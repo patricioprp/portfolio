@@ -138,3 +138,17 @@ test('el sitio arranca en modo oscuro aunque el sistema prefiera claro', async (
     'rgb(15, 23, 42)'
   )
 })
+
+test('el CV se puede descargar en cada idioma', async ({ page, request }) => {
+  for (const [ruta, nombre, archivo] of [
+    ['/', 'Descargar CV', '/cv/CV_Patricio_Polito_ES.pdf'],
+    ['/en/', 'Download CV', '/cv/CV_Patricio_Polito_EN.pdf']
+  ] as const) {
+    await page.goto(ruta)
+    const enlace = page.getByRole('link', { name: nombre })
+    await expect(enlace).toHaveAttribute('href', archivo)
+    const respuesta = await request.get(archivo)
+    expect(respuesta.ok()).toBe(true)
+    expect(respuesta.headers()['content-type']).toContain('pdf')
+  }
+})

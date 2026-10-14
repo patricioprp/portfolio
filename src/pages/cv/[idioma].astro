@@ -1,0 +1,204 @@
+---
+// CV imprimible (A4). Solo existe en desarrollo: `npm run cv` lo abre con
+// Chromium y guarda public/cv/CV_Patricio_Polito_{ES,EN}.pdf.
+// Usa el mismo contenido que el sitio: nunca agregar datos privados acá.
+import type { GetStaticPaths } from 'astro'
+import { getCollection } from 'astro:content'
+import { Font } from 'astro:assets'
+import '@/styles/global.css'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+import { obtenerCasos, rutaDeCaso, slugDeCaso } from '@/data/casos'
+import { perfil } from '@/data/perfil'
+import { rutaInicio } from '@/i18n/rutas'
+import { compararPorFechaDesc, formatearPeriodo } from '@/lib/periodo'
+
+export const getStaticPaths = (() => {
+  if (import.meta.env.PROD) return []
+  return [{ params: { idioma: 'es' } }, { params: { idioma: 'en' } }]
+}) satisfies GetStaticPaths
+
+const idioma = Astro.params.idioma as Idioma
+const t = obtenerDiccionario(idioma)
+const sitio = (ruta: string) => new URL(ruta, Astro.site).href
+const sinProtocolo = (url: string) => url.replace(/^https?:\/\//, '')
+
+const experiencias = (await getCollection('experiencia'))
+  .map((e) => e.data)
+  .sort(compararPorFechaDesc)
+const casos = await obtenerCasos(idioma)
+const web = sitio(rutaInicio(idioma))
+---
+
+<!doctype html>
+<html lang={idioma} data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <title>CV · {perfil.nombre}</title>
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-jetbrains" />
+    <style>
+      @page {
+        size: A4;
+        margin: 14mm 14mm 12mm;
+      }
+      html {
+        font-size: 10.5px;
+      }
+      section,
+      article {
+        break-inside: avoid;
+      }
+      .experiencia article {
+        break-inside: auto;
+      }
+      .experiencia li {
+        break-inside: avoid;
+      }
+    </style>
+  </head>
+  <body class="bg-white font-sans leading-snug text-fg">
+    <header class="flex items-start justify-between gap-6 border-b border-line pb-4">
+      <div>
+        <h1 class="text-[2.6rem] leading-none font-extrabold tracking-tight text-strong">
+          {perfil.nombre}
+        </h1>
+        <p class="mt-2 font-mono text-[1.15rem] text-accent">{t.hero.rol}</p>
+        <p class="mt-1 text-[1.15rem] font-semibold text-strong">
+          {t.hero.credencial}
+        </p>
+      </div>
+      <ul class="shrink-0 space-y-0.5 text-right text-[0.95rem]">
+        <li>{perfil.email}</li>
+        <li>{perfil.telefono}</li>
+        <li>{t.contacto.ubicacion}</li>
+        <li>
+          <a href={perfil.linkedin} class="text-accent">
+            {sinProtocolo(perfil.linkedin).replace(/^www\./, '')}
+          </a>
+        </li>
+        <li>
+          <a href={perfil.github} class="text-accent">
+            {sinProtocolo(perfil.github)}
+          </a>
+        </li>
+      </ul>
+    </header>
+
+    <section class="mt-4">
+      <h2 class="text-[0.8rem] font-bold tracking-widest text-accent uppercase">
+        {t.cv.perfil}
+      </h2>
+      <p class="mt-1.5 text-[1.05rem]">{t.cv.perfilTexto}</p>
+      <p class="mt-1.5 text-[1.05rem]">
+        {t.cv.portfolio}:{' '}
+        <a href={web} class="font-semibold text-accent">
+          {sinProtocolo(web)}
+        </a>
+      </p>
+    </section>
+
+    <section class="experiencia mt-5">
+      <h2 class="text-[0.8rem] font-bold tracking-widest text-accent uppercase">
+        {t.experiencia.titulo}
+      </h2>
+      <div class="mt-2 space-y-3.5">
+        {experiencias.map((exp) => (
+          <article>
+            <div class="flex items-baseline justify-between gap-4">
+              <h3 class="text-[1.1rem] font-bold text-strong">
+                {exp.rol[idioma]}{' '}
+                <span class="font-normal text-muted">
+                  · {exp.empresa[idioma]}
+                  {exp.ubicacion && ` · ${exp.ubicacion[idioma]}`}
+                </span>
+              </h3>
+              <p class="shrink-0 font-mono text-[0.9rem] text-accent">
+                {formatearPeriodo(
+                  exp.desde,
+                  exp.hasta,
+                  idioma,
+                  t.experiencia.actualidad
+                )}
+              </p>
+            </div>
+            {exp.nota && (
+              <p class="text-[0.9rem] text-muted italic">{exp.nota[idioma]}</p>
+            )}
+            <ul class="mt-1 list-disc space-y-0.5 pl-4 marker:text-accent">
+              {exp.logros[idioma].map((logro) => (
+                <li>{logro}</li>
+              ))}
+            </ul>
+            {exp.stack.length > 0 && (
+              <p class="mt-1 font-mono text-[0.85rem] text-muted">
+                {exp.stack.join(' · ')}
+              </p>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-5">
+      <h2 class="text-[0.8rem] font-bold tracking-widest text-accent uppercase">
+        {t.cv.casos}
+      </h2>
+      <ul class="mt-2 space-y-1.5">
+        {casos.map((caso) => (
+          <li>
+            <a
+              href={sitio(rutaDeCaso(idioma, slugDeCaso(caso)))}
+              class="font-semibold text-strong underline decoration-sky-500/50"
+            >
+              {caso.data.titulo}
+            </a>
+            <span class="text-muted"> — {caso.data.impacto}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mt-5">
+      <h2 class="text-[0.8rem] font-bold tracking-widest text-accent uppercase">
+        {t.stack.titulo}
+      </h2>
+      <dl class="mt-2 grid grid-cols-[7rem_1fr] gap-x-3 gap-y-1">
+        {t.stack.grupos.map((g) => (
+          <>
+            <dt class="font-semibold text-strong">{g.titulo}</dt>
+            <dd>{g.items.join(', ')}</dd>
+          </>
+        ))}
+      </dl>
+    </section>
+
+    <section class="mt-5 grid grid-cols-[1fr_auto] gap-8">
+      <div>
+        <h2 class="text-[0.8rem] font-bold tracking-widest text-accent uppercase">
+          {t.formacion.titulo}
+        </h2>
+        <ul class="mt-2 space-y-1.5">
+          {t.formacion.items.map((f) => (
+            <li>
+              <p class="font-semibold text-strong">
+                {f.titulo}
+                <span class="font-mono text-[0.9rem] font-normal text-accent">
+                  {' '}
+                  · {f.detalle}
+                </span>
+              </p>
+              <p class="text-muted">{f.institucion}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-[0.8rem] font-bold tracking-widest text-accent uppercase">
+          {t.cv.idiomas}
+        </h2>
+        <p class="mt-2">{t.contacto.idiomas}</p>
+      </div>
+    </section>
+  </body>
+</html>

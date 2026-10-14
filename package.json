@@ -17,7 +17,8 @@
     "test:watch": "vitest",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",
-    "og": "node scripts/og.mjs"
+    "og": "node scripts/og.mjs",
+    "cv": "node scripts/cv.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.3",

@@ -52,6 +52,7 @@ npm test           # vitest run
 npx vitest run <ruta>   # un solo archivo
 npm run e2e        # playwright (desktop + mobile)
 npm run og         # regenera las imágenes OG (public/og/<idioma>/...)
+npm run cv         # regenera los CV en PDF (public/cv/) desde el contenido del sitio
 ```
 
 Antes de dar una tarea por terminada, ejecutá la skill `/verificar`.

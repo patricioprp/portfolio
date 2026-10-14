@@ -319,6 +319,15 @@ export const es = {
       }
     ]
   },
+  cv: {
+    perfil: 'Perfil',
+    perfilTexto:
+      'Frontend Senior con experiencia full stack e Ingeniero en Sistemas de Información. Más de 10 años desarrollando software en producción, hoy con React, Node y TypeScript y antes con Laravel. Me especializo en migrar sistemas legacy, construir software que el negocio configura sin deploys y aplicar optimización matemática a procesos operativos.',
+    casos: 'Casos de estudio destacados',
+    contacto: 'Contacto',
+    idiomas: 'Idiomas',
+    portfolio: 'Portfolio con casos y demos en vivo'
+  },
   contacto: {
     eyebrow: 'Contacto',
     titulo: 'Hablemos',

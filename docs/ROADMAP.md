@@ -75,7 +75,7 @@ Bloquean contenido, no código. Respuestas volcadas en `docs/contenido/` y `CLAU
 - [ ] **Patricio:** en Netlify, Site configuration → Forms → activar "Form detection" y configurar la notificación por email (si se mantiene el formulario)
 - [ ] **Patricio:** Google Search Console: verificar el sitio y enviar `/sitemap-index.xml`
 - [ ] **Patricio:** actualizar el enlace al portfolio en LinkedIn y en el perfil de GitHub
-- [ ] **Patricio:** CV públicos ES/EN en `public/cv/` (el botón "Descargar CV" aparece solo cuando existen)
+- [x] CV públicos ES/EN generados desde el contenido del sitio (`npm run cv`, plantilla en `src/pages/cv/` solo en desarrollo). Regenerarlos cuando cambie la experiencia o el stack.
 
 ## Ideas para después
 

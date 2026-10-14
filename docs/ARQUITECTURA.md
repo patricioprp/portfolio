@@ -71,6 +71,7 @@ mi-portfolio/
 
 - Rutas: español en la raíz (`/`, `/casos/`, `/demos/`, `/gracias/`) e inglés bajo `/en/` (`/en/case-studies/`, `/en/demos/`, `/en/thanks/`). Helpers en `src/i18n/rutas.ts`, `src/data/casos.ts` y `src/data/demos.ts`.
 - Cada página pasa `alternos` (su URL en cada idioma) a `BaseLayout`: se usan para `hreflang` y para el selector de idioma del header.
+- CV en PDF: `npm run cv` abre `src/pages/cv/[idioma].astro` (solo en desarrollo) y guarda `public/cv/CV_Patricio_Polito_{ES,EN}.pdf` con el mismo contenido que el sitio. No agregar ahí datos que el sitio no publique.
 - Imágenes OG: `npm run og` levanta Astro en desarrollo, abre `src/pages/og/[...pagina].astro` (no existe en producción) y guarda `public/og/<idioma>/<pagina>.png`. Regenerarlas cuando cambie un título o resumen.
 
 - Textos de la UI y de la home: `src/i18n/es.ts` y `src/i18n/en.ts`. `en` está tipado como `Diccionario` (`typeof es`), así que una clave faltante rompe `npm run check`.

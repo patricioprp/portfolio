@@ -323,6 +323,15 @@ export const en: Diccionario = {
       }
     ]
   },
+  cv: {
+    perfil: 'Profile',
+    perfilTexto:
+      'Senior Frontend Developer with full stack experience and an Information Systems Engineering degree. 10+ years building production software, today with React, Node and TypeScript, previously Laravel. I focus on migrating legacy systems, building software the business can configure without deploys, and applying mathematical optimization to operational processes.',
+    casos: 'Selected case studies',
+    contacto: 'Contact',
+    idiomas: 'Languages',
+    portfolio: 'Portfolio with case studies and live demos'
+  },
   contacto: {
     eyebrow: 'Contact',
     titulo: "Let's talk",
