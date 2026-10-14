@@ -1,6 +1,6 @@
 export const es = {
   meta: {
-    titulo: 'Patricio Rolando Polito | Frontend Senior',
+    titulo: 'Patricio R. Polito | Frontend Senior',
     descripcion:
       'Frontend Senior e Ingeniero en Sistemas con más de 10 años desarrollando software, hoy con React, Node y TypeScript. Casos de estudio con impacto medible y demos en vivo.',
     tituloPersona: 'Frontend Senior'
@@ -24,7 +24,7 @@ export const es = {
   hero: {
     disponible: 'Abierto a nuevas oportunidades',
     credencial: 'Ingeniero en Sistemas de Información · UTN',
-    nombre: 'Patricio Rolando Polito',
+    nombre: 'Patricio R. Polito',
     rol: 'Frontend Senior · Experiencia full stack',
     propuesta:
       'Convierto procesos operativos en software que ahorra tiempo y dinero.',
@@ -108,7 +108,7 @@ export const es = {
   },
   demoOptimizador: {
     meta: {
-      titulo: 'Optimizador de cortes de viguetas | Demo de Patricio Polito',
+      titulo: 'Optimizador de cortes de viguetas | Demo de Patricio R. Polito',
       descripcion:
         'Demo en vivo: programación lineal entera en el navegador para minimizar el acero en la producción de viguetas.'
     },
@@ -186,7 +186,7 @@ export const es = {
   },
   demoFormulario: {
     meta: {
-      titulo: 'Formulario dinámico | Demo de Patricio Polito',
+      titulo: 'Formulario dinámico | Demo de Patricio R. Polito',
       descripcion:
         'Demo en vivo: una planilla de calidad descrita en JSON y dibujada por un componente React recursivo, con puntaje en vivo.'
     },
@@ -358,7 +358,7 @@ export const es = {
     volver: 'Volver al inicio'
   },
   footer: {
-    derechos: 'Patricio Rolando Polito.',
+    derechos: 'Patricio R. Polito.',
     hecho: 'Hecho con Astro y React.'
   }
 }

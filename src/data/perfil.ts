@@ -1,6 +1,7 @@
 // Datos de contacto públicos. Fuente de verdad: docs/contenido/perfil.md
 export const perfil = {
-  nombre: 'Patricio Rolando Polito',
+  nombre: 'Patricio R. Polito',
+  nombreCompleto: 'Patricio Rolando Polito',
   email: 'patricioprp06@gmail.com',
   telefono: '+54 9 381 498 6358',
   whatsapp: '5493814986358',

@@ -5,7 +5,7 @@ Fuente: CV actualizado (docx) y portfolio legacy. Lo marcado con
 
 ## Datos públicos
 
-- **Nombre:** Patricio Rolando Polito
+- **Nombre visible en el sitio y el CV:** Patricio R. Polito (nombre completo: Patricio Rolando Polito, solo en datos estructurados)
 - **Título:** Frontend Senior (experiencia full stack) · Ingeniero en Sistemas de Información
 - **Ubicación:** San Miguel de Tucumán, Argentina (trabajo remoto)
 - **Email:** patricioprp06@gmail.com

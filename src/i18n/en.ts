@@ -2,7 +2,7 @@ import type { Diccionario } from './index'
 
 export const en: Diccionario = {
   meta: {
-    titulo: 'Patricio Rolando Polito | Senior Frontend Developer',
+    titulo: 'Patricio R. Polito | Senior Frontend Developer',
     descripcion:
       'Senior Frontend Developer and Systems Engineer with 10+ years building software, today with React, Node and TypeScript. Case studies with measurable impact and live demos.',
     tituloPersona: 'Senior Frontend Developer'
@@ -26,7 +26,7 @@ export const en: Diccionario = {
   hero: {
     disponible: 'Open to new opportunities',
     credencial: 'Information Systems Engineer · UTN',
-    nombre: 'Patricio Rolando Polito',
+    nombre: 'Patricio R. Polito',
     rol: 'Senior Frontend Developer · Full stack experience',
     propuesta:
       'I turn operational processes into software that saves time and money.',
@@ -111,7 +111,7 @@ export const en: Diccionario = {
   },
   demoOptimizador: {
     meta: {
-      titulo: 'Joist cutting optimizer | Demo by Patricio Polito',
+      titulo: 'Joist cutting optimizer | Demo by Patricio R. Polito',
       descripcion:
         'Live demo: integer linear programming in the browser to minimize steel in joist production.'
     },
@@ -189,7 +189,7 @@ export const en: Diccionario = {
   },
   demoFormulario: {
     meta: {
-      titulo: 'Dynamic form | Demo by Patricio Polito',
+      titulo: 'Dynamic form | Demo by Patricio R. Polito',
       descripcion:
         'Live demo: a quality form described in JSON and rendered by a recursive React component, with a live score.'
     },
@@ -362,7 +362,7 @@ export const en: Diccionario = {
     volver: 'Back to home'
   },
   footer: {
-    derechos: 'Patricio Rolando Polito.',
+    derechos: 'Patricio R. Polito.',
     hecho: 'Built with Astro and React.'
   }
 }

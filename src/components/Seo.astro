@@ -22,6 +22,7 @@ const personaJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: perfil.nombre,
+  alternateName: perfil.nombreCompleto,
   jobTitle: t.meta.tituloPersona,
   url: url(idioma === 'es' ? '/' : '/en/'),
   email: `mailto:${perfil.email}`,

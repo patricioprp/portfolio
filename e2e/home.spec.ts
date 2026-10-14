@@ -8,9 +8,9 @@ test.describe('home', () => {
   test('muestra el hero con la propuesta de valor y los CTAs', async ({
     page
   }) => {
-    await expect(page).toHaveTitle(/Patricio Rolando Polito/)
+    await expect(page).toHaveTitle(/Patricio R. Polito/)
     await expect(
-      page.getByRole('heading', { level: 1, name: 'Patricio Rolando Polito' })
+      page.getByRole('heading', { level: 1, name: 'Patricio R. Polito' })
     ).toBeVisible()
     await expect(
       page.getByText('Convierto procesos operativos en software')
