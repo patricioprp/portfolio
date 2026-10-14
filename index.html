@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patricio Rolando Polito | Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0284c7',
+                            dark: '#0f172a',
+                            card: '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-brand-dark text-slate-200 font-sans antialiased selection:bg-sky-500 selection:text-white">
+
+    <nav class="fixed top-0 w-full bg-brand-dark/90 backdrop-blur border-b border-slate-800 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <span class="text-xl font-bold tracking-wider text-sky-400">PRP<span class="text-slate-100">.dev</span></span>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6 text-sm font-medium">
+                        <a href="#about" class="hover:text-sky-400 transition-colors">Sobre mí</a>
+                        <a href="#experience" class="hover:text-sky-400 transition-colors">Experiencia</a>
+                        <a href="#projects" class="hover:text-sky-400 transition-colors">Proyectos</a>
+                        <a href="#skills" class="hover:text-sky-400 transition-colors">Habilidades</a>
+                        <a href="#contact" class="hover:text-sky-400 transition-colors">Contacto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about" class="pt-32 pb-20 px-4 max-w-6xl mx-auto flex flex-col items-start justify-center min-h-screen">
+        <div class="inline-block px-3 py-1 bg-sky-500/10 text-sky-400 border border-sky-500/20 rounded-full text-sm font-semibold mb-4">
+            Disponible para proyectos y desafíos
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-4">
+            Patricio Rolando Polito
+        </h1>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-400 mb-6">
+            Desarrollador Full Stack & Ingeniero en Sistemas
+        </h2>
+        <p class="text-slate-400 max-w-2xl text-lg leading-relaxed mb-8">
+            Más de 10 años de experiencia en desarrollo y mantenimiento de sistemas web y móviles. Fuerte dominio de <strong>Laravel, React.js, Node.js</strong> y bases de datos relacionales, participando activamente en todo el ciclo de vida del software bajo metodologías ágiles como SCRUM.
+        </p>
+        
+        <div class="flex flex-wrap gap-4 items-center">
+            <a href="#contact" class="px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold transition-all shadow-lg shadow-sky-600/30">
+                Contactar
+            </a>
+            <a href="https://github.com/patricioprp" target="_blank" class="px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold transition-all">
+                <i class="fab font-normal fa-github mr-2"></i>GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/patricio-polito-88099a134" target="_blank" class="px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold transition-all">
+                <i class="fab font-normal fa-linkedin mr-2"></i>LinkedIn
+            </a>
+        </div>
+    </section>
+
+    <section id="experience" class="py-20 bg-slate-900/50 border-y border-slate-800/80 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
+                <i class="fas fa-briefcase text-sky-400"></i> Experiencia Profesional
+            </h2>
+
+            <div class="space-y-8">
+                <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-white">Desarrollador Full Stack / Frontend SR</h3>
+                        <span class="text-sky-400 text-sm font-semibold">Diciembre 2023 - Actualidad | Remoto</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4">Quadion Tech (Buenos Aires)</p>
+                    <ul class="list-disc list-inside text-slate-300 space-y-2 text-sm">
+                        <li>Desarrollo de trámites y plataforma web responsive para prepaga líder a nivel nacional.</li>
+                        <li>Migración de sistemas web legacy a arquitecturas modernas y escalables.</li>
+                        <li>Desarrollo e implementación de componentes reutilizables con Storybook y Material UI.</li>
+                        <li>Refactorización aplicando patrones de diseño, pruebas unitarias con Jest y end-to-end con Playwright.</li>
+                    </ul>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">React.js</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">Node.js</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">Storybook</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">Jest</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">Playwright</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">Material UI</span>
+                    </div>
+                </div>
+
+                <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-white">Desarrollador SR</h3>
+                        <span class="text-sky-400 text-sm font-semibold">Abril 2021 - Abril 2026 | Remoto</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4">Sertic (Rosario, Santa Fe)</p>
+                    <ul class="list-disc list-inside text-slate-300 space-y-2 text-sm">
+                        <li>Desarrollo y mantenimiento evolutivo de sistemas internos.</li>
+                        <li>Refactorización utilizando patrones de diseño y suite completa de pruebas.</li>
+                    </ul>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">Laravel</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">React.js</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">Node.js</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">Angular</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">API REST</span>
+                    </div>
+                </div>
+
+                <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-all">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-white">Desarrollador SSR</h3>
+                        <span class="text-sky-400 text-sm font-semibold">2020 - Abril 2021</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4">Tensolite S.A. / Sitenso</p>
+                    <ul class="list-disc list-inside text-slate-300 space-y-2 text-sm">
+                        <li>Mantenimiento de sistemas corporativos e integración con servicios SOAP.</li>
+                        <li>Desarrollo de aplicación web para acopio estratégico de elementos producidos, planificación de producción, control de stock y gestión de turnos de entrega.</li>
+                    </ul>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">Laravel</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">React.js</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">SOAP</span>
+                        <span class="px-2.5 py-1 bg-slate-800 text-sky-300 text-xs rounded border border-slate-700">API REST</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
+            <i class="fas fa-code text-sky-400"></i> Proyectos y Soluciones
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-semibold text-sky-400 uppercase tracking-wider">Freelance / Educación</span>
+                    <h3 class="text-xl font-bold text-white mt-1 mb-3">Sistemas para Instituciones Educativas</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Desarrollo de soluciones web y móviles integradas: migración de sistemas de escritorio a entorno web (Colegio Nueva Concepción), módulo de pagos online con QR (Colegio Sagrado Corazón) y App de notificaciones en tiempo real vía Firebase (Colegio Santa Catalina).
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs rounded">Laravel</span>
+                    <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs rounded">React.js</span>
+                    <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs rounded">Firebase</span>
+                    <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs rounded">Firebird</span>
+                </div>
+            </div>
+
+            <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-semibold text-sky-400 uppercase tracking-wider">Sector Público</span>
+                    <h3 class="text-xl font-bold text-white mt-1 mb-3">Ministerio de Desarrollo Productivo</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Desarrollo de sistemas internos de gestión, mantenimiento de red y desarrollo del portal web institucional. Implementación de sistema de gestión de contratos.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs rounded">Laravel</span>
+                    <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs rounded">WordPress</span>
+                    <span class="px-2.5 py-1 bg-slate-800 text-slate-300 text-xs rounded">jQuery</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20 bg-slate-900/50 border-y border-slate-800/80 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-3">
+                <i class="fas fa-laptop-code text-sky-400"></i> Habilidades Técnicas
+            </h2>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-brand-card p-5 rounded-xl border border-slate-800">
+                    <h3 class="text-sky-400 font-bold mb-4 flex items-center gap-2"><i class="fas fa-layer-group"></i> Frameworks & Libs</h3>
+                    <ul class="text-slate-300 space-y-2 text-sm">
+                        <li>Laravel 10+ / PHP</li>
+                        <li>React.js / React Native</li>
+                        <li>Node.js / Express</li>
+                        <li>Angular / jQuery</li>
+                        <li>Bootstrap / Material UI</li>
+                    </ul>
+                </div>
+
+                <div class="bg-brand-card p-5 rounded-xl border border-slate-800">
+                    <h3 class="text-sky-400 font-bold mb-4 flex items-center gap-2"><i class="fas fa-vial"></i> Testing & Tooling</h3>
+                    <ul class="text-slate-300 space-y-2 text-sm">
+                        <li>PHPUnit / Jest / Vitest</li>
+                        <li>Playwright / Cypress</li>
+                        <li>Storybook / Webpack</li>
+                        <li>Git / GitHub / SCRUM</li>
+                        <li>Docker / Kubernetes</li>
+                    </ul>
+                </div>
+
+                <div class="bg-brand-card p-5 rounded-xl border border-slate-800">
+                    <h3 class="text-sky-400 font-bold mb-4 flex items-center gap-2"><i class="fas fa-database"></i> Bases de Datos</h3>
+                    <ul class="text-slate-300 space-y-2 text-sm">
+                        <li>MySQL</li>
+                        <li>SQL Server</li>
+                        <li>PostgreSQL</li>
+                        <li>Firebird</li>
+                    </ul>
+                </div>
+
+                <div class="bg-brand-card p-5 rounded-xl border border-slate-800">
+                    <h3 class="text-sky-400 font-bold mb-4 flex items-center gap-2"><i class="fas fa-robot"></i> Formación en IA</h3>
+                    <ul class="text-slate-300 space-y-2 text-sm">
+                        <li>N8N</li>
+                        <li>Claude API</li>
+                        <li>LangGraph</li>
+                        <li>LangChain</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 px-4 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12">
+            <div>
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <i class="fas fa-graduation-cap text-sky-400"></i> Formación
+                </h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Ingeniería en Sistemas de Información</h3>
+                        <p class="text-sky-400 text-sm">UTN - Facultad Regional Tucumán (2025)</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Técnico en Computación</h3>
+                        <p class="text-slate-400 text-sm">Escuela Técnica Nº5 (Promedio: 7.33 - Abanderado)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <i class="fas fa-envelope text-sky-400"></i> Contacto
+                </h2>
+                <div class="space-y-4 text-slate-300">
+                    <p class="flex items-center gap-3">
+                        <i class="fas fa-map-marker-alt text-sky-400 w-5"></i>
+                        San Miguel de Tucumán, Argentina
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <i class="fas fa-envelope text-sky-400 w-5"></i>
+                        <a href="mailto:patricioprp06@gmail.com" class="hover:text-sky-400">patricioprp06@gmail.com</a>
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <i class="fas fa-phone text-sky-400 w-5"></i>
+                        +54 9 381 498 6358
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <i class="fas fa-globe text-sky-400 w-5"></i>
+                        Español (Nativo) | Inglés (Pre-intermedio)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 border-t border-slate-800 text-center text-slate-500 text-sm">
+        <p>© 2026 Patricio Rolando Polito. Desarrollado para Netlify.</p>
+    </footer>
+
+</body>
+</html>
