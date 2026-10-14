@@ -18,8 +18,9 @@ CV en formato web; el nuevo tiene que mostrar resultados.
 
 > **Frontend Senior que convierte procesos operativos en software que ahorra
 > tiempo y dinero.**
-> Más de 10 años con React, Node y Laravel: de la migración de sistemas legacy
-> a la optimización matemática de la producción.
+> Más de 10 años desarrollando software, hoy con React, Node y TypeScript y
+> antes con Laravel: de la migración de sistemas legacy a la optimización
+> matemática de la producción.
 
 Tres pilares (se repiten en el hero y en los casos):
 
@@ -38,7 +39,7 @@ Tres pilares (se repiten en el hero y en los casos):
    CTAs: "Ver casos" (primario), "Descargar CV", "Contactar". Íconos GitHub y LinkedIn.
 2. **Franja de impacto** (solo métricas reales):
    - "+10 años" desarrollando software
-   - "De hasta 3 días a 0" de espera de camiones (caso acopio)
+   - "Hasta 3 días → 0" de espera de camiones (caso acopio)
    - "0 deploys" para crear o cambiar una planilla de calidad (caso formularios)
 3. **Casos de estudio** (3 tarjetas → página propia cada uno): problema → solución → impacto.
 4. **Demos en vivo**: Optimizador de cortes de viguetas y Formulario dinámico.

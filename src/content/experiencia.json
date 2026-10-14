@@ -11,16 +11,16 @@
     "hasta": null,
     "logros": {
       "es": [
-        "Desarrollo de trámites y plataforma web responsive para una prepaga líder a nivel nacional.",
-        "Migración de una web legacy a una arquitectura moderna y escalable.",
-        "Componentes reutilizables documentados con Storybook y Material UI.",
-        "Refactorización con patrones de diseño, pruebas unitarias con Jest y end-to-end con Playwright."
+        "Desarrollo trámites y la plataforma web responsive de una prepaga líder a nivel nacional.",
+        "Migré una web legacy a una arquitectura moderna y escalable.",
+        "Construí componentes reutilizables con Material UI, documentados en Storybook.",
+        "Refactoricé con patrones de diseño y sumé pruebas unitarias (Jest) y end-to-end (Playwright)."
       ],
       "en": [
-        "Built online procedures and a responsive web platform for a leading national health insurer.",
+        "Build self-service member workflows and the responsive web platform for a leading national private health insurer.",
         "Migrated a legacy website to a modern, scalable architecture.",
-        "Reusable components documented with Storybook and Material UI.",
-        "Refactoring with design patterns, unit tests with Jest and end-to-end tests with Playwright."
+        "Built reusable components with Material UI, documented in Storybook.",
+        "Refactored code using design patterns and added unit (Jest) and end-to-end (Playwright) tests."
       ]
     },
     "stack": [
@@ -46,14 +46,14 @@
     },
     "logros": {
       "es": [
-        "Plataforma de monitoreo de calidad para un call center de nivel internacional: formularios dinámicos y migración de Laravel a React + Node.",
-        "Reportes sobre grandes volúmenes optimizados con stored procedures.",
-        "Desarrollo y mantenimiento evolutivo de sistemas internos, con refactorización y pruebas."
+        "Desarrollé una plataforma de monitoreo de calidad para un call center de nivel internacional: formularios dinámicos y migración de Laravel a React + Node.",
+        "Optimicé con stored procedures los reportes sobre grandes volúmenes de datos.",
+        "Desarrollé y evolucioné sistemas internos, con refactorización y pruebas."
       ],
       "en": [
-        "Quality monitoring platform for an international call center: dynamic forms and a migration from Laravel to React + Node.",
-        "Reports over large data volumes optimized with stored procedures.",
-        "Development and evolutionary maintenance of internal systems, with refactoring and tests."
+        "Built a quality monitoring platform for an international call center: dynamic forms and a migration from Laravel to React + Node.",
+        "Optimized stored procedures so reports over large data volumes load fast.",
+        "Built and evolved internal systems, refactoring with design patterns and adding automated tests."
       ]
     },
     "stack": [
@@ -61,8 +61,9 @@
       "React",
       "Node.js",
       "Angular",
+      "jQuery",
       "SQL Server",
-      "API REST"
+      "REST API"
     ],
     "caso": "formularios-dinamicos"
   },
@@ -77,38 +78,35 @@
     "hasta": "2021-04",
     "logros": {
       "es": [
-        "Sistema de acopio por rotación, planificación de producción, stock por cuadrante y turnos de retiro: la espera de los camiones bajó de hasta 3 días a cero.",
-        "Optimización del acero en la producción de viguetas con programación lineal entera.",
-        "Mantenimiento de sistemas corporativos e integración con servicios SOAP."
+        "Participé desde el análisis en el sistema de acopio por rotación y desarrollé la planificación de producción, el stock por cuadrante y el plan de carga: la espera de los camiones bajó de hasta 3 días a cero si llegaban en su turno.",
+        "Optimicé el uso de acero en la producción de viguetas con programación lineal entera.",
+        "Mantuve sistemas corporativos e integré servicios SOAP."
       ],
       "en": [
-        "Storage-by-turnover system, production planning, stock per quadrant and pickup slots: truck waiting time dropped from up to 3 days to zero.",
-        "Steel optimization in joist production using integer linear programming.",
-        "Maintenance of corporate systems and integration with SOAP services."
+        "Part of the team behind a turnover-based storage system, from the analysis stage; I built the production planning, per-quadrant stock and loading plan. Truck waits dropped from up to 3 days to zero for on-time arrivals.",
+        "Optimized steel usage in joist production with integer linear programming.",
+        "Maintained corporate systems and integrated SOAP services."
       ]
     },
-    "stack": ["PHP", "Laravel", "React", "jQuery", "API REST", "SOAP"],
+    "stack": ["PHP", "Laravel", "React", "jQuery", "REST API", "SOAP"],
     "caso": "acopio-planta"
   },
   {
     "id": "instituciones-educativas",
-    "empresa": {
-      "es": "Freelance · Instituciones educativas",
-      "en": "Freelance · Schools"
-    },
-    "rol": { "es": "Desarrollador Full Stack", "en": "Full Stack Developer" },
+    "empresa": { "es": "Instituciones educativas", "en": "Schools" },
+    "rol": { "es": "Desarrollador freelance", "en": "Freelance developer" },
     "desde": "2018",
     "hasta": "2019",
     "logros": {
       "es": [
-        "Migración de un sistema de escritorio a web para un colegio.",
-        "Módulo de pagos online con QR.",
-        "App web y móvil de notificaciones y mensajería en tiempo real con Firebase."
+        "Migré a web el sistema de escritorio de un colegio.",
+        "Desarrollé un módulo de pagos online con QR.",
+        "Desarrollé una app web y móvil de notificaciones y mensajería en tiempo real con Firebase."
       ],
       "en": [
         "Migrated a school's desktop system to the web.",
-        "Online payments module with QR codes.",
-        "Web and mobile app for real-time notifications and messaging with Firebase."
+        "Built an online payments module with QR codes.",
+        "Built a web and mobile app for real-time notifications and messaging with Firebase."
       ]
     },
     "stack": ["Laravel", "Firebird", "React", "Firebase", "jQuery"]
@@ -116,17 +114,17 @@
   {
     "id": "edtech",
     "empresa": {
-      "es": "Freelance · Startup de tecnología educativa",
-      "en": "Freelance · EdTech startup"
+      "es": "Startup de tecnología educativa",
+      "en": "EdTech startup"
     },
-    "rol": { "es": "Desarrollador Frontend", "en": "Frontend Developer" },
+    "rol": { "es": "Desarrollador freelance", "en": "Freelance developer" },
     "desde": "2018",
     "hasta": "2018",
     "logros": {
       "es": [
-        "Front-end de una aplicación educativa de lectura tipo lectograma."
+        "Desarrollé el front-end de una aplicación educativa de lectura tipo lectograma."
       ],
-      "en": ["Front end of an educational reading app."]
+      "en": ["Built the front end of an educational reading app."]
     },
     "stack": ["React", "React Native"]
   },
@@ -141,12 +139,12 @@
     "hasta": "2018-05",
     "logros": {
       "es": [
-        "Sistema de gestión de contratos y otros sistemas internos.",
-        "Sitio web institucional en WordPress, soporte técnico y mantenimiento de redes."
+        "Desarrollé un sistema de gestión de contratos y otros sistemas internos.",
+        "Desarrollé el sitio web institucional en WordPress; también di soporte técnico y mantuve la red."
       ],
       "en": [
-        "Contract management system and other internal systems.",
-        "Institutional WordPress website, IT support and network maintenance."
+        "Built a contract management system and other internal systems.",
+        "Built the institutional WordPress website; also provided IT support and network maintenance."
       ]
     },
     "stack": ["Laravel", "jQuery", "WordPress"]
@@ -159,9 +157,11 @@
     "hasta": "2014",
     "logros": {
       "es": [
-        "Atención técnica a clientes de internet, telefonía IP y TV digital."
+        "Brindé soporte técnico a clientes de internet, telefonía IP y TV digital."
       ],
-      "en": ["Technical support for internet, VoIP and digital TV customers."]
+      "en": [
+        "Provided technical support to internet, VoIP and digital TV customers."
+      ]
     },
     "stack": []
   }

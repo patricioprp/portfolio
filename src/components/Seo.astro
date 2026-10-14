@@ -1,25 +1,29 @@
 ---
 import { obtenerDiccionario, type Idioma } from '@/i18n'
 import { perfil } from '@/data/perfil'
+import type { Alternos } from '@/i18n/rutas'
 
 interface Props {
   idioma: Idioma
   titulo: string
   descripcion: string
   noIndex: boolean
+  alternos: Alternos
+  imagen: string
 }
 
-const { idioma, titulo, descripcion, noIndex } = Astro.props
+const { idioma, titulo, descripcion, noIndex, alternos } = Astro.props
 const t = obtenerDiccionario(idioma)
 const canonical = new URL(Astro.url.pathname, Astro.site)
-const imagen = new URL('/og/default.png', Astro.site)
+const imagen = new URL(Astro.props.imagen, Astro.site)
+const url = (ruta: string) => new URL(ruta, Astro.site).href
 
 const personaJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: perfil.nombre,
   jobTitle: t.meta.tituloPersona,
-  url: new URL('/', Astro.site).href,
+  url: url(idioma === 'es' ? '/' : '/en/'),
   email: `mailto:${perfil.email}`,
   sameAs: [perfil.linkedin, perfil.github],
   address: {
@@ -31,6 +35,11 @@ const personaJsonLd = {
     '@type': 'CollegeOrUniversity',
     name: 'Universidad Tecnológica Nacional — Facultad Regional Tucumán'
   },
+  hasCredential: {
+    '@type': 'EducationalOccupationalCredential',
+    credentialCategory: 'degree',
+    name: 'Ingeniería en Sistemas de Información'
+  },
   knowsAbout: ['React', 'TypeScript', 'Node.js', 'Laravel', 'Playwright']
 }
 ---
@@ -39,6 +48,13 @@ const personaJsonLd = {
 <meta name="description" content={descripcion} />
 <link rel="canonical" href={canonical} />
 {noIndex && <meta name="robots" content="noindex" />}
+{!noIndex && (
+  <>
+    <link rel="alternate" hreflang="es" href={url(alternos.es)} />
+    <link rel="alternate" hreflang="en" href={url(alternos.en)} />
+    <link rel="alternate" hreflang="x-default" href={url(alternos.es)} />
+  </>
+)}
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <meta name="theme-color" content="#0f172a" />

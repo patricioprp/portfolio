@@ -26,13 +26,23 @@ const hayCv = existsSync(join(process.cwd(), 'public', cv))
     class="pointer-events-none absolute -top-40 left-1/2 h-[32rem] w-[56rem] -translate-x-1/2 rounded-full bg-sky-500/10 blur-3xl"
   ></div>
   <div class="relative mx-auto max-w-6xl">
-    <p class="inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-accent-soft px-3 py-1 text-sm font-semibold text-accent">
-      <span
-        class="size-2 rounded-full bg-emerald-500"
-        aria-hidden="true"
-      ></span>
-      {t.hero.disponible}
-    </p>
+    <ul class="flex flex-wrap gap-2 text-sm font-semibold">
+      <li class="inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-accent-soft px-3 py-1 text-accent">
+        <span
+          class="size-2 rounded-full bg-emerald-500"
+          aria-hidden="true"
+        ></span>
+        {t.hero.disponible}
+      </li>
+      <li class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-strong">
+        <Icon
+          name="lucide:graduation-cap"
+          class="size-4 text-accent"
+          aria-hidden="true"
+        />
+        {t.hero.credencial}
+      </li>
+    </ul>
     <h1
       id="hero-titulo"
       class="mt-6 text-4xl font-extrabold tracking-tight text-strong sm:text-6xl"

@@ -4,7 +4,7 @@ export const en: Diccionario = {
   meta: {
     titulo: 'Patricio Rolando Polito | Senior Frontend Developer',
     descripcion:
-      'Senior Frontend Developer and Systems Engineer with 10+ years of experience in React, Node and Laravel. Case studies with measurable impact and live demos.',
+      'Senior Frontend Developer and Systems Engineer with 10+ years building software, today with React, Node and TypeScript. Case studies with measurable impact and live demos.',
     tituloPersona: 'Senior Frontend Developer'
   },
   nav: {
@@ -19,16 +19,19 @@ export const en: Diccionario = {
     abrirMenu: 'Open menu',
     cerrarMenu: 'Close menu',
     temaClaro: 'Switch to light mode',
-    temaOscuro: 'Switch to dark mode'
+    temaOscuro: 'Switch to dark mode',
+    otroIdioma: 'ES',
+    otroIdiomaEtiqueta: 'Leer esta página en español'
   },
   hero: {
     disponible: 'Open to new opportunities',
+    credencial: 'Information Systems Engineer · UTN',
     nombre: 'Patricio Rolando Polito',
-    rol: 'Senior Frontend Developer · Systems Engineer',
+    rol: 'Senior Frontend Developer · Full stack experience',
     propuesta:
       'I turn operational processes into software that saves time and money.',
     bajada:
-      '10+ years with React, Node and Laravel: from migrating legacy systems to mathematically optimizing production.',
+      '10+ years building software, today with React, Node and TypeScript, previously Laravel: from migrating legacy systems to mathematical optimization of production.',
     verCasos: 'See case studies',
     descargarCv: 'Download CV',
     contactar: 'Get in touch'
@@ -38,12 +41,12 @@ export const en: Diccionario = {
     items: [
       { valor: '10+ years', etiqueta: 'building production software' },
       {
-        valor: '3 days → 0',
+        valor: 'Up to 3 days → 0',
         etiqueta: 'truck waiting time at an industrial plant'
       },
       {
         valor: '0 deploys',
-        etiqueta: 'to create or change a quality form'
+        etiqueta: 'to create or change a quality scorecard'
       }
     ]
   },
@@ -59,6 +62,7 @@ export const en: Diccionario = {
   },
   caso: {
     volver: 'All case studies',
+    etiqueta: 'Case study',
     enTreinta: 'In 30 seconds',
     cliente: 'Client',
     rol: 'Role',
@@ -100,7 +104,7 @@ export const en: Diccionario = {
         slug: 'formulario-dinamico',
         titulo: 'Dynamic form',
         descripcion:
-          'Edit the JSON of a form with fields nested three levels deep and watch the form and score update live.',
+          'Edit the JSON of a quality scorecard with fields nested three levels deep and watch the form and score update live.',
         stack: ['TypeScript', 'React', 'Zod']
       }
     ]
@@ -127,7 +131,7 @@ export const en: Diccionario = {
       demanda: 'Demand',
       quitar: 'Remove length {id}',
       agregar: 'Add length',
-      restaurar: 'Reset example',
+      restaurar: 'Reset to example',
       costos: 'Relative steel cost per row',
       optimizar: 'Optimize',
       calculando: 'Calculating…'
@@ -153,16 +157,16 @@ export const en: Diccionario = {
     resultado: {
       titulo: 'Optimal plan',
       costo: 'Steel cost',
-      vsHeuristica: 'vs. {valor} filling beds first come, first served',
+      vsHeuristica: 'vs. {valor} filling beds in order of arrival',
       ahorro: 'Steel savings',
       ahorroDetalle:
-        'versus first come, first served (average of 200 random orders)',
+        'versus filling in order of arrival (average of 200 random arrival sequences)',
       sobreMinimo: 'Above the theoretical minimum',
       sobreMinimoDetalle:
-        'minimum: {valor}, with every piece on its exact steel and no offcuts',
+        'minimum: {valor}, with each joist using exactly the steel it needs and no offcuts',
       bancos: 'Beds',
       bancosDetalle: '{jornadas} production days of 3 beds',
-      recorte: 'Total offcut',
+      recorte: 'Total offcuts',
       recorteDetalle: 'across {filas} rows of 33 m',
       bancosTitulo: 'How to produce',
       fila: 'Row {n}',
@@ -179,7 +183,7 @@ export const en: Diccionario = {
         'Generates every maximal cutting pattern for a 33 m row and each steel diameter, making sure no joist gets thinner steel than its minimum.',
         'Builds an integer linear programming model: minimize steel cost while meeting demand, with beds of 3 rows of the same diameter and production days of 3 beds.',
         'HiGHS solves it with simplex and branch and bound, inside a Web Worker so the page stays responsive.',
-        'Compares the plan with the previous practice: filling rows in the order joists arrive, with each bed using the steel of its longest joist.'
+        'Compares the plan with a simple baseline that mimics the previous practice: filling rows in the order joists arrive, with each bed using the steel of its longest joist.'
       ]
     }
   },
@@ -221,7 +225,7 @@ export const en: Diccionario = {
         'Changes apply as you type, as long as the JSON is valid. Field types: si-no (yes/no), seleccion (select), checkbox and texto (text). Try adding a fourth level inside "hijos".',
       etiqueta: 'Form JSON',
       formatear: 'Format',
-      restaurar: 'Reset example',
+      restaurar: 'Reset to example',
       valido: 'Valid JSON: the form is up to date.',
       invalido: 'The JSON has problems; the last valid version is still shown.'
     },
@@ -231,7 +235,7 @@ export const en: Diccionario = {
       'id-duplicado': 'The id “{id}” is used more than once.',
       'falta-falla':
         'Field “{id}” has a weight or is critical, but doesn\'t define "falla".',
-      'falta-opciones': 'Select “{id}” needs "opciones".',
+      'falta-opciones': 'The select field “{id}” needs "opciones".',
       'falla-no-es-opcion':
         'The "falla" value of “{id}” is not one of its options.',
       profundidad:
@@ -243,7 +247,7 @@ export const en: Diccionario = {
       pasos: [
         'The form is a JSON tree: each field has a type, the condition for showing its children, a weight and whether it is critical.',
         'A component registry maps each field type to its React component, replacing what Blade used to do on the server.',
-        'A recursive component renders each field and, if the answer meets the condition, calls itself with the children: any depth, no code changes.',
+        'A recursive component renders each field and, if the answer meets the condition, calls itself with the children: any depth with no code changes (the demo allows up to 5 levels).',
         "The score deducts failed regular items and drops to 0 if a critical item fails; hidden fields don't count. Zod validates the JSON before applying it."
       ]
     }
@@ -305,13 +309,17 @@ export const en: Diccionario = {
     items: [
       {
         titulo: 'Information Systems Engineering',
-        institucion: 'UTN — Tucumán Regional School',
-        detalle: 'Graduated 2025'
+        institucion:
+          'National Technological University (UTN) — Tucumán Regional Faculty',
+        detalle: "Bachelor's-level engineering degree · 2025",
+        destacado: true,
+        nota: 'The Operations Research I used to model the cutting optimizer comes from this degree.',
+        enlace: { texto: 'See the case study', caso: 'optimizador-viguetas' }
       },
       {
         titulo: 'Computer Technician',
         institucion: 'Technical School No. 5, Tucumán',
-        detalle: 'Flag bearer · GPA 7.33/10'
+        detalle: '2000 – 2006'
       }
     ]
   },

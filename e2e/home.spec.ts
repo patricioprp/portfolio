@@ -48,7 +48,7 @@ test.describe('home', () => {
     )
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
       'content',
-      /\/og\/default\.png$/
+      /\/og\/es\/inicio\.png$/
     )
     const jsonLd = await page
       .locator('script[type="application/ld+json"]')
@@ -124,5 +124,17 @@ test('la página de gracias no se indexa', async ({ page }) => {
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',
     'noindex'
+  )
+})
+
+test('el sitio arranca en modo oscuro aunque el sistema prefiera claro', async ({
+  page
+}) => {
+  await page.emulateMedia({ colorScheme: 'light' })
+  await page.goto('/')
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+  await expect(page.locator('body')).toHaveCSS(
+    'background-color',
+    'rgb(15, 23, 42)'
   )
 })

@@ -20,7 +20,7 @@ impacto medible** y las **demos ejecutables** en el navegador.
 
 ## Estado actual
 
-Fases 1 a 5 terminadas: home, casos y las dos demos en español; diccionarios y casos en inglés listos (faltan las rutas `/en`, Fase 6).
+Fases 1 a 6 terminadas: sitio completo en español e inglés (home, casos, dos demos). Pendientes manuales del lanzamiento en la Fase 6 de `docs/ROADMAP.md`.
 `legacy/index.html` es la versión anterior (HTML + Tailwind por CDN); sirve
 solo de referencia de contenido y estética (paleta oscura slate + sky). El
 progreso está en `docs/ROADMAP.md`.
@@ -51,7 +51,7 @@ npm run format     # prettier --write
 npm test           # vitest run
 npx vitest run <ruta>   # un solo archivo
 npm run e2e        # playwright (desktop + mobile)
-npm run og         # regenera public/og/default.png
+npm run og         # regenera las imágenes OG (public/og/<idioma>/...)
 ```
 
 Antes de dar una tarea por terminada, ejecutá la skill `/verificar`.

@@ -47,7 +47,7 @@ Propuesta de valor para el sitio: ver `docs/PRODUCTO.md`.
 ## Formación
 
 - **Ingeniería en Sistemas de Información** — UTN, Facultad Regional Tucumán (egreso 2025)
-- **Técnico en Computación** — Escuela Técnica N.º 5, Tucumán (2000–2006). Promedio 7,33. Abanderado.
+- **Técnico en Computación** — Escuela Técnica N.º 5, Tucumán (2000–2006). No publicar promedio ni abanderado (decisión de Patricio).
 
 ## Cursos
 

@@ -2,27 +2,31 @@
 import { Icon } from 'astro-icon/components'
 import ThemeToggle from '@/components/ThemeToggle.astro'
 import { obtenerDiccionario, type Idioma } from '@/i18n'
+import { otroIdioma, rutaInicio, type Alternos } from '@/i18n/rutas'
 
 interface Props {
   idioma: Idioma
+  alternos: Alternos
 }
 
-const { idioma } = Astro.props
+const { idioma, alternos } = Astro.props
 const t = obtenerDiccionario(idioma)
+const inicio = rutaInicio(idioma)
+const otro = otroIdioma(idioma)
 
 const enlaces = [
-  { href: '/#casos', texto: t.nav.casos },
-  { href: '/#demos', texto: t.nav.demos },
-  { href: '/#experiencia', texto: t.nav.experiencia },
-  { href: '/#stack', texto: t.nav.stack },
-  { href: '/#contacto', texto: t.nav.contacto }
+  { href: `${inicio}#casos`, texto: t.nav.casos },
+  { href: `${inicio}#demos`, texto: t.nav.demos },
+  { href: `${inicio}#experiencia`, texto: t.nav.experiencia },
+  { href: `${inicio}#stack`, texto: t.nav.stack },
+  { href: `${inicio}#contacto`, texto: t.nav.contacto }
 ]
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/85 backdrop-blur">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
     <a
-      href="/"
+      href={inicio}
       class="font-mono text-lg font-bold tracking-wide text-accent"
       aria-label={`${t.nav.inicio} — PRP.dev`}
     >
@@ -42,6 +46,15 @@ const enlaces = [
     </nav>
 
     <div class="flex items-center gap-1">
+      <a
+        href={alternos[otro]}
+        hreflang={otro}
+        lang={otro}
+        class="inline-flex h-10 items-center rounded-md px-2.5 font-mono text-sm font-semibold text-strong hover:bg-surface-2"
+      >
+        {t.nav.otroIdioma}
+        <span class="sr-only">— {t.nav.otroIdiomaEtiqueta}</span>
+      </a>
       <ThemeToggle idioma={idioma} />
       <button
         type="button"

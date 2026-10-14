@@ -125,7 +125,7 @@ export default function FormularioDinamico({ idioma, textos }: Props) {
             <span
               className={`font-mono text-lg font-bold ${
                 fallaCritica
-                  ? 'text-rose-600 dark:text-rose-400'
+                  ? 'text-rose-700 dark:text-rose-400'
                   : 'text-strong'
               }`}
             >
@@ -148,7 +148,7 @@ export default function FormularioDinamico({ idioma, textos }: Props) {
             <span
               className={`font-mono text-5xl font-bold ${
                 fallaCritica
-                  ? 'text-rose-600 dark:text-rose-400'
+                  ? 'text-rose-700 dark:text-rose-400'
                   : 'text-strong'
               }`}
             >
@@ -201,7 +201,7 @@ export default function FormularioDinamico({ idioma, textos }: Props) {
               {resultado.descuentos.map((d) => (
                 <li key={d.id} className="flex justify-between gap-3">
                   <span>{d.etiqueta}</span>
-                  <span className="shrink-0 font-mono text-rose-600 dark:text-rose-400">
+                  <span className="shrink-0 font-mono text-rose-700 dark:text-rose-400">
                     −{d.peso}
                   </span>
                 </li>

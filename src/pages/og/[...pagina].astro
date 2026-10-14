@@ -1,0 +1,104 @@
+---
+// Plantilla de imágenes Open Graph (1200 × 630). Solo existe en desarrollo:
+// `npm run og` la abre con Chromium y guarda las capturas en public/og/.
+import type { GetStaticPaths } from 'astro'
+import { Font } from 'astro:assets'
+import '@/styles/global.css'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+import { obtenerCasos, slugDeCaso } from '@/data/casos'
+
+type Tarjeta = {
+  eyebrow: string
+  titulo: string
+  bajada: string
+  tags: string[]
+}
+
+export const getStaticPaths = (async () => {
+  if (import.meta.env.PROD) return []
+  const paginas: { params: { pagina: string }; props: Tarjeta }[] = []
+
+  for (const idioma of ['es', 'en'] as Idioma[]) {
+    const t = obtenerDiccionario(idioma)
+    paginas.push({
+      params: { pagina: `${idioma}/inicio` },
+      props: {
+        eyebrow: t.hero.rol,
+        titulo: t.hero.nombre,
+        bajada: t.hero.propuesta,
+        tags: ['React', 'TypeScript', 'Node.js', 'Laravel']
+      }
+    })
+
+    for (const caso of await obtenerCasos(idioma)) {
+      paginas.push({
+        params: { pagina: `${idioma}/casos/${slugDeCaso(caso)}` },
+        props: {
+          eyebrow: `${t.caso.etiqueta} · ${caso.data.cliente}`,
+          titulo: caso.data.titulo,
+          bajada: caso.data.resumen,
+          tags: caso.data.stack.slice(0, 4)
+        }
+      })
+    }
+
+    const demos = [
+      ['optimizador-viguetas', t.demoOptimizador],
+      ['formulario-dinamico', t.demoFormulario]
+    ] as const
+    for (const [slug, d] of demos) {
+      const item = t.demos.items.find((i) => i.slug === slug)
+      paginas.push({
+        params: { pagina: `${idioma}/demos/${slug}` },
+        props: {
+          eyebrow: d.eyebrow,
+          titulo: d.titulo,
+          bajada: item?.descripcion ?? d.bajada,
+          tags: item?.stack ?? []
+        }
+      })
+    }
+  }
+  return paginas
+}) satisfies GetStaticPaths
+
+const { eyebrow, titulo, bajada, tags } = Astro.props
+---
+
+<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-jetbrains" />
+    <title>OG · {titulo}</title>
+  </head>
+  <body class="m-0 bg-bg font-sans">
+    <div
+      id="tarjeta"
+      class="relative flex h-[630px] w-[1200px] flex-col justify-between overflow-hidden bg-bg p-20 text-fg"
+    >
+      <div class="pointer-events-none absolute -top-64 -right-52 size-[760px] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.28),transparent_65%)]"></div>
+      <p class="font-mono text-3xl font-bold text-accent">
+        PRP<span class="text-strong">.dev</span>
+      </p>
+      <div class="relative max-w-[1000px]">
+        <p class="font-mono text-2xl text-accent">{eyebrow}</p>
+        <h1 class="mt-4 text-[64px] leading-[1.05] font-extrabold tracking-tight text-balance text-strong">
+          {titulo}
+        </h1>
+        <p class="mt-6 line-clamp-2 text-[28px] leading-snug text-fg">
+          {bajada}
+        </p>
+      </div>
+      <ul class="flex gap-3">
+        {tags.map((tag) => (
+          <li class="rounded-lg border border-line bg-surface px-4 py-2 font-mono text-xl">
+            {tag}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </body>
+</html>

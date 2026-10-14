@@ -1,0 +1,17 @@
+---
+import type { GetStaticPaths } from 'astro'
+import CasoPage from '@/components/caso/CasoPage.astro'
+import { obtenerCasos, slugDeCaso } from '@/data/casos'
+
+export const getStaticPaths = (async () => {
+  const casos = await obtenerCasos('en')
+  return casos.map((caso, i) => ({
+    params: { slug: slugDeCaso(caso) },
+    props: { caso, anterior: casos[i - 1], siguiente: casos[i + 1] }
+  }))
+}) satisfies GetStaticPaths
+
+const { caso, anterior, siguiente } = Astro.props
+---
+
+<CasoPage idioma="en" caso={caso} anterior={anterior} siguiente={siguiente} />

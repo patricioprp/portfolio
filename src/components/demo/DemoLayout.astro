@@ -5,6 +5,8 @@ import Button from '@/components/ui/Button.astro'
 import { obtenerDiccionario, type Idioma } from '@/i18n'
 import { rutaDeCaso } from '@/data/casos'
 import { perfil } from '@/data/perfil'
+import { rutaDeDemo } from '@/data/demos'
+import { rutaInicio, rutaOg } from '@/i18n/rutas'
 
 interface Props {
   idioma: Idioma
@@ -17,20 +19,25 @@ interface Props {
     verCodigo: string
     comoFunciona: { titulo: string; pasos: string[] }
   }
+  /** Slug de esta demo. */
+  demo: string
   /** Slug del caso de estudio relacionado. */
   caso: string
   /** Carpeta del código en el repositorio (ej. `src/lib/optimizador`). */
   codigo: string
 }
 
-const { idioma, textos: t, caso, codigo } = Astro.props
-const inicio = idioma === 'es' ? '/' : '/en/'
+const { idioma, textos: t, demo, caso, codigo } = Astro.props
+const inicio = rutaInicio(idioma)
+const alternos = { es: rutaDeDemo('es', demo), en: rutaDeDemo('en', demo) }
 ---
 
 <BaseLayout
   idioma={idioma}
   titulo={t.meta.titulo}
   descripcion={t.meta.descripcion}
+  alternos={alternos}
+  imagenOg={rutaOg(idioma, `demos/${demo}`)}
 >
   <header class="px-4 pt-32 pb-10 sm:px-6 sm:pt-40">
     <div class="mx-auto max-w-5xl">

@@ -66,13 +66,16 @@ Bloquean contenido, no código. Respuestas volcadas en `docs/contenido/` y `CLAU
 
 ## Fase 6 — Inglés, calidad y lanzamiento
 
-- [ ] i18n `/en` para todas las páginas y el selector de idioma
-- [ ] Imágenes OG por página
-- [ ] e2e: navegación, menú móvil, formulario, demos; axe sin violaciones
-- [ ] Lighthouse móvil ≥ 95 en las 4 categorías
-- [ ] Revisión del texto con el agente `revisor-contenido`
-- [ ] Decidir si se mantiene el formulario de contacto; si se mantiene, activar "Form detection" en Netlify (Site configuration → Forms) y configurar la notificación por email. **Avisarle a Patricio en este paso.**
-- [ ] Deploy, Search Console; actualizar el link en LinkedIn y GitHub
+- [x] Versión en inglés de todas las páginas (`/en/`, `/en/case-studies/`, `/en/demos/`, `/en/thanks/`), selector de idioma y `hreflang`
+- [x] Imágenes OG por página e idioma (`npm run og`, plantilla en `src/pages/og/` solo en desarrollo)
+- [x] e2e: navegación, menú móvil, formulario, demos e i18n; axe (WCAG 2.2 AA) sin violaciones en tema claro y oscuro
+- [x] Lighthouse móvil: 99–100 en las 4 categorías en home, casos y demos (CLS 0 gracias a la API de fuentes de Astro)
+- [x] Revisión del texto con el agente `revisor-contenido`
+- [ ] **Patricio:** `git push` de `main` → Netlify despliega el sitio nuevo
+- [ ] **Patricio:** en Netlify, Site configuration → Forms → activar "Form detection" y configurar la notificación por email (si se mantiene el formulario)
+- [ ] **Patricio:** Google Search Console: verificar el sitio y enviar `/sitemap-index.xml`
+- [ ] **Patricio:** actualizar el enlace al portfolio en LinkedIn y en el perfil de GitHub
+- [ ] **Patricio:** CV públicos ES/EN en `public/cv/` (el botón "Descargar CV" aparece solo cuando existen)
 
 ## Ideas para después
 

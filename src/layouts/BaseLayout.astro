@@ -1,20 +1,31 @@
 ---
-import '@fontsource-variable/inter'
-import '@fontsource-variable/jetbrains-mono'
+import { Font } from 'astro:assets'
 import '@/styles/global.css'
 import Seo from '@/components/Seo.astro'
 import Header from '@/components/Header.astro'
 import Footer from '@/components/Footer.astro'
 import { obtenerDiccionario, type Idioma } from '@/i18n'
+import { ALTERNOS_INICIO, rutaOg, type Alternos } from '@/i18n/rutas'
 
 interface Props {
   idioma: Idioma
   titulo?: string
   descripcion?: string
   noIndex?: boolean
+  /** La misma página en cada idioma; por defecto, la home. */
+  alternos?: Alternos | undefined
+  /** Imagen Open Graph; por defecto, la de la home. */
+  imagenOg?: string | undefined
 }
 
-const { idioma, titulo, descripcion, noIndex = false } = Astro.props
+const {
+  idioma,
+  titulo,
+  descripcion,
+  noIndex = false,
+  alternos = ALTERNOS_INICIO,
+  imagenOg = rutaOg(idioma, 'inicio')
+} = Astro.props
 const t = obtenerDiccionario(idioma)
 ---
 
@@ -29,21 +40,22 @@ const t = obtenerDiccionario(idioma)
         try {
           tema = localStorage.getItem('tema')
         } catch {
-          // Sin almacenamiento: se usa la preferencia del sistema.
+          // Sin almacenamiento: queda el modo oscuro.
         }
-        if (tema !== 'light' && tema !== 'dark') {
-          tema = matchMedia('(prefers-color-scheme: dark)').matches
-            ? 'dark'
-            : 'light'
-        }
+        // Sin elección guardada, el sitio arranca en modo oscuro.
+        if (tema !== 'light') tema = 'dark'
         document.documentElement.dataset.theme = tema
       })()
     </script>
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-jetbrains" />
     <Seo
       idioma={idioma}
       titulo={titulo ?? t.meta.titulo}
       descripcion={descripcion ?? t.meta.descripcion}
       noIndex={noIndex}
+      alternos={alternos}
+      imagen={imagenOg}
     />
   </head>
   <body class="bg-bg font-sans text-fg antialiased">
@@ -53,7 +65,7 @@ const t = obtenerDiccionario(idioma)
     >
       {t.nav.saltar}
     </a>
-    <Header idioma={idioma} />
+    <Header idioma={idioma} alternos={alternos} />
     <main id="contenido" tabindex="-1" class="outline-none">
       <slot />
     </main>

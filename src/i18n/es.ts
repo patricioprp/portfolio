@@ -2,7 +2,7 @@ export const es = {
   meta: {
     titulo: 'Patricio Rolando Polito | Frontend Senior',
     descripcion:
-      'Frontend Senior e Ingeniero en Sistemas con más de 10 años de experiencia en React, Node y Laravel. Casos de estudio con impacto medible y demos en vivo.',
+      'Frontend Senior e Ingeniero en Sistemas con más de 10 años desarrollando software, hoy con React, Node y TypeScript. Casos de estudio con impacto medible y demos en vivo.',
     tituloPersona: 'Frontend Senior'
   },
   nav: {
@@ -17,16 +17,19 @@ export const es = {
     abrirMenu: 'Abrir menú',
     cerrarMenu: 'Cerrar menú',
     temaClaro: 'Cambiar a modo claro',
-    temaOscuro: 'Cambiar a modo oscuro'
+    temaOscuro: 'Cambiar a modo oscuro',
+    otroIdioma: 'EN',
+    otroIdiomaEtiqueta: 'Read this page in English'
   },
   hero: {
     disponible: 'Abierto a nuevas oportunidades',
+    credencial: 'Ingeniero en Sistemas de Información · UTN',
     nombre: 'Patricio Rolando Polito',
-    rol: 'Frontend Senior · Ingeniero en Sistemas',
+    rol: 'Frontend Senior · Experiencia full stack',
     propuesta:
       'Convierto procesos operativos en software que ahorra tiempo y dinero.',
     bajada:
-      'Más de 10 años con React, Node y Laravel: de la migración de sistemas legacy a la optimización matemática de la producción.',
+      'Más de 10 años desarrollando software, hoy con React, Node y TypeScript y antes con Laravel: de la migración de sistemas legacy a la optimización matemática de la producción.',
     verCasos: 'Ver casos de estudio',
     descargarCv: 'Descargar CV',
     contactar: 'Contactar'
@@ -36,7 +39,7 @@ export const es = {
     items: [
       { valor: '+10 años', etiqueta: 'desarrollando software en producción' },
       {
-        valor: '3 días → 0',
+        valor: 'Hasta 3 días → 0',
         etiqueta: 'de espera de camiones en una planta industrial'
       },
       {
@@ -57,6 +60,7 @@ export const es = {
   },
   caso: {
     volver: 'Todos los casos',
+    etiqueta: 'Caso de estudio',
     enTreinta: 'En 30 segundos',
     cliente: 'Cliente',
     rol: 'Rol',
@@ -153,7 +157,7 @@ export const es = {
       vsHeuristica: 'vs. {valor} llenando los bancos por orden de llegada',
       ahorro: 'Ahorro de acero',
       ahorroDetalle:
-        'frente al orden de llegada (promedio de 200 órdenes aleatorios)',
+        'frente al orden de llegada (promedio de 200 secuencias de llegada aleatorias)',
       sobreMinimo: 'Sobre el mínimo teórico',
       sobreMinimoDetalle:
         'mínimo: {valor}, con cada pieza en su acero justo y sin recortes',
@@ -176,7 +180,7 @@ export const es = {
         'Genera todos los patrones de corte maximales de una fila de 33 m para cada diámetro de acero, respetando que una vigueta nunca lleve un acero más fino que su mínimo.',
         'Arma un modelo de programación lineal entera: minimizar el costo del acero cubriendo la demanda, con bancos de 3 filas del mismo diámetro y jornadas de 3 bancos.',
         'HiGHS lo resuelve con símplex y branch and bound, dentro de un Web Worker para que la página no se trabe.',
-        'Compara el plan con la práctica anterior: llenar las filas en el orden en que llegan las viguetas, con cada banco tomando el acero de la más larga.'
+        'Compara el plan con una referencia simple que imita la práctica anterior: llenar las filas en el orden en que llegan las viguetas, con cada banco tomando el acero de la más larga.'
       ]
     }
   },
@@ -239,7 +243,7 @@ export const es = {
       pasos: [
         'La planilla es un árbol JSON: cada campo tiene un tipo, la condición para mostrar a sus hijos, un peso y si es crítico.',
         'Un registro de componentes asocia cada tipo de campo con su componente React, el reemplazo de lo que antes hacía Blade en el servidor.',
-        'Un componente recursivo dibuja cada campo y, si la respuesta cumple la condición, se llama a sí mismo con los hijos: cualquier profundidad, sin cambiar código.',
+        'Un componente recursivo dibuja cada campo y, si la respuesta cumple la condición, se llama a sí mismo con los hijos: cualquier profundidad sin cambiar código (la demo admite hasta 5 niveles).',
         'El puntaje descuenta los ítems comunes que fallan y vale 0 si falla un ítem crítico; los campos ocultos no cuentan. Zod valida el JSON antes de aplicarlo.'
       ]
     }
@@ -301,13 +305,17 @@ export const es = {
     items: [
       {
         titulo: 'Ingeniería en Sistemas de Información',
-        institucion: 'UTN — Facultad Regional Tucumán',
-        detalle: 'Egreso 2025'
+        institucion:
+          'Universidad Tecnológica Nacional — Facultad Regional Tucumán',
+        detalle: 'Título de grado · 2025',
+        destacado: true,
+        nota: 'De la carrera viene la Investigación Operativa con la que modelé el optimizador de cortes.',
+        enlace: { texto: 'Ver el caso', caso: 'optimizador-viguetas' }
       },
       {
         titulo: 'Técnico en Computación',
         institucion: 'Escuela Técnica N.º 5, Tucumán',
-        detalle: 'Abanderado · Promedio 7,33'
+        detalle: '2000 – 2006'
       }
     ]
   },

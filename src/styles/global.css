@@ -6,8 +6,8 @@
 /* Tokens semánticos: las utilidades (bg-bg, text-fg, border-line, ...) leen
    variables CSS que cambian según el tema. */
 @theme inline {
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
   --color-bg: var(--bg);
   --color-surface: var(--surface);
@@ -22,40 +22,8 @@
   --color-accent-soft: var(--accent-soft);
 }
 
+/* Oscuro por defecto (también sin JS); claro solo por elección explícita. */
 :root {
-  color-scheme: light;
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --surface-2: #f1f5f9;
-  --line: #e2e8f0;
-  --fg: #334155;
-  --strong: #0f172a;
-  --muted: #5b6b80;
-  --accent: #0369a1;
-  --accent-solid: #0369a1;
-  --accent-solid-hover: #075985;
-  --accent-soft: #e0f2fe;
-}
-
-/* Oscuro: por preferencia del sistema (sin JS) o por elección explícita. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    color-scheme: dark;
-    --bg: #0f172a;
-    --surface: #1e293b;
-    --surface-2: #172033;
-    --line: #334155;
-    --fg: #cbd5e1;
-    --strong: #ffffff;
-    --muted: #94a3b8;
-    --accent: #38bdf8;
-    --accent-solid: #0369a1;
-    --accent-solid-hover: #075985;
-    --accent-soft: rgb(14 165 233 / 0.12);
-  }
-}
-
-:root[data-theme='dark'] {
   color-scheme: dark;
   --bg: #0f172a;
   --surface: #1e293b;
@@ -68,6 +36,21 @@
   --accent-solid: #0369a1;
   --accent-solid-hover: #075985;
   --accent-soft: rgb(14 165 233 / 0.12);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --line: #e2e8f0;
+  --fg: #334155;
+  --strong: #0f172a;
+  --muted: #5b6b80;
+  --accent: #0369a1;
+  --accent-solid: #0369a1;
+  --accent-solid-hover: #075985;
+  --accent-soft: #e0f2fe;
 }
 
 @media (prefers-reduced-motion: no-preference) {

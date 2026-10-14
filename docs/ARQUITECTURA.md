@@ -2,19 +2,20 @@
 
 ## Decisiones
 
-| Decisión               | Elección                                                                         | Por qué                                                                                                                                       |
-| ---------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Framework              | **Astro 7**                                                                      | HTML estático por defecto (SEO y velocidad), content collections para los casos, i18n nativo                                                  |
-| Interactividad         | **Islas React 19**                                                               | Es el stack principal de Patricio; las demos muestran su forma de trabajar en React                                                           |
-| Menú móvil y tema      | **Scripts de Astro** (vanilla, < 2 KB)                                           | El runtime de React (~60 KB gz) solo para un menú rompería el presupuesto de 50 KB de la home                                                 |
-| Lenguaje               | **TypeScript 6 (`strictest`)**                                                   | Sin `any`; los modelos del optimizador y del formulario tipados                                                                               |
-| Estilos                | **Tailwind CSS 4** (`@tailwindcss/vite`)                                         | Continuidad con la versión actual, sin CDN                                                                                                    |
-| Solver LP              | **HiGHS** (`highs`, WebAssembly), detrás de una interfaz `Solver`                | javascript-lp-solver no terminaba en 5 min con 200 variables enteras; HiGHS resuelve en < 1 s. El .wasm (~1,2 MB gz) se carga solo en la demo |
-| Ejecución del solver   | **Web Worker** en el navegador                                                   | Sin backend: el deploy sigue siendo estático y gratuito; la UI no se bloquea                                                                  |
-| Formulario de contacto | **Netlify Forms**                                                                | Sin servidor propio; protección contra spam con honeypot                                                                                      |
-| Íconos                 | `astro-icon` + Iconify (SVG sueltos)                                             | Se reemplaza Font Awesome completo por CDN                                                                                                    |
-| Tests                  | **Vitest** (lib) + **Playwright** (e2e, smoke + a11y con `@axe-core/playwright`) | Mismo tooling que usa en su trabajo                                                                                                           |
-| Deploy                 | **Netlify**, `publish = "dist"`                                                  | Ya está configurado; solo cambia la carpeta publicada                                                                                         |
+| Decisión               | Elección                                                                          | Por qué                                                                                                                                       |
+| ---------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework              | **Astro 7**                                                                       | HTML estático por defecto (SEO y velocidad), content collections para los casos, i18n nativo                                                  |
+| Interactividad         | **Islas React 19**                                                                | Es el stack principal de Patricio; las demos muestran su forma de trabajar en React                                                           |
+| Menú móvil y tema      | **Scripts de Astro** (vanilla, < 2 KB)                                            | El runtime de React (~60 KB gz) solo para un menú rompería el presupuesto de 50 KB de la home                                                 |
+| Lenguaje               | **TypeScript 6 (`strictest`)**                                                    | Sin `any`; los modelos del optimizador y del formulario tipados                                                                               |
+| Estilos                | **Tailwind CSS 4** (`@tailwindcss/vite`)                                          | Continuidad con la versión actual, sin CDN                                                                                                    |
+| Solver LP              | **HiGHS** (`highs`, WebAssembly), detrás de una interfaz `Solver`                 | javascript-lp-solver no terminaba en 5 min con 200 variables enteras; HiGHS resuelve en < 1 s. El .wasm (~1,2 MB gz) se carga solo en la demo |
+| Ejecución del solver   | **Web Worker** en el navegador                                                    | Sin backend: el deploy sigue siendo estático y gratuito; la UI no se bloquea                                                                  |
+| Formulario de contacto | **Netlify Forms**                                                                 | Sin servidor propio; protección contra spam con honeypot                                                                                      |
+| Fuentes                | **API de fuentes de Astro** (`fontProviders.local()` con los woff2 de Fontsource) | Fallbacks con métricas ajustadas (CLS 0) y preload de Inter                                                                                   |
+| Íconos                 | `astro-icon` + Iconify (SVG sueltos)                                              | Se reemplaza Font Awesome completo por CDN                                                                                                    |
+| Tests                  | **Vitest** (lib) + **Playwright** (e2e, smoke + a11y con `@axe-core/playwright`)  | Mismo tooling que usa en su trabajo                                                                                                           |
+| Deploy                 | **Netlify**, `publish = "dist"`                                                   | Ya está configurado; solo cambia la carpeta publicada                                                                                         |
 
 ## Estructura de carpetas (objetivo)
 
@@ -67,6 +68,10 @@ mi-portfolio/
 ```
 
 ## Textos e idiomas
+
+- Rutas: español en la raíz (`/`, `/casos/`, `/demos/`, `/gracias/`) e inglés bajo `/en/` (`/en/case-studies/`, `/en/demos/`, `/en/thanks/`). Helpers en `src/i18n/rutas.ts`, `src/data/casos.ts` y `src/data/demos.ts`.
+- Cada página pasa `alternos` (su URL en cada idioma) a `BaseLayout`: se usan para `hreflang` y para el selector de idioma del header.
+- Imágenes OG: `npm run og` levanta Astro en desarrollo, abre `src/pages/og/[...pagina].astro` (no existe en producción) y guarda `public/og/<idioma>/<pagina>.png`. Regenerarlas cuando cambie un título o resumen.
 
 - Textos de la UI y de la home: `src/i18n/es.ts` y `src/i18n/en.ts`. `en` está tipado como `Diccionario` (`typeof es`), así que una clave faltante rompe `npm run check`.
 - Contenido estructurado con idioma por campo (`{ es, en }`): colección `experiencia` en `src/content/experiencia.json`.

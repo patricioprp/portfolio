@@ -1,0 +1,15 @@
+---
+import PaginaMensaje from '@/components/PaginaMensaje.astro'
+import { obtenerDiccionario } from '@/i18n'
+
+const t = obtenerDiccionario('en').gracias
+---
+
+<PaginaMensaje
+  idioma="en"
+  icono="lucide:circle-check"
+  titulo={t.titulo}
+  texto={t.texto}
+  volver={t.volver}
+  alternos={{ es: '/gracias/', en: '/en/thanks/' }}
+/>

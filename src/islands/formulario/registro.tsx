@@ -25,7 +25,7 @@ function Encabezado({
     <span className="flex flex-wrap items-center gap-2 font-medium text-strong">
       {campo.etiqueta}
       {campo.critico && (
-        <span className="rounded-full bg-rose-500/15 px-2 py-0.5 text-xs font-semibold text-rose-600 dark:text-rose-400">
+        <span className="rounded-full bg-rose-500/15 px-2 py-0.5 text-xs font-semibold text-rose-700 dark:text-rose-400">
           {textos.critico}
         </span>
       )}
