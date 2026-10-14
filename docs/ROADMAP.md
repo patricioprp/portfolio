@@ -56,12 +56,13 @@ Bloquean contenido, no código. Respuestas volcadas en `docs/contenido/` y `CLAU
 - [x] Home y caso enlazan a la demo; métrica ilustrativa del caso alineada con la demo (~37 %)
 - [x] Repositorio público: https://github.com/patricioprp/portfolio (el enlace "Ver el código" apunta a `main`)
 
-## Fase 5 — Demo: Formulario dinámico
+## Fase 5 — Demo: Formulario dinámico ✅
 
-- [ ] `src/lib/formularios` (visibilidad y puntaje) con tests
-- [ ] Registro de componentes + `Campo` recursivo + panel de puntaje en vivo
-- [ ] Editor JSON de la planilla con validación (zod) y mensajes claros
-- [ ] Planilla de ejemplo con 3 niveles y un ítem crítico
+- [x] `src/lib/formularios` (esquema zod recursivo, visibilidad, puntaje, validación) con tests
+- [x] Registro de componentes + `Campo` recursivo + panel de puntaje en vivo (barra fija en mobile)
+- [x] Editor JSON validado con zod (mensajes localizados ES/EN) y reglas de negocio; se mantiene la última versión válida
+- [x] Planilla de ejemplo con 3 niveles y un ítem crítico (ES/EN)
+- [x] `DemoLayout` común para las páginas de demo; README en `src/lib/formularios/README.md`
 
 ## Fase 6 — Inglés, calidad y lanzamiento
 

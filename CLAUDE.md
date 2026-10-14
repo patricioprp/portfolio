@@ -20,7 +20,7 @@ impacto medible** y las **demos ejecutables** en el navegador.
 
 ## Estado actual
 
-Fases 1 a 4 terminadas: home, casos y demo del optimizador en español; diccionarios y casos en inglés listos (faltan las rutas `/en`, Fase 6).
+Fases 1 a 5 terminadas: home, casos y las dos demos en español; diccionarios y casos en inglés listos (faltan las rutas `/en`, Fase 6).
 `legacy/index.html` es la versión anterior (HTML + Tailwind por CDN); sirve
 solo de referencia de contenido y estética (paleta oscura slate + sky). El
 progreso está en `docs/ROADMAP.md`.

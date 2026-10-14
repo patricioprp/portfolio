@@ -5,7 +5,7 @@ Ingeniero en Sistemas. Incluye casos de estudio con impacto medible y demos
 ejecutables: un optimizador de cortes con programación lineal entera y un
 motor de formularios dinámicos.
 
-- **Estado:** Fases 1 a 4 terminadas: home, casos de estudio y demo del optimizador en español. La versión anterior está en `legacy/index.html`.
+- **Estado:** Fases 1 a 5 terminadas: home, casos de estudio y las dos demos en español. La versión anterior está en `legacy/index.html`.
 - **Stack:** Astro 7 + React 19 + TypeScript + Tailwind CSS 4, deploy en Netlify.
 
 ## Desarrollo

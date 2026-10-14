@@ -180,6 +180,70 @@ export const es = {
       ]
     }
   },
+  demoFormulario: {
+    meta: {
+      titulo: 'Formulario dinámico | Demo de Patricio Polito',
+      descripcion:
+        'Demo en vivo: una planilla de calidad descrita en JSON y dibujada por un componente React recursivo, con puntaje en vivo.'
+    },
+    eyebrow: 'Demo en vivo',
+    titulo: 'Formulario dinámico',
+    bajada:
+      'Una planilla de calidad descrita en JSON y dibujada por un componente React recursivo. Respondé y mirá cómo aparecen los campos anidados y cambia el puntaje; después editá el JSON y la planilla se actualiza sin recargar.',
+    aviso:
+      'Planilla ilustrativa. En el sistema real el puntaje oficial lo calculaba el backend; acá es una vista previa.',
+    leerCaso: 'Leer el caso de estudio',
+    verCodigo: 'Ver el código',
+    planilla: {
+      nivel: 'Nivel {n}',
+      critico: 'Crítico',
+      descuenta: '−{n} pts',
+      si: 'Sí',
+      no: 'No',
+      elegir: 'Elegí una opción'
+    },
+    puntaje: {
+      titulo: 'Puntaje (vista previa)',
+      de: 'de {total}',
+      respondidos: '{r} de {e} ítems evaluables respondidos',
+      sinDescuentos: 'Sin descuentos por ahora.',
+      descuentos: 'Descuentos',
+      criticoTitulo: 'Ítem crítico fallido',
+      criticoTexto: 'La evaluación vale 0 porque falló: {etiqueta}',
+      anuncio: 'Puntaje: {p} de {t}.'
+    },
+    editor: {
+      titulo: 'Editá la planilla (JSON)',
+      ayuda:
+        'Los cambios se aplican mientras escribís, si el JSON es válido. Tipos de campo: si-no, seleccion, checkbox y texto. Probá agregar un cuarto nivel dentro de "hijos".',
+      etiqueta: 'JSON de la planilla',
+      formatear: 'Formatear',
+      restaurar: 'Restaurar ejemplo',
+      valido: 'JSON válido: la planilla está actualizada.',
+      invalido:
+        'Hay problemas en el JSON; se sigue mostrando la última versión válida.'
+    },
+    errores: {
+      json: 'El JSON no es válido: {detalle}',
+      esquema: '{ruta}: {mensaje}',
+      'id-duplicado': 'El id «{id}» está repetido.',
+      'falta-falla':
+        'El campo «{id}» tiene peso o es crítico, pero no define "falla".',
+      'falta-opciones': 'La selección «{id}» necesita "opciones".',
+      'falla-no-es-opcion': 'La "falla" de «{id}» no es una de sus opciones.',
+      profundidad: '«{id}» supera los {maximo} niveles permitidos en la demo.',
+      raiz: 'planilla'
+    },
+    comoFunciona: {
+      titulo: 'Cómo funciona',
+      pasos: [
+        'La planilla es un árbol JSON: cada campo tiene un tipo, la condición para mostrar a sus hijos, un peso y si es crítico.',
+        'Un registro de componentes asocia cada tipo de campo con su componente React, el reemplazo de lo que antes hacía Blade en el servidor.',
+        'Un componente recursivo dibuja cada campo y, si la respuesta cumple la condición, se llama a sí mismo con los hijos: cualquier profundidad, sin cambiar código.',
+        'El puntaje descuenta los ítems comunes que fallan y vale 0 si falla un ítem crítico; los campos ocultos no cuentan. Zod valida el JSON antes de aplicarlo.'
+      ]
+    }
+  },
   experiencia: {
     eyebrow: 'Trayectoria',
     titulo: 'Experiencia',

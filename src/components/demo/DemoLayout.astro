@@ -1,0 +1,95 @@
+---
+import { Icon } from 'astro-icon/components'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Button from '@/components/ui/Button.astro'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+import { rutaDeCaso } from '@/data/casos'
+import { perfil } from '@/data/perfil'
+
+interface Props {
+  idioma: Idioma
+  textos: {
+    meta: { titulo: string; descripcion: string }
+    eyebrow: string
+    titulo: string
+    bajada: string
+    leerCaso: string
+    verCodigo: string
+    comoFunciona: { titulo: string; pasos: string[] }
+  }
+  /** Slug del caso de estudio relacionado. */
+  caso: string
+  /** Carpeta del código en el repositorio (ej. `src/lib/optimizador`). */
+  codigo: string
+}
+
+const { idioma, textos: t, caso, codigo } = Astro.props
+const inicio = idioma === 'es' ? '/' : '/en/'
+---
+
+<BaseLayout
+  idioma={idioma}
+  titulo={t.meta.titulo}
+  descripcion={t.meta.descripcion}
+>
+  <header class="px-4 pt-32 pb-10 sm:px-6 sm:pt-40">
+    <div class="mx-auto max-w-5xl">
+      <a
+        href={`${inicio}#demos`}
+        class="inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
+      >
+        <Icon name="lucide:arrow-left" class="size-4" aria-hidden="true" />
+        {obtenerDiccionario(idioma).nav.demos}
+      </a>
+      <p class="mt-8 font-mono text-sm font-semibold tracking-wider text-accent uppercase">
+        {t.eyebrow}
+      </p>
+      <h1 class="mt-2 text-4xl font-extrabold tracking-tight text-strong sm:text-5xl">
+        {t.titulo}
+      </h1>
+      <p class="mt-6 max-w-3xl text-lg text-muted">{t.bajada}</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <Button
+          href={rutaDeCaso(idioma, caso)}
+          variante="secundario"
+          icono="lucide:book-open"
+        >
+          {t.leerCaso}
+        </Button>
+        {perfil.repositorio && (
+          <Button
+            href={`${perfil.repositorio}/tree/main/${codigo}`}
+            variante="secundario"
+            icono="simple-icons:github"
+          >
+            {t.verCodigo}
+          </Button>
+        )}
+      </div>
+    </div>
+  </header>
+
+  <section class="px-4 pb-12 sm:px-6">
+    <div class="mx-auto max-w-5xl">
+      <slot />
+    </div>
+  </section>
+
+  <section aria-labelledby="como-funciona" class="px-4 pb-20 sm:px-6">
+    <div class="mx-auto max-w-5xl rounded-2xl border border-line bg-surface-2 p-6 sm:p-8">
+      <h2 id="como-funciona" class="text-xl font-bold text-strong">
+        {t.comoFunciona.titulo}
+      </h2>
+      <ol class="mt-4 space-y-3">
+        {t.comoFunciona.pasos.map((paso, i) => (
+          <li class="flex gap-3">
+            <span class="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent-soft font-mono text-sm font-bold text-accent">
+              {i + 1}
+            </span>
+            <span>{paso}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</BaseLayout>

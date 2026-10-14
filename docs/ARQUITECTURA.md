@@ -73,6 +73,7 @@ mi-portfolio/
 - La home es `src/components/home/HomePage.astro` con prop `idioma`; la Fase 6 solo agrega `src/pages/en/index.astro`.
 - Datos de contacto: `src/data/perfil.ts`.
 - Casos: MDX en `src/content/casos/{es,en}/<slug>.mdx` (id del glob = `<idioma>/<slug>`); helpers en `src/data/casos.ts` (`obtenerCasos`, `slugDeCaso`, `rutaDeCaso`). La página es `src/components/caso/CasoPage.astro`.
+- Demos: páginas en `src/components/demo/` sobre `DemoLayout.astro` (encabezado, enlaces al caso y al código, "Cómo funciona"); islas en `src/islands/{optimizador,formulario}/` y utilidades compartidas en `src/islands/compartido/`.
 - Diagramas: `src/components/diagramas/`, cada uno con prop `idioma` y textos propios; envueltos en `Figura.astro` (scroll horizontal en mobile, mínimo 640 px).
 
 ## Demo 1: Optimizador de cortes de viguetas

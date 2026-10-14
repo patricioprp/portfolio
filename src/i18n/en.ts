@@ -183,6 +183,71 @@ export const en: Diccionario = {
       ]
     }
   },
+  demoFormulario: {
+    meta: {
+      titulo: 'Dynamic form | Demo by Patricio Polito',
+      descripcion:
+        'Live demo: a quality form described in JSON and rendered by a recursive React component, with a live score.'
+    },
+    eyebrow: 'Live demo',
+    titulo: 'Dynamic form',
+    bajada:
+      'A quality form described in JSON and rendered by a recursive React component. Answer it and watch nested fields appear and the score change; then edit the JSON and the form updates without reloading.',
+    aviso:
+      'Illustrative form. In the real system the official score was calculated on the backend; this is a preview.',
+    leerCaso: 'Read the case study',
+    verCodigo: 'View the code',
+    planilla: {
+      nivel: 'Level {n}',
+      critico: 'Critical',
+      descuenta: '−{n} pts',
+      si: 'Yes',
+      no: 'No',
+      elegir: 'Choose an option'
+    },
+    puntaje: {
+      titulo: 'Score (preview)',
+      de: 'out of {total}',
+      respondidos: '{r} of {e} scored items answered',
+      sinDescuentos: 'No deductions so far.',
+      descuentos: 'Deductions',
+      criticoTitulo: 'Critical item failed',
+      criticoTexto: 'The review scores 0 because this failed: {etiqueta}',
+      anuncio: 'Score: {p} out of {t}.'
+    },
+    editor: {
+      titulo: 'Edit the form (JSON)',
+      ayuda:
+        'Changes apply as you type, as long as the JSON is valid. Field types: si-no (yes/no), seleccion (select), checkbox and texto (text). Try adding a fourth level inside "hijos".',
+      etiqueta: 'Form JSON',
+      formatear: 'Format',
+      restaurar: 'Reset example',
+      valido: 'Valid JSON: the form is up to date.',
+      invalido: 'The JSON has problems; the last valid version is still shown.'
+    },
+    errores: {
+      json: 'The JSON is not valid: {detalle}',
+      esquema: '{ruta}: {mensaje}',
+      'id-duplicado': 'The id “{id}” is used more than once.',
+      'falta-falla':
+        'Field “{id}” has a weight or is critical, but doesn\'t define "falla".',
+      'falta-opciones': 'Select “{id}” needs "opciones".',
+      'falla-no-es-opcion':
+        'The "falla" value of “{id}” is not one of its options.',
+      profundidad:
+        '“{id}” goes beyond the {maximo} levels allowed in the demo.',
+      raiz: 'form'
+    },
+    comoFunciona: {
+      titulo: 'How it works',
+      pasos: [
+        'The form is a JSON tree: each field has a type, the condition for showing its children, a weight and whether it is critical.',
+        'A component registry maps each field type to its React component, replacing what Blade used to do on the server.',
+        'A recursive component renders each field and, if the answer meets the condition, calls itself with the children: any depth, no code changes.',
+        "The score deducts failed regular items and drops to 0 if a critical item fails; hidden fields don't count. Zod validates the JSON before applying it."
+      ]
+    }
+  },
   experiencia: {
     eyebrow: 'Career',
     titulo: 'Experience',

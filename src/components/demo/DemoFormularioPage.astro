@@ -1,0 +1,21 @@
+---
+import DemoLayout from './DemoLayout.astro'
+import FormularioDinamico from '@/islands/formulario/FormularioDinamico'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const { idioma } = Astro.props
+const t = obtenerDiccionario(idioma).demoFormulario
+---
+
+<DemoLayout
+  idioma={idioma}
+  textos={t}
+  caso="formularios-dinamicos"
+  codigo="src/lib/formularios"
+>
+  <FormularioDinamico client:load idioma={idioma} textos={t} />
+</DemoLayout>

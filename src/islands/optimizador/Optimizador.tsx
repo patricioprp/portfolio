@@ -13,7 +13,7 @@ import type {
 } from '@/lib/optimizador/ejecutar'
 import { MAX_TIPOS, type ErrorEntrada } from '@/lib/optimizador/validacion'
 import type { Diccionario, Idioma } from '@/i18n'
-import { interpolar, parsearDecimal } from './formato'
+import { interpolar, parsearDecimal } from '../compartido/formato'
 import { VistaBanco } from './VistaBanco'
 
 type Textos = Diccionario['demoOptimizador']
