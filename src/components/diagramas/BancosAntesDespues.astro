@@ -1,0 +1,253 @@
+---
+import Figura from './Figura.astro'
+import type { Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const { idioma } = Astro.props
+
+const textos = {
+  es: {
+    titulo: 'Cortes de viguetas: antes y después',
+    desc: 'Antes, una fila de 33 metros mezclaba viguetas de distintos largos con el acero grueso de la más larga, y las cortas salían con acero de más. Después, cada banco usa el diámetro que corresponde: grueso con 3 viguetas de 10 m y una de 3 m que aprovecha el sobrante; medio con 4 de 7 m y una de 5 m sin recorte; fino con 6 de 4,40 m y 2 de 3 m.',
+    leyenda:
+      'Al separar las medidas por diámetro de acero se elimina el exceso. Cada fila mide 33 m y cada banco produce 3 filas con el mismo diámetro. Medidas del ejemplo ilustrativo.',
+    antes: 'Antes: todo en la misma fila, con acero grueso',
+    despues: 'Después: cada banco con el diámetro que corresponde',
+    grueso: 'Grueso',
+    medio: 'Medio',
+    fino: 'Fino',
+    exceso: 'Exceso de acero',
+    recorte: 'Recorte sobrante',
+    notaAntes: 'Las viguetas cortas salen con el acero de la de 10 m',
+    notaGrueso: '3 × 10 m + 1 × 3 m (aprovecha el sobrante)',
+    notaMedio: '4 × 7 m + 1 × 5 m (sin recorte)',
+    notaFino: '6 × 4,40 m + 2 × 3 m'
+  },
+  en: {
+    titulo: 'Joist cutting: before and after',
+    desc: 'Before, a 33-meter row mixed joists of different lengths with the thick steel of the longest one, so short joists got extra steel. After, each bed uses the right diameter: thick with three 10 m joists and one 3 m joist that uses the leftover; medium with four 7 m and one 5 m with no offcut; thin with six 4.40 m and two 3 m.',
+    leyenda:
+      'Separating lengths by steel diameter removes the excess. Each row is 33 m long and each bed produces 3 rows with the same diameter. Lengths from the illustrative example.',
+    antes: 'Before: everything in the same row, with thick steel',
+    despues: 'After: each bed with the right diameter',
+    grueso: 'Thick',
+    medio: 'Medium',
+    fino: 'Thin',
+    exceso: 'Excess steel',
+    recorte: 'Offcut',
+    notaAntes: 'Short joists get the steel of the 10 m one',
+    notaGrueso: '3 × 10 m + 1 × 3 m (uses the leftover)',
+    notaMedio: '4 × 7 m + 1 × 5 m (no offcut)',
+    notaFino: '6 × 4.40 m + 2 × 3 m'
+  }
+}[idioma]
+
+type Acero = 'grueso' | 'medio' | 'fino'
+const color: Record<Acero, string> = {
+  grueso: 'fill-rose-500/30 stroke-rose-500',
+  medio: 'fill-violet-500/30 stroke-violet-500',
+  fino: 'fill-sky-500/30 stroke-sky-500'
+}
+
+const x0 = 80
+const escala = 20 // px por metro: 33 m → 660 px
+const largoFila = 33
+
+interface Pieza {
+  largo: number
+  necesita: Acero
+}
+
+const fila = (piezas: number[], necesita: (l: number) => Acero): Pieza[] =>
+  piezas.map((largo) => ({ largo, necesita: necesita(largo) }))
+
+const aceroMinimo = (l: number): Acero =>
+  l >= 10 ? 'grueso' : l >= 5 ? 'medio' : 'fino'
+
+const filas = [
+  {
+    y: 46,
+    etiqueta: textos.grueso,
+    acero: 'grueso' as Acero,
+    piezas: fila([10, 7, 5, 4.4, 3, 3], aceroMinimo),
+    nota: textos.notaAntes,
+    marcarExceso: true
+  },
+  {
+    y: 150,
+    etiqueta: textos.grueso,
+    acero: 'grueso' as Acero,
+    piezas: fila([10, 10, 10, 3], aceroMinimo),
+    nota: textos.notaGrueso,
+    marcarExceso: false
+  },
+  {
+    y: 212,
+    etiqueta: textos.medio,
+    acero: 'medio' as Acero,
+    piezas: fila([7, 7, 7, 7, 5], aceroMinimo),
+    nota: textos.notaMedio,
+    marcarExceso: false
+  },
+  {
+    y: 274,
+    etiqueta: textos.fino,
+    acero: 'fino' as Acero,
+    piezas: fila([4.4, 4.4, 4.4, 4.4, 4.4, 4.4, 3, 3], aceroMinimo),
+    nota: textos.notaFino,
+    marcarExceso: false
+  }
+].map((f) => {
+  let x = x0
+  const segmentos = f.piezas.map((p) => {
+    const segmento = {
+      ...p,
+      x,
+      ancho: p.largo * escala,
+      // En el "después" el sobredimensionado es buscado (aprovecha un sobrante).
+      exceso: f.marcarExceso && p.necesita !== f.acero
+    }
+    x += segmento.ancho
+    return segmento
+  })
+  const usado = f.piezas.reduce((total, p) => total + p.largo, 0)
+  const recorte = Math.round((largoFila - usado) * 100) / 100
+  return { ...f, segmentos, recorte, xRecorte: x }
+})
+
+const formato = new Intl.NumberFormat(idioma, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})
+
+const leyenda: { clase: string; relleno?: string; texto: string }[] = [
+  { clase: color.grueso, texto: textos.grueso },
+  { clase: color.medio, texto: textos.medio },
+  { clase: color.fino, texto: textos.fino },
+  {
+    clase: 'stroke-rose-500',
+    relleno: 'url(#bancos-exceso)',
+    texto: textos.exceso
+  },
+  {
+    clase: 'stroke-slate-400',
+    relleno: 'url(#bancos-recorte)',
+    texto: textos.recorte
+  }
+]
+---
+
+<Figura leyenda={textos.leyenda}>
+  <svg
+    viewBox="0 0 760 370"
+    role="img"
+    aria-labelledby="bancos-titulo bancos-desc"
+    class="w-full min-w-[640px] font-sans"
+  >
+    <title id="bancos-titulo">{textos.titulo}</title>
+    <desc id="bancos-desc">{textos.desc}</desc>
+    <defs>
+      <pattern
+        id="bancos-exceso"
+        width="6"
+        height="6"
+        patternUnits="userSpaceOnUse"
+        patternTransform="rotate(45)"
+      >
+        <rect width="6" height="6" class="fill-rose-500/30"></rect>
+        <path d="M0 0 V6" stroke-width="2.5" class="stroke-rose-500"></path>
+      </pattern>
+      <pattern
+        id="bancos-recorte"
+        width="5"
+        height="5"
+        patternUnits="userSpaceOnUse"
+        patternTransform="rotate(-45)"
+      >
+        <path d="M0 0 V5" stroke-width="1.5" class="stroke-slate-400"></path>
+      </pattern>
+    </defs>
+
+    <text x={x0} y="30" class="fill-strong text-[14px] font-semibold">
+      {textos.antes}
+    </text>
+    <text x={x0} y="134" class="fill-strong text-[14px] font-semibold">
+      {textos.despues}
+    </text>
+
+    {filas.map((f) => (
+      <g>
+        <text
+          x={x0 - 10}
+          y={f.y + 19}
+          text-anchor="end"
+          class="fill-muted text-[12px]"
+        >
+          {f.etiqueta}
+        </text>
+        {f.segmentos.map((s) => (
+          <g>
+            <rect
+              x={s.x}
+              y={f.y}
+              width={s.ancho}
+              height="28"
+              class={color[f.acero]}
+            />
+            {s.exceso && (
+              <rect
+                x={s.x}
+                y={f.y}
+                width={s.ancho}
+                height="28"
+                fill="url(#bancos-exceso)"
+                class="stroke-rose-500"
+              />
+            )}
+            <text
+              x={s.x + s.ancho / 2}
+              y={f.y + 18}
+              text-anchor="middle"
+              class="fill-strong font-mono text-[11px] font-semibold"
+            >
+              {formato.format(s.largo)}
+            </text>
+          </g>
+        ))}
+        {f.recorte > 0 && (
+          <rect
+            x={f.xRecorte}
+            y={f.y}
+            width={f.recorte * escala}
+            height="28"
+            fill="url(#bancos-recorte)"
+            class="stroke-slate-400"
+          />
+        )}
+        <text x={x0} y={f.y + 44} class="fill-muted text-[12px]">
+          {f.nota}
+        </text>
+      </g>
+    ))}
+
+    {leyenda.map((l, i) => (
+      <g>
+        <rect
+          x={x0 + i * 135}
+          y="338"
+          width="16"
+          height="16"
+          rx="3"
+          fill={l.relleno}
+          class={l.clase}
+        />
+        <text x={x0 + i * 135 + 22} y="351" class="fill-fg text-[12px]">
+          {l.texto}
+        </text>
+      </g>
+    ))}
+  </svg>
+</Figura>

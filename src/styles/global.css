@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Tokens semánticos: las utilidades (bg-bg, text-fg, border-line, ...) leen
+   variables CSS que cambian según el tema. */
+@theme inline {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-strong: var(--strong);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-solid: var(--accent-solid);
+  --color-accent-solid-hover: var(--accent-solid-hover);
+  --color-accent-soft: var(--accent-soft);
+}
+
+:root {
+  color-scheme: light;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --line: #e2e8f0;
+  --fg: #334155;
+  --strong: #0f172a;
+  --muted: #5b6b80;
+  --accent: #0369a1;
+  --accent-solid: #0369a1;
+  --accent-solid-hover: #075985;
+  --accent-soft: #e0f2fe;
+}
+
+/* Oscuro: por preferencia del sistema (sin JS) o por elección explícita. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface-2: #172033;
+    --line: #334155;
+    --fg: #cbd5e1;
+    --strong: #ffffff;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-solid: #0369a1;
+    --accent-solid-hover: #075985;
+    --accent-soft: rgb(14 165 233 / 0.12);
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-2: #172033;
+  --line: #334155;
+  --fg: #cbd5e1;
+  --strong: #ffffff;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-solid: #0369a1;
+  --accent-solid-hover: #075985;
+  --accent-soft: rgb(14 165 233 / 0.12);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+/* Texto largo (casos en MDX) con los tokens del tema. */
+.prose {
+  --tw-prose-body: var(--fg);
+  --tw-prose-headings: var(--strong);
+  --tw-prose-lead: var(--muted);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--strong);
+  --tw-prose-counters: var(--muted);
+  --tw-prose-bullets: var(--accent);
+  --tw-prose-hr: var(--line);
+  --tw-prose-quotes: var(--strong);
+  --tw-prose-quote-borders: var(--accent);
+  --tw-prose-captions: var(--muted);
+  --tw-prose-code: var(--strong);
+  --tw-prose-pre-code: inherit;
+  --tw-prose-pre-bg: var(--surface-2);
+  --tw-prose-th-borders: var(--line);
+  --tw-prose-td-borders: var(--line);
+}
+
+/* Shiki con temas duales: los colores llegan como variables por token. */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+[data-theme='dark'] .astro-code,
+[data-theme='dark'] .astro-code span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+.astro-code {
+  border: 1px solid var(--line);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}

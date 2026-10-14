@@ -1,0 +1,185 @@
+---
+import Figura from './Figura.astro'
+import type { Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const textos = {
+  es: {
+    titulo: 'Ciclo de un monitoreo de calidad',
+    desc: 'El supervisor evalúa al agente y el monitoreo queda en estado Enviada. El agente recibe una notificación y lo lee: si está de acuerdo lo acepta (Aceptada); si no, pide una rectificación, el supervisor lo revisa y queda Revisada.',
+    leyenda:
+      'Ciclo de un monitoreo: del supervisor al agente, con aceptación o pedido de rectificación.',
+    supervisor: 'Supervisor',
+    evalua: 'Evalúa al agente',
+    enviada: 'Enviada',
+    agente: 'Agente',
+    recibe: 'Recibe notificación y lee',
+    aceptada: 'Aceptada',
+    deAcuerdo: 'De acuerdo',
+    rectificacion: 'Rectificación',
+    pide: 'Pide rectificación',
+    revisa: 'Supervisor revisa',
+    revisada: 'Revisada',
+    reglas: 'Reglas',
+    r1: 'Solo quien cargó el monitoreo puede editarlo.',
+    r2: 'Ningún monitoreo se elimina: trazabilidad completa.',
+    r3: 'Evidencias: audios e imágenes en un file server.'
+  },
+  en: {
+    titulo: 'Lifecycle of a quality review',
+    desc: 'The supervisor evaluates the agent and the review becomes Sent. The agent gets a notification and reads it: if they agree they accept it (Accepted); otherwise they request a correction, the supervisor reviews it and it becomes Reviewed.',
+    leyenda:
+      'Lifecycle of a review: from supervisor to agent, with acceptance or a correction request.',
+    supervisor: 'Supervisor',
+    evalua: 'Evaluates the agent',
+    enviada: 'Sent',
+    agente: 'Agent',
+    recibe: 'Gets notified and reads it',
+    aceptada: 'Accepted',
+    deAcuerdo: 'Agrees',
+    rectificacion: 'Correction',
+    pide: 'Requests a correction',
+    revisa: 'Supervisor reviews',
+    revisada: 'Reviewed',
+    reglas: 'Rules',
+    r1: 'Only the author of a review can edit it.',
+    r2: 'No review is ever deleted: full traceability.',
+    r3: 'Evidence: audio and images on a file server.'
+  }
+}[Astro.props.idioma]
+
+const caja = 'fill-surface-2 stroke-line'
+const pastilla = 'fill-accent-soft stroke-accent'
+const titulo = 'fill-strong text-[15px] font-semibold'
+const sub = 'fill-muted text-[12px]'
+const flecha = 'stroke-muted'
+---
+
+<Figura leyenda={textos.leyenda}>
+  <svg
+    viewBox="0 0 760 300"
+    role="img"
+    aria-labelledby="ciclo-titulo ciclo-desc"
+    class="w-full min-w-[640px] font-sans"
+  >
+    <title id="ciclo-titulo">{textos.titulo}</title>
+    <desc id="ciclo-desc">{textos.desc}</desc>
+    <defs>
+      <marker
+        id="ciclo-flecha"
+        viewBox="0 0 10 10"
+        refX="9"
+        refY="5"
+        markerWidth="7"
+        markerHeight="7"
+        orient="auto-start-reverse"
+      >
+        <path d="M0 0 L10 5 L0 10 z" class="fill-muted"></path>
+      </marker>
+    </defs>
+
+    <g text-anchor="middle">
+      <rect x="20" y="40" width="160" height="64" rx="10" class={caja}></rect>
+      <text x="100" y="67" class={titulo}>
+        {textos.supervisor}
+      </text>
+      <text x="100" y="89" class={sub}>
+        {textos.evalua}
+      </text>
+
+      <rect
+        x="220"
+        y="56"
+        width="110"
+        height="32"
+        rx="16"
+        class={pastilla}
+      ></rect>
+      <text x="275" y="77" class="fill-accent text-[13px] font-semibold">
+        {textos.enviada}
+      </text>
+
+      <rect x="370" y="40" width="170" height="64" rx="10" class={caja}></rect>
+      <text x="455" y="67" class={titulo}>
+        {textos.agente}
+      </text>
+      <text x="455" y="89" class={sub}>
+        {textos.recibe}
+      </text>
+
+      <rect
+        x="604"
+        y="16"
+        width="130"
+        height="32"
+        rx="16"
+        class={pastilla}
+      ></rect>
+      <text x="669" y="37" class="fill-accent text-[13px] font-semibold">
+        {textos.aceptada}
+      </text>
+      <text x="669" y="66" class={sub}>
+        {textos.deAcuerdo}
+      </text>
+
+      <rect
+        x="604"
+        y="96"
+        width="130"
+        height="32"
+        rx="16"
+        class={pastilla}
+      ></rect>
+      <text x="669" y="117" class="fill-accent text-[13px] font-semibold">
+        {textos.rectificacion}
+      </text>
+      <text x="669" y="146" class={sub}>
+        {textos.pide}
+      </text>
+
+      <rect x="584" y="172" width="170" height="50" rx="10" class={caja}></rect>
+      <text x="669" y="202" class="fill-strong text-[14px] font-semibold">
+        {textos.revisa}
+      </text>
+
+      <rect
+        x="604"
+        y="246"
+        width="130"
+        height="32"
+        rx="16"
+        class={pastilla}
+      ></rect>
+      <text x="669" y="267" class="fill-accent text-[13px] font-semibold">
+        {textos.revisada}
+      </text>
+    </g>
+
+    <g fill="none" stroke-width="1.5" marker-end="url(#ciclo-flecha)">
+      <path d="M180 72 H216" class={flecha}></path>
+      <path d="M330 72 H366" class={flecha}></path>
+      <path d="M540 58 L600 34" class={flecha}></path>
+      <path d="M540 86 L600 110" class={flecha}></path>
+      <path d="M669 154 V168" class={flecha}></path>
+      <path d="M669 222 V242" class={flecha}></path>
+    </g>
+
+    <g class="text-[13px]">
+      <text x="20" y="168" class="fill-strong font-semibold">
+        {textos.reglas}
+      </text>
+      <text x="20" y="196" class="fill-fg">
+        • {textos.r1}
+      </text>
+      <text x="20" y="222" class="fill-fg">
+        • {textos.r2}
+      </text>
+      <text x="20" y="248" class="fill-fg">
+        • {textos.r3}
+      </text>
+    </g>
+  </svg>
+</Figura>

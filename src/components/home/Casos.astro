@@ -1,0 +1,64 @@
+---
+import { Icon } from 'astro-icon/components'
+import Section from '@/components/ui/Section.astro'
+import Tags from '@/components/ui/Tags.astro'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+import { obtenerCasos, rutaDeCaso, slugDeCaso } from '@/data/casos'
+
+interface Props {
+  idioma: Idioma
+}
+
+const { idioma } = Astro.props
+const t = obtenerDiccionario(idioma)
+const casos = await obtenerCasos(idioma)
+---
+
+<Section
+  id="casos"
+  eyebrow={t.casos.eyebrow}
+  titulo={t.casos.titulo}
+  bajada={t.casos.bajada}
+>
+  <ul class="grid gap-6 lg:grid-cols-3">
+    {casos.map((caso) => {
+      const d = caso.data
+      const ruta = rutaDeCaso(idioma, slugDeCaso(caso))
+      return (
+        <li>
+          <article class="group relative flex h-full flex-col rounded-2xl border border-line bg-surface p-6 transition-colors hover:border-sky-500/40">
+            <p class="text-xs font-semibold tracking-wider text-accent uppercase">
+              {d.cliente}
+            </p>
+            <h3 class="mt-2 text-xl font-bold text-strong">
+              <a href={ruta} class="after:absolute after:inset-0">
+                {d.titulo}
+              </a>
+            </h3>
+            <dl class="mt-4 flex-1 space-y-3 text-sm">
+              <div>
+                <dt class="font-semibold text-strong">{t.casos.problema}</dt>
+                <dd class="text-muted">{d.problema}</dd>
+              </div>
+              <div>
+                <dt class="font-semibold text-strong">{t.casos.impacto}</dt>
+                <dd class="text-fg">{d.impacto}</dd>
+              </div>
+            </dl>
+            <div class="mt-6">
+              <Tags items={d.stack.slice(0, 4)} />
+            </div>
+            <p class="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-accent">
+              {t.casos.leerCaso}
+              <Icon
+                name="lucide:arrow-right"
+                class="size-4 transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              />
+            </p>
+          </article>
+        </li>
+      )
+    })}
+  </ul>
+</Section>

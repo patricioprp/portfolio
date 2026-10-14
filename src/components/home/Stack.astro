@@ -1,0 +1,27 @@
+---
+import Section from '@/components/ui/Section.astro'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const t = obtenerDiccionario(Astro.props.idioma)
+---
+
+<Section id="stack" eyebrow={t.stack.eyebrow} titulo={t.stack.titulo} alterna>
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {t.stack.grupos.map((grupo) => (
+      <div class="rounded-2xl border border-line bg-surface p-6">
+        <h3 class="font-bold text-strong">{grupo.titulo}</h3>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {grupo.items.map((item) => (
+            <li class="rounded-md bg-surface-2 px-2.5 py-1 text-sm text-fg">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Section>

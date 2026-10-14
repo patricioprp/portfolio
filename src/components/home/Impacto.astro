@@ -1,0 +1,23 @@
+---
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const t = obtenerDiccionario(Astro.props.idioma)
+---
+
+<section aria-labelledby="impacto-titulo" class="px-4 sm:px-6">
+  <h2 id="impacto-titulo" class="sr-only">
+    {t.impacto.titulo}
+  </h2>
+  <dl class="mx-auto grid max-w-6xl gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
+    {t.impacto.items.map((item) => (
+      <div class="flex flex-col-reverse gap-1 bg-surface p-6">
+        <dt class="text-sm text-muted">{item.etiqueta}</dt>
+        <dd class="font-mono text-3xl font-bold text-strong">{item.valor}</dd>
+      </div>
+    ))}
+  </dl>
+</section>

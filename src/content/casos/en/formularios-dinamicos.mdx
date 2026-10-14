@@ -1,0 +1,128 @@
+---
+titulo: Forms you configure, not code
+resumen: Dynamic three-level quality forms for a call center, and a Laravel to React + Node migration without recoding each form.
+cliente: International call center
+rol: Senior Full Stack Developer
+periodo: 2021 – 2022
+stack:
+  - React
+  - Node.js
+  - Laravel
+  - SQL Server
+  - Stored procedures
+problema: Dozens of companies, each with quality forms that changed all the time. Every change meant coding, testing and deploying.
+solucion: I took over the Laravel platform, extended it, optimized its reports and migrated it to React and Node, building the new projects from scratch.
+impacto: Creating or changing a form became configuration, with no deploys. Fast reports over large volumes and a stack aligned with the rest of the company.
+metricas:
+  - valor: 0 deploys
+    etiqueta: to create or change a form
+    tipo: real
+  - valor: 3 levels
+    etiqueta: of nested fields, configured from the database
+    tipo: real
+demo: formulario-dinamico
+orden: 1
+---
+
+import CicloMonitoreo from '@/components/diagramas/CicloMonitoreo.astro'
+import ArbolPlanilla from '@/components/diagramas/ArbolPlanilla.astro'
+import MigracionAntesDespues from '@/components/diagramas/MigracionAntesDespues.astro'
+
+## Context
+
+The company served a call center that handled many client companies.
+Supervisors evaluated agents with quality monitoring forms from a responsive web
+app. Each company had one or more forms, and what they wanted to evaluate changed
+frequently.
+
+Beyond the form itself, the platform managed the whole review lifecycle under strict rules: only
+the author of a review could edit it, none could be deleted, and evidence
+(audio and images) was stored on a file server.
+
+<CicloMonitoreo idioma="en" />
+
+## The technical challenge: dynamic forms
+
+To avoid touching code with every change, forms were not hard-coded: they were
+read from the database. Each field was a configurable record that could have
+children, up to three levels deep. For example, a Yes/No dropdown that, when
+answered "Yes", showed a checkbox, which could in turn reveal another field.
+
+Every answer affected the score: regular items deducted from the total, and
+**critical items brought the whole review down to zero**.
+
+<ArbolPlanilla idioma="en" />
+
+## What I did, in three stages
+
+1. **Took over and improved the Laravel platform.** I added a third level of
+   nesting, audio and image uploads as evidence, user profiles and security:
+   only the author can edit a review and none can be deleted.
+2. **Optimized data handling.** Reports filtered by date, campaign, company,
+   form, supervisor, agent and status, and were exported to Excel. Given the
+   volume, I wrote and tuned stored procedures that the app called directly so
+   reports loaded fast.
+3. **Migrated to React and Node, building the projects from scratch.** The
+   company wanted all its web platforms on that stack, so I started the new
+   frontend and backend projects.
+
+## The migration: describe, don't render
+
+In Laravel, the server built each form's HTML by injecting the fields into
+Blade views. React doesn't work that way. The solution was a change of approach:
+**the server no longer renders the form, it describes it, and the client
+interprets it.**
+
+<MigracionAntesDespues idioma="en" />
+
+- The Node API reads the fields and returns the form as a **JSON tree**: each
+  field with its type, options, visibility condition, weight and whether it is
+  critical.
+- In React, a **component registry** maps each field type to its visual
+  component: the direct replacement for what Blade did.
+- A **recursive component** renders each field and, if the answer meets the
+  condition, calls itself with the children.
+- The **official score is calculated on the backend**, the source of truth; the
+  frontend only shows a preview.
+
+```jsx
+const components = {
+  select: SelectField,
+  checkbox: CheckboxField,
+  text: TextField
+}
+
+function Field({ field, answers, onChange }) {
+  const Component = components[field.type]
+  const value = answers[field.id]
+  const showChildren = field.children?.length && meetsCondition(field, value)
+  return (
+    <div>
+      <Component field={field} value={value} onChange={onChange} />
+      {showChildren &&
+        field.children.map((child) => (
+          <Field
+            key={child.id}
+            field={child}
+            answers={answers}
+            onChange={onChange}
+          />
+        ))}
+    </div>
+  )
+}
+```
+
+## Results
+
+- **No deploys:** creating or changing a form became configuration.
+- **Traceability:** reviews that others can't alter, with evidence and a
+  correction workflow.
+- **Performance:** fast reports over large volumes thanks to stored procedures.
+- **Unified stack:** the platform ended up aligned with React and Node, like the rest
+  of the company.
+
+## What I'd do today
+
+I'd add form versioning: store with each review the version of the form used to
+evaluate it, so future changes don't affect historical reviews.

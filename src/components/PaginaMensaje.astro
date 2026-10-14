@@ -1,0 +1,39 @@
+---
+import { Icon } from 'astro-icon/components'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Button from '@/components/ui/Button.astro'
+import type { Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+  icono: string
+  titulo: string
+  texto: string
+  volver: string
+}
+
+const { idioma, icono, titulo, texto, volver } = Astro.props
+const inicio = idioma === 'es' ? '/' : '/en/'
+---
+
+<BaseLayout
+  idioma={idioma}
+  titulo={`${titulo} | PRP.dev`}
+  descripcion={texto}
+  noIndex
+>
+  <section class="flex min-h-[70vh] items-center px-4 pt-24 sm:px-6">
+    <div class="mx-auto max-w-xl text-center">
+      <Icon
+        name={icono}
+        class="mx-auto size-12 text-accent"
+        aria-hidden="true"
+      />
+      <h1 class="mt-6 text-3xl font-bold text-strong sm:text-4xl">{titulo}</h1>
+      <p class="mt-4 text-lg text-muted">{texto}</p>
+      <Button href={inicio} icono="lucide:arrow-left" class="mt-8">
+        {volver}
+      </Button>
+    </div>
+  </section>
+</BaseLayout>

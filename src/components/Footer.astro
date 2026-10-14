@@ -1,0 +1,53 @@
+---
+import { Icon } from 'astro-icon/components'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+import { perfil } from '@/data/perfil'
+
+interface Props {
+  idioma: Idioma
+}
+
+const t = obtenerDiccionario(Astro.props.idioma)
+const anio = new Date().getFullYear()
+---
+
+<footer class="border-t border-line py-8 text-sm text-muted">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6">
+    <p>
+      © {anio} {t.footer.derechos} {t.footer.hecho}
+    </p>
+    <ul class="flex items-center gap-2">
+      <li>
+        <a
+          href={perfil.linkedin}
+          class="inline-flex size-10 items-center justify-center rounded-md hover:text-accent"
+          aria-label="LinkedIn"
+        >
+          <Icon
+            name="simple-icons:linkedin"
+            class="size-5"
+            aria-hidden="true"
+          />
+        </a>
+      </li>
+      <li>
+        <a
+          href={perfil.github}
+          class="inline-flex size-10 items-center justify-center rounded-md hover:text-accent"
+          aria-label="GitHub"
+        >
+          <Icon name="simple-icons:github" class="size-5" aria-hidden="true" />
+        </a>
+      </li>
+      <li>
+        <a
+          href={`mailto:${perfil.email}`}
+          class="inline-flex size-10 items-center justify-center rounded-md hover:text-accent"
+          aria-label="Email"
+        >
+          <Icon name="lucide:mail" class="size-5" aria-hidden="true" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>

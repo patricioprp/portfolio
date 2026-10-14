@@ -1,0 +1,14 @@
+---
+import PaginaMensaje from '@/components/PaginaMensaje.astro'
+import { obtenerDiccionario } from '@/i18n'
+
+const t = obtenerDiccionario('es').noEncontrada
+---
+
+<PaginaMensaje
+  idioma="es"
+  icono="lucide:compass"
+  titulo={t.titulo}
+  texto={t.texto}
+  volver={t.volver}
+/>

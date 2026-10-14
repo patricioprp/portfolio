@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Hero from './Hero.astro'
+import Impacto from './Impacto.astro'
+import Casos from './Casos.astro'
+import Demos from './Demos.astro'
+import Timeline from './Timeline.astro'
+import Stack from './Stack.astro'
+import Formacion from './Formacion.astro'
+import Contacto from './Contacto.astro'
+import type { Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const { idioma } = Astro.props
+---
+
+<BaseLayout idioma={idioma}>
+  <Hero idioma={idioma} />
+  <Impacto idioma={idioma} />
+  <Casos idioma={idioma} />
+  <Demos idioma={idioma} />
+  <Timeline idioma={idioma} />
+  <Stack idioma={idioma} />
+  <Formacion idioma={idioma} />
+  <Contacto idioma={idioma} />
+</BaseLayout>

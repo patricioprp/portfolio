@@ -1,0 +1,30 @@
+# Dependencias y build
+node_modules/
+dist/
+.astro/
+
+# Tests
+test-results/
+playwright-report/
+coverage/
+
+# Entorno
+.env
+.env.*
+!.env.example
+
+# Netlify
+.netlify/
+
+# Claude Code (config local por usuario)
+.claude/settings.local.json
+
+# Material personal: nunca se publica
+docs/privado/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Volcados de procesos que se cayeron (Git Bash en Windows)
+*.stackdump

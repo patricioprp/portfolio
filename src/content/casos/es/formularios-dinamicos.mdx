@@ -1,0 +1,129 @@
+---
+titulo: Formularios que se configuran, no se programan
+resumen: Planillas de calidad dinámicas en tres niveles para un call center, y la migración de Laravel a React + Node sin reprogramar cada formulario.
+cliente: Call center de nivel internacional
+rol: Desarrollador Senior Full Stack
+periodo: 2021 – 2022
+stack:
+  - React
+  - Node.js
+  - Laravel
+  - SQL Server
+  - Stored procedures
+problema: Decenas de empresas, cada una con planillas de calidad que cambiaban todo el tiempo. Cada cambio implicaba programar, testear y hacer deploy.
+solucion: Heredé la plataforma en Laravel, la evolucioné, optimicé sus reportes y la migré a React y Node, construyendo los nuevos proyectos desde cero.
+impacto: Crear o modificar una planilla pasó a ser configuración, sin deploys. Reportes rápidos sobre grandes volúmenes y stack unificado con el de la empresa.
+metricas:
+  - valor: 0 deploys
+    etiqueta: para crear o modificar una planilla
+    tipo: real
+  - valor: 3 niveles
+    etiqueta: de campos anidados, configurables desde la base de datos
+    tipo: real
+demo: formulario-dinamico
+orden: 1
+---
+
+import CicloMonitoreo from '@/components/diagramas/CicloMonitoreo.astro'
+import ArbolPlanilla from '@/components/diagramas/ArbolPlanilla.astro'
+import MigracionAntesDespues from '@/components/diagramas/MigracionAntesDespues.astro'
+
+## Contexto
+
+La empresa daba servicio a un call center que atendía a muchas empresas. Los
+supervisores evaluaban a los agentes con planillas de monitoreo de calidad,
+desde una aplicación web responsive. Cada empresa tenía una o más planillas, y
+lo que se quería evaluar cambiaba con frecuencia.
+
+Además del formulario, la plataforma gestionaba todo el ciclo de la evaluación con
+reglas estrictas: solo quien cargaba un monitoreo podía editarlo, ninguno se eliminaba y las
+evidencias (audios e imágenes) quedaban guardadas en un file server.
+
+<CicloMonitoreo idioma="es" />
+
+## El reto técnico: formularios dinámicos
+
+Para no tocar código con cada cambio, los formularios no estaban programados:
+se leían de la base de datos. Cada campo era un registro parametrizable que
+podía tener hijos, hasta tres niveles. Por ejemplo, un desplegable Sí/No que, al
+responder "Sí", mostraba un checkbox, que a su vez podía desplegar otro campo.
+
+Cada respuesta impactaba en el puntaje: los ítems comunes descontaban del total
+y los **ítems críticos llevaban toda la evaluación a cero**.
+
+<ArbolPlanilla idioma="es" />
+
+## Qué hice, en tres etapas
+
+1. **Heredé y mejoré la plataforma en Laravel.** Agregué un tercer nivel de
+   anidamiento entre campos, la carga de audios e imágenes como evidencia, los
+   perfiles y la seguridad: solo el autor edita un monitoreo y ninguno se elimina.
+2. **Optimicé el manejo de datos.** Los reportes filtraban por fecha, campaña,
+   empresa, planilla, supervisor, evaluado y estado, y se exportaban a Excel. Con
+   ese volumen, escribí y optimicé stored procedures que la aplicación consumía
+   directamente para que los reportes cargaran rápido.
+3. **Migré a React y Node, construyendo los proyectos desde cero.** La empresa
+   quería unificar sus plataformas web en ese stack, así que inicié los nuevos
+   proyectos de frontend y backend.
+
+## La migración: describir en lugar de dibujar
+
+En Laravel, el servidor armaba el HTML de cada formulario inyectando los campos
+en las vistas Blade. React no funciona así. La solución fue cambiar el enfoque:
+**el servidor ya no dibuja el formulario, lo describe, y el cliente lo
+interpreta.**
+
+<MigracionAntesDespues idioma="es" />
+
+- La API en Node lee los campos y devuelve la planilla como un **árbol JSON**:
+  cada campo con su tipo, opciones, condición de visibilidad, peso y si es crítico.
+- En React, un **registro de componentes** asocia cada tipo de campo con su
+  componente visual: el reemplazo directo de lo que hacía Blade.
+- Un **componente recursivo** dibuja cada campo y, si la respuesta cumple la
+  condición, se llama a sí mismo con los hijos.
+- El **puntaje oficial se calcula en el backend**, que es la fuente de verdad;
+  el frontend solo muestra una vista previa.
+
+```jsx
+const componentes = {
+  select: SelectField,
+  checkbox: CheckboxField,
+  text: TextField
+}
+
+function Campo({ campo, respuestas, onChange }) {
+  const Componente = componentes[campo.tipo]
+  const valor = respuestas[campo.id]
+  const mostrarHijos = campo.hijos?.length && cumpleCondicion(campo, valor)
+  return (
+    <div>
+      <Componente campo={campo} valor={valor} onChange={onChange} />
+      {mostrarHijos &&
+        campo.hijos.map((hijo) => (
+          <Campo
+            key={hijo.id}
+            campo={hijo}
+            respuestas={respuestas}
+            onChange={onChange}
+          />
+        ))}
+    </div>
+  )
+}
+```
+
+## Resultados
+
+- **Sin deploys:** crear o modificar una planilla pasó a ser configuración.
+- **Trazabilidad:** monitoreos que terceros no pueden alterar, con evidencias y
+  ciclo de rectificación.
+- **Rendimiento:** reportes rápidos sobre grandes volúmenes gracias a los stored
+  procedures.
+- **Stack unificado:** la plataforma quedó alineada con React y Node, como el
+  resto de la empresa.
+
+## Qué haría hoy
+
+Agregaría versionado de planillas: guardar con cada monitoreo la versión del
+formulario con la que se evaluó, para que los cambios futuros no afecten a las
+evaluaciones históricas.

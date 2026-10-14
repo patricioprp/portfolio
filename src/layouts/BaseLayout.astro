@@ -1,0 +1,62 @@
+---
+import '@fontsource-variable/inter'
+import '@fontsource-variable/jetbrains-mono'
+import '@/styles/global.css'
+import Seo from '@/components/Seo.astro'
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+  titulo?: string
+  descripcion?: string
+  noIndex?: boolean
+}
+
+const { idioma, titulo, descripcion, noIndex = false } = Astro.props
+const t = obtenerDiccionario(idioma)
+---
+
+<!doctype html>
+<html lang={idioma}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      ;(() => {
+        let tema = null
+        try {
+          tema = localStorage.getItem('tema')
+        } catch {
+          // Sin almacenamiento: se usa la preferencia del sistema.
+        }
+        if (tema !== 'light' && tema !== 'dark') {
+          tema = matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light'
+        }
+        document.documentElement.dataset.theme = tema
+      })()
+    </script>
+    <Seo
+      idioma={idioma}
+      titulo={titulo ?? t.meta.titulo}
+      descripcion={descripcion ?? t.meta.descripcion}
+      noIndex={noIndex}
+    />
+  </head>
+  <body class="bg-bg font-sans text-fg antialiased">
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-md focus:bg-accent-solid focus:px-4 focus:py-2 focus:text-white"
+    >
+      {t.nav.saltar}
+    </a>
+    <Header idioma={idioma} />
+    <main id="contenido" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
+    <Footer idioma={idioma} />
+  </body>
+</html>

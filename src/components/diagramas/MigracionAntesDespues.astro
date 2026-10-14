@@ -1,0 +1,184 @@
+---
+import Figura from './Figura.astro'
+import type { Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const textos = {
+  es: {
+    titulo: 'Antes y después de la migración',
+    desc: 'Antes: la base de datos con campos y stored procedures alimentaba a Laravel con Blade, que inyectaba el HTML, y el navegador recibía HTML listo. Después: la base de datos alimenta una API en Node que devuelve la planilla como JSON en forma de árbol, y React la dibuja con un componente recursivo. Las evidencias quedan en un file server.',
+    leyenda:
+      'De HTML armado en el servidor a un formulario descrito en JSON y dibujado por React.',
+    antes: 'ANTES',
+    despues: 'DESPUÉS',
+    db: 'Base de datos',
+    dbD: 'Campos y stored procedures',
+    laravel: 'Laravel + Blade',
+    laravelD: 'Inyecta el HTML',
+    navegador: 'Navegador',
+    navegadorD: 'Recibe HTML listo',
+    api: 'API Node',
+    apiD: 'Devuelve JSON (árbol)',
+    react: 'React',
+    reactD: 'Render recursivo',
+    files: 'File server',
+    filesD: 'Audios e imágenes'
+  },
+  en: {
+    titulo: 'Before and after the migration',
+    desc: 'Before: the database with fields and stored procedures fed Laravel with Blade, which injected the HTML, and the browser received ready-made HTML. After: the database feeds a Node API that returns the form as a JSON tree, and React renders it with a recursive component. Evidence is stored on a file server.',
+    leyenda:
+      'From server-built HTML to a form described in JSON and rendered by React.',
+    antes: 'BEFORE',
+    despues: 'AFTER',
+    db: 'Database',
+    dbD: 'Fields and stored procedures',
+    laravel: 'Laravel + Blade',
+    laravelD: 'Injects the HTML',
+    navegador: 'Browser',
+    navegadorD: 'Receives ready HTML',
+    api: 'Node API',
+    apiD: 'Returns JSON (tree)',
+    react: 'React',
+    reactD: 'Recursive rendering',
+    files: 'File server',
+    filesD: 'Audio and images'
+  }
+}[Astro.props.idioma]
+
+const filas = [
+  {
+    etiqueta: textos.antes,
+    y: 66,
+    cajas: [
+      [textos.db, textos.dbD],
+      [textos.laravel, textos.laravelD],
+      [textos.navegador, textos.navegadorD]
+    ],
+    destacada: false
+  },
+  {
+    etiqueta: textos.despues,
+    y: 186,
+    cajas: [
+      [textos.db, textos.dbD],
+      [textos.api, textos.apiD],
+      [textos.react, textos.reactD]
+    ],
+    destacada: true
+  }
+]
+const xs = [20, 285, 550]
+const ancho = 190
+---
+
+<Figura leyenda={textos.leyenda}>
+  <svg
+    viewBox="0 0 760 330"
+    role="img"
+    aria-labelledby="migracion-titulo migracion-desc"
+    class="w-full min-w-[640px] font-sans"
+  >
+    <title id="migracion-titulo">{textos.titulo}</title>
+    <desc id="migracion-desc">{textos.desc}</desc>
+    <defs>
+      <marker
+        id="migracion-flecha"
+        viewBox="0 0 10 10"
+        refX="9"
+        refY="5"
+        markerWidth="7"
+        markerHeight="7"
+        orient="auto-start-reverse"
+      >
+        <path d="M0 0 L10 5 L0 10 z" class="fill-muted"></path>
+      </marker>
+    </defs>
+
+    {filas.map((fila) => (
+      <g>
+        <text
+          x="20"
+          y={fila.y - 12}
+          class="fill-accent font-mono text-[12px] font-semibold tracking-wider"
+        >
+          {fila.etiqueta}
+        </text>
+        {fila.cajas.map(([titulo, detalle], i) => (
+          <g>
+            <rect
+              x={xs[i]}
+              y={fila.y}
+              width={ancho}
+              height="60"
+              rx="10"
+              class={
+                fila.destacada && i > 0
+                  ? 'fill-accent-soft stroke-accent'
+                  : 'fill-surface-2 stroke-line'
+              }
+            />
+            <text
+              x={(xs[i] ?? 0) + ancho / 2}
+              y={fila.y + 26}
+              text-anchor="middle"
+              class="fill-strong text-[14px] font-semibold"
+            >
+              {titulo}
+            </text>
+            <text
+              x={(xs[i] ?? 0) + ancho / 2}
+              y={fila.y + 46}
+              text-anchor="middle"
+              class="fill-muted text-[12px]"
+            >
+              {detalle}
+            </text>
+          </g>
+        ))}
+        <path
+          d={`M${20 + ancho} ${fila.y + 30} H${285 - 4}`}
+          stroke-width="1.5"
+          marker-end="url(#migracion-flecha)"
+          class="stroke-muted"
+        />
+        <path
+          d={`M${285 + ancho} ${fila.y + 30} H${550 - 4}`}
+          stroke-width="1.5"
+          marker-end="url(#migracion-flecha)"
+          class="stroke-muted"
+        />
+      </g>
+    ))}
+
+    <path
+      d="M380 246 V270"
+      stroke-width="1.5"
+      stroke-dasharray="4 4"
+      class="stroke-muted"
+    ></path>
+    <rect
+      x="285"
+      y="270"
+      width={ancho}
+      height="48"
+      rx="10"
+      class="fill-surface-2 stroke-line"
+      stroke-dasharray="4 4"
+    ></rect>
+    <text
+      x="380"
+      y="291"
+      text-anchor="middle"
+      class="fill-strong text-[13px] font-semibold"
+    >
+      {textos.files}
+    </text>
+    <text x="380" y="309" text-anchor="middle" class="fill-muted text-[12px]">
+      {textos.filesD}
+    </text>
+  </svg>
+</Figura>

@@ -1,0 +1,234 @@
+---
+import { render } from 'astro:content'
+import { Icon } from 'astro-icon/components'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Button from '@/components/ui/Button.astro'
+import Tags from '@/components/ui/Tags.astro'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+import { rutaDeCaso, slugDeCaso, type Caso } from '@/data/casos'
+import { demoDisponible, rutaDeDemo } from '@/data/demos'
+
+interface Props {
+  idioma: Idioma
+  caso: Caso
+  anterior: Caso | undefined
+  siguiente: Caso | undefined
+}
+
+const { idioma, caso, anterior, siguiente } = Astro.props
+const t = obtenerDiccionario(idioma)
+const d = caso.data
+const { Content } = await render(caso)
+
+const inicio = idioma === 'es' ? '/' : '/en/'
+const reales = d.metricas.filter((m) => m.tipo === 'real')
+const ilustrativas = d.metricas.filter((m) => m.tipo === 'ilustrativa')
+const hayDemo = demoDisponible(d.demo)
+
+const resumen = [
+  { titulo: t.casos.problema, texto: d.problema, icono: 'lucide:circle-alert' },
+  { titulo: t.casos.solucion, texto: d.solucion, icono: 'lucide:wrench' },
+  { titulo: t.casos.impacto, texto: d.impacto, icono: 'lucide:trending-up' }
+]
+---
+
+<BaseLayout
+  idioma={idioma}
+  titulo={`${d.titulo} | Patricio Rolando Polito`}
+  descripcion={d.resumen}
+>
+  <article>
+    <header class="px-4 pt-32 pb-12 sm:px-6 sm:pt-40">
+      <div class="mx-auto max-w-4xl">
+        <a
+          href={`${inicio}#casos`}
+          class="inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
+        >
+          <Icon name="lucide:arrow-left" class="size-4" aria-hidden="true" />
+          {t.caso.volver}
+        </a>
+        <p class="mt-8 font-mono text-sm font-semibold tracking-wider text-accent uppercase">
+          {d.cliente}
+        </p>
+        <h1 class="mt-2 text-4xl font-extrabold tracking-tight text-balance text-strong sm:text-5xl">
+          {d.titulo}
+        </h1>
+        <p class="mt-6 text-xl text-muted">{d.resumen}</p>
+
+        <dl class="mt-8 grid gap-4 text-sm sm:grid-cols-2">
+          <div>
+            <dt class="font-semibold text-strong">{t.caso.rol}</dt>
+            <dd class="mt-1">{d.rol}</dd>
+          </div>
+          {d.periodo && (
+            <div>
+              <dt class="font-semibold text-strong">{t.caso.periodo}</dt>
+              <dd class="mt-1">{d.periodo}</dd>
+            </div>
+          )}
+          <div class="sm:col-span-2">
+            <dt class="font-semibold text-strong">{t.caso.stack}</dt>
+            <dd class="mt-2">
+              <Tags items={d.stack} />
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+
+    <section aria-labelledby="treinta-titulo" class="px-4 sm:px-6">
+      <div class="mx-auto max-w-4xl">
+        <h2 id="treinta-titulo" class="text-xl font-bold text-strong">
+          {t.caso.enTreinta}
+        </h2>
+        <div class="mt-4 grid gap-4 md:grid-cols-3">
+          {resumen.map((r) => (
+            <div class="rounded-2xl border border-line bg-surface p-5">
+              <h3 class="flex items-center gap-2 font-semibold text-strong">
+                <Icon
+                  name={r.icono}
+                  class="size-5 text-accent"
+                  aria-hidden="true"
+                />
+                {r.titulo}
+              </h3>
+              <p class="mt-2 text-sm">{r.texto}</p>
+            </div>
+          ))}
+        </div>
+
+        {reales.length > 0 && (
+          <div class="mt-6">
+            <h3 class="sr-only">{t.caso.metricas}</h3>
+            <dl class="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+              {reales.map((m) => (
+                <div class="flex flex-col-reverse gap-1 bg-surface p-5">
+                  <dt class="text-sm text-muted">{m.etiqueta}</dt>
+                  <dd class="font-mono text-2xl font-bold text-strong">
+                    {m.valor}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <div class="prose mx-auto max-w-3xl px-4 py-12 prose-headings:scroll-mt-24 prose-pre:text-[13px] sm:px-6">
+      <Content />
+    </div>
+
+    {d.demo && (
+      <aside aria-labelledby="demo-titulo" class="px-4 pb-12 sm:px-6">
+        <div class="mx-auto max-w-4xl rounded-2xl border border-sky-500/30 bg-accent-soft p-6 sm:p-8">
+          <h2
+            id="demo-titulo"
+            class="flex items-center gap-2 text-xl font-bold text-strong"
+          >
+            <Icon
+              name="lucide:play"
+              class="size-5 text-accent"
+              aria-hidden="true"
+            />
+            {t.caso.demoTitulo}
+          </h2>
+          <p class="mt-2">
+            {hayDemo ? t.caso.demoDisponible : t.caso.demoTexto}
+          </p>
+          {ilustrativas.length > 0 && (
+            <>
+              <dl class="mt-6 grid gap-4 sm:grid-cols-2">
+                {ilustrativas.map((m) => (
+                  <div class="flex flex-col-reverse gap-1 rounded-xl border border-line bg-surface p-4">
+                    <dt class="text-sm text-muted">{m.etiqueta}</dt>
+                    <dd class="font-mono text-2xl font-bold text-strong">
+                      {m.valor}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p class="mt-3 text-sm text-muted italic">{t.caso.ilustrativa}</p>
+            </>
+          )}
+          {hayDemo && d.demo ? (
+            <Button
+              href={rutaDeDemo(idioma, d.demo)}
+              icono="lucide:play"
+              class="mt-6"
+            >
+              {t.caso.demoAbrir}
+            </Button>
+          ) : (
+            <p class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent">
+              <Icon name="lucide:clock" class="size-4" aria-hidden="true" />
+              {t.caso.demoProximamente}
+            </p>
+          )}
+        </div>
+      </aside>
+    )}
+
+    <section aria-labelledby="cta-titulo" class="px-4 pb-16 sm:px-6">
+      <div class="mx-auto flex max-w-4xl flex-col items-start gap-4 rounded-2xl border border-line bg-surface p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+        <div>
+          <h2 id="cta-titulo" class="text-xl font-bold text-strong">
+            {t.caso.ctaTitulo}
+          </h2>
+          <p class="mt-1 text-muted">{t.caso.ctaTexto}</p>
+        </div>
+        <Button
+          href={`${inicio}#contacto`}
+          icono="lucide:mail"
+          class="shrink-0"
+        >
+          {t.caso.ctaBoton}
+        </Button>
+      </div>
+
+      <nav
+        aria-label={t.caso.volver}
+        class="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2"
+      >
+        {anterior ? (
+          <a
+            href={rutaDeCaso(idioma, slugDeCaso(anterior))}
+            class="rounded-2xl border border-line p-5 hover:border-sky-500/40"
+          >
+            <span class="flex items-center gap-1 text-sm text-muted">
+              <Icon
+                name="lucide:arrow-left"
+                class="size-4"
+                aria-hidden="true"
+              />
+              {t.caso.anterior}
+            </span>
+            <span class="mt-1 block font-semibold text-strong">
+              {anterior.data.titulo}
+            </span>
+          </a>
+        ) : (
+          <span />
+        )}
+        {siguiente && (
+          <a
+            href={rutaDeCaso(idioma, slugDeCaso(siguiente))}
+            class="rounded-2xl border border-line p-5 text-right hover:border-sky-500/40"
+          >
+            <span class="flex items-center justify-end gap-1 text-sm text-muted">
+              {t.caso.siguiente}
+              <Icon
+                name="lucide:arrow-right"
+                class="size-4"
+                aria-hidden="true"
+              />
+            </span>
+            <span class="mt-1 block font-semibold text-strong">
+              {siguiente.data.titulo}
+            </span>
+          </a>
+        )}
+      </nav>
+    </section>
+  </article>
+</BaseLayout>

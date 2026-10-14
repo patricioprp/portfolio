@@ -1,0 +1,149 @@
+---
+import Figura from './Figura.astro'
+import type { Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const textos = {
+  es: {
+    titulo: 'Vista superior de la planta',
+    desc: 'Los camiones entran por la izquierda a tres calles internas. Los cuadrantes de acopio se ordenan por rotación: alta rotación cerca de la entrada, media en la zona intermedia y baja en los sectores más alejados. Un puente grúa recorre la planta sobre rieles.',
+    leyenda:
+      'Vista superior: tres calles internas, cuadrantes ordenados por rotación desde la entrada y puente grúa sobre rieles. Se muestra una parte de los 128 cuadrantes.',
+    entrada: 'Entrada',
+    camion: 'Camión',
+    calle: 'Calle',
+    grua: 'Puente grúa sobre rieles',
+    alta: 'Alta rotación',
+    media: 'Media rotación',
+    baja: 'Baja rotación'
+  },
+  en: {
+    titulo: 'Top view of the plant',
+    desc: 'Trucks enter from the left into three internal lanes. Storage quadrants are ordered by turnover: high turnover near the entrance, medium in the middle area and low in the farthest sectors. An overhead crane runs across the plant on rails.',
+    leyenda:
+      'Top view: three internal lanes, quadrants ordered by turnover from the entrance and an overhead crane on rails. Part of the 128 quadrants is shown.',
+    entrada: 'Entrance',
+    camion: 'Truck',
+    calle: 'Lane',
+    grua: 'Overhead crane on rails',
+    alta: 'High turnover',
+    media: 'Medium turnover',
+    baja: 'Low turnover'
+  }
+}[Astro.props.idioma]
+
+const x0 = 135
+const columnas = 12
+const anchoColumna = 50
+const filasCuadrantes = [62, 140, 218, 296]
+const calles = [104, 182, 260]
+
+const zona = (col: number) =>
+  col < 4
+    ? 'fill-emerald-500/25 stroke-emerald-500'
+    : col < 8
+      ? 'fill-amber-500/25 stroke-amber-500'
+      : 'fill-slate-400/20 stroke-slate-400'
+
+const leyendas = [
+  {
+    x: 135,
+    clase: 'fill-emerald-500/25 stroke-emerald-500',
+    texto: textos.alta
+  },
+  { x: 330, clase: 'fill-amber-500/25 stroke-amber-500', texto: textos.media },
+  { x: 525, clase: 'fill-slate-400/20 stroke-slate-400', texto: textos.baja }
+]
+---
+
+<Figura leyenda={textos.leyenda}>
+  <svg
+    viewBox="0 0 760 400"
+    role="img"
+    aria-labelledby="planta-titulo planta-desc"
+    class="w-full min-w-[640px] font-sans"
+  >
+    <title id="planta-titulo">{textos.titulo}</title>
+    <desc id="planta-desc">{textos.desc}</desc>
+
+    <text
+      x="70"
+      y="44"
+      text-anchor="middle"
+      class="fill-strong text-[13px] font-semibold"
+    >
+      {textos.entrada}
+    </text>
+    <text x="435" y="44" text-anchor="middle" class="fill-muted text-[12px]">
+      {textos.grua}
+    </text>
+
+    {calles.map((y, i) => (
+      <g>
+        <rect x="20" y={y} width="715" height="34" class="fill-surface-2" />
+        <path
+          d={`M${x0} ${y + 17} H735`}
+          stroke-dasharray="8 8"
+          class="stroke-line"
+        />
+        <rect
+          x="34"
+          y={y + 6}
+          width="72"
+          height="22"
+          rx="4"
+          class="fill-accent-soft stroke-accent"
+        />
+        <text
+          x="70"
+          y={y + 21}
+          text-anchor="middle"
+          class="fill-accent text-[11px] font-semibold"
+        >
+          {textos.camion}
+        </text>
+        <text x={x0 + 6} y={y + 22} class="fill-muted text-[11px]">
+          {`${textos.calle} ${i + 1}`}
+        </text>
+      </g>
+    ))}
+
+    {filasCuadrantes.map((y) =>
+      Array.from({ length: columnas }, (_, col) => (
+        <rect
+          x={x0 + col * anchoColumna + 2}
+          y={y}
+          width={anchoColumna - 4}
+          height="40"
+          rx="4"
+          class={zona(col)}
+        />
+      ))
+    )}
+
+    <g class="stroke-muted" stroke-width="3">
+      <path d={`M${x0} 56 H735`}></path>
+      <path d={`M${x0} 342 H735`}></path>
+    </g>
+    <rect
+      x="431"
+      y="52"
+      width="8"
+      height="294"
+      rx="2"
+      class="fill-sky-500/60 stroke-sky-500"
+    ></rect>
+
+    {leyendas.map((l) => (
+      <g>
+        <rect x={l.x} y="364" width="16" height="16" rx="3" class={l.clase} />
+        <text x={l.x + 24} y="377" class="fill-fg text-[13px]">
+          {l.texto}
+        </text>
+      </g>
+    ))}
+  </svg>
+</Figura>

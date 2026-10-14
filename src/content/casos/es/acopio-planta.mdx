@@ -1,0 +1,74 @@
+---
+titulo: Acopio por rotación en una planta de premoldeados
+resumen: Acopio por rotación, planificación de producción y plan de carga por turno para que la espera de los camiones bajara de hasta 3 días a cero.
+cliente: Empresa de premoldeados para la construcción
+rol: Desarrollador en el equipo, desde el análisis hasta la planificación de producción
+periodo: 2020 – abril 2021
+stack:
+  - Laravel
+  - React
+  - jQuery
+  - API REST
+problema: Los camiones esperaban hasta 3 días para cargar y el puente grúa hacía recorridos largos porque la mercadería no estaba ubicada según la demanda.
+solucion: Analizamos la rotación de productos con el historial de ventas y desarrollé la planificación de producción, el stock por cuadrante y el plan de carga por turno.
+impacto: La espera de los camiones se redujo a cero si llegaban en su turno, y el tiempo de carga dentro de la planta bajó considerablemente.
+metricas:
+  - valor: 3 días → 0
+    etiqueta: de espera de los camiones que llegaban en su turno
+    tipo: real
+  - valor: 128 cuadrantes
+    etiqueta: con stock controlado por fila
+    tipo: real
+demo: null
+orden: 2
+---
+
+import PlantaCuadrantes from '@/components/diagramas/PlantaCuadrantes.astro'
+
+## Contexto
+
+La empresa fabricaba una gran variedad de productos para la construcción:
+viguetas, bloques, bovedillas y muchos más. La producción se acopiaba en unos
+**128 cuadrantes** distribuidos a lo largo de **tres calles internas**,
+parecidas a los pasillos de un supermercado. Los clientes retiraban la
+mercadería con turnos y los operarios cargaban los camiones con un puente grúa.
+
+## El problema
+
+El problema tenía dos partes. Por un lado, los camiones podían esperar días
+enteros, a veces hasta tres, para ser atendidos. Por otro, la mercadería no
+estaba ubicada según la demanda, así que el puente grúa hacía recorridos largos
+y la carga se demoraba.
+
+## Qué hicimos
+
+Participé en el equipo desde el análisis.
+
+- **Análisis de la rotación.** A partir del historial de ventas en Excel
+  hicimos una clasificación ABC (curva de Pareto): los productos A, de alta
+  rotación, concentraban la mayor parte de los retiros; los B tenían rotación
+  media y los C, baja.
+- **Acopio por rotación.** Cada clase tuvo su zona: los productos de alta rotación pasaron a acopiarse
+  cerca de la entrada y de las calles de circulación; los de rotación media, en
+  una zona intermedia; y los de baja rotación, en los sectores más alejados.
+
+<PlantaCuadrantes idioma="es" />
+
+Después **desarrollé la planificación de producción**:
+
+- **Producir sabiendo dónde guardar.** Como los turnos se sacaban con tres meses
+  de anticipación, el sistema sabía qué había que producir. Al registrar la
+  producción, indicaba en qué cuadrante con lugar disponible convenía
+  depositarla para que el cliente la retirara rápido en su turno.
+- **Stock por cuadrante y por fila.** Si un cuadrante tenía cuatro filas de
+  viguetas y el cliente se llevaba una, se descontaba esa fila y el cuadrante
+  seguía ocupado con las otras tres; si se vaciaba, quedaba liberado.
+- **Plan de carga.** Al llegar cada turno, el sistema le armaba al operario un
+  plan que indicaba de qué cuadrante retirar cada producto y en qué orden.
+
+## Resultados
+
+- **La espera de los camiones se redujo a cero:** si llegaban en el horario de
+  su turno, se los atendía de inmediato.
+- **Menor tiempo de carga dentro de la planta**, porque la mercadería ya estaba
+  acopiada en los cuadrantes más convenientes.

@@ -1,0 +1,168 @@
+[
+  {
+    "id": "quadion",
+    "empresa": { "es": "Quadion Tech", "en": "Quadion Tech" },
+    "ubicacion": {
+      "es": "Buenos Aires · Remoto",
+      "en": "Buenos Aires · Remote"
+    },
+    "rol": { "es": "Frontend Senior", "en": "Senior Frontend Developer" },
+    "desde": "2023-12",
+    "hasta": null,
+    "logros": {
+      "es": [
+        "Desarrollo de trámites y plataforma web responsive para una prepaga líder a nivel nacional.",
+        "Migración de una web legacy a una arquitectura moderna y escalable.",
+        "Componentes reutilizables documentados con Storybook y Material UI.",
+        "Refactorización con patrones de diseño, pruebas unitarias con Jest y end-to-end con Playwright."
+      ],
+      "en": [
+        "Built online procedures and a responsive web platform for a leading national health insurer.",
+        "Migrated a legacy website to a modern, scalable architecture.",
+        "Reusable components documented with Storybook and Material UI.",
+        "Refactoring with design patterns, unit tests with Jest and end-to-end tests with Playwright."
+      ]
+    },
+    "stack": [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Material UI",
+      "Storybook",
+      "Jest",
+      "Playwright"
+    ]
+  },
+  {
+    "id": "sertic",
+    "empresa": { "es": "Sertic", "en": "Sertic" },
+    "ubicacion": { "es": "Rosario · Remoto", "en": "Rosario · Remote" },
+    "rol": { "es": "Desarrollador Senior", "en": "Senior Developer" },
+    "desde": "2021-04",
+    "hasta": "2026-06",
+    "nota": {
+      "es": "Desde diciembre de 2023, mantenimiento puntual de proyectos legacy.",
+      "en": "Since December 2023, occasional maintenance of legacy projects."
+    },
+    "logros": {
+      "es": [
+        "Plataforma de monitoreo de calidad para un call center de nivel internacional: formularios dinámicos y migración de Laravel a React + Node.",
+        "Reportes sobre grandes volúmenes optimizados con stored procedures.",
+        "Desarrollo y mantenimiento evolutivo de sistemas internos, con refactorización y pruebas."
+      ],
+      "en": [
+        "Quality monitoring platform for an international call center: dynamic forms and a migration from Laravel to React + Node.",
+        "Reports over large data volumes optimized with stored procedures.",
+        "Development and evolutionary maintenance of internal systems, with refactoring and tests."
+      ]
+    },
+    "stack": [
+      "Laravel",
+      "React",
+      "Node.js",
+      "Angular",
+      "SQL Server",
+      "API REST"
+    ],
+    "caso": "formularios-dinamicos"
+  },
+  {
+    "id": "tensolite",
+    "empresa": {
+      "es": "Tensolite S.A. / Sitenso",
+      "en": "Tensolite S.A. / Sitenso"
+    },
+    "rol": { "es": "Desarrollador Semi Senior", "en": "Mid-level Developer" },
+    "desde": "2020",
+    "hasta": "2021-04",
+    "logros": {
+      "es": [
+        "Sistema de acopio por rotación, planificación de producción, stock por cuadrante y turnos de retiro: la espera de los camiones bajó de hasta 3 días a cero.",
+        "Optimización del acero en la producción de viguetas con programación lineal entera.",
+        "Mantenimiento de sistemas corporativos e integración con servicios SOAP."
+      ],
+      "en": [
+        "Storage-by-turnover system, production planning, stock per quadrant and pickup slots: truck waiting time dropped from up to 3 days to zero.",
+        "Steel optimization in joist production using integer linear programming.",
+        "Maintenance of corporate systems and integration with SOAP services."
+      ]
+    },
+    "stack": ["PHP", "Laravel", "React", "jQuery", "API REST", "SOAP"],
+    "caso": "acopio-planta"
+  },
+  {
+    "id": "instituciones-educativas",
+    "empresa": {
+      "es": "Freelance · Instituciones educativas",
+      "en": "Freelance · Schools"
+    },
+    "rol": { "es": "Desarrollador Full Stack", "en": "Full Stack Developer" },
+    "desde": "2018",
+    "hasta": "2019",
+    "logros": {
+      "es": [
+        "Migración de un sistema de escritorio a web para un colegio.",
+        "Módulo de pagos online con QR.",
+        "App web y móvil de notificaciones y mensajería en tiempo real con Firebase."
+      ],
+      "en": [
+        "Migrated a school's desktop system to the web.",
+        "Online payments module with QR codes.",
+        "Web and mobile app for real-time notifications and messaging with Firebase."
+      ]
+    },
+    "stack": ["Laravel", "Firebird", "React", "Firebase", "jQuery"]
+  },
+  {
+    "id": "edtech",
+    "empresa": {
+      "es": "Freelance · Startup de tecnología educativa",
+      "en": "Freelance · EdTech startup"
+    },
+    "rol": { "es": "Desarrollador Frontend", "en": "Frontend Developer" },
+    "desde": "2018",
+    "hasta": "2018",
+    "logros": {
+      "es": [
+        "Front-end de una aplicación educativa de lectura tipo lectograma."
+      ],
+      "en": ["Front end of an educational reading app."]
+    },
+    "stack": ["React", "React Native"]
+  },
+  {
+    "id": "ministerio",
+    "empresa": {
+      "es": "Ministerio de Desarrollo Productivo de Tucumán",
+      "en": "Ministry of Productive Development of Tucumán"
+    },
+    "rol": { "es": "Desarrollador", "en": "Developer" },
+    "desde": "2016",
+    "hasta": "2018-05",
+    "logros": {
+      "es": [
+        "Sistema de gestión de contratos y otros sistemas internos.",
+        "Sitio web institucional en WordPress, soporte técnico y mantenimiento de redes."
+      ],
+      "en": [
+        "Contract management system and other internal systems.",
+        "Institutional WordPress website, IT support and network maintenance."
+      ]
+    },
+    "stack": ["Laravel", "jQuery", "WordPress"]
+  },
+  {
+    "id": "teleperformance",
+    "empresa": { "es": "Teleperformance", "en": "Teleperformance" },
+    "rol": { "es": "Soporte técnico", "en": "Technical support" },
+    "desde": "2010",
+    "hasta": "2014",
+    "logros": {
+      "es": [
+        "Atención técnica a clientes de internet, telefonía IP y TV digital."
+      ],
+      "en": ["Technical support for internet, VoIP and digital TV customers."]
+    },
+    "stack": []
+  }
+]

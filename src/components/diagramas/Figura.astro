@@ -1,0 +1,14 @@
+---
+interface Props {
+  leyenda: string
+}
+
+const { leyenda } = Astro.props
+---
+
+<figure class="not-prose my-10">
+  <div class="overflow-x-auto rounded-2xl border border-line bg-surface p-4 sm:p-6">
+    <slot />
+  </div>
+  <figcaption class="mt-3 text-sm text-muted">{leyenda}</figcaption>
+</figure>

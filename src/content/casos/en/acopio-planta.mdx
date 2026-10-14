@@ -1,0 +1,72 @@
+---
+titulo: Turnover-based storage at a precast concrete plant
+resumen: Storage by turnover, production planning and a loading plan per pickup slot that cut truck waiting time from up to 3 days to zero.
+cliente: Precast concrete manufacturer
+rol: Developer on the team, from analysis to production planning
+periodo: 2020 – April 2021
+stack:
+  - Laravel
+  - React
+  - jQuery
+  - REST API
+problema: Trucks waited up to 3 days to load, and the overhead crane traveled long distances because goods were not placed according to demand.
+solucion: We analyzed product turnover with the sales history, and I built the production planning, stock per quadrant and loading plan per pickup slot.
+impacto: Waiting time dropped to zero for trucks arriving during their slot, and loading time inside the plant went down considerably.
+metricas:
+  - valor: 3 days → 0
+    etiqueta: waiting time for trucks arriving during their slot
+    tipo: real
+  - valor: 128 quadrants
+    etiqueta: with stock tracked row by row
+    tipo: real
+demo: null
+orden: 2
+---
+
+import PlantaCuadrantes from '@/components/diagramas/PlantaCuadrantes.astro'
+
+## Context
+
+The company manufactured a wide range of construction products: joists,
+blocks, filler blocks and many more. Production was stored in about **128
+quadrants** along **three internal lanes**, similar to supermarket aisles.
+Customers picked up goods in scheduled slots, and operators loaded the trucks
+with an overhead crane.
+
+## The problem
+
+The problem had two parts. On one side, trucks could wait whole days, sometimes
+up to three, to be served. On the other, goods were not placed according to
+demand, so the crane traveled long distances and loading took a long time.
+
+## What we did
+
+I was part of the team from the analysis stage.
+
+- **Turnover analysis.** Using the sales history in Excel, we ran an ABC
+  classification (Pareto curve): A products, with high turnover, accounted for
+  most pickups; B products had medium turnover and C products, low.
+- **Storage by turnover.** Each class got its own zone: high-turnover products were stored near the entrance
+  and the main lanes; medium-turnover products in an intermediate area; and
+  low-turnover products in the farthest sectors.
+
+<PlantaCuadrantes idioma="en" />
+
+Then **I built the production planning system**:
+
+- **Producing while knowing where to store.** Since pickup slots were booked
+  three months ahead, the system knew what had to be produced. When production
+  was recorded, it suggested the quadrant with available space that would let
+  the customer pick it up fastest on their slot.
+- **Stock per quadrant and per row.** If a quadrant held four rows of joists and
+  a customer took one, that row was deducted and the quadrant stayed occupied
+  with the other three; once empty, it was freed.
+- **Loading plan.** When each truck arrived for its slot, the system gave the operator a plan
+  stating which quadrant to pick each product from and in what order.
+
+## Results
+
+- **Truck waiting time dropped to zero:** trucks arriving during their slot were
+  served right away.
+- **Shorter loading time inside the plant**, because goods were already stored
+  in the most convenient quadrants.

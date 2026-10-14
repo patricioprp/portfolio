@@ -1,0 +1,85 @@
+---
+titulo: Menos acero con programación lineal entera
+resumen: Modelé la producción de viguetas como un problema de corte con programación lineal entera e implementé el algoritmo que genera el plan óptimo.
+cliente: Empresa de premoldeados para la construcción
+rol: Responsable de punta a punta, del modelo matemático a la implementación
+periodo: 2020 – abril 2021
+stack:
+  - PHP
+  - Investigación operativa
+  - Programación lineal entera
+  - Cutting stock
+problema: Las viguetas cortas salían con el acero de las largas y sobraban recortes. Era desperdicio del insumo más caro de la línea.
+solucion: Lo modelé como un problema de corte con programación lineal entera e implementé el algoritmo que generaba el plan de producción óptimo.
+impacto: La planificación dejó de depender de la intuición. Cada vigueta se produce con el acero de su medida y bajó el consumo de acero.
+metricas:
+  - valor: ~37 %
+    etiqueta: menos acero que llenar los bancos por orden de llegada
+    tipo: ilustrativa
+  - valor: +4 %
+    etiqueta: sobre el mínimo teórico de acero
+    tipo: ilustrativa
+demo: optimizador-viguetas
+orden: 3
+---
+
+import BancosAntesDespues from '@/components/diagramas/BancosAntesDespues.astro'
+
+## Contexto
+
+Cada vigueta lleva acero en su interior, y el diámetro de ese acero depende de
+su longitud: cuanto más larga, más grueso. La planta tenía **tres bancos de
+producción**; cada banco producía siempre **tres filas de 33 metros a la vez**,
+es decir, nueve filas por jornada, que después se cortaban en las medidas que
+pedía la demanda: unas cinco medidas distintas, la más larga de unos 10 metros.
+
+## El problema
+
+Cuando en un mismo banco se producían viguetas largas y cortas, las cortas
+salían con el acero de las largas: eran "superviguetas", mucho más resistentes
+de lo necesario. Ese exceso de acero, el insumo más caro, se sumaba a los
+recortes sobrantes, que también eran desperdicio.
+
+<BancosAntesDespues idioma="es" />
+
+## Qué hice
+
+Este trabajo lo hice de principio a fin. Identifiqué que se trataba de un
+**problema de corte (cutting stock)**, que había visto en Investigación
+Operativa, y lo formulé como un modelo de **programación lineal entera**:
+minimizar el acero utilizado, con la restricción de satisfacer la demanda de
+cada medida.
+
+1. **Generé los patrones de corte.** Para cada diámetro de acero, las
+   combinaciones de piezas que entran en una fila de 33 m, respetando que una
+   vigueta puede llevar un acero igual o más grueso que el que necesita, nunca
+   más fino. Solo cuentan los patrones maximales, los que ya no admiten otra
+   pieza.
+2. **Planteé el modelo.** Las variables son la cantidad de filas cortadas con
+   cada patrón y la cantidad de bancos producidos con cada diámetro. El objetivo
+   es minimizar el costo del acero; las restricciones, satisfacer la demanda de
+   cada medida y respetar que un banco produce siempre sus tres filas con el
+   mismo diámetro.
+3. **Implementé en PHP el algoritmo** que resolvía el modelo y generaba la
+   planificación óptima: cuántos bancos producir con cada diámetro y cómo cortar
+   cada fila, con el mínimo sobrante y el mínimo desperdicio de acero.
+
+Un detalle que el modelo descubre solo: una única función objetivo penaliza a la
+vez el acero sobredimensionado y los recortes, porque se paga el acero de la
+fila entera. Pero distingue cuándo conviene **aprovechar un sobrante** con una
+vigueta sobredimensionada: en el escenario de la demo, cortar 3 × 10 m + 1 × 3 m
+cuesta lo mismo que 3 × 10 m y entrega una vigueta más.
+
+## Resultados
+
+- La planificación dejó de depender de la intuición.
+- Cada vigueta se produce con el acero que corresponde a su medida.
+- Se redujo el consumo del insumo más costoso de la línea.
+
+## Un ejemplo con números
+
+Para la demo armé un ejemplo con cinco medidas basadas en largos comerciales
+habituales, extendidas hasta 10 m, y una demanda de 465 viguetas. Los números son **ilustrativos, no medidos en la
+planta**: el plan óptimo usa 24 bancos (8 jornadas), queda apenas un 4 % por
+encima del mínimo teórico de acero y usa alrededor de un 37 % menos de acero
+que llenar los bancos en el orden en que llegan las viguetas.

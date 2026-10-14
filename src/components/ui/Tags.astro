@@ -1,0 +1,18 @@
+---
+interface Props {
+  items: readonly string[]
+  etiqueta?: string
+}
+
+const { items, etiqueta } = Astro.props
+---
+
+{items.length > 0 && (
+  <ul class="flex flex-wrap gap-2" aria-label={etiqueta}>
+    {items.map((item) => (
+      <li class="rounded-md border border-line bg-surface-2 px-2.5 py-1 font-mono text-xs text-fg">
+        {item}
+      </li>
+    ))}
+  </ul>
+)}

@@ -1,0 +1,146 @@
+---
+import { Icon } from 'astro-icon/components'
+import Section from '@/components/ui/Section.astro'
+import Button from '@/components/ui/Button.astro'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+import { enlaceWhatsapp, perfil } from '@/data/perfil'
+
+interface Props {
+  idioma: Idioma
+}
+
+const { idioma } = Astro.props
+const t = obtenerDiccionario(idioma)
+const f = t.contacto.form
+const gracias = idioma === 'es' ? '/gracias/' : '/en/thanks/'
+
+const campo =
+  'mt-1 block w-full rounded-lg border border-line bg-bg px-3 py-2.5 text-strong placeholder:text-muted focus:border-accent focus:outline-none focus-visible:outline-2 focus-visible:outline-accent'
+---
+
+<Section
+  id="contacto"
+  eyebrow={t.contacto.eyebrow}
+  titulo={t.contacto.titulo}
+  bajada={t.contacto.bajada}
+  alterna
+>
+  <div class="grid gap-12 lg:grid-cols-5">
+    <div class="space-y-6 lg:col-span-2">
+      <Button
+        href={enlaceWhatsapp(t.contacto.mensajeWhatsapp)}
+        icono="simple-icons:whatsapp"
+        class="w-full sm:w-auto"
+      >
+        {t.contacto.whatsapp}
+      </Button>
+      <ul class="space-y-4">
+        <li class="flex items-center gap-3">
+          <Icon
+            name="lucide:mail"
+            class="size-5 text-accent"
+            aria-hidden="true"
+          />
+          <a href={`mailto:${perfil.email}`} class="hover:text-accent">
+            {perfil.email}
+          </a>
+        </li>
+        <li class="flex items-center gap-3">
+          <Icon
+            name="lucide:phone"
+            class="size-5 text-accent"
+            aria-hidden="true"
+          />
+          <a href={`tel:+${perfil.whatsapp}`} class="hover:text-accent">
+            {perfil.telefono}
+          </a>
+        </li>
+        <li class="flex items-center gap-3">
+          <Icon
+            name="lucide:map-pin"
+            class="size-5 text-accent"
+            aria-hidden="true"
+          />
+          <span>{t.contacto.ubicacion}</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <Icon
+            name="lucide:languages"
+            class="size-5 text-accent"
+            aria-hidden="true"
+          />
+          <span>{t.contacto.idiomas}</span>
+        </li>
+      </ul>
+    </div>
+
+    <form
+      name="contacto"
+      method="POST"
+      action={gracias}
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      aria-label={f.titulo}
+      class="space-y-5 rounded-2xl border border-line bg-surface p-6 lg:col-span-3"
+    >
+      <input type="hidden" name="form-name" value="contacto" />
+      <p class="hidden">
+        <label>
+          {f.honeypot}
+          <input name="bot-field" tabindex="-1" autocomplete="off" />
+        </label>
+      </p>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <label class="block text-sm font-medium text-strong">
+          {f.nombre}
+          <input
+            name="nombre"
+            type="text"
+            required
+            autocomplete="name"
+            maxlength="100"
+            class={campo}
+          />
+        </label>
+        <label class="block text-sm font-medium text-strong">
+          {f.email}
+          <input
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            maxlength="200"
+            class={campo}
+          />
+        </label>
+      </div>
+      <label class="block text-sm font-medium text-strong">
+        {f.empresa}
+        <input
+          name="empresa"
+          type="text"
+          autocomplete="organization"
+          maxlength="100"
+          class={campo}
+        />
+      </label>
+      <label class="block text-sm font-medium text-strong">
+        {f.mensaje}
+        <textarea
+          name="mensaje"
+          required
+          rows="5"
+          maxlength="3000"
+          class={campo}
+        ></textarea>
+      </label>
+      <button
+        type="submit"
+        class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent-solid px-5 py-3 font-semibold text-white hover:bg-accent-solid-hover sm:w-auto"
+      >
+        <Icon name="lucide:send" class="size-5" aria-hidden="true" />
+        {f.enviar}
+      </button>
+    </form>
+  </div>
+</Section>

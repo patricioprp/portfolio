@@ -1,0 +1,139 @@
+---
+import Figura from './Figura.astro'
+import type { Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const textos = {
+  es: {
+    titulo: 'Estructura de una planilla dinámica',
+    desc: 'Una planilla de una empresa y campaña tiene campos anidados en tres niveles: un desplegable Sí/No, un checkbox visible si se responde Sí y un campo nieto visible si se marca el checkbox. Los ítems comunes descuentan del total y un ítem crítico que falla lleva el puntaje a cero.',
+    leyenda:
+      'Estructura de una planilla dinámica: campos anidados en tres niveles y reglas de puntaje.',
+    planilla: 'Planilla de calidad',
+    empresa: 'Empresa · campaña',
+    n1: 'Nivel 1 · campo padre',
+    n1d: 'Desplegable Sí / No',
+    n2: 'Nivel 2 · campo hijo',
+    n2d: 'Checkbox, visible si «Sí»',
+    n3: 'Nivel 3 · campo nieto',
+    n3d: 'Visible si se marca',
+    critico: 'Ítem crítico',
+    criticoD: 'Si falla, el puntaje es 0',
+    puntaje: 'Cálculo del puntaje',
+    puntajeD: 'Total − descuentos de ítems comunes'
+  },
+  en: {
+    titulo: 'Structure of a dynamic form',
+    desc: 'A form for a company and campaign has fields nested three levels deep: a Yes/No dropdown, a checkbox shown when the answer is Yes and a grandchild field shown when the checkbox is checked. Regular items deduct from the total and a failed critical item sets the score to zero.',
+    leyenda:
+      'Structure of a dynamic form: fields nested three levels deep and scoring rules.',
+    planilla: 'Quality form',
+    empresa: 'Company · campaign',
+    n1: 'Level 1 · parent field',
+    n1d: 'Yes / No dropdown',
+    n2: 'Level 2 · child field',
+    n2d: 'Checkbox, shown if “Yes”',
+    n3: 'Level 3 · grandchild field',
+    n3d: 'Shown when checked',
+    critico: 'Critical item',
+    criticoD: 'If it fails, the score is 0',
+    puntaje: 'Score calculation',
+    puntajeD: 'Total − regular item deductions'
+  }
+}[Astro.props.idioma]
+
+const niveles = [
+  { x: 60, y: 110, titulo: textos.n1, detalle: textos.n1d },
+  { x: 100, y: 190, titulo: textos.n2, detalle: textos.n2d },
+  { x: 140, y: 270, titulo: textos.n3, detalle: textos.n3d }
+]
+---
+
+<Figura leyenda={textos.leyenda}>
+  <svg
+    viewBox="0 0 760 346"
+    role="img"
+    aria-labelledby="arbol-titulo arbol-desc"
+    class="w-full min-w-[640px] font-sans"
+  >
+    <title id="arbol-titulo">{textos.titulo}</title>
+    <desc id="arbol-desc">{textos.desc}</desc>
+
+    <rect
+      x="20"
+      y="20"
+      width="300"
+      height="56"
+      rx="10"
+      class="fill-accent-soft stroke-accent"
+    ></rect>
+    <text x="36" y="44" class="fill-strong text-[15px] font-semibold">
+      {textos.planilla}
+    </text>
+    <text x="36" y="64" class="fill-muted text-[12px]">
+      {textos.empresa}
+    </text>
+
+    {niveles.map((n) => (
+      <g>
+        <path
+          d={`M${n.x - 20} ${n.y - 34} V${n.y + 28} H${n.x}`}
+          fill="none"
+          stroke-width="1.5"
+          class="stroke-muted"
+        />
+        <rect
+          x={n.x}
+          y={n.y}
+          width="280"
+          height="56"
+          rx="10"
+          class="fill-surface-2 stroke-line"
+        />
+        <text
+          x={n.x + 16}
+          y={n.y + 24}
+          class="fill-strong text-[14px] font-semibold"
+        >
+          {n.titulo}
+        </text>
+        <text x={n.x + 16} y={n.y + 44} class="fill-muted text-[12px]">
+          {n.detalle}
+        </text>
+      </g>
+    ))}
+
+    <rect
+      x="460"
+      y="110"
+      width="280"
+      height="64"
+      rx="10"
+      class="fill-rose-500/10 stroke-rose-500"
+    ></rect>
+    <text x="476" y="137" class="fill-strong text-[14px] font-semibold">
+      {textos.critico}
+    </text>
+    <text x="476" y="158" class="fill-fg text-[13px]">
+      {textos.criticoD}
+    </text>
+
+    <rect
+      x="460"
+      y="194"
+      width="280"
+      height="64"
+      rx="10"
+      class="fill-surface-2 stroke-line"
+    ></rect>
+    <text x="476" y="221" class="fill-strong text-[14px] font-semibold">
+      {textos.puntaje}
+    </text>
+    <text x="476" y="242" class="fill-fg text-[13px]">
+      {textos.puntajeD}
+    </text>
+  </svg>
+</Figura>

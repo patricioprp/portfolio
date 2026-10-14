@@ -1,0 +1,34 @@
+---
+import { Icon } from 'astro-icon/components'
+import Section from '@/components/ui/Section.astro'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const t = obtenerDiccionario(Astro.props.idioma)
+---
+
+<Section
+  id="formacion"
+  eyebrow={t.formacion.eyebrow}
+  titulo={t.formacion.titulo}
+>
+  <ul class="grid gap-6 md:grid-cols-2">
+    {t.formacion.items.map((item) => (
+      <li class="flex gap-4 rounded-2xl border border-line bg-surface p-6">
+        <Icon
+          name="lucide:graduation-cap"
+          class="size-7 shrink-0 text-accent"
+          aria-hidden="true"
+        />
+        <div>
+          <h3 class="font-bold text-strong">{item.titulo}</h3>
+          <p class="text-muted">{item.institucion}</p>
+          <p class="mt-1 font-mono text-sm text-accent">{item.detalle}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+</Section>

@@ -1,0 +1,83 @@
+---
+titulo: Less steel with integer linear programming
+resumen: I modeled joist production as an integer linear programming cutting stock problem and implemented the algorithm behind the optimal plan.
+cliente: Precast concrete manufacturer
+rol: End-to-end owner, from the mathematical model to the implementation
+periodo: 2020 – April 2021
+stack:
+  - PHP
+  - Operations research
+  - Integer linear programming
+  - Cutting stock
+problema: Short joists were made with the steel of long ones and offcuts piled up. That wasted the line's most expensive input.
+solucion: I modeled it as a cutting stock problem with integer linear programming and implemented the algorithm that produced the optimal production plan.
+impacto: Planning stopped relying on intuition. Each joist is made with the steel its length requires, and steel consumption went down.
+metricas:
+  - valor: ~37%
+    etiqueta: less steel than filling beds first come, first served
+    tipo: ilustrativa
+  - valor: +4%
+    etiqueta: above the theoretical minimum steel usage
+    tipo: ilustrativa
+demo: optimizador-viguetas
+orden: 3
+---
+
+import BancosAntesDespues from '@/components/diagramas/BancosAntesDespues.astro'
+
+## Context
+
+Each joist has steel inside, and the diameter of that steel depends on its
+length: the longer the joist, the thicker the steel. The plant had **three
+production beds**; each bed always produced **three 33-meter rows at once**,
+nine rows per day, which were then cut to the lengths demanded: about five
+different lengths, the longest around 10 meters.
+
+## The problem
+
+When long and short joists were produced on the same bed, the short ones got the
+steel of the long ones: "super joists", much stronger than needed. That excess
+of steel, the most expensive input, added to the leftover offcuts, which were
+also waste.
+
+<BancosAntesDespues idioma="en" />
+
+## What I did
+
+I owned this work from start to finish. I identified it as a **cutting stock
+problem**, which I had studied in Operations Research, and formulated it as an
+**integer linear programming** model: minimize the steel used, subject to
+meeting the demand for each length.
+
+1. **I generated the cutting patterns.** For each steel diameter, the
+   combinations of pieces that fit in a 33 m row, given that a joist can carry
+   steel equal to or thicker than it needs, never thinner. Only maximal
+   patterns count: those that can't fit another piece.
+2. **I built the model.** The variables are the number of rows cut with each
+   pattern and the number of beds produced with each diameter. The goal is to
+   minimize the cost of steel; the constraints are meeting the demand for each
+   length and respecting that a bed always produces its three rows with the
+   same diameter.
+3. **I implemented the algorithm in PHP** that solved the model and produced the
+   optimal plan: how many beds to produce with each diameter and how to cut each
+   row, with the least leftover and the least steel waste.
+
+A detail the model finds on its own: a single objective function penalizes both
+oversized steel and offcuts, since you pay for the steel of the whole row. But
+it can tell when it pays to **use a leftover** with an oversized joist: in the
+demo scenario, cutting 3 × 10 m + 1 × 3 m costs the same as 3 × 10 m and
+delivers one more joist.
+
+## Results
+
+- Planning stopped relying on intuition.
+- Each joist is produced with the steel its length requires.
+- Consumption of the most expensive input on the line went down.
+
+## An example with numbers
+
+For the demo I built an example with five lengths based on common commercial
+sizes, extended up to 10 m, and a demand of 465 joists. The numbers are **illustrative, not measured at the
+plant**: the optimal plan uses 24 beds (8 production days), sits just 4% above
+the theoretical minimum of steel, and uses about 37% less steel than filling the
+beds in the order joists arrive.
