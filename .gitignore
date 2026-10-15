@@ -28,3 +28,6 @@ Thumbs.db
 
 # Volcados de procesos que se cayeron (Git Bash en Windows)
 *.stackdump
+
+# Notas personales para Claude Code (no se versionan)
+CLAUDE.local.md

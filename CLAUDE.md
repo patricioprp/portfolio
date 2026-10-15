@@ -17,10 +17,13 @@ impacto medible** y las **demos ejecutables** en el navegador.
 - Estrategia, público y estructura de páginas: `docs/PRODUCTO.md`
 - Stack, carpetas y decisiones técnicas: `docs/ARQUITECTURA.md`
 - Plan de trabajo por fases (con checkboxes): `docs/ROADMAP.md`
+- Specs de cada funcionalidad (criterios de aceptación → tests): `docs/specs/`
+- Decisiones técnicas con alternativas (ADR): `docs/adr/`
+- Guía de cómo se trabaja con IA en este repo (capítulos con diagramas): `docs/guia-ia/`
 
 ## Estado actual
 
-Fases 1 a 7 terminadas: sitio completo en español e inglés (home, cinco casos, cuatro demos). Pendientes manuales del lanzamiento en la Fase 6 de `docs/ROADMAP.md`.
+Fases 1 a 8 terminadas: sitio completo en español e inglés (home, cinco casos, cuatro demos) y flujo de trabajo con IA documentado. Pendientes manuales del lanzamiento en la Fase 6 de `docs/ROADMAP.md`.
 `legacy/index.html` es la versión anterior (HTML + Tailwind por CDN); sirve
 solo de referencia de contenido y estética (paleta oscura slate + sky). El
 progreso está en `docs/ROADMAP.md`.
@@ -56,6 +59,31 @@ npm run cv         # regenera los CV en PDF (public/cv/) desde el contenido del 
 ```
 
 Antes de dar una tarea por terminada, ejecutá la skill `/verificar`.
+
+## Cómo trabajar
+
+| Pedido                                  | Flujo                                                |
+| --------------------------------------- | ---------------------------------------------------- |
+| Funcionalidad, demo o página nueva      | `/spec` → aprobación de Patricio → `/implementar`    |
+| Demo nueva (con spec aprobada)          | `/nueva-demo <slug>` y después `/implementar`        |
+| Caso de estudio                         | `/nuevo-caso <slug>`                                 |
+| Experiencia laboral nueva o actualizada | `/nueva-experiencia` (entrevista o borrador)         |
+| Arreglo chico o ajuste de texto         | directo, con test si toca `src/lib/`, y `/verificar` |
+| Commit                                  | `/commit`, solo cuando Patricio lo pida              |
+
+- Revisores (subagentes de solo lectura): `revisor-codigo` para el diff y
+  `revisor-contenido` para el texto visible. Usalos antes de cerrar una tarea.
+- Reglas por carpeta en `.claude/rules/` (se cargan solas al tocar
+  `src/lib/`, `src/islands/`, contenido o `e2e/`).
+- Hooks en `.claude/settings.json`: Prettier corre solo después de cada
+  edición; editar `dist/`, `legacy/`, `.astro/`, `package-lock.json` o `.env`
+  está bloqueado, igual que escribir términos de
+  `docs/privado/terminos-sensibles.txt`. Si un hook bloquea, corregí la causa;
+  no lo esquives.
+- Una decisión técnica con alternativas reales se registra como ADR.
+- Si cambiás algo de `.claude/` (skills, agentes, reglas, hooks, permisos),
+  actualizá el capítulo correspondiente de `docs/guia-ia/` para que la guía
+  siga describiendo el repo real.
 
 ## Fuente de verdad del contenido
 

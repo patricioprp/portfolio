@@ -9,16 +9,71 @@
       "Bash(npm run lint)",
       "Bash(npm run lint:fix)",
       "Bash(npm run format)",
+      "Bash(npm run format:check)",
       "Bash(npm test)",
       "Bash(npm run test *)",
       "Bash(npm run e2e)",
+      "Bash(npm run og)",
+      "Bash(npm run cv)",
       "Bash(npx vitest run *)",
       "Bash(npx playwright test *)",
       "Bash(npx astro check)",
       "Bash(git status)",
       "Bash(git diff *)",
-      "Bash(git log *)"
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git branch *)",
+      "Bash(git grep *)"
     ],
-    "deny": ["Read(./.env)", "Read(./.env.*)", "Bash(git push *)"]
+    "ask": [
+      "Bash(git commit *)",
+      "Bash(npm install *)",
+      "Bash(npm uninstall *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Bash(git push *)",
+      "Bash(git reset --hard *)",
+      "Bash(rm -rf *)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/contexto-sesion.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/proteger-archivos.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/formatear.mjs\"",
+            "timeout": 30,
+            "statusMessage": "Formateando con Prettier"
+          }
+        ]
+      }
+    ]
   }
 }
