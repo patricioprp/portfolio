@@ -22,8 +22,16 @@
 ```text
 mi-portfolio/
 ├─ CLAUDE.md
-├─ .claude/                    # configuración de Claude Code (skills, agentes, permisos)
+├─ .claude/                    # Claude Code (ver docs/guia-ia/)
+│  ├─ settings.json            # permisos y hooks
+│  ├─ hooks/                   # scripts de los hooks (Node)
+│  ├─ rules/                   # reglas por carpeta (frontmatter `paths`)
+│  ├─ skills/                  # /spec, /implementar, /verificar, /nuevo-caso, ...
+│  └─ agents/                  # revisor-codigo, revisor-contenido
+├─ .github/workflows/ci.yml    # CI: formato, lint, tipos, tests, build, e2e
 ├─ docs/                       # fuente de verdad: producto, arquitectura, contenido, casos
+│  ├─ specs/                   # specs con criterios de aceptación
+│  ├─ adr/                     # decisiones de arquitectura
 │  └─ privado/                 # notas personales (gitignored, nunca se publican)
 ├─ legacy/index.html           # versión anterior, solo como referencia
 ├─ public/

@@ -30,14 +30,27 @@ npm run e2e        # Playwright (la primera vez: npx playwright install chromium
 | [`docs/ROADMAP.md`](docs/ROADMAP.md)           | Plan por fases                                         |
 | [`docs/contenido/`](docs/contenido/)           | Perfil y experiencia (fuente de verdad)                |
 | [`docs/casos/`](docs/casos/)                   | Casos de estudio                                       |
+| [`docs/specs/`](docs/specs/)                   | Specs: alcance y criterios de aceptación → tests       |
+| [`docs/adr/`](docs/adr/)                       | Decisiones de arquitectura y alternativas descartadas  |
+| [`docs/guia-ia/`](docs/guia-ia/README.md)      | Guía paso a paso para trabajar con Claude Code         |
 
 ## Trabajar con Claude Code
 
-```bash
-claude
-> Ejecutá la Fase 1 de docs/ROADMAP.md
+El proyecto está preparado para desarrollarse con
+[Claude Code](https://claude.com/claude-code) con un flujo guiado por specs.
+El detalle de cada pieza está en
+[`docs/guia-ia/`](docs/guia-ia/README.md), una guía en 10 capítulos con diagramas.
+
+```text
+/spec <idea>          → docs/specs/NNN-slug.md (borrador para aprobar)
+/implementar <spec>   → TDD, /verificar, revisores y checkboxes del roadmap
+/nueva-demo <slug>    → esqueleto de una demo nueva
+/nuevo-caso <slug>    → caso de estudio ES/EN
+/nueva-experiencia    → entrevista y alta de una experiencia laboral
+/verificar            → formato, lint, tipos, tests, build y e2e
+/commit               → mensaje Conventional Commits a partir del diff
 ```
 
-- `/verificar`: formato, lint, tipos, tests y build.
-- `/nuevo-caso <slug>`: crea o migra un caso de estudio.
-- Agente `revisor-contenido`: revisa exactitud, privacidad y tono del texto.
+- Subagentes de solo lectura: `revisor-codigo` (diff) y `revisor-contenido` (texto).
+- Reglas por carpeta en `.claude/rules/`; hooks de formato y protección en `.claude/settings.json`.
+- CI en `.github/workflows/ci.yml` con las mismas verificaciones.

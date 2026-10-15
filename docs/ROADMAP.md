@@ -88,8 +88,20 @@ Bloquean contenido, no código. Respuestas volcadas en `docs/contenido/` y `CLAU
 - [x] Caso propio `mapa-beneficios` (ES/EN, segundo en el orden) con dos ilustraciones: card vs carrusel y recorrido hasta el cupón
 - [x] Demo `/demos/mapa-beneficios`: mapa en SVG con zoom y arrastre, clusters, carrusel por edificio, listado sincronizado, "Buscar en esta zona" y canje con QR; lógica en `src/lib/mapa` con tests
 
+## Fase 8 — Flujo de trabajo con IA ✅
+
+- [x] Specs con criterios de aceptación enlazados a tests (`docs/specs/`, plantilla y specs 001–005)
+- [x] Decisiones de arquitectura como ADR (`docs/adr/0001`–`0005`)
+- [x] Reglas por carpeta en `.claude/rules/` (lógica pura, islas, contenido, e2e)
+- [x] Skills `/spec`, `/implementar`, `/nueva-demo`, `/nueva-experiencia` y `/commit`; agente `revisor-codigo`
+- [x] Hooks: contexto al iniciar sesión, archivos protegidos y términos privados, Prettier automático
+- [x] Plantilla para cargar experiencia (`docs/contenido/_plantilla-experiencia.md`) y test e2e del enlace experiencia → caso
+- [x] CI en GitHub Actions (formato, lint, tipos, unitarios, build, e2e)
+- [x] Guía de aprendizaje en 10 capítulos con diagramas: `docs/guia-ia/` (no se publica en el sitio; propuesta en `docs/specs/006-guia-ia-en-el-sitio.md`)
+
 ## Ideas para después
 
+- Publicar la guía de IA como sección del sitio (spec en borrador: `docs/specs/006-guia-ia-en-el-sitio.md`)
 - Calendario de producción en el optimizador (asignar bancos a jornadas según los turnos)
 - Generación de columnas (Gilmore–Gomory) para muchas medidas
 - Carga de demanda por CSV
