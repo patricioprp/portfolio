@@ -1,0 +1,106 @@
+---
+titulo: Una plataforma, decenas de trámites, una sola experiencia
+resumen: Migración del portal de socios de una prepaga líder, con una librería de componentes compartida y contingencias que apagan un trámite sin deploys.
+cliente: Prepaga líder a nivel nacional
+rol: Frontend Senior en Quadion Tech
+periodo: diciembre 2023 – actualidad
+stack:
+  - React
+  - TypeScript
+  - Module Federation
+  - Storybook
+  - Firebase Remote Config
+  - Vitest
+  - Playwright
+  - GitLab CI
+problema: Migrar el portal de socios legacy de una de las principales prepagas del país con varias células trabajando en paralelo, sin que cada una construyera sus propios componentes ni que una falla tirara abajo toda la plataforma.
+solucion: Desarrollé componentes de una librería compartida en Storybook (steppers, breadcrumbs, carga de archivos, analytics) y participé del sistema de contingencias que controla el portal desde una configuración remota.
+impacto: Experiencia uniforme en todos los trámites y una plataforma que se degrada de forma controlada; ante una falla se apaga un trámite, no el portal, y sin deploys.
+metricas:
+  - valor: 0 deploys
+    etiqueta: para apagar un trámite o poner el portal en mantenimiento
+    tipo: real
+  - valor: 2 arquitecturas
+    etiqueta: microfrontends con Module Federation y monolito modular
+    tipo: real
+demo: contingencias
+orden: 1
+---
+
+import ArquitecturaPortal from '@/components/diagramas/ArquitecturaPortal.astro'
+import PantallaTramite from '@/components/diagramas/PantallaTramite.astro'
+import ContingenciasNiveles from '@/components/diagramas/ContingenciasNiveles.astro'
+
+## Contexto
+
+En Quadion Tech trabajo para una de las principales prepagas del país, en la
+migración de su portal de socios: reintegros, autorizaciones, facturación,
+discapacidad y muchos trámites más, usados por socios y prestadores. Varias
+células de desarrollo trabajan en paralelo sobre la misma plataforma.
+
+## La arquitectura
+
+La migración comenzó con **microfrontends con Module Federation**: un contenedor
+principal (app shell) orquestaba la autenticación, el layout y la navegación, y cada trámite
+era un microfrontend independiente. Más adelante, por decisión del cliente,
+consolidamos la plataforma en un **monolito modular**, donde cada trámite sigue
+siendo un módulo independiente que se carga bajo demanda. Viví las dos
+arquitecturas.
+
+<ArquitecturaPortal idioma="es" />
+
+## Reto 1: que todo se vea y se comporte igual
+
+Con varias células desarrollando en paralelo, cada una corría el riesgo de
+construir sus propios botones, formularios y patrones. Para evitarlo creamos una
+**librería de componentes compartida** que, como era una migración, hubo que
+reconstruir desde cero. Desarrollé muchos de sus componentes en **Storybook**, en
+conjunto con diseño a partir de **Figma**:
+
+- **Steppers y breadcrumbs**, presentes en todos los trámites.
+- **Carga de archivos**, que sube los documentos en dos pasos mediante URLs
+  firmadas a la nube.
+- **Funciones de analytics centralizadas**, para que todos los trámites midan sus
+  eventos de la misma forma.
+
+Cada componente recorre el mismo camino: diseño en Figma, desarrollo y
+documentación en Storybook, tests unitarios y end-to-end en el pipeline, y
+recién ahí llega a los trámites.
+
+<PantallaTramite idioma="es" />
+
+## Reto 2: la resiliencia
+
+Una plataforma con tantos trámites depende de muchos servicios, y si uno falla no
+puede caerse todo. Implementamos un sistema de **contingencias con Firebase Remote
+Config**: la aplicación consulta la configuración cada minuto y, según lo que
+encuentre, **apaga un trámite puntual**, **muestra un aviso de mantenimiento con
+fecha y horario** o **pone toda la plataforma en mantenimiento**. Todo sin
+deployar.
+
+<ContingenciasNiveles idioma="es" />
+
+## Calidad y deploy
+
+Tests unitarios (primero con Jest y después migrados a Vitest), tests end-to-end
+con Playwright y pipelines de GitLab con análisis de seguridad que deployan en
+Kubernetes. Además, el mismo build corre en todos los ambientes, porque la
+aplicación lee su configuración al iniciar.
+
+## Resultados
+
+- **Uniformidad:** socios y prestadores ven los mismos componentes en todos los
+  trámites.
+- **Resiliencia:** ante una falla se apaga un trámite, no la plataforma, y sin
+  deploys.
+- **Velocidad de equipo:** una mejora en un componente llega a todas las células a
+  la vez.
+
+## También en este proyecto
+
+Con **Next.js** desarrollé la plataforma donde los socios buscan y canjean
+beneficios en comercios adheridos, con un mapa de Google Maps mobile-first:
+agrupé por coordenadas los comercios que comparten edificio (en lugar de una sola
+card, un carrusel con todos los comercios del lugar), sincronicé el listado con el
+mapa y reuní los pines en clusters con la cantidad cuando hay muchos resultados. El recorrido termina en un código QR que
+genera el cupón de descuento.

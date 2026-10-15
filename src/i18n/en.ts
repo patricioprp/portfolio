@@ -54,7 +54,7 @@ export const en: Diccionario = {
     eyebrow: 'Case studies',
     titulo: 'Real problems, concrete results',
     bajada:
-      'Three projects told as problem, solution and impact, with the technical decisions behind them.',
+      'Four projects told as problem, solution and impact, with the technical decisions behind them.',
     problema: 'Problem',
     solucion: 'Solution',
     impacto: 'Impact',
@@ -89,10 +89,17 @@ export const en: Diccionario = {
     eyebrow: 'Live demos',
     titulo: 'Try it in your browser',
     bajada:
-      'Open-source reimplementations of two of the case studies, with sample data and the code on GitHub.',
+      'Open-source reimplementations of three of the case studies, with sample data and the code on GitHub.',
     proximamente: 'Coming soon',
     probar: 'Try the demo',
     items: [
+      {
+        slug: 'contingencias',
+        titulo: 'Contingency simulator',
+        descripcion:
+          'Turn off a request, announce maintenance or pause the whole portal from a remote configuration, and watch it respond with no deploys.',
+        stack: ['TypeScript', 'React', 'Feature flags']
+      },
       {
         slug: 'optimizador-viguetas',
         titulo: 'Joist cutting optimizer',
@@ -252,6 +259,73 @@ export const en: Diccionario = {
       ]
     }
   },
+  demoContingencias: {
+    meta: {
+      titulo: 'Contingency simulator | Demo by Patricio R. Polito',
+      descripcion:
+        'Live demo: a remote configuration turns off requests, announces maintenance or puts the whole portal in maintenance, with no deploys.'
+    },
+    eyebrow: 'Live demo',
+    titulo: 'Contingency simulator',
+    bajada:
+      'This is how a portal with dozens of requests degrades gracefully: a single remote configuration turns off one request, announces maintenance or pauses the whole platform. Change the configuration and watch the portal respond, with no deploys.',
+    aviso:
+      "Fictional portal with generic requests. A simplified reimplementation to show the concept; it's not the client's code.",
+    leerCaso: 'Read the case study',
+    verCodigo: 'View the code',
+    tramites: {
+      reintegros: 'Reimbursements',
+      autorizaciones: 'Authorizations',
+      facturacion: 'Billing and payments',
+      discapacidad: 'Disability',
+      credencial: 'Digital ID card',
+      cartilla: 'Provider directory'
+    },
+    control: {
+      titulo: 'Remote configuration',
+      total: 'Full maintenance',
+      forzar: 'Force now',
+      programar: 'Schedule a window',
+      desde: 'From',
+      hasta: 'To',
+      apagados: 'Requests turned off',
+      aviso: 'Scheduled maintenance notice',
+      mostrarAviso: 'Announce a maintenance window',
+      reloj: 'Simulated time',
+      relojAyuda:
+        'Move the clock forward to see when scheduled windows take effect.',
+      relojValor: '+{h} h · {fecha}',
+      ventanaInvalida: 'The end date must be after the start date.',
+      restaurar: 'Reset',
+      json: 'How the configuration travels (JSON)'
+    },
+    portal: {
+      titulo: "Member's view",
+      nombre: 'Member portal',
+      hola: 'Hi, which request do you want to start?',
+      disponible: 'Available',
+      apagado: 'Temporarily unavailable',
+      avisoProximo:
+        'Scheduled maintenance: {desde} – {hasta}. Some requests may be unavailable.',
+      avisoEnCurso:
+        'Maintenance in progress until {hasta}. Some requests may be unavailable.',
+      totalTitulo: "We're making improvements",
+      totalTexto: 'The portal will be back shortly.',
+      totalHasta: 'The portal will be back on {hasta}.',
+      anuncio: 'Portal updated: {estado}.',
+      estadoOperativo: '{n} requests available',
+      estadoTotal: 'full maintenance'
+    },
+    comoFunciona: {
+      titulo: 'How it works',
+      pasos: [
+        'In the real system, the app polls a remote configuration (Firebase Remote Config) every minute; here you edit that configuration in the panel.',
+        'Full maintenance wins over everything else: it can be forced or scheduled for a date and time window.',
+        "When the platform is up, each request that's turned off shows as unavailable while the rest keep working: one request fails, not the portal.",
+        'A scheduled notice shows a banner before and during the window and disappears on its own when it ends. The logic lives in plain TypeScript with tests.'
+      ]
+    }
+  },
   experiencia: {
     eyebrow: 'Career',
     titulo: 'Experience',
@@ -267,11 +341,13 @@ export const en: Diccionario = {
         items: [
           'React',
           'TypeScript',
+          'Next.js',
           'JavaScript (ES6+)',
+          'Microfrontends (Module Federation)',
+          'Storybook',
+          'Material UI',
           'React Native',
           'Angular',
-          'Material UI',
-          'Storybook',
           'Bootstrap',
           'jQuery'
         ]
@@ -295,7 +371,16 @@ export const en: Diccionario = {
       },
       {
         titulo: 'Tooling',
-        items: ['Git', 'Docker', 'Kubernetes', 'Webpack', 'SCRUM']
+        items: [
+          'Git',
+          'GitLab CI',
+          'Docker',
+          'Kubernetes',
+          'Firebase Remote Config',
+          'Figma',
+          'Webpack',
+          'SCRUM'
+        ]
       },
       {
         titulo: 'Exploring',

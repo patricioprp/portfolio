@@ -1,0 +1,219 @@
+---
+import Figura from './Figura.astro'
+import type { Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const textos = {
+  es: {
+    titulo: 'Arquitectura del portal de trámites',
+    desc: 'Un contenedor principal (app shell) se encarga de la autenticación, el layout y la navegación e integra los trámites, cada uno como un módulo independiente que se carga bajo demanda. El header, el footer y los componentes comunes salen de una librería compartida. La migración empezó con microfrontends (Module Federation) y luego, por decisión del cliente, se consolidó en un monolito modular.',
+    leyenda:
+      'El app shell integra los trámites como módulos independientes; header, footer y componentes comunes salen de la librería compartida.',
+    shell: 'App shell',
+    shellD: 'Autenticación · layout · navegación',
+    modulo: 'Módulo independiente',
+    bajoDemanda: 'Carga bajo demanda',
+    tramites: ['Reintegros', 'Autorizaciones', 'Facturación', 'Discapacidad'],
+    mas: 'y muchos más…',
+    libreria: 'Librería compartida',
+    libreriaD: [
+      'Header y footer',
+      'Stepper · breadcrumb',
+      'Carga de archivos',
+      'Analytics'
+    ],
+    etapa1: '1 · Microfrontends con Module Federation',
+    etapa2: '2 · Monolito modular (decisión del cliente)'
+  },
+  en: {
+    titulo: 'Architecture of the request portal',
+    desc: 'An app shell handles authentication, layout and navigation and integrates the requests, each as an independent module loaded on demand. Header, footer and shared components come from a shared library. The migration started with microfrontends (Module Federation) and later, by client decision, was consolidated into a modular monolith.',
+    leyenda:
+      'The app shell integrates requests as independent modules; header, footer and shared components come from the shared library.',
+    shell: 'App shell',
+    shellD: 'Authentication · layout · navigation',
+    modulo: 'Independent module',
+    bajoDemanda: 'Loaded on demand',
+    tramites: ['Reimbursements', 'Authorizations', 'Billing', 'Disability'],
+    mas: 'and many more…',
+    libreria: 'Shared library',
+    libreriaD: [
+      'Header and footer',
+      'Stepper · breadcrumb',
+      'File upload',
+      'Analytics'
+    ],
+    etapa1: '1 · Microfrontends with Module Federation',
+    etapa2: '2 · Modular monolith (client decision)'
+  }
+}[Astro.props.idioma]
+
+const xs = [20, 152, 284, 416]
+---
+
+<Figura leyenda={textos.leyenda}>
+  <svg
+    viewBox="0 0 760 330"
+    role="img"
+    aria-labelledby="arq-titulo arq-desc"
+    class="w-full min-w-[640px] font-sans"
+  >
+    <title id="arq-titulo">{textos.titulo}</title>
+    <desc id="arq-desc">{textos.desc}</desc>
+    <defs>
+      <marker
+        id="arq-flecha"
+        viewBox="0 0 10 10"
+        refX="9"
+        refY="5"
+        markerWidth="7"
+        markerHeight="7"
+        orient="auto-start-reverse"
+      >
+        <path d="M0 0 L10 5 L0 10 z" class="fill-muted"></path>
+      </marker>
+    </defs>
+
+    <rect
+      x="20"
+      y="20"
+      width="520"
+      height="62"
+      rx="10"
+      class="fill-accent-soft stroke-accent"
+    ></rect>
+    <text
+      x="280"
+      y="47"
+      text-anchor="middle"
+      class="fill-strong text-[16px] font-semibold"
+    >
+      {textos.shell}
+    </text>
+    <text x="280" y="68" text-anchor="middle" class="fill-muted text-[12px]">
+      {textos.shellD}
+    </text>
+
+    {xs.map((x, i) => (
+      <g>
+        <path
+          d={`M${x + 58} 82 V114`}
+          stroke-width="1.5"
+          marker-end="url(#arq-flecha)"
+          class="stroke-muted"
+        />
+        <rect
+          x={x}
+          y="118"
+          width="116"
+          height="70"
+          rx="10"
+          class="fill-surface-2 stroke-line"
+        />
+        <text
+          x={x + 58}
+          y="146"
+          text-anchor="middle"
+          class="fill-strong text-[13px] font-semibold"
+        >
+          {textos.tramites[i]}
+        </text>
+        <text
+          x={x + 58}
+          y="166"
+          text-anchor="middle"
+          class="fill-muted text-[10.5px]"
+        >
+          {textos.modulo}
+        </text>
+        <text
+          x={x + 58}
+          y="180"
+          text-anchor="middle"
+          class="fill-muted text-[10.5px]"
+        >
+          {textos.bajoDemanda}
+        </text>
+      </g>
+    ))}
+    <text
+      x="280"
+      y="210"
+      text-anchor="middle"
+      class="fill-muted text-[12px] italic"
+    >
+      {textos.mas}
+    </text>
+
+    <rect
+      x="572"
+      y="20"
+      width="168"
+      height="168"
+      rx="10"
+      class="fill-surface-2 stroke-line"
+    ></rect>
+    <text
+      x="656"
+      y="46"
+      text-anchor="middle"
+      class="fill-strong text-[14px] font-semibold"
+    >
+      {textos.libreria}
+    </text>
+    {textos.libreriaD.map((item, i) => (
+      <text x="590" y={76 + i * 26} class="fill-fg text-[12px]">
+        • {item}
+      </text>
+    ))}
+    <path
+      d="M572 51 H544"
+      stroke-width="1.5"
+      stroke-dasharray="4 4"
+      marker-end="url(#arq-flecha)"
+      class="stroke-muted"
+    ></path>
+    <path
+      d="M656 188 V206 H536 V192"
+      fill="none"
+      stroke-width="1.5"
+      stroke-dasharray="4 4"
+      marker-end="url(#arq-flecha)"
+      class="stroke-muted"
+    ></path>
+
+    <g class="text-[12px]">
+      <rect
+        x="20"
+        y="246"
+        width="340"
+        height="56"
+        rx="10"
+        class="fill-surface stroke-line"
+      ></rect>
+      <text x="36" y="279" class="fill-fg">
+        {textos.etapa1}
+      </text>
+      <path
+        d="M362 274 H396"
+        stroke-width="1.5"
+        marker-end="url(#arq-flecha)"
+        class="stroke-muted"
+      ></path>
+      <rect
+        x="400"
+        y="246"
+        width="340"
+        height="56"
+        rx="10"
+        class="fill-accent-soft stroke-accent"
+      ></rect>
+      <text x="416" y="279" class="fill-strong font-semibold">
+        {textos.etapa2}
+      </text>
+    </g>
+  </svg>
+</Figura>

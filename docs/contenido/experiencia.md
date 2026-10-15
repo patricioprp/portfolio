@@ -6,12 +6,13 @@ Orden cronológico inverso. "Caso" enlaza con `docs/casos/`.
 
 - **Rol:** Frontend Senior
 - **Período:** diciembre 2023 – actualidad
-- **Logros:**
-  - Desarrollo de trámites y plataforma web responsive para una prepaga líder a nivel nacional.
-  - Migración de una web legacy a una arquitectura moderna y escalable.
-  - Componentes reutilizables documentados con Storybook y Material UI.
-  - Refactorización con patrones de diseño; pruebas unitarias (Jest) y end-to-end (Playwright).
-- **Stack:** React, Node.js, TypeScript, Material UI, Storybook, Jest, Playwright
+- **Logros:** (fuente: PDF "Experiencia en Quadion Tech" y `docs/casos/portal-tramites.md`)
+  - Portal de trámites de una prepaga líder a nivel nacional: migración de microfrontends (Module Federation) a monolito modular, por decisión del cliente. → Caso: `portal-tramites`
+  - Componentes de la librería compartida en Storybook con Figma: steppers, breadcrumbs, carga de archivos con URLs firmadas, analytics.
+  - Contingencias con Firebase Remote Config (trabajo de equipo): apagar un trámite, aviso programado o mantenimiento total, sin deploys.
+  - Plataforma de beneficios con Next.js y Google Maps mobile-first: clusters, ubicaciones compartidas (carrusel), listado y mapa sincronizados, canje con QR.
+  - Pruebas unitarias (Jest → Vitest) y e2e (Playwright); GitLab CI con análisis de seguridad; deploy en Kubernetes.
+- **Stack:** React, TypeScript, Next.js, Module Federation, Storybook, Material UI, Figma, Firebase Remote Config, Vitest, Playwright, GitLab CI, Kubernetes
 - **Confidencialidad:** no nombrar al cliente ni detallar sistemas internos.
 
 ## Sertic (Rosario, Santa Fe) — remoto, full-time

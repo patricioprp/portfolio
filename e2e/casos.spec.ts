@@ -2,6 +2,11 @@ import { expect, test } from '@playwright/test'
 
 const casos = [
   {
+    slug: 'portal-tramites',
+    titulo: 'Una plataforma, decenas de trámites, una sola experiencia',
+    diagramas: 3
+  },
+  {
     slug: 'formularios-dinamicos',
     titulo: 'Formularios que se configuran, no se programan',
     diagramas: 3

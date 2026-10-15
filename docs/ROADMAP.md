@@ -77,6 +77,15 @@ Bloquean contenido, no código. Respuestas volcadas en `docs/contenido/` y `CLAU
 - [ ] **Patricio:** actualizar el enlace al portfolio en LinkedIn y en el perfil de GitHub
 - [x] CV públicos ES/EN generados desde el contenido del sitio (`npm run cv`, plantilla en `src/pages/cv/` solo en desarrollo). Regenerarlos cuando cambie la experiencia o el stack.
 
+## Fase 7 — Caso Quadion: portal de trámites
+
+- [x] Fuente `docs/casos/portal-tramites.md` (PDF "Experiencia en Quadion Tech", con la autoría corregida) y notas de entrevista en `docs/privado/`
+- [x] Caso `portal-tramites` (ES/EN), primero en el orden: arquitectura (microfrontends → monolito modular), librería compartida, contingencias, calidad y deploy
+- [x] Diagramas: arquitectura del portal, pantalla genérica de un trámite (maqueta anotada) y niveles de contingencia
+- [x] Demo `/demos/contingencias`: simulador de contingencias con lógica en `src/lib/contingencias` y tests
+- [x] Experiencia de Quadion con el caso y el mapa de beneficios (Next.js); stack con Next.js, Module Federation, Firebase Remote Config, GitLab CI y Figma
+- [x] CV, imágenes OG y tests e2e/axe actualizados
+
 ## Ideas para después
 
 - Calendario de producción en el optimizador (asignar bancos a jornadas según los turnos)

@@ -20,7 +20,7 @@ const t = obtenerDiccionario(idioma)
   bajada={t.demos.bajada}
   alterna
 >
-  <ul class="grid gap-6 md:grid-cols-2">
+  <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
     {t.demos.items.map((demo) => {
       const disponible = demoDisponible(demo.slug)
       return (

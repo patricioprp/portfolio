@@ -20,7 +20,7 @@ const casos = await obtenerCasos(idioma)
   titulo={t.casos.titulo}
   bajada={t.casos.bajada}
 >
-  <ul class="grid gap-6 lg:grid-cols-3">
+  <ul class="grid gap-6 md:grid-cols-2">
     {casos.map((caso) => {
       const d = caso.data
       const ruta = rutaDeCaso(idioma, slugDeCaso(caso))

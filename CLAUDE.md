@@ -20,7 +20,7 @@ impacto medible** y las **demos ejecutables** en el navegador.
 
 ## Estado actual
 
-Fases 1 a 6 terminadas: sitio completo en español e inglés (home, casos, dos demos). Pendientes manuales del lanzamiento en la Fase 6 de `docs/ROADMAP.md`.
+Fases 1 a 7 terminadas: sitio completo en español e inglés (home, cuatro casos, tres demos). Pendientes manuales del lanzamiento en la Fase 6 de `docs/ROADMAP.md`.
 `legacy/index.html` es la versión anterior (HTML + Tailwind por CDN); sirve
 solo de referencia de contenido y estética (paleta oscura slate + sky). El
 progreso está en `docs/ROADMAP.md`.
@@ -69,6 +69,9 @@ ambiguo, preguntá o dejalo marcado con `TODO(contenido)`.
 - Los clientes de los casos **siempre son anónimos** ("prepaga líder a nivel
   nacional", "call center de nivel internacional", "empresa de premoldeados
   para la construcción"). Nunca nombres de empresas cliente en el sitio.
+- Del trabajo actual en Quadion (cliente: prepaga) no se publican nombres de
+  servicios, endpoints, repositorios ni el nombre interno de la librería
+  compartida. No usar como fuente el `CLAUDE.md` de `C:\Users\ppolito\Desktop`.
 
 ### Datos que nunca se publican
 

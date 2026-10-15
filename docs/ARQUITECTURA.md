@@ -82,6 +82,15 @@ mi-portfolio/
 - Demos: páginas en `src/components/demo/` sobre `DemoLayout.astro` (encabezado, enlaces al caso y al código, "Cómo funciona"); islas en `src/islands/{optimizador,formulario}/` y utilidades compartidas en `src/islands/compartido/`.
 - Diagramas: `src/components/diagramas/`, cada uno con prop `idioma` y textos propios; envueltos en `Figura.astro` (scroll horizontal en mobile, mínimo 640 px).
 
+## Demo: Simulador de contingencias
+
+Portal ficticio con seis trámites y un panel de "configuración remota":
+mantenimiento total (forzado o con ventana), trámites apagados y aviso
+programado, más un reloj simulado para ver las ventanas entrar en vigor.
+La lógica (`src/lib/contingencias/evaluar.ts`) es TS puro con tests; la isla
+(`src/islands/contingencias/Simulador.tsx`) se monta con `client:only` porque
+depende de la hora del visitante.
+
 ## Demo 1: Optimizador de cortes de viguetas
 
 Flujo: el usuario edita medidas, diámetro mínimo, costos y demanda → el Worker

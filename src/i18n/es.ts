@@ -52,7 +52,7 @@ export const es = {
     eyebrow: 'Casos de estudio',
     titulo: 'Problemas reales, resultados concretos',
     bajada:
-      'Tres proyectos contados como problema, solución e impacto, con las decisiones técnicas detrás.',
+      'Cuatro proyectos contados como problema, solución e impacto, con las decisiones técnicas detrás.',
     problema: 'Problema',
     solucion: 'Solución',
     impacto: 'Impacto',
@@ -86,10 +86,17 @@ export const es = {
     eyebrow: 'Demos en vivo',
     titulo: 'Probalo en el navegador',
     bajada:
-      'Reimplementaciones abiertas de dos de los casos, con datos de ejemplo y el código en GitHub.',
+      'Reimplementaciones abiertas de tres de los casos, con datos de ejemplo y el código en GitHub.',
     proximamente: 'Próximamente',
     probar: 'Probar la demo',
     items: [
+      {
+        slug: 'contingencias',
+        titulo: 'Simulador de contingencias',
+        descripcion:
+          'Apagás un trámite, anunciás un mantenimiento o ponés todo el portal en pausa desde una configuración remota, y ves cómo responde sin deploys.',
+        stack: ['TypeScript', 'React', 'Feature flags']
+      },
       {
         slug: 'optimizador-viguetas',
         titulo: 'Optimizador de cortes de viguetas',
@@ -248,6 +255,74 @@ export const es = {
       ]
     }
   },
+  demoContingencias: {
+    meta: {
+      titulo: 'Simulador de contingencias | Demo de Patricio R. Polito',
+      descripcion:
+        'Demo en vivo: una configuración remota apaga trámites, anuncia mantenimientos o pone todo el portal en mantenimiento, sin deploys.'
+    },
+    eyebrow: 'Demo en vivo',
+    titulo: 'Simulador de contingencias',
+    bajada:
+      'Así se degrada de forma controlada un portal con decenas de trámites: una única configuración remota apaga un trámite, anuncia un mantenimiento o pone toda la plataforma en pausa. Cambiá la configuración y mirá cómo responde el portal, sin deploys.',
+    aviso:
+      'Portal ficticio con trámites genéricos. Reimplementación simplificada para mostrar el concepto; no es el código del cliente.',
+    leerCaso: 'Leer el caso de estudio',
+    verCodigo: 'Ver el código',
+    tramites: {
+      reintegros: 'Reintegros',
+      autorizaciones: 'Autorizaciones',
+      facturacion: 'Facturación y pagos',
+      discapacidad: 'Discapacidad',
+      credencial: 'Credencial digital',
+      cartilla: 'Cartilla médica'
+    },
+    control: {
+      titulo: 'Configuración remota',
+      total: 'Mantenimiento total',
+      forzar: 'Forzar ahora',
+      programar: 'Programar una ventana',
+      desde: 'Desde',
+      hasta: 'Hasta',
+      apagados: 'Trámites apagados',
+      aviso: 'Aviso de mantenimiento programado',
+      mostrarAviso: 'Anunciar un mantenimiento',
+      reloj: 'Hora simulada',
+      relojAyuda:
+        'Adelantá el reloj para ver cuándo entran en vigor las ventanas programadas.',
+      relojValor: '+{h} h · {fecha}',
+      ventanaInvalida:
+        'La fecha de fin tiene que ser posterior a la de inicio.',
+      restaurar: 'Restaurar',
+      json: 'Así viaja la configuración (JSON)'
+    },
+    portal: {
+      titulo: 'Vista del socio',
+      nombre: 'Portal de socios',
+      hola: 'Hola, ¿qué trámite querés hacer?',
+      disponible: 'Disponible',
+      apagado: 'No disponible por el momento',
+      avisoProximo:
+        'Mantenimiento programado: {desde} – {hasta}. Algunos trámites podrían no estar disponibles.',
+      avisoEnCurso:
+        'Mantenimiento en curso hasta {hasta}. Algunos trámites podrían no estar disponibles.',
+      totalTitulo: 'Estamos haciendo mejoras',
+      totalTexto: 'El portal vuelve a estar disponible en breve.',
+      totalHasta: 'El portal vuelve a estar disponible el {hasta}.',
+      anuncio: 'Portal actualizado: {estado}.',
+      estadoOperativo: '{n} trámites disponibles',
+      estadoTotal: 'mantenimiento total'
+    },
+    comoFunciona: {
+      titulo: 'Cómo funciona',
+      pasos: [
+        'En el sistema real, la aplicación consulta cada minuto una configuración remota (Firebase Remote Config); acá la configuración se edita en el panel.',
+        'El mantenimiento total gana sobre todo: puede forzarse o programarse en una ventana de fecha y hora.',
+        'Si la plataforma opera, cada trámite apagado se muestra como no disponible y el resto sigue funcionando: falla un trámite, no el portal.',
+        'Un aviso programado se anuncia con un banner antes y durante la ventana, y desaparece solo al terminar. La lógica vive en TypeScript puro con tests.'
+      ]
+    }
+  },
   experiencia: {
     eyebrow: 'Trayectoria',
     titulo: 'Experiencia',
@@ -263,11 +338,13 @@ export const es = {
         items: [
           'React',
           'TypeScript',
+          'Next.js',
           'JavaScript (ES6+)',
+          'Microfrontends (Module Federation)',
+          'Storybook',
+          'Material UI',
           'React Native',
           'Angular',
-          'Material UI',
-          'Storybook',
           'Bootstrap',
           'jQuery'
         ]
@@ -291,7 +368,16 @@ export const es = {
       },
       {
         titulo: 'Herramientas',
-        items: ['Git', 'Docker', 'Kubernetes', 'Webpack', 'SCRUM']
+        items: [
+          'Git',
+          'GitLab CI',
+          'Docker',
+          'Kubernetes',
+          'Firebase Remote Config',
+          'Figma',
+          'Webpack',
+          'SCRUM'
+        ]
       },
       {
         titulo: 'Explorando',

@@ -3,6 +3,9 @@ import { expect, test, type Page } from '@playwright/test'
 
 const PAGINAS = [
   '/',
+  '/casos/portal-tramites/',
+  '/demos/contingencias/',
+  '/en/case-studies/portal-tramites/',
   '/casos/formularios-dinamicos/',
   '/casos/acopio-planta/',
   '/casos/optimizador-viguetas/',

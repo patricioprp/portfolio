@@ -1,0 +1,102 @@
+---
+titulo: One platform, dozens of member requests, a single experience
+resumen: Migrating a leading health insurer's member portal, with a shared component library and contingencies that turn off a request with no deploys.
+cliente: Leading national health insurer
+rol: Senior Frontend Developer at Quadion Tech
+periodo: December 2023 – present
+stack:
+  - React
+  - TypeScript
+  - Module Federation
+  - Storybook
+  - Firebase Remote Config
+  - Vitest
+  - Playwright
+  - GitLab CI
+problema: Migrating the legacy member portal of one of Argentina's leading health insurers with several teams working in parallel, without each team building its own components or one failure taking down the whole platform.
+solucion: I built components for a shared library in Storybook (steppers, breadcrumbs, file upload, analytics) and worked on the contingency system that controls the portal from a remote configuration.
+impacto: A consistent experience across every request and a platform that degrades gracefully; when something fails, one request goes down, not the portal, and with no deploys.
+metricas:
+  - valor: 0 deploys
+    etiqueta: to turn off a request or put the portal in maintenance
+    tipo: real
+  - valor: 2 architectures
+    etiqueta: microfrontends with Module Federation and a modular monolith
+    tipo: real
+demo: contingencias
+orden: 1
+---
+
+import ArquitecturaPortal from '@/components/diagramas/ArquitecturaPortal.astro'
+import PantallaTramite from '@/components/diagramas/PantallaTramite.astro'
+import ContingenciasNiveles from '@/components/diagramas/ContingenciasNiveles.astro'
+
+## Context
+
+At Quadion Tech I work for one of Argentina's leading health insurers, on the
+migration of its member portal: reimbursements, authorizations, billing,
+disability and many more requests, used by members and healthcare providers.
+Several development teams work in parallel on the same platform.
+
+## The architecture
+
+The migration started with **microfrontends using Module Federation**: an app
+shell handled authentication, layout and navigation, and each request was an
+independent microfrontend. Later, by client decision, we consolidated the
+platform into a **modular monolith**, where each request is still an independent
+module loaded on demand. I worked with both architectures.
+
+<ArquitecturaPortal idioma="en" />
+
+## Challenge 1: everything has to look and behave the same
+
+With several teams building in parallel, each one risked creating its own
+buttons, forms and patterns. To prevent that we created a **shared component
+library** that, since this was a migration, had to be rebuilt from scratch. I
+built many of its components in **Storybook**, working closely with the
+design team from **Figma** files:
+
+- **Steppers and breadcrumbs**, present in every request.
+- **File upload**, which uploads documents in two steps using signed cloud URLs.
+- **Centralized analytics functions**, so every request tracks its events the
+  same way.
+
+Every component follows the same path: design in Figma, development and
+documentation in Storybook, unit and end-to-end tests in the pipeline, and only
+then does it reach the requests.
+
+<PantallaTramite idioma="en" />
+
+## Challenge 2: resilience
+
+A platform with this many requests depends on many services, and a single failure
+can't take everything down. We built a **contingency system with Firebase
+Remote Config**: the app polls the configuration every minute and, depending on
+what it finds, **turns off a single request**, **shows a maintenance notice with
+date and time** or **puts the whole platform in maintenance**. All without
+deploying.
+
+<ContingenciasNiveles idioma="en" />
+
+## Quality and deployment
+
+Unit tests (first with Jest, later migrated to Vitest), end-to-end tests with
+Playwright and GitLab pipelines with security scanning that deploy to Kubernetes.
+The same build also runs in every environment, because the app reads its
+configuration at startup.
+
+## Results
+
+- **Consistency:** members and providers see the same components in every
+  request.
+- **Resilience:** when something fails, one request goes down, not the platform,
+  and with no deploys.
+- **Team velocity:** an improvement to a component reaches every team at once.
+
+## Also on this project
+
+With **Next.js** I built the platform where members find and redeem benefits at
+partner businesses, with a mobile-first Google Maps view: I grouped businesses
+that share a building by coordinates (a carousel instead of a single card),
+synced the list with the map and clustered the pins when there are many results.
+The journey ends with a QR code that generates the discount coupon.

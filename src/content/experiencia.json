@@ -1,43 +1,63 @@
 [
   {
     "id": "quadion",
-    "empresa": { "es": "Quadion Tech", "en": "Quadion Tech" },
+    "empresa": {
+      "es": "Quadion Tech",
+      "en": "Quadion Tech"
+    },
     "ubicacion": {
       "es": "Buenos Aires · Remoto",
       "en": "Buenos Aires · Remote"
     },
-    "rol": { "es": "Frontend Senior", "en": "Senior Frontend Developer" },
+    "rol": {
+      "es": "Frontend Senior",
+      "en": "Senior Frontend Developer"
+    },
     "desde": "2023-12",
     "hasta": null,
     "logros": {
       "es": [
-        "Desarrollo trámites y la plataforma web responsive de una prepaga líder a nivel nacional.",
-        "Migré una web legacy a una arquitectura moderna y escalable.",
-        "Construí componentes reutilizables con Material UI, documentados en Storybook.",
-        "Refactoricé con patrones de diseño y sumé pruebas unitarias (Jest) y end-to-end (Playwright)."
+        "Formo parte del equipo que migra el portal de trámites de una prepaga líder a nivel nacional, de microfrontends (Module Federation) a un monolito modular.",
+        "Desarrollo componentes de la librería compartida en Storybook a partir de Figma: steppers, breadcrumbs, carga de archivos con URLs firmadas y analytics.",
+        "Participo del sistema de contingencias con Firebase Remote Config que apaga un trámite o pone el portal en mantenimiento sin deploys.",
+        "Desarrollé con Next.js la plataforma de beneficios, con un mapa mobile-first de Google Maps: clusters, comercios que comparten ubicación y canje con QR.",
+        "Escribo pruebas unitarias (Jest, luego Vitest) y end-to-end (Playwright), integradas en pipelines de GitLab con análisis de seguridad que deployan en Kubernetes."
       ],
       "en": [
-        "Build self-service member workflows and the responsive web platform for a leading national private health insurer.",
-        "Migrated a legacy website to a modern, scalable architecture.",
-        "Built reusable components with Material UI, documented in Storybook.",
-        "Refactored code using design patterns and added unit (Jest) and end-to-end (Playwright) tests."
+        "Part of the team migrating the member portal of a leading national health insurer from microfrontends (Module Federation) to a modular monolith.",
+        "Building shared-library components in Storybook from Figma designs: steppers, breadcrumbs, file upload with signed URLs and analytics.",
+        "Working on the contingency system with Firebase Remote Config that turns off a request or puts the portal in maintenance with no deploys.",
+        "Built the benefits platform with Next.js, with a mobile-first Google Maps view: clustering, businesses sharing a location and QR redemption.",
+        "Writing unit (Jest, later Vitest) and end-to-end (Playwright) tests, run in GitLab pipelines with security scanning that deploy to Kubernetes."
       ]
     },
     "stack": [
       "React",
       "TypeScript",
-      "Node.js",
-      "Material UI",
+      "Next.js",
+      "Module Federation",
       "Storybook",
-      "Jest",
-      "Playwright"
-    ]
+      "Material UI",
+      "Vitest",
+      "Playwright",
+      "GitLab CI"
+    ],
+    "caso": "portal-tramites"
   },
   {
     "id": "sertic",
-    "empresa": { "es": "Sertic", "en": "Sertic" },
-    "ubicacion": { "es": "Rosario · Remoto", "en": "Rosario · Remote" },
-    "rol": { "es": "Desarrollador Senior", "en": "Senior Developer" },
+    "empresa": {
+      "es": "Sertic",
+      "en": "Sertic"
+    },
+    "ubicacion": {
+      "es": "Rosario · Remoto",
+      "en": "Rosario · Remote"
+    },
+    "rol": {
+      "es": "Desarrollador Senior",
+      "en": "Senior Developer"
+    },
     "desde": "2021-04",
     "hasta": "2026-06",
     "nota": {
@@ -73,7 +93,10 @@
       "es": "Tensolite S.A. / Sitenso",
       "en": "Tensolite S.A. / Sitenso"
     },
-    "rol": { "es": "Desarrollador Semi Senior", "en": "Mid-level Developer" },
+    "rol": {
+      "es": "Desarrollador Semi Senior",
+      "en": "Mid-level Developer"
+    },
     "desde": "2020",
     "hasta": "2021-04",
     "logros": {
@@ -93,8 +116,14 @@
   },
   {
     "id": "instituciones-educativas",
-    "empresa": { "es": "Instituciones educativas", "en": "Schools" },
-    "rol": { "es": "Desarrollador freelance", "en": "Freelance developer" },
+    "empresa": {
+      "es": "Instituciones educativas",
+      "en": "Schools"
+    },
+    "rol": {
+      "es": "Desarrollador freelance",
+      "en": "Freelance developer"
+    },
     "desde": "2018",
     "hasta": "2019",
     "logros": {
@@ -117,7 +146,10 @@
       "es": "Startup de tecnología educativa",
       "en": "EdTech startup"
     },
-    "rol": { "es": "Desarrollador freelance", "en": "Freelance developer" },
+    "rol": {
+      "es": "Desarrollador freelance",
+      "en": "Freelance developer"
+    },
     "desde": "2018",
     "hasta": "2018",
     "logros": {
@@ -134,7 +166,10 @@
       "es": "Ministerio de Desarrollo Productivo de Tucumán",
       "en": "Ministry of Productive Development of Tucumán"
     },
-    "rol": { "es": "Desarrollador", "en": "Developer" },
+    "rol": {
+      "es": "Desarrollador",
+      "en": "Developer"
+    },
     "desde": "2016",
     "hasta": "2018-05",
     "logros": {
@@ -151,8 +186,14 @@
   },
   {
     "id": "teleperformance",
-    "empresa": { "es": "Teleperformance", "en": "Teleperformance" },
-    "rol": { "es": "Soporte técnico", "en": "Technical support" },
+    "empresa": {
+      "es": "Teleperformance",
+      "en": "Teleperformance"
+    },
+    "rol": {
+      "es": "Soporte técnico",
+      "en": "Technical support"
+    },
     "desde": "2010",
     "hasta": "2014",
     "logros": {

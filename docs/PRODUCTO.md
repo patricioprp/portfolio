@@ -22,13 +22,15 @@ CV en formato web; el nuevo tiene que mostrar resultados.
 > antes con Laravel: de la migración de sistemas legacy a la optimización
 > matemática de la producción.
 
-Tres pilares (se repiten en el hero y en los casos):
+Cuatro pilares (se repiten en el hero y en los casos):
 
-1. **Migración y modernización**: de Laravel/Blade o sistemas de escritorio a
+1. **Arquitectura frontend a escala**: plataformas con muchos módulos y varios
+   equipos, con una librería de componentes compartida y resiliencia ante fallas.
+2. **Migración y modernización**: de Laravel/Blade o sistemas de escritorio a
    React + Node, sin frenar la operación.
-2. **Software que se configura, no se reprograma**: formularios y reglas
+3. **Software que se configura, no se reprograma**: formularios y reglas
    dinámicas que el negocio cambia sin deploys.
-3. **Optimización de procesos**: modelos matemáticos (investigación operativa)
+4. **Optimización de procesos**: modelos matemáticos (investigación operativa)
    aplicados a stock, logística y producción.
 
 ## Estructura del sitio
@@ -41,8 +43,8 @@ Tres pilares (se repiten en el hero y en los casos):
    - "+10 años" desarrollando software
    - "Hasta 3 días → 0" de espera de camiones (caso acopio)
    - "0 deploys" para crear o cambiar una planilla de calidad (caso formularios)
-3. **Casos de estudio** (3 tarjetas → página propia cada uno): problema → solución → impacto.
-4. **Demos en vivo**: Optimizador de cortes de viguetas y Formulario dinámico.
+3. **Casos de estudio** (4 tarjetas → página propia cada uno): problema → solución → impacto.
+4. **Demos en vivo**: Simulador de contingencias, Optimizador de cortes de viguetas y Formulario dinámico.
 5. **Experiencia**: línea de tiempo compacta (empresa, rol, período, 1–2 logros, stack).
 6. **Stack**: agrupado por categoría; la IA aparece como "Explorando" (es formación en curso).
 7. **Formación**: Ingeniería en Sistemas de Información (UTN FRT, 2025), Técnico en Computación.

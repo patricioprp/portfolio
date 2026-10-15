@@ -1,0 +1,30 @@
+---
+import DemoLayout from './DemoLayout.astro'
+import Simulador from '@/islands/contingencias/Simulador'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const { idioma } = Astro.props
+const t = obtenerDiccionario(idioma).demoContingencias
+---
+
+<DemoLayout
+  idioma={idioma}
+  textos={t}
+  demo="contingencias"
+  caso="portal-tramites"
+  codigo="src/lib/contingencias"
+>
+  <!-- client:only: el simulador usa la hora del visitante, que no existe en el build. -->
+  <Simulador client:only="react" idioma={idioma} textos={t}>
+    <p
+      slot="fallback"
+      class="rounded-2xl border border-line bg-surface p-6 text-muted"
+    >
+      {t.aviso}
+    </p>
+  </Simulador>
+</DemoLayout>

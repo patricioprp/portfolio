@@ -1,7 +1,11 @@
 import type { Idioma } from '@/i18n'
 
 /** Demos que ya tienen página publicada. */
-const DISPONIBLES = new Set(['optimizador-viguetas', 'formulario-dinamico'])
+const DISPONIBLES = new Set([
+  'contingencias',
+  'optimizador-viguetas',
+  'formulario-dinamico'
+])
 
 export function demoDisponible(slug: string | null | undefined): boolean {
   return !!slug && DISPONIBLES.has(slug)
