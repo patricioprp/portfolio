@@ -20,7 +20,7 @@ impacto medible** y las **demos ejecutables** en el navegador.
 
 ## Estado actual
 
-Fases 1 a 7 terminadas: sitio completo en español e inglés (home, cuatro casos, tres demos). Pendientes manuales del lanzamiento en la Fase 6 de `docs/ROADMAP.md`.
+Fases 1 a 7 terminadas: sitio completo en español e inglés (home, cinco casos, cuatro demos). Pendientes manuales del lanzamiento en la Fase 6 de `docs/ROADMAP.md`.
 `legacy/index.html` es la versión anterior (HTML + Tailwind por CDN); sirve
 solo de referencia de contenido y estética (paleta oscura slate + sky). El
 progreso está en `docs/ROADMAP.md`.

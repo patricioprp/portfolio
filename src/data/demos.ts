@@ -3,6 +3,7 @@ import type { Idioma } from '@/i18n'
 /** Demos que ya tienen página publicada. */
 const DISPONIBLES = new Set([
   'contingencias',
+  'mapa-beneficios',
   'optimizador-viguetas',
   'formulario-dinamico'
 ])

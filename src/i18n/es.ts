@@ -52,7 +52,7 @@ export const es = {
     eyebrow: 'Casos de estudio',
     titulo: 'Problemas reales, resultados concretos',
     bajada:
-      'Cuatro proyectos contados como problema, solución e impacto, con las decisiones técnicas detrás.',
+      'Cinco proyectos contados como problema, solución e impacto, con las decisiones técnicas detrás.',
     problema: 'Problema',
     solucion: 'Solución',
     impacto: 'Impacto',
@@ -86,7 +86,7 @@ export const es = {
     eyebrow: 'Demos en vivo',
     titulo: 'Probalo en el navegador',
     bajada:
-      'Reimplementaciones abiertas de tres de los casos, con datos de ejemplo y el código en GitHub.',
+      'Reimplementaciones abiertas de cuatro de los casos, con datos de ejemplo y el código en GitHub.',
     proximamente: 'Próximamente',
     probar: 'Probar la demo',
     items: [
@@ -96,6 +96,13 @@ export const es = {
         descripcion:
           'Apagás un trámite, anunciás un mantenimiento o ponés todo el portal en pausa desde una configuración remota, y ves cómo responde sin deploys.',
         stack: ['TypeScript', 'React', 'Feature flags']
+      },
+      {
+        slug: 'mapa-beneficios',
+        titulo: 'Mapa de beneficios',
+        descripcion:
+          'Mapa mobile-first con clusters, un carrusel para comercios del mismo edificio, listado sincronizado y canje con QR.',
+        stack: ['TypeScript', 'React', 'Mapa en SVG', 'Mobile-first']
       },
       {
         slug: 'optimizador-viguetas',
@@ -320,6 +327,89 @@ export const es = {
         'El mantenimiento total gana sobre todo: puede forzarse o programarse en una ventana de fecha y hora.',
         'Si la plataforma opera, cada trámite apagado se muestra como no disponible y el resto sigue funcionando: falla un trámite, no el portal.',
         'Un aviso programado se anuncia con un banner antes y durante la ventana, y desaparece solo al terminar. La lógica vive en TypeScript puro con tests.'
+      ]
+    }
+  },
+  demoMapa: {
+    meta: {
+      titulo: 'Mapa de beneficios | Demo de Patricio R. Polito',
+      descripcion:
+        'Demo en vivo: mapa mobile-first con clusters, comercios que comparten edificio en un carrusel, listado sincronizado y canje con QR.'
+    },
+    eyebrow: 'Demo en vivo',
+    titulo: 'Mapa de beneficios',
+    bajada:
+      'Una reimplementación de los casos difíciles que resolví en el mapa: clusters cuando hay muchos resultados, un carrusel cuando varios comercios comparten edificio y listado y mapa sincronizados. Incluye el recorrido hasta el cupón. Probalo como lo usaría un socio, idealmente desde el celular.',
+    aviso:
+      'Ciudad y comercios ficticios, mapa dibujado en SVG. Reimplementación ilustrativa: el sistema real usa Google Maps y no es este código.',
+    leerCaso: 'Leer el caso de estudio',
+    verCodigo: 'Ver el código',
+    rubros: {
+      gastronomia: 'Gastronomía',
+      farmacia: 'Farmacia',
+      optica: 'Óptica',
+      deportes: 'Deportes',
+      indumentaria: 'Indumentaria',
+      libreria: 'Librería'
+    },
+    zonas: {
+      centro: 'Centro',
+      norte: 'Zona norte',
+      sur: 'Zona sur'
+    },
+    ui: {
+      filtros: 'Filtros',
+      zona: 'Localidad',
+      rubro: 'Rubro',
+      todas: 'Todas',
+      todos: 'Todos',
+      vista: 'Vista',
+      tabMapa: 'Mapa',
+      tabListado: 'Listado',
+      resultados: '{n} comercios',
+      sinResultados: 'No hay comercios con estos filtros.',
+      mapaEtiqueta:
+        'Mapa de beneficios. Arrastrá o usá las flechas para mover el mapa; + y − para acercar o alejar.',
+      acercar: 'Acercar',
+      alejar: 'Alejar',
+      miUbicacion: 'Volver a mi ubicación',
+      tuUbicacion: 'Tu ubicación',
+      buscarZona: 'Buscar en esta zona',
+      verTodos: 'Ver todos los resultados',
+      filtradoZona: 'Mostrando solo esta zona del mapa',
+      cluster: '{n} comercios en esta zona. Acercar',
+      pinComercio: '{nombre}: {descuento}% de descuento',
+      pinGrupo: '{n} comercios en esta ubicación',
+      descuento: '{n}% de descuento',
+      distancia: 'A {km} km',
+      verDetalle: 'Ver detalle',
+      verEnMapa: 'Ver en mapa',
+      cerrar: 'Cerrar',
+      anterior: 'Comercio anterior',
+      siguiente: 'Comercio siguiente',
+      carrusel: '{n} comercios en el mismo lugar',
+      posicion: '{i} de {n}',
+      anuncioSeleccion: 'Seleccionado: {nombre}'
+    },
+    canje: {
+      pasos: ['Detalle', 'Código QR', 'Cupón'],
+      verQr: 'Ver código QR',
+      qrTexto: 'Mostrá este código en el comercio para generar tu cupón.',
+      qrAviso: 'QR ilustrativo, no se puede escanear.',
+      generar: 'Generar cupón',
+      cuponTitulo: '¡Cupón listo!',
+      cuponTexto: '{descuento}% de descuento en {nombre}. Válido por hoy.',
+      codigo: 'Código del cupón',
+      volver: 'Volver',
+      terminar: 'Listo'
+    },
+    comoFunciona: {
+      titulo: 'Cómo funciona',
+      pasos: [
+        'Los comercios se agrupan por coordenadas: si varios comparten edificio, el mapa muestra un solo pin y, al tocarlo, un carrusel en lugar de pines superpuestos.',
+        'Con poco zoom, los pines que caen en la misma celda de una grilla de pantalla se unen en un cluster con la cantidad; tocarlo acerca el mapa a esa zona.',
+        'Listado y mapa comparten el comercio seleccionado: "Ver en mapa" cambia de vista, centra el mapa en su pin y abre su card.',
+        'Al mover el mapa aparece "Buscar en esta zona", que filtra los resultados por el área visible. La lógica vive en TypeScript puro con tests.'
       ]
     }
   },

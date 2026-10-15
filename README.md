@@ -2,10 +2,10 @@
 
 Portfolio profesional de Patricio Rolando Polito, Frontend Senior e
 Ingeniero en Sistemas. Incluye casos de estudio con impacto medible y demos
-ejecutables: un simulador de contingencias, un optimizador de cortes con
+ejecutables: un mapa de beneficios, un simulador de contingencias, un optimizador de cortes con
 programación lineal entera y un motor de formularios dinámicos.
 
-- **Estado:** Sitio completo en español e inglés: home, cuatro casos de estudio y tres demos ejecutables. La versión anterior está en `legacy/index.html`.
+- **Estado:** Sitio completo en español e inglés: home, cinco casos de estudio y cuatro demos ejecutables. La versión anterior está en `legacy/index.html`.
 - **Stack:** Astro 7 + React 19 + TypeScript + Tailwind CSS 4, deploy en Netlify.
 
 ## Desarrollo

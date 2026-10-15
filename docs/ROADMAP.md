@@ -85,6 +85,8 @@ Bloquean contenido, no código. Respuestas volcadas en `docs/contenido/` y `CLAU
 - [x] Demo `/demos/contingencias`: simulador de contingencias con lógica en `src/lib/contingencias` y tests
 - [x] Experiencia de Quadion con el caso y el mapa de beneficios (Next.js); stack con Next.js, Module Federation, Firebase Remote Config, GitLab CI y Figma
 - [x] CV, imágenes OG y tests e2e/axe actualizados
+- [x] Caso propio `mapa-beneficios` (ES/EN, segundo en el orden) con dos ilustraciones: card vs carrusel y recorrido hasta el cupón
+- [x] Demo `/demos/mapa-beneficios`: mapa en SVG con zoom y arrastre, clusters, carrusel por edificio, listado sincronizado, "Buscar en esta zona" y canje con QR; lógica en `src/lib/mapa` con tests
 
 ## Ideas para después
 

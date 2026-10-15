@@ -54,7 +54,7 @@ export const en: Diccionario = {
     eyebrow: 'Case studies',
     titulo: 'Real problems, concrete results',
     bajada:
-      'Four projects told as problem, solution and impact, with the technical decisions behind them.',
+      'Five projects told as problem, solution and impact, with the technical decisions behind them.',
     problema: 'Problem',
     solucion: 'Solution',
     impacto: 'Impact',
@@ -89,7 +89,7 @@ export const en: Diccionario = {
     eyebrow: 'Live demos',
     titulo: 'Try it in your browser',
     bajada:
-      'Open-source reimplementations of three of the case studies, with sample data and the code on GitHub.',
+      'Open-source reimplementations of four of the case studies, with sample data and the code on GitHub.',
     proximamente: 'Coming soon',
     probar: 'Try the demo',
     items: [
@@ -99,6 +99,13 @@ export const en: Diccionario = {
         descripcion:
           'Turn off a request, announce maintenance or pause the whole portal from a remote configuration, and watch it respond with no deploys.',
         stack: ['TypeScript', 'React', 'Feature flags']
+      },
+      {
+        slug: 'mapa-beneficios',
+        titulo: 'Benefits map',
+        descripcion:
+          'A mobile-first map with clustering, a carousel for businesses sharing a building, a synced list and QR redemption.',
+        stack: ['TypeScript', 'React', 'SVG map', 'Mobile-first']
       },
       {
         slug: 'optimizador-viguetas',
@@ -323,6 +330,89 @@ export const en: Diccionario = {
         'Full maintenance wins over everything else: it can be forced or scheduled for a date and time window.',
         "When the platform is up, each request that's turned off shows as unavailable while the rest keep working: one request fails, not the portal.",
         'A scheduled notice shows a banner before and during the window and disappears on its own when it ends. The logic lives in plain TypeScript with tests.'
+      ]
+    }
+  },
+  demoMapa: {
+    meta: {
+      titulo: 'Benefits map | Demo by Patricio R. Polito',
+      descripcion:
+        'Live demo: a mobile-first map with clustering, a carousel for businesses sharing a building, a synced list and QR redemption.'
+    },
+    eyebrow: 'Live demo',
+    titulo: 'Benefits map',
+    bajada:
+      'A reimplementation of the hard cases I solved on the map: clusters when there are many results, a carousel when several businesses share a building, and a list and map kept in sync. It also includes the journey to the coupon. Try it the way a member would, ideally on your phone.',
+    aviso:
+      'Fictional city and businesses, map drawn in SVG. An illustrative reimplementation: the real system uses Google Maps and is not this code.',
+    leerCaso: 'Read the case study',
+    verCodigo: 'View the code',
+    rubros: {
+      gastronomia: 'Food & drink',
+      farmacia: 'Pharmacy',
+      optica: 'Eyewear',
+      deportes: 'Sports',
+      indumentaria: 'Clothing',
+      libreria: 'Bookstore'
+    },
+    zonas: {
+      centro: 'Downtown',
+      norte: 'North side',
+      sur: 'South side'
+    },
+    ui: {
+      filtros: 'Filters',
+      zona: 'Area',
+      rubro: 'Category',
+      todas: 'All',
+      todos: 'All',
+      vista: 'View',
+      tabMapa: 'Map',
+      tabListado: 'List',
+      resultados: '{n} businesses',
+      sinResultados: 'No businesses match these filters.',
+      mapaEtiqueta:
+        'Benefits map. Drag or use the arrow keys to move the map; + and − to zoom in or out.',
+      acercar: 'Zoom in',
+      alejar: 'Zoom out',
+      miUbicacion: 'Back to my location',
+      tuUbicacion: 'Your location',
+      buscarZona: 'Search this area',
+      verTodos: 'Show all results',
+      filtradoZona: 'Showing this map area only',
+      cluster: '{n} businesses in this area. Zoom in',
+      pinComercio: '{nombre}: {descuento}% off',
+      pinGrupo: '{n} businesses at this location',
+      descuento: '{n}% off',
+      distancia: '{km} km away',
+      verDetalle: 'See details',
+      verEnMapa: 'Show on map',
+      cerrar: 'Close',
+      anterior: 'Previous business',
+      siguiente: 'Next business',
+      carrusel: '{n} businesses at the same location',
+      posicion: '{i} of {n}',
+      anuncioSeleccion: 'Selected: {nombre}'
+    },
+    canje: {
+      pasos: ['Details', 'QR code', 'Coupon'],
+      verQr: 'Show QR code',
+      qrTexto: 'Show this code at the business to generate your coupon.',
+      qrAviso: "Illustrative QR, it can't be scanned.",
+      generar: 'Generate coupon',
+      cuponTitulo: 'Coupon ready!',
+      cuponTexto: '{descuento}% off at {nombre}. Valid today.',
+      codigo: 'Coupon code',
+      volver: 'Back',
+      terminar: 'Done'
+    },
+    comoFunciona: {
+      titulo: 'How it works',
+      pasos: [
+        'Businesses are grouped by coordinates: if several share a building, the map shows a single pin that opens a carousel instead of overlapping pins.',
+        'When zoomed out, pins that fall in the same cell of a screen grid merge into a cluster with the count; tapping it zooms into that area.',
+        'The list and the map share the selected business: "Show on map" switches views, centers the map on its pin and opens its card.',
+        'Moving the map reveals "Search this area", which filters results to the visible area. The logic lives in plain TypeScript with tests.'
       ]
     }
   },

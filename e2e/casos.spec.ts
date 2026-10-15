@@ -7,6 +7,11 @@ const casos = [
     diagramas: 3
   },
   {
+    slug: 'mapa-beneficios',
+    titulo: 'Beneficios en el mapa, del celular al cupón',
+    diagramas: 2
+  },
+  {
     slug: 'formularios-dinamicos',
     titulo: 'Formularios que se configuran, no se programan',
     diagramas: 3

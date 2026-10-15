@@ -43,8 +43,8 @@ Cuatro pilares (se repiten en el hero y en los casos):
    - "+10 años" desarrollando software
    - "Hasta 3 días → 0" de espera de camiones (caso acopio)
    - "0 deploys" para crear o cambiar una planilla de calidad (caso formularios)
-3. **Casos de estudio** (4 tarjetas → página propia cada uno): problema → solución → impacto.
-4. **Demos en vivo**: Simulador de contingencias, Optimizador de cortes de viguetas y Formulario dinámico.
+3. **Casos de estudio** (5 tarjetas → página propia cada uno): problema → solución → impacto.
+4. **Demos en vivo**: Mapa de beneficios, Simulador de contingencias, Optimizador de cortes de viguetas y Formulario dinámico.
 5. **Experiencia**: línea de tiempo compacta (empresa, rol, período, 1–2 logros, stack).
 6. **Stack**: agrupado por categoría; la IA aparece como "Explorando" (es formación en curso).
 7. **Formación**: Ingeniería en Sistemas de Información (UTN FRT, 2025), Técnico en Computación.

@@ -1,0 +1,77 @@
+---
+titulo: Benefits on the map, from phone to coupon
+resumen: A mobile-first benefits platform built with Next.js and a map that clusters results, handles businesses sharing a building and stays in sync with the list.
+cliente: Leading national health insurer
+rol: Senior Frontend Developer at Quadion Tech
+stack:
+  - Next.js
+  - React
+  - TypeScript
+  - Google Maps
+  - Mobile-first
+problema: Members needed to find and redeem benefits at partner businesses from their phones, with many results on the map and businesses sharing the same building.
+solucion: I built the benefits platform in Next.js (search, plus a list and map kept in sync) and solved the map's hard cases.
+impacto: A map that handles density and shared locations well, and a complete journey from search to coupon designed for the phone.
+metricas:
+  - valor: 3 hard cases
+    etiqueta: solved on the map (shared locations, sync and density)
+    tipo: real
+  - valor: Mobile-first
+    etiqueta: from search to discount coupon on the phone
+    tipo: real
+demo: mapa-beneficios
+orden: 2
+---
+
+import MapaPinCarrusel from '@/components/diagramas/MapaPinCarrusel.astro'
+import RecorridoCanje from '@/components/diagramas/RecorridoCanje.astro'
+
+## Context
+
+For the same health insurer as the [member portal](/en/case-studies/portal-tramites/),
+I used **Next.js** to build the platform where members find and redeem benefits at
+partner businesses. They search by province and city or by their current
+location, and results appear in a **list** and on a map powered by **Google Maps**. The
+design is **mobile-first**.
+
+## The challenge: a map you can use with your thumb
+
+A map with a few pins is easy. The problems show up with real data: businesses
+sharing an address, many results close together, and two views (list and map)
+that have to show the same thing.
+
+<MapaPinCarrusel idioma="en" />
+
+## What I solved
+
+- **Shared locations.** When several businesses are in the same building or
+  mall, their pins overlap and can't be tapped separately. I grouped them by
+  coordinates: the map shows a single pin and, instead of a single card,
+  opens a **carousel** with every business at that place.
+- **Synced list and map.** Both views share the selected business. From any
+  business in the list, "Show on map" takes you straight to its pin on the map
+  with its card open.
+- **Density.** With many results, pins merge into **clusters showing the count**,
+  and members can move the map and **search this area**.
+
+Grouping by coordinates, in its simplest form:
+
+```js
+const groups = businesses.reduce((acc, b) => {
+  const key = `${b.lat},${b.lng}`
+  ;(acc[key] ||= []).push(b)
+  return acc
+}, {})
+```
+
+## The member's journey
+
+The journey ends with redemption: from the benefit details, members open a QR code
+and get their discount coupon.
+
+<RecorridoCanje idioma="en" />
+
+## Results
+
+- **Mobile experience:** a map that handles density and shared locations well.
+- **Complete journey:** from search to coupon without leaving the phone.

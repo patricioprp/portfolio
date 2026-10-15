@@ -1,0 +1,149 @@
+---
+import Figura from './Figura.astro'
+import type { Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const textos = {
+  es: {
+    titulo: 'Recorrido del socio',
+    desc: 'Cuatro pasos: buscar en el mapa o el listado, ver el detalle del comercio y su sede, abrir el código QR y obtener el cupón de descuento listo para usar.',
+    leyenda: 'Recorrido del socio, de la búsqueda al cupón.',
+    pasos: [
+      ['Buscar', 'Mapa o listado'],
+      ['Detalle', 'Comercio y sede'],
+      ['Código QR', 'Se abre el QR'],
+      ['Cupón', 'Descuento listo']
+    ]
+  },
+  en: {
+    titulo: "The member's journey",
+    desc: 'Four steps: search on the map or the list, see the business and branch details, open the QR code and get the discount coupon ready to use.',
+    leyenda: "The member's journey, from search to coupon.",
+    pasos: [
+      ['Search', 'Map or list'],
+      ['Details', 'Business and branch'],
+      ['QR code', 'The QR opens'],
+      ['Coupon', 'Discount ready']
+    ]
+  }
+}[Astro.props.idioma]
+
+const xs = [20, 210, 400, 590]
+---
+
+<Figura leyenda={textos.leyenda}>
+  <svg
+    viewBox="0 0 760 170"
+    role="img"
+    aria-labelledby="canje-fig-titulo canje-fig-desc"
+    class="w-full min-w-[640px] font-sans"
+  >
+    <title id="canje-fig-titulo">{textos.titulo}</title>
+    <desc id="canje-fig-desc">{textos.desc}</desc>
+    <defs>
+      <marker
+        id="canje-flecha"
+        viewBox="0 0 10 10"
+        refX="9"
+        refY="5"
+        markerWidth="7"
+        markerHeight="7"
+        orient="auto-start-reverse"
+      >
+        <path d="M0 0 L10 5 L0 10 z" class="fill-muted"></path>
+      </marker>
+    </defs>
+
+    {textos.pasos.map(([nombre, detalle], i) => {
+      const x = xs[i] ?? 0
+      const ultimo = i === textos.pasos.length - 1
+      return (
+        <g>
+          <rect
+            x={x}
+            y="30"
+            width="150"
+            height="110"
+            rx="12"
+            class={
+              ultimo
+                ? 'fill-emerald-500/15 stroke-emerald-500'
+                : 'fill-surface-2 stroke-line'
+            }
+          />
+          <circle
+            cx={x + 75}
+            cy="62"
+            r="16"
+            class={ultimo ? 'fill-emerald-600' : 'fill-accent-solid'}
+          />
+          {i === 0 && (
+            <g
+              stroke="white"
+              stroke-width="2.2"
+              fill="none"
+              stroke-linecap="round"
+            >
+              <circle cx={x + 73} cy="60" r="6" />
+              <path d={`M${x + 77} 64 l5 5`} />
+            </g>
+          )}
+          {i === 1 && (
+            <g stroke="white" stroke-width="2" fill="none">
+              <rect x={x + 67} y="53" width="16" height="18" rx="2" />
+              <path
+                d={`M${x + 70} 59 h10 M${x + 70} 63 h10 M${x + 70} 67 h6`}
+              />
+            </g>
+          )}
+          {i === 2 && (
+            <g fill="white">
+              <rect x={x + 66} y="53" width="7" height="7" />
+              <rect x={x + 77} y="53" width="7" height="7" />
+              <rect x={x + 66} y="64" width="7" height="7" />
+              <rect x={x + 78} y="65" width="3" height="3" />
+              <rect x={x + 82} y="69" width="3" height="3" />
+            </g>
+          )}
+          {i === 3 && (
+            <path
+              d={`M${x + 67} 62 l5 5 l10 -10`}
+              stroke="white"
+              stroke-width="2.6"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          )}
+          <text
+            x={x + 75}
+            y="104"
+            text-anchor="middle"
+            class="fill-strong text-[15px] font-semibold"
+          >
+            {nombre}
+          </text>
+          <text
+            x={x + 75}
+            y="125"
+            text-anchor="middle"
+            class="fill-muted text-[12px]"
+          >
+            {detalle}
+          </text>
+          {!ultimo && (
+            <path
+              d={`M${x + 152} 85 H${x + 186}`}
+              stroke-width="1.5"
+              marker-end="url(#canje-flecha)"
+              class="stroke-muted"
+            />
+          )}
+        </g>
+      )
+    })}
+  </svg>
+</Figura>

@@ -91,6 +91,15 @@ La lógica (`src/lib/contingencias/evaluar.ts`) es TS puro con tests; la isla
 (`src/islands/contingencias/Simulador.tsx`) se monta con `client:only` porque
 depende de la hora del visitante.
 
+## Demo: Mapa de beneficios
+
+Mapa dibujado en SVG (sin Google Maps, para no exponer una API key en un repo
+público) con comercios ficticios. La lógica (`src/lib/mapa/mapa.ts`) agrupa por
+coordenadas, proyecta a la vista, arma clusters con una grilla de pantalla
+(celda de 0,24 del ancho) y filtra por el área visible. La isla
+(`src/islands/mapa/`) maneja zoom, arrastre con puntero y teclado, pestañas
+Mapa/Listado en mobile, carrusel y el diálogo de canje (detalle → QR → cupón).
+
 ## Demo 1: Optimizador de cortes de viguetas
 
 Flujo: el usuario edita medidas, diámetro mínimo, costos y demanda → el Worker

@@ -1,0 +1,269 @@
+---
+import Figura from './Figura.astro'
+import type { Idioma } from '@/i18n'
+
+interface Props {
+  idioma: Idioma
+}
+
+const textos = {
+  es: {
+    titulo: 'Los dos comportamientos del mapa',
+    desc: 'Izquierda: un pin de un solo comercio, Óptica Norte, abre una card con 20% de descuento, a 1,2 km. Derecha: varios comercios en el mismo edificio comparten un solo pin con la cantidad; al tocarlo se abre un carrusel de cards, empezando por Café Central con 15% de descuento, a 3,4 km. Arriba, un cluster con el número 12 agrupa los pines cercanos.',
+    leyenda:
+      'Los dos comportamientos del mapa, con comercios ficticios: card para un pin y carrusel para una ubicación compartida.',
+    mapa: 'Mapa',
+    listado: 'Listado',
+    uno: 'Un pin: card',
+    varios: 'Mismo edificio: carrusel',
+    c1: 'Óptica Norte',
+    d1: '20% de descuento',
+    k1: 'A 1,2 km · Ver detalle',
+    c2: 'Café Central',
+    d2: '15% de descuento',
+    k2: 'A 3,4 km · Ver detalle',
+    posicion: '1 de 4'
+  },
+  en: {
+    titulo: 'The two behaviors of the map',
+    desc: 'Left: a pin for a single business, Óptica Norte, opens a card with 20% off, 1.2 km away. Right: several businesses in the same building share a single pin with the count; tapping it opens a carousel of cards, starting with Café Central with 15% off, 3.4 km away. At the top, a cluster with the number 12 groups nearby pins.',
+    leyenda:
+      'The two behaviors of the map, with fictional businesses: a card for one pin and a carousel for a shared location.',
+    mapa: 'Map',
+    listado: 'List',
+    uno: 'One pin: card',
+    varios: 'Same building: carousel',
+    c1: 'Óptica Norte',
+    d1: '20% off',
+    k1: '1.2 km away · See details',
+    c2: 'Café Central',
+    d2: '15% off',
+    k2: '3.4 km away · See details',
+    posicion: '1 of 4'
+  }
+}[Astro.props.idioma]
+
+const telefonos = [
+  { x: 60, pin: 'uno' as const },
+  { x: 420, pin: 'varios' as const }
+]
+---
+
+<Figura leyenda={textos.leyenda}>
+  <svg
+    viewBox="0 0 760 420"
+    role="img"
+    aria-labelledby="mapa-fig-titulo mapa-fig-desc"
+    class="w-full min-w-[640px] font-sans"
+  >
+    <title id="mapa-fig-titulo">{textos.titulo}</title>
+    <desc id="mapa-fig-desc">{textos.desc}</desc>
+
+    {telefonos.map(({ x, pin }) => (
+      <g>
+        <text
+          x={x + 140}
+          y="24"
+          text-anchor="middle"
+          class="fill-strong text-[14px] font-semibold"
+        >
+          {pin === 'uno' ? textos.uno : textos.varios}
+        </text>
+        <rect
+          x={x}
+          y="38"
+          width="280"
+          height="370"
+          rx="26"
+          class="fill-bg stroke-line"
+          stroke-width="2"
+        />
+        <rect
+          x={x + 16}
+          y="60"
+          width="248"
+          height="30"
+          rx="8"
+          class="fill-surface-2"
+        />
+        <rect
+          x={x + 18}
+          y="62"
+          width="122"
+          height="26"
+          rx="7"
+          class="fill-accent-solid"
+        />
+        <text
+          x={x + 79}
+          y="80"
+          text-anchor="middle"
+          class="fill-white text-[12px] font-semibold"
+        >
+          {textos.mapa}
+        </text>
+        <text
+          x={x + 202}
+          y="80"
+          text-anchor="middle"
+          class="fill-muted text-[12px]"
+        >
+          {textos.listado}
+        </text>
+
+        <rect
+          x={x + 16}
+          y="100"
+          width="248"
+          height="290"
+          rx="12"
+          class="fill-surface-2"
+        />
+        <g class="stroke-line" stroke-width="2">
+          <path d={`M${x + 16} 160 H${x + 264}`} />
+          <path d={`M${x + 16} 240 H${x + 264}`} />
+          <path d={`M${x + 90} 100 V390`} />
+          <path d={`M${x + 190} 100 V390`} />
+        </g>
+        <path
+          d={`M${x + 16} 330 L${x + 264} 120`}
+          stroke-width="5"
+          class="stroke-amber-500/50"
+        />
+
+        <circle cx={x + 230} cy="130" r="17" class="fill-sky-600" />
+        <circle
+          cx={x + 230}
+          cy="130"
+          r="21"
+          fill="none"
+          stroke-width="4"
+          class="stroke-sky-500/30"
+        />
+        <text
+          x={x + 230}
+          y="135"
+          text-anchor="middle"
+          class="fill-white text-[13px] font-bold"
+        >
+          12
+        </text>
+
+        {pin === 'uno' ? (
+          <g>
+            <path
+              d={`M${x + 128} 222 h30 a12 12 0 0 1 12 12 v6 a12 12 0 0 1 -12 12 h-30 a12 12 0 0 1 -12 -12 v-18 z`}
+              class="fill-rose-600"
+            />
+            <text
+              x={x + 143}
+              y="242"
+              text-anchor="middle"
+              class="fill-white text-[11px] font-bold"
+            >
+              20%
+            </text>
+          </g>
+        ) : (
+          <g>
+            <path
+              d={`M${x + 128} 192 h30 a12 12 0 0 1 12 12 v6 a12 12 0 0 1 -12 12 h-30 a12 12 0 0 1 -12 -12 v-18 z`}
+              class="fill-rose-600"
+            />
+            <text
+              x={x + 143}
+              y="212"
+              text-anchor="middle"
+              class="fill-white text-[11px] font-bold"
+            >
+              ×4
+            </text>
+          </g>
+        )}
+
+        {pin === 'uno' ? (
+          <g>
+            <rect
+              x={x + 28}
+              y="272"
+              width="224"
+              height="104"
+              rx="12"
+              class="fill-surface stroke-line"
+            />
+            <text x={x + 44} y="300" class="fill-strong text-[15px] font-bold">
+              {textos.c1}
+            </text>
+            <rect
+              x={x + 44}
+              y="312"
+              width="118"
+              height="22"
+              rx="11"
+              class="fill-emerald-500/15"
+            />
+            <text
+              x={x + 54}
+              y="327"
+              class="fill-emerald-600 text-[11.5px] font-semibold"
+            >
+              {textos.d1}
+            </text>
+            <text x={x + 44} y="360" class="fill-muted text-[12px]">
+              {textos.k1}
+            </text>
+          </g>
+        ) : (
+          <g>
+            <rect
+              x={x + 214}
+              y="276"
+              width="60"
+              height="96"
+              rx="12"
+              class="fill-surface stroke-line"
+              opacity="0.7"
+            />
+            <rect
+              x={x + 28}
+              y="266"
+              width="200"
+              height="110"
+              rx="12"
+              class="fill-surface stroke-line"
+            />
+            <text x={x + 44} y="294" class="fill-strong text-[15px] font-bold">
+              {textos.c2}
+            </text>
+            <rect
+              x={x + 44}
+              y="306"
+              width="118"
+              height="22"
+              rx="11"
+              class="fill-emerald-500/15"
+            />
+            <text
+              x={x + 54}
+              y="321"
+              class="fill-emerald-600 text-[11.5px] font-semibold"
+            >
+              {textos.d2}
+            </text>
+            <text x={x + 44} y="354" class="fill-muted text-[12px]">
+              {textos.k2}
+            </text>
+            <text
+              x={x + 128}
+              y="402"
+              text-anchor="middle"
+              class="fill-accent font-mono text-[11px]"
+            >
+              ‹ {textos.posicion} ›
+            </text>
+          </g>
+        )}
+      </g>
+    ))}
+  </svg>
+</Figura>

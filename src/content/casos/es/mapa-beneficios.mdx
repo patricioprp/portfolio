@@ -1,0 +1,78 @@
+---
+titulo: Beneficios en el mapa, del celular al cupón
+resumen: Plataforma de beneficios mobile-first en Next.js, con un mapa que agrupa en clusters, maneja comercios del mismo edificio y se sincroniza con el listado.
+cliente: Prepaga líder a nivel nacional
+rol: Frontend Senior en Quadion Tech
+stack:
+  - Next.js
+  - React
+  - TypeScript
+  - Google Maps
+  - Mobile-first
+problema: Los socios tenían que encontrar y canjear beneficios en comercios adheridos desde el celular, con muchos resultados en el mapa y comercios que comparten edificio.
+solucion: Desarrollé con Next.js la plataforma de beneficios, con búsqueda, listado y mapa sincronizados, y resolví los casos difíciles del mapa.
+impacto: Un mapa que resuelve bien la densidad y las ubicaciones compartidas, y un recorrido completo de la búsqueda al cupón pensado para el celular.
+metricas:
+  - valor: 3 casos difíciles
+    etiqueta: resueltos en el mapa (ubicaciones compartidas, sincronización y densidad)
+    tipo: real
+  - valor: Mobile-first
+    etiqueta: de la búsqueda al cupón de descuento desde el celular
+    tipo: real
+demo: mapa-beneficios
+orden: 2
+---
+
+import MapaPinCarrusel from '@/components/diagramas/MapaPinCarrusel.astro'
+import RecorridoCanje from '@/components/diagramas/RecorridoCanje.astro'
+
+## Contexto
+
+Para la misma prepaga del [portal de trámites](/casos/portal-tramites/),
+desarrollé con **Next.js** la plataforma donde los socios encuentran y canjean
+beneficios en comercios adheridos. Se busca por provincia y localidad o por la
+ubicación actual, y los resultados se ven en un **listado** y en un **mapa de
+Google Maps**. El diseño es **mobile-first**.
+
+## El reto: un mapa que se pueda usar con el dedo
+
+Un mapa con pocos pines es fácil. Los problemas aparecen con datos reales:
+comercios que comparten dirección, muchos resultados juntos y dos vistas
+(listado y mapa) que tienen que mostrar lo mismo.
+
+<MapaPinCarrusel idioma="es" />
+
+## Qué resolví
+
+- **Ubicaciones compartidas.** Cuando varios comercios están en el mismo edificio
+  o shopping, sus pines se superponen y no se pueden tocar por separado. Los
+  agrupé por coordenadas: el mapa muestra un solo pin y, en lugar de una card, se
+  despliega un **carrusel** con todos los comercios del lugar.
+- **Listado y mapa sincronizados.** Las dos vistas comparten el comercio
+  seleccionado. Desde cualquier comercio del listado, "Ver en mapa" lleva
+  directo a su pin en el mapa con la card abierta.
+- **Densidad.** Con muchos resultados, los pines se agrupan en **clusters con la
+  cantidad**, y el socio puede mover el mapa y **buscar en esa zona**.
+
+La agrupación por coordenadas, en su forma más simple:
+
+```js
+const grupos = comercios.reduce((acc, c) => {
+  const clave = `${c.lat},${c.lng}`
+  ;(acc[clave] ||= []).push(c)
+  return acc
+}, {})
+```
+
+## El recorrido del socio
+
+El recorrido termina en el canje: desde el detalle del beneficio se abre un
+código QR y, con él, el cupón de descuento listo para usar.
+
+<RecorridoCanje idioma="es" />
+
+## Resultados
+
+- **Experiencia móvil:** un mapa que resuelve bien la densidad y las ubicaciones
+  compartidas.
+- **Recorrido completo:** de la búsqueda al cupón, sin salir del celular.
