@@ -41,6 +41,16 @@ test.describe('home', () => {
     await expect(primero).toContainText('actualidad')
   })
 
+  test('una experiencia con caso enlaza a su página', async ({ page }) => {
+    const enlace = page
+      .locator('#experiencia')
+      .getByRole('link', { name: 'Ver caso' })
+      .first()
+    await enlace.click()
+    await expect(page).toHaveURL(/\/casos\/[a-z0-9-]+\/$/)
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  })
+
   test('incluye SEO básico y JSON-LD de Person', async ({ page }) => {
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
       'content',
