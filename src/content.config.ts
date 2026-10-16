@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content'
 import { file, glob } from 'astro/loaders'
 import { z } from 'astro/zod'
+import { guiaLoader } from './loaders/guia'
 
 const textoLocalizado = z.object({ es: z.string(), en: z.string() })
 const fecha = z.string().regex(/^\d{4}(-\d{2})?$/, 'Formato: AAAA o AAAA-MM')
@@ -47,4 +48,8 @@ const casos = defineCollection({
   })
 })
 
-export const collections = { experiencia, casos }
+// Guía "Hacé tu portfolio con IA": un Markdown por capítulo en docs/guia-ia/
+// (sin frontmatter). Título, resumen y orden salen del archivo: ver src/data/guia.ts.
+const guia = defineCollection({ loader: guiaLoader() })
+
+export const collections = { experiencia, casos, guia }

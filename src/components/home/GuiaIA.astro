@@ -1,0 +1,67 @@
+---
+import { Icon } from 'astro-icon/components'
+import Button from '@/components/ui/Button.astro'
+import { obtenerDiccionario, type Idioma } from '@/i18n'
+import {
+  RUTA_GUIA,
+  primerCapituloDelTutorial,
+  rutaDeCapitulo
+} from '@/data/guia'
+
+interface Props {
+  idioma: Idioma
+}
+
+const { idioma } = Astro.props
+const t = obtenerDiccionario(idioma)
+// La guía existe solo en español: en inglés se avisa con hreflang y una nota.
+const hreflang = idioma === 'es' ? undefined : 'es'
+const tutorial = rutaDeCapitulo((await primerCapituloDelTutorial()).slug)
+const iconos = ['lucide:lightbulb', 'lucide:hammer', 'lucide:book-marked']
+---
+
+<section id="guia" aria-labelledby="guia-titulo" class="px-4 py-20 sm:px-6">
+  <div class="mx-auto max-w-6xl rounded-3xl border border-sky-500/30 bg-accent-soft p-6 sm:p-10">
+    <p class="font-mono text-sm font-semibold tracking-wider text-accent uppercase">
+      {t.guiaIA.eyebrow}
+    </p>
+    <h2
+      id="guia-titulo"
+      class="mt-2 text-3xl font-bold tracking-tight text-strong sm:text-4xl"
+    >
+      {t.guiaIA.titulo}
+    </h2>
+    <p class="mt-4 max-w-3xl text-lg">{t.guiaIA.bajada}</p>
+
+    <ul class="mt-8 grid gap-4 md:grid-cols-3">
+      {t.guiaIA.partes.map((parte, i) => (
+        <li class="rounded-2xl border border-line bg-surface p-5">
+          <h3 class="flex items-center gap-2 font-semibold text-strong">
+            <Icon
+              name={iconos[i] ?? 'lucide:book-open'}
+              class="size-5 text-accent"
+              aria-hidden="true"
+            />
+            {parte.titulo}
+          </h3>
+          <p class="mt-2 text-sm text-muted">{parte.texto}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-8 flex flex-wrap items-center gap-4">
+      <Button href={RUTA_GUIA} hreflang={hreflang} icono="lucide:book-open">
+        {t.guiaIA.boton}
+      </Button>
+      <Button
+        href={tutorial}
+        hreflang={hreflang}
+        variante="secundario"
+        icono="lucide:hammer"
+      >
+        {t.guiaIA.botonTutorial}
+      </Button>
+      {t.guiaIA.nota && <p class="text-sm text-muted">{t.guiaIA.nota}</p>}
+    </div>
+  </div>
+</section>

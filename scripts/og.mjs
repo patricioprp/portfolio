@@ -6,6 +6,7 @@ import { mkdir, readdir } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { dev } from 'astro'
 import { chromium } from '@playwright/test'
+import { infoDeArchivo } from '../src/lib/guia/guia.ts'
 
 const raiz = process.cwd()
 const PUERTO = 4399
@@ -21,11 +22,21 @@ const demos = sinExtension(
   await readdir(join(raiz, 'src/pages/demos')),
   '.astro'
 )
-const paginas = ['es', 'en'].flatMap((idioma) => [
-  `${idioma}/inicio`,
-  ...casos.map((c) => `${idioma}/casos/${c}`),
-  ...demos.map((d) => `${idioma}/demos/${d}`)
-])
+// Capítulos de la guía (solo en español): docs/guia-ia/NN-slug.md → es/guia/slug
+const capitulos = (await readdir(join(raiz, 'docs/guia-ia')))
+  .filter((a) => a.endsWith('.md'))
+  .map((a) => infoDeArchivo(a)?.slug)
+  .filter(Boolean)
+const paginas = [
+  'es/guia/inicio',
+  ...capitulos.map((c) => `es/guia/${c}`)
+].concat(
+  ['es', 'en'].flatMap((idioma) => [
+    `${idioma}/inicio`,
+    ...casos.map((c) => `${idioma}/casos/${c}`),
+    ...demos.map((d) => `${idioma}/demos/${d}`)
+  ])
+)
 
 const servidor = await dev({
   root: raiz,

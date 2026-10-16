@@ -104,3 +104,58 @@ html {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+
+/* Guía de IA (docs/guia-ia/ → /guia/): diagramas Mermaid pre-renderizados
+   (ADR 0006). Cada figura trae un SVG claro y uno oscuro; se ve el del tema.
+   Como el resto del sitio, oscuro por defecto y claro por elección. */
+.guia-contenido .diagrama {
+  /* Más ancha que la columna de texto en pantallas grandes, centrada. */
+  position: relative;
+  left: 50%;
+  width: min(100vw - 2rem, 72rem);
+  transform: translateX(-50%);
+  margin-block: 2rem;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+}
+
+/* Tamaño natural si entra; si no, se achica hasta el 75 % y después se
+   desplaza: más chico, el texto deja de leerse. */
+.guia-contenido .diagrama img {
+  margin: 0 auto;
+  max-width: 100%;
+  min-width: calc(var(--ancho) * 0.75px);
+  height: auto;
+}
+
+.guia-contenido .diagrama-claro {
+  display: none;
+}
+
+[data-theme='light'] .guia-contenido .diagrama-claro {
+  display: block;
+}
+
+[data-theme='light'] .guia-contenido .diagrama-oscuro {
+  display: none;
+}
+
+.guia-contenido .tabla {
+  overflow-x: auto;
+}
+
+/* Código en línea sin los acentos graves que agrega la tipografía. */
+.guia-contenido :not(pre) > code {
+  padding: 0.1em 0.35em;
+  border-radius: 0.375rem;
+  background: var(--surface-2);
+  font-weight: 600;
+}
+
+.guia-contenido :not(pre) > code::before,
+.guia-contenido :not(pre) > code::after {
+  content: none;
+}

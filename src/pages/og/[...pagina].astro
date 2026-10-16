@@ -6,6 +6,7 @@ import { Font } from 'astro:assets'
 import '@/styles/global.css'
 import { obtenerDiccionario, type Idioma } from '@/i18n'
 import { obtenerCasos, slugDeCaso } from '@/data/casos'
+import { GUIA, obtenerCapitulos } from '@/data/guia'
 
 type Tarjeta = {
   eyebrow: string
@@ -60,6 +61,29 @@ export const getStaticPaths = (async () => {
         }
       })
     }
+  }
+  // La guía existe solo en español.
+  const tagsGuia = ['Claude Code', 'Astro', 'React', 'TypeScript']
+  paginas.push({
+    params: { pagina: 'es/guia/inicio' },
+    props: {
+      eyebrow: 'Guía gratuita · en español',
+      titulo: GUIA.titulo,
+      bajada: GUIA.bajada,
+      tags: tagsGuia
+    }
+  })
+  const capitulos = await obtenerCapitulos()
+  for (const c of capitulos) {
+    paginas.push({
+      params: { pagina: `es/guia/${c.slug}` },
+      props: {
+        eyebrow: `Guía · capítulo ${c.numero} de ${capitulos.length}`,
+        titulo: c.titulo,
+        bajada: c.resumen,
+        tags: tagsGuia
+      }
+    })
   }
   return paginas
 }) satisfies GetStaticPaths

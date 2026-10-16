@@ -16,6 +16,7 @@ export const en: Diccionario = {
     experiencia: 'Experience',
     stack: 'Stack',
     contacto: 'Contact',
+    guia: 'AI guide (ES)',
     abrirMenu: 'Open menu',
     cerrarMenu: 'Close menu',
     temaClaro: 'Switch to light mode',
@@ -415,6 +416,29 @@ export const en: Diccionario = {
         'Moving the map reveals "Search this area", which filters results to the visible area. The logic lives in plain TypeScript with tests.'
       ]
     }
+  },
+  guiaIA: {
+    eyebrow: 'Free guide · in Spanish',
+    titulo: 'Build your portfolio with AI — Claude Code',
+    bajada:
+      'Like this portfolio? Build your own. A from-scratch guide with the theory behind each piece and a step-by-step tutorial to do it with Claude Code.',
+    partes: [
+      {
+        titulo: 'Fundamentals',
+        texto: 'What an AI agent is, context, permissions, hooks and specs.'
+      },
+      {
+        titulo: 'Step by step',
+        texto: 'From installing the tools to a published portfolio.'
+      },
+      {
+        titulo: 'Reference',
+        texto: 'Day-to-day workflows, best practices and a glossary.'
+      }
+    ],
+    boton: 'Start the guide',
+    botonTutorial: 'Go to the tutorial',
+    nota: 'The guide is written in Spanish; your browser can translate it.'
   },
   experiencia: {
     eyebrow: 'Career',

@@ -18,7 +18,10 @@ const PAGINAS = [
   '/en/',
   '/en/case-studies/optimizador-viguetas/',
   '/en/demos/optimizador-viguetas/',
-  '/en/demos/formulario-dinamico/'
+  '/en/demos/formulario-dinamico/',
+  '/guia/',
+  '/guia/permisos-y-hooks/',
+  '/guia/preparar-el-entorno/'
 ]
 
 const TEMAS = ['light', 'dark'] as const

@@ -11,7 +11,7 @@ Ejecutá en este orden y frená en el primer error que no puedas corregir:
 2. `npm run lint`
 3. `npm run check` (astro check: tipos y archivos .astro)
 4. `npm test`
-5. `npm run build`
+5. `npm run build` (si cambió un diagrama de `docs/guia-ia/`, antes `npm run diagramas`)
 6. Si la tarea tocó páginas, navegación, el formulario o las demos: `npm run e2e`
 
 Si un paso falla:

@@ -1,0 +1,141 @@
+---
+import { render } from 'astro:content'
+import { Icon } from 'astro-icon/components'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { rutaOg } from '@/i18n/rutas'
+import { GUIA, RUTA_GUIA, rutaDeCapitulo, type Capitulo } from '@/data/guia'
+
+interface Props {
+  capitulo: Capitulo
+  anterior: Capitulo | undefined
+  siguiente: Capitulo | undefined
+  total: number
+}
+
+const { capitulo: c, anterior, siguiente, total } = Astro.props
+const { Content } = await render(c.entrada)
+const ruta = rutaDeCapitulo(c.slug)
+---
+
+<BaseLayout
+  idioma="es"
+  titulo={`${c.titulo} | ${GUIA.titulo}`}
+  descripcion={c.resumen}
+  alternos={{ es: ruta }}
+  imagenOg={rutaOg('es', `guia/${c.slug}`)}
+>
+  <article class="px-4 pt-28 pb-16 sm:px-6 sm:pt-36">
+    <div class="mx-auto max-w-3xl">
+      <nav aria-label="Ubicación en la guía" class="text-sm">
+        <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-muted">
+          <li>
+            <a
+              href={RUTA_GUIA}
+              class="font-semibold text-accent hover:underline"
+            >
+              {GUIA.titulo}
+            </a>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li>
+            <a href={`${RUTA_GUIA}#${c.parte.id}`} class="hover:underline">
+              Parte {c.parte.numero} · {c.parte.titulo}
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="mt-6 font-mono text-sm font-semibold tracking-wider text-accent uppercase">
+        Capítulo {c.numero} de {total}
+      </p>
+
+      <div class="guia-contenido prose mt-2 max-w-none prose-headings:scroll-mt-24 prose-h1:text-4xl prose-h1:font-extrabold prose-h1:tracking-tight prose-pre:text-[13px]">
+        <Content />
+      </div>
+
+      <p class="mt-10 text-sm text-muted">
+        <a
+          href={c.github}
+          class="inline-flex items-center gap-1.5 font-semibold text-accent hover:underline"
+        >
+          <Icon name="simple-icons:github" class="size-4" aria-hidden="true" />
+          Ver este capítulo en GitHub
+        </a>
+        — la guía es Markdown en el repositorio; los diagramas también se ven
+        ahí.
+      </p>
+
+      <nav aria-label="Capítulos" class="mt-10 grid gap-4 sm:grid-cols-2">
+        {anterior ? (
+          <a
+            href={rutaDeCapitulo(anterior.slug)}
+            class="rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-sky-500/40"
+          >
+            <span class="inline-flex items-center gap-1 text-sm text-muted">
+              <Icon
+                name="lucide:arrow-left"
+                class="size-4"
+                aria-hidden="true"
+              />
+              Anterior · capítulo {anterior.numero}
+            </span>
+            <span class="mt-1 block font-semibold text-strong">
+              {anterior.titulo}
+            </span>
+          </a>
+        ) : (
+          <a
+            href={RUTA_GUIA}
+            class="rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-sky-500/40"
+          >
+            <span class="inline-flex items-center gap-1 text-sm text-muted">
+              <Icon
+                name="lucide:arrow-left"
+                class="size-4"
+                aria-hidden="true"
+              />
+              Índice
+            </span>
+            <span class="mt-1 block font-semibold text-strong">
+              {GUIA.titulo}
+            </span>
+          </a>
+        )}
+        {siguiente ? (
+          <a
+            href={rutaDeCapitulo(siguiente.slug)}
+            class="rounded-2xl border border-line bg-surface p-5 text-right transition-colors hover:border-sky-500/40 sm:col-start-2"
+          >
+            <span class="inline-flex items-center gap-1 text-sm text-muted">
+              Siguiente · capítulo {siguiente.numero}
+              <Icon
+                name="lucide:arrow-right"
+                class="size-4"
+                aria-hidden="true"
+              />
+            </span>
+            <span class="mt-1 block font-semibold text-strong">
+              {siguiente.titulo}
+            </span>
+          </a>
+        ) : (
+          <a
+            href={RUTA_GUIA}
+            class="rounded-2xl border border-line bg-surface p-5 text-right transition-colors hover:border-sky-500/40 sm:col-start-2"
+          >
+            <span class="inline-flex items-center gap-1 text-sm text-muted">
+              Terminaste la guía
+              <Icon
+                name="lucide:arrow-right"
+                class="size-4"
+                aria-hidden="true"
+              />
+            </span>
+            <span class="mt-1 block font-semibold text-strong">
+              Volver al índice
+            </span>
+          </a>
+        )}
+      </nav>
+    </div>
+  </article>
+</BaseLayout>

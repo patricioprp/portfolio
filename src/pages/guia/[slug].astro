@@ -1,0 +1,27 @@
+---
+import type { GetStaticPaths } from 'astro'
+import GuiaCapitulo from '@/components/guia/GuiaCapitulo.astro'
+import { obtenerCapitulos } from '@/data/guia'
+
+export const getStaticPaths = (async () => {
+  const capitulos = await obtenerCapitulos()
+  return capitulos.map((capitulo, i) => ({
+    params: { slug: capitulo.slug },
+    props: {
+      capitulo,
+      anterior: capitulos[i - 1],
+      siguiente: capitulos[i + 1],
+      total: capitulos.length
+    }
+  }))
+}) satisfies GetStaticPaths
+
+const { capitulo, anterior, siguiente, total } = Astro.props
+---
+
+<GuiaCapitulo
+  capitulo={capitulo}
+  anterior={anterior}
+  siguiente={siguiente}
+  total={total}
+/>

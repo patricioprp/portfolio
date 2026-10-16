@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components'
 import ThemeToggle from '@/components/ThemeToggle.astro'
 import { obtenerDiccionario, type Idioma } from '@/i18n'
 import { otroIdioma, rutaInicio, type Alternos } from '@/i18n/rutas'
+import { RUTA_GUIA } from '@/lib/guia/guia'
 
 interface Props {
   idioma: Idioma
@@ -14,12 +15,18 @@ const t = obtenerDiccionario(idioma)
 const inicio = rutaInicio(idioma)
 const otro = otroIdioma(idioma)
 
-const enlaces = [
+const enlaces: { href: string; texto: string; hreflang?: string }[] = [
   { href: `${inicio}#casos`, texto: t.nav.casos },
   { href: `${inicio}#demos`, texto: t.nav.demos },
   { href: `${inicio}#experiencia`, texto: t.nav.experiencia },
   { href: `${inicio}#stack`, texto: t.nav.stack },
-  { href: `${inicio}#contacto`, texto: t.nav.contacto }
+  { href: `${inicio}#contacto`, texto: t.nav.contacto },
+  // La guía existe solo en español (spec 006).
+  {
+    href: RUTA_GUIA,
+    texto: t.nav.guia,
+    ...(idioma === 'es' ? {} : { hreflang: 'es' })
+  }
 ]
 ---
 
@@ -37,7 +44,11 @@ const enlaces = [
       <ul class="flex items-center gap-6 text-sm font-medium">
         {enlaces.map((e) => (
           <li>
-            <a href={e.href} class="transition-colors hover:text-accent">
+            <a
+              href={e.href}
+              hreflang={e.hreflang}
+              class="transition-colors hover:text-accent"
+            >
               {e.texto}
             </a>
           </li>
@@ -47,7 +58,7 @@ const enlaces = [
 
     <div class="flex items-center gap-1">
       <a
-        href={alternos[otro]}
+        href={alternos[otro] ?? rutaInicio(otro)}
         hreflang={otro}
         lang={otro}
         class="inline-flex h-10 items-center rounded-md px-2.5 font-mono text-sm font-semibold text-strong hover:bg-surface-2"
@@ -93,6 +104,7 @@ const enlaces = [
         <li>
           <a
             href={e.href}
+            hreflang={e.hreflang}
             class="block rounded-md px-2 py-3 text-base font-medium text-strong hover:bg-surface-2"
           >
             {e.texto}

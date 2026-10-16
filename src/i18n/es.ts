@@ -14,6 +14,7 @@ export const es = {
     experiencia: 'Experiencia',
     stack: 'Stack',
     contacto: 'Contacto',
+    guia: 'Guía IA',
     abrirMenu: 'Abrir menú',
     cerrarMenu: 'Cerrar menú',
     temaClaro: 'Cambiar a modo claro',
@@ -412,6 +413,31 @@ export const es = {
         'Al mover el mapa aparece "Buscar en esta zona", que filtra los resultados por el área visible. La lógica vive en TypeScript puro con tests.'
       ]
     }
+  },
+  guiaIA: {
+    eyebrow: 'Guía gratuita',
+    titulo: 'Hacé tu portfolio con IA — Claude Code',
+    bajada:
+      '¿Te gusta cómo quedó este portfolio? Armá el tuyo. Una guía desde cero con el marco teórico para entender cada pieza y el paso a paso para hacerlo con Claude Code.',
+    partes: [
+      {
+        titulo: 'Fundamentos',
+        texto:
+          'Qué es un agente de IA, el contexto, los permisos, los hooks y las specs.'
+      },
+      {
+        titulo: 'Paso a paso',
+        texto: 'De instalar las herramientas a tener tu portfolio publicado.'
+      },
+      {
+        titulo: 'Referencia',
+        texto:
+          'Flujos de trabajo, buenas prácticas y glosario para el día a día.'
+      }
+    ],
+    boton: 'Empezar la guía',
+    botonTutorial: 'Ir al paso a paso',
+    nota: ''
   },
   experiencia: {
     eyebrow: 'Trayectoria',
