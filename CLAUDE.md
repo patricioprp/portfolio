@@ -2,8 +2,8 @@
 
 Guía para Claude Code en este repositorio.
 
-> El `CLAUDE.md` que está en `C:\Users\ppolito\Desktop` describe otro proyecto
-> (Shell Container / OSDE) y **no aplica acá**. Ignorá sus comandos y convenciones.
+> Si en la carpeta superior hay otro `CLAUDE.md`, describe un proyecto de
+> trabajo y **no aplica acá**. Ignorá sus comandos y convenciones.
 
 ## Qué es este proyecto
 
@@ -19,11 +19,11 @@ impacto medible** y las **demos ejecutables** en el navegador.
 - Plan de trabajo por fases (con checkboxes): `docs/ROADMAP.md`
 - Specs de cada funcionalidad (criterios de aceptación → tests): `docs/specs/`
 - Decisiones técnicas con alternativas (ADR): `docs/adr/`
-- Guía de cómo se trabaja con IA en este repo (capítulos con diagramas): `docs/guia-ia/`
+- Guía pública "Hacé tu portfolio con IA — Claude Code" (fuente de `/guia/`): `docs/guia-ia/`
 
 ## Estado actual
 
-Fases 1 a 8 terminadas: sitio completo en español e inglés (home, cinco casos, cuatro demos) y flujo de trabajo con IA documentado. Pendientes manuales del lanzamiento en la Fase 6 de `docs/ROADMAP.md`.
+Fases 1 a 9 terminadas: sitio completo en español e inglés (home, cinco casos, cuatro demos), flujo de trabajo con IA documentado y la guía "Hacé tu portfolio con IA — Claude Code" publicada en `/guia/` (solo en español). Pendientes manuales del lanzamiento en la Fase 6 de `docs/ROADMAP.md`.
 `legacy/index.html` es la versión anterior (HTML + Tailwind por CDN); sirve
 solo de referencia de contenido y estética (paleta oscura slate + sky). El
 progreso está en `docs/ROADMAP.md`.
@@ -56,6 +56,7 @@ npx vitest run <ruta>   # un solo archivo
 npm run e2e        # playwright (desktop + mobile)
 npm run og         # regenera las imágenes OG (public/og/<idioma>/...)
 npm run cv         # regenera los CV en PDF (public/cv/) desde el contenido del sitio
+npm run diagramas  # dibuja los diagramas Mermaid de docs/guia-ia/ como SVG (public/guia/diagramas/)
 ```
 
 Antes de dar una tarea por terminada, ejecutá la skill `/verificar`.
@@ -99,7 +100,7 @@ ambiguo, preguntá o dejalo marcado con `TODO(contenido)`.
   para la construcción"). Nunca nombres de empresas cliente en el sitio.
 - Del trabajo actual en Quadion (cliente: prepaga) no se publican nombres de
   servicios, endpoints, repositorios ni el nombre interno de la librería
-  compartida. No usar como fuente el `CLAUDE.md` de `C:\Users\ppolito\Desktop`.
+  compartida. No usar como fuente el `CLAUDE.md` de la carpeta superior.
 
 ### Datos que nunca se publican
 
