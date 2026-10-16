@@ -147,3 +147,23 @@ campos ocultos no puntúan.
 Mantener `X-Frame-Options: DENY` y `X-Content-Type-Options: nosniff`; agregar
 `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` y una
 CSP que permita `worker-src 'self' blob:`.
+
+## Guía "Hacé tu portfolio con IA — Claude Code"
+
+Sección `/guia/` generada desde `docs/guia-ia/` (spec 006): una sola fuente,
+que también se lee en GitHub. Solo en español: las páginas no declaran
+`hreflang` en inglés y el selector de idioma lleva a `/en/`.
+
+- **Colección `guia`:** loader propio (`src/lib/guia/loader.ts`) en lugar de
+  plugins de remark, para no cambiar el procesador de Markdown de todo el
+  sitio. Lee `NN-slug.md`, cambia cada bloque `mermaid` por los SVG, renderiza
+  con `renderMarkdown` y ajusta el HTML (tablas desplazables, casillas con
+  nombre accesible, enlaces a rutas del sitio o a GitHub).
+- **Lógica pura:** `src/lib/guia/guia.ts` (número y slug, título, resumen,
+  enlaces, transformaciones, hash de diagramas) con tests.
+- **Datos y páginas:** `src/data/guia.ts` (partes, capítulos ordenados),
+  `src/components/guia/` y `src/pages/guia/`. Acceso desde `Header.astro` y
+  `src/components/home/GuiaIA.astro`.
+- **Diagramas:** `npm run diagramas` los dibuja con Mermaid en Chromium como
+  SVG claro y oscuro en `public/guia/diagramas/` (ADR 0006). Si falta uno, el
+  build falla.

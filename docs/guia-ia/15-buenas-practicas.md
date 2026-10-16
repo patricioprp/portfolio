@@ -1,10 +1,10 @@
-# 9 · Buenas prácticas y problemas comunes
+# 15 · Buenas prácticas y problemas comunes
 
 Este capítulo junta los hábitos que más diferencia hacen al trabajar con un
 agente, cómo cuidar el contexto, qué tener en cuenta de seguridad y una tabla
 para cuando algo sale mal.
 
-## 9.1 Hábitos que conviene tener
+## 15.1 Hábitos que conviene tener
 
 | Hacé                                                  | Por qué                                            |
 | ----------------------------------------------------- | -------------------------------------------------- |
@@ -25,10 +25,11 @@ para cuando algo sale mal.
 | Aceptar permisos sin leer el comando                      | Es tu máquina y tu repositorio                             |
 | Pegar datos privados o secretos en el chat                | Quedan en el historial y pueden terminar en un archivo     |
 
-## 9.2 Cuidar el contexto
+## 15.2 Cuidar el contexto
 
 ```mermaid
 flowchart TD
+    accTitle: Cómo cuidar el contexto entre tareas
     A["Empieza una tarea"] --> B["Sesión nueva o /clear"]
     B --> C["Trabajo"]
     C --> D{"¿La conversación<br/>se hizo muy larga?"}
@@ -46,7 +47,7 @@ flowchart TD
   archivo del repo.
 - Los subagentes ayudan a ahorrar contexto: su lectura queda en su sesión.
 
-## 9.3 Seguridad
+## 15.3 Seguridad
 
 - **Secretos:** nunca en el repositorio ni en el chat. `.env` está prohibido
   para lectura y escritura en este repo.
@@ -58,7 +59,7 @@ flowchart TD
   elimina la protección.
 - **Publicación:** en este repo el `git push` es siempre tuyo.
 
-## 9.4 Cuando algo sale mal
+## 15.4 Cuando algo sale mal
 
 | Síntoma                                      | Causa probable                                            | Qué hacer                                                                |
 | -------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ |
@@ -79,5 +80,5 @@ flowchart TD
 - Secretos fuera del repo y del chat; el push es tuyo.
 - Cada error repetido es una pista de qué falta escribir en el repositorio.
 
-Anterior: [8 · Armar un proyecto desde cero](08-proyecto-desde-cero.md) ·
-Siguiente: [10 · Glosario](10-glosario.md)
+Anterior: [14 · Flujos de trabajo](14-flujos-de-trabajo.md) ·
+Siguiente: [16 · Glosario](16-glosario.md)

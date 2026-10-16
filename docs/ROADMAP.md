@@ -97,11 +97,23 @@ Bloquean contenido, no código. Respuestas volcadas en `docs/contenido/` y `CLAU
 - [x] Hooks: contexto al iniciar sesión, archivos protegidos y términos privados, Prettier automático
 - [x] Plantilla para cargar experiencia (`docs/contenido/_plantilla-experiencia.md`) y test e2e del enlace experiencia → caso
 - [x] CI en GitHub Actions (formato, lint, tipos, unitarios, build, e2e)
-- [x] Guía de aprendizaje en 10 capítulos con diagramas: `docs/guia-ia/` (no se publica en el sitio; propuesta en `docs/specs/006-guia-ia-en-el-sitio.md`)
+- [x] Guía de aprendizaje con diagramas: `docs/guia-ia/`
+
+## Fase 9 — Guía "Hacé tu portfolio con IA — Claude Code" ✅
+
+Spec: `docs/specs/006-guia-ia-en-el-sitio.md`.
+
+- [x] Guía reorganizada en 16 capítulos para cualquier lector: fundamentos (1–6), paso a paso (7–13) y referencia (14–16)
+- [x] Colección `guia` con loader propio (`src/lib/guia/loader.ts`) y lógica en `src/lib/guia/guia.ts` con tests
+- [x] Páginas `/guia/` y `/guia/<slug>/`; acceso desde el menú (ES/EN) y bloque en la home
+- [x] Diagramas Mermaid pre-renderizados claro/oscuro con `npm run diagramas` (ADR 0006) y `accTitle` obligatorio
+- [x] Imágenes OG, e2e (`e2e/guia.spec.ts`) y axe en tema claro y oscuro; tema de código oscuro de alto contraste
+- [x] Regla `.claude/rules/guia.md`
+- [ ] **Patricio:** decidir la licencia del código del repositorio (la guía invita a reutilizar la estructura)
 
 ## Ideas para después
 
-- Publicar la guía de IA como sección del sitio (spec en borrador: `docs/specs/006-guia-ia-en-el-sitio.md`)
+- Traducir la guía al inglés
 - Calendario de producción en el optimizador (asignar bancos a jornadas según los turnos)
 - Generación de columnas (Gilmore–Gomory) para muchas medidas
 - Carga de demanda por CSV

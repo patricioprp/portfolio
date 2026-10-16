@@ -19,6 +19,7 @@ No tiene sintaxis especial: es texto. Lo que importa es **qué** se escribe y
 
 ```mermaid
 flowchart TD
+    accTitle: De dónde se cargan las instrucciones: CLAUDE.md global, del proyecto, local y reglas por carpeta
     U["~/.claude/CLAUDE.md<br/>tus preferencias para todos los proyectos"] --> S
     P["CLAUDE.md (raíz del repo)<br/>reglas del proyecto · versionado"] --> S
     L["CLAUDE.local.md<br/>tus notas personales · no versionado"] --> S
@@ -30,27 +31,29 @@ flowchart TD
     SUB["CLAUDE.md dentro de una subcarpeta"] -.-> W
 ```
 
-| Archivo               | Alcance                            | ¿Va a git?        | Uso en este repo                   |
-| --------------------- | ---------------------------------- | ----------------- | ---------------------------------- |
-| `~/.claude/CLAUDE.md` | Todos tus proyectos                | No                | No se usa                          |
-| `CLAUDE.md`           | Este proyecto, siempre             | Sí                | Reglas globales del portfolio      |
-| `CLAUDE.local.md`     | Este proyecto, solo tu máquina     | No (`.gitignore`) | Disponible para notas personales   |
-| `.claude/rules/*.md`  | Archivos que coinciden con `paths` | Sí                | Lógica pura, islas, contenido, e2e |
+| Archivo               | Alcance                            | ¿Va a git?        | Uso en este repo                          |
+| --------------------- | ---------------------------------- | ----------------- | ----------------------------------------- |
+| `~/.claude/CLAUDE.md` | Todos tus proyectos                | No                | No se usa                                 |
+| `CLAUDE.md`           | Este proyecto, siempre             | Sí                | Reglas globales del portfolio             |
+| `CLAUDE.local.md`     | Este proyecto, solo tu máquina     | No (`.gitignore`) | Disponible para notas personales          |
+| `.claude/rules/*.md`  | Archivos que coinciden con `paths` | Sí                | Lógica pura, islas, contenido, e2e y guía |
 
-Un detalle de esta máquina: en `C:\Users\ppolito\Desktop` hay **otro**
-`CLAUDE.md` (de un proyecto de trabajo). Como el portfolio está dentro de esa
-carpeta, Claude Code también lo carga. Por eso el `CLAUDE.md` del portfolio
-empieza aclarando que ese otro archivo no aplica acá.
+Un detalle que conviene saber: Claude Code también carga los `CLAUDE.md` de
+las **carpetas superiores**. Si tu proyecto vive dentro de una carpeta que
+tiene su propio `CLAUDE.md` (por ejemplo, el de otro proyecto de trabajo), se
+van a mezclar instrucciones. Al portfolio le pasó en la máquina donde se
+desarrolló; por eso su `CLAUDE.md` empieza aclarando que el otro archivo no
+aplica. Lo más simple es no anidar proyectos.
 
 ## 3.3 Recorrido por el `CLAUDE.md` de este repo
 
 | Sección                     | Qué dice                                                        | Por qué está                                                         |
 | --------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Aviso inicial               | Que el `CLAUDE.md` del escritorio no aplica                     | Evitar que mezcle convenciones de otro proyecto                      |
+| Aviso inicial               | Que el `CLAUDE.md` de la carpeta superior no aplica             | Evitar que mezcle convenciones de otro proyecto                      |
 | Qué es este proyecto        | Objetivo: empleo estable; diferencial: casos y demos            | Que cada decisión apunte al objetivo (nada de "servicios freelance") |
 | Estado actual y Stack       | Fases terminadas, versiones y por qué TypeScript queda en 6     | Que no "actualice" algo que se fijó a propósito                      |
 | Comandos                    | `npm run …` del proyecto                                        | Que use los comandos reales y no invente otros                       |
-| Cómo trabajar               | Qué skill usar según el pedido                                  | Que siga el flujo (capítulo 7) sin que se lo recuerdes               |
+| Cómo trabajar               | Qué skill usar según el pedido                                  | Que siga el flujo (capítulo 14) sin que se lo recuerdes              |
 | Fuente de verdad            | Todo texto sale de `docs/contenido/` y `docs/casos/`            | La regla que más errores evita: no inventar                          |
 | Datos que nunca se publican | Referencias, credenciales, fecha de nacimiento, `docs/privado/` | El repo es público                                                   |
 | Convenciones                | Idioma, Prettier, sin `any`, a11y, commits                      | Consistencia sin tener que repetirlo                                 |
@@ -86,6 +89,7 @@ patrones glob, los mismos que usás en `.gitignore` o en la config de ESLint.
 | `islas-react.md` | `src/islands/**`                                                                     | La isla dibuja; la lógica se importa; a11y y tokens del tema |
 | `contenido.md`   | `src/content/**`, `src/i18n/**`, `src/data/**`, `docs/contenido/**`, `docs/casos/**` | No inventar, ES y EN siempre, clientes anónimos              |
 | `tests-e2e.md`   | `e2e/**`, `playwright.config.ts`                                                     | Selectores accesibles, desktop y mobile, sin esperas fijas   |
+| `guia.md`        | `docs/guia-ia/**` y el código de la guía                                             | Una fuente, `accTitle` en cada diagrama, `npm run diagramas` |
 
 Si venís de Laravel: es parecido a tener un `README` por módulo, con la
 diferencia de que acá se lee solo, justo cuando tocás ese módulo.

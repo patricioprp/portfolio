@@ -5,7 +5,7 @@ Ingeniero en Sistemas. Incluye casos de estudio con impacto medible y demos
 ejecutables: un mapa de beneficios, un simulador de contingencias, un optimizador de cortes con
 programación lineal entera y un motor de formularios dinámicos.
 
-- **Estado:** Sitio completo en español e inglés: home, cinco casos de estudio y cuatro demos ejecutables. La versión anterior está en `legacy/index.html`.
+- **Estado:** Sitio completo en español e inglés: home, cinco casos de estudio, cuatro demos ejecutables y la guía "Hacé tu portfolio con IA — Claude Code" en `/guia/`. La versión anterior está en `legacy/index.html`.
 - **Stack:** Astro 7 + React 19 + TypeScript + Tailwind CSS 4, deploy en Netlify.
 
 ## Desarrollo
@@ -32,14 +32,14 @@ npm run e2e        # Playwright (la primera vez: npx playwright install chromium
 | [`docs/casos/`](docs/casos/)                   | Casos de estudio                                       |
 | [`docs/specs/`](docs/specs/)                   | Specs: alcance y criterios de aceptación → tests       |
 | [`docs/adr/`](docs/adr/)                       | Decisiones de arquitectura y alternativas descartadas  |
-| [`docs/guia-ia/`](docs/guia-ia/README.md)      | Guía paso a paso para trabajar con Claude Code         |
+| [`docs/guia-ia/`](docs/guia-ia/README.md)      | Guía "Hacé tu portfolio con IA" (fuente de `/guia/`)   |
 
 ## Trabajar con Claude Code
 
 El proyecto está preparado para desarrollarse con
 [Claude Code](https://claude.com/claude-code) con un flujo guiado por specs.
 El detalle de cada pieza está en
-[`docs/guia-ia/`](docs/guia-ia/README.md), una guía en 10 capítulos con diagramas.
+[`docs/guia-ia/`](docs/guia-ia/README.md), una guía en 16 capítulos con diagramas (fundamentos, paso a paso y referencia) que también se publica en el sitio.
 
 ```text
 /spec <idea>          → docs/specs/NNN-slug.md (borrador para aprobar)

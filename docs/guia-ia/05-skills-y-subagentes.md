@@ -48,6 +48,7 @@ Entrada: `$ARGUMENTS` …
 
 ```mermaid
 sequenceDiagram
+    accTitle: Qué pasa al invocar un skill
     actor Vos
     participant CC as Claude Code
     participant Claude
@@ -109,6 +110,7 @@ Sos un tech lead que revisa un pull request de este portfolio. Solo leés…
 
 ```mermaid
 flowchart TD
+    accTitle: La sesión principal delega la revisión a dos subagentes en paralelo
     M["Sesión principal<br/>implementó la funcionalidad"] --> RC["revisor-codigo<br/>contexto propio · Read, Grep, Glob, Bash"]
     M --> RT["revisor-contenido<br/>contexto propio · Read, Grep, Glob"]
     RC --> H1["Hallazgos por gravedad<br/>archivo:línea + corrección"]
@@ -143,6 +145,7 @@ Ya viste cinco formas de "decirle algo" al agente. Este árbol ayuda a elegir:
 
 ```mermaid
 flowchart TD
+    accTitle: Árbol de decisión para elegir entre permiso, hook, CLAUDE.md, regla, skill o subagente
     Q["Quiero que Claude…"] --> A{"¿Tiene que pasar SIEMPRE,<br/>aunque el modelo se olvide?"}
     A -- "Sí" --> B{"¿Es sobre qué puede ejecutar?"}
     B -- "Sí" --> P["Permiso<br/>settings.json"]

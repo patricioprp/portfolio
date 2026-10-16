@@ -12,6 +12,7 @@ que no era**. Sin una spec pasa esto:
 
 ```mermaid
 flowchart LR
+    accTitle: Sin spec: idea vaga, el agente completa los huecos y hay que rehacer
     I["Idea vaga<br/>'agregá una sección de charlas'"] --> C["El agente completa<br/>los huecos con lo probable"]
     C --> R["Algo que funciona<br/>pero no es lo que querías"]
     R --> RE["Rehacer"]
@@ -23,6 +24,7 @@ editar un párrafo:
 
 ```mermaid
 flowchart LR
+    accTitle: Con spec: preguntas, aprobación e implementación contra criterios claros
     I["Idea"] --> S["/spec<br/>Claude pregunta y escribe"]
     S --> A["Vos revisás y aprobás"]
     A --> IM["/implementar<br/>contra criterios claros"]
@@ -36,9 +38,10 @@ historia de usuario con criterios de aceptación y lo que queda fuera.
 
 ```mermaid
 stateDiagram-v2
+    accTitle: Ciclo de vida de una spec: borrador, aprobada, implementada
     [*] --> Borrador: /spec
-    Borrador --> Borrador: Patricio pide cambios
-    Borrador --> Aprobada: Patricio aprueba
+    Borrador --> Borrador: pedís cambios
+    Borrador --> Aprobada: aprobás
     Aprobada --> Implementada: /implementar + /verificar + revisores
     Implementada --> Implementada: se actualiza si cambia el comportamiento
 ```
@@ -77,6 +80,7 @@ development_):
 
 ```mermaid
 flowchart LR
+    accTitle: Ciclo de TDD: rojo, verde, refactor
     R["Rojo<br/>escribir el test<br/>y verlo fallar"] --> G["Verde<br/>el código mínimo<br/>para que pase"]
     G --> RF["Refactor<br/>mejorar el código<br/>con el test en verde"]
     RF --> R
@@ -107,6 +111,7 @@ descartada. Ejemplo real:
 | [0003](../adr/0003-highs-en-web-worker.md)                | Solver HiGHS en un Web Worker                  |
 | [0004](../adr/0004-mapa-en-svg.md)                        | Mapa en SVG                                    |
 | [0005](../adr/0005-desarrollo-guiado-por-specs-con-ia.md) | Desarrollo guiado por specs con Claude Code    |
+| [0006](../adr/0006-diagramas-mermaid-pre-renderizados.md) | Diagramas de esta guía pre-renderizados a SVG  |
 
 Cuándo escribir uno: cuando hubo **alternativas reales** y elegir una tiene
 consecuencias. Un ADR no se edita para cambiar de opinión: se escribe uno
@@ -121,6 +126,7 @@ demás deriva de ahí.
 
 ```mermaid
 flowchart TD
+    accTitle: Recorrido de los datos desde la fuente de verdad hasta el sitio y el CV
     subgraph FV["Fuente de verdad (la escribís vos)"]
         EX["docs/contenido/experiencia.md"]
         PE["docs/contenido/perfil.md"]
@@ -183,4 +189,4 @@ El contrato completo de la experiencia está en
 - Cada dato tiene una fuente de verdad; zod impide que un dato mal formado llegue al sitio.
 
 Anterior: [5 · Skills y subagentes](05-skills-y-subagentes.md) ·
-Siguiente: [7 · Flujos de trabajo](07-flujos-de-trabajo.md)
+Siguiente: [7 · Tutorial: preparar el entorno](07-preparar-el-entorno.md)

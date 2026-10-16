@@ -12,6 +12,7 @@ Así trabaja casi todo el mundo con la IA al principio:
 
 ```mermaid
 sequenceDiagram
+    accTitle: Trabajo con la IA en el chat: vos copiás, pegás y ejecutás
     actor Vos
     participant Chat as IA en el chat
     participant Proyecto as Tu proyecto
@@ -41,6 +42,7 @@ proyecto, y le presta esas herramientas a Claude.
 
 ```mermaid
 sequenceDiagram
+    accTitle: Trabajo con un agente: Claude Code lee, edita y ejecuta los tests por su cuenta
     actor Vos
     participant Agente as Claude Code
     participant Proyecto as Tu proyecto
@@ -66,6 +68,7 @@ que considera que terminó:
 
 ```mermaid
 flowchart TD
+    accTitle: El ciclo del agente: pensar, usar una herramienta, ver el resultado y repetir
     P["Tu pedido"] --> T["Claude piensa qué necesita saber o hacer"]
     T --> H{"¿Necesita una herramienta?"}
     H -- "Sí" --> U["Pide usar una herramienta<br/>(leer, buscar, editar, ejecutar)"]
@@ -109,6 +112,7 @@ dos propiedades que lo explican casi todo:
 
 ```mermaid
 flowchart LR
+    accTitle: Qué entra en el contexto de una sesión
     subgraph CTX["Contexto de una sesión"]
         direction TB
         A["Instrucciones del sistema<br/>(las pone Claude Code)"]
@@ -123,7 +127,7 @@ flowchart LR
 
 El contexto también tiene un **tamaño máximo**. En sesiones largas se llena
 de lecturas y salidas viejas, y Claude Code lo resume automáticamente. Por
-eso conviene una sesión por tarea (lo vemos en el capítulo 9).
+eso conviene una sesión por tarea (lo vemos en el capítulo 15).
 
 ## 1.5 Por qué un agente se equivoca
 
@@ -151,6 +155,7 @@ memoria cada mañana**. ¿Qué harías?
 
 ```mermaid
 flowchart LR
+    accTitle: Cada necesidad de un desarrollador nuevo y la pieza del repositorio que la resuelve
     Q1["Le dejo un documento de bienvenida<br/>que lea cada día"] --> R1["CLAUDE.md"]
     Q2["Le doy notas específicas<br/>según la parte del código"] --> R2[".claude/rules/"]
     Q3["Le escribo los procedimientos<br/>que se repiten"] --> R3["Skills"]

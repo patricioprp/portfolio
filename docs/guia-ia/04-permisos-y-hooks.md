@@ -10,6 +10,7 @@ Este capítulo explica los dos con los ejemplos reales del repo.
 
 ```mermaid
 flowchart LR
+    accTitle: Instrucciones que el modelo decide seguir frente a controles que se ejecutan siempre
     subgraph I["Instrucciones (el modelo decide)"]
         I1["CLAUDE.md"]
         I2["Reglas"]
@@ -39,6 +40,7 @@ específico gana:
 
 ```mermaid
 flowchart LR
+    accTitle: Niveles de configuración: usuario, proyecto y local
     A["~/.claude/settings.json<br/>usuario"] --> B[".claude/settings.json<br/>proyecto · versionado"] --> C[".claude/settings.local.json<br/>local · no versionado"]
 ```
 
@@ -90,6 +92,7 @@ Eventos más usados:
 
 ```mermaid
 sequenceDiagram
+    accTitle: Cómo un hook PreToolUse deja pasar o bloquea una edición, y qué hace después el PostToolUse
     participant Claude
     participant CC as Claude Code
     participant Pre as Hook PreToolUse
@@ -149,6 +152,7 @@ Windows, macOS, Linux y CI, sin depender de herramientas externas.
 
 ```mermaid
 flowchart TD
+    accTitle: Los tres hooks del repositorio en el ciclo de una sesión
     S(["Abrís una sesión"]) --> H1["contexto-sesion.mjs<br/>SessionStart"]
     H1 --> X["Claude trabaja"]
     X --> E{"¿Va a editar o crear un archivo?"}

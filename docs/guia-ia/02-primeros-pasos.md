@@ -7,17 +7,42 @@ salga bien a la primera.
 
 ## 2.1 Instalación
 
-Requisitos: Node.js 18 o superior y una cuenta de Claude (o una API key). En
+Necesitás una cuenta de Claude con acceso a Claude Code (o una API key). En
 Windows, Claude Code usa **Git Bash** para ejecutar comandos, así que tiene
 que estar instalado Git for Windows.
 
+Hay un instalador nativo (la opción recomendada) y también un paquete de
+npm, que requiere Node.js 18 o superior:
+
 ```bash
+# Instalador nativo — macOS, Linux o Git Bash
+curl -fsSL https://claude.ai/install.sh | bash
+
+# Instalador nativo — PowerShell en Windows
+irm https://claude.ai/install.ps1 | iex
+
+# Alternativa con npm
 npm install -g @anthropic-ai/claude-code
 ```
 
-También existe un instalador nativo y extensiones para VS Code y JetBrains;
-la documentación oficial está en https://docs.claude.com/claude-code. La
-primera vez que lo abrís te pide iniciar sesión.
+Los métodos de instalación cambian con el tiempo: antes de instalar, revisá
+la documentación oficial de Claude Code (https://docs.claude.com). También
+hay extensiones para VS Code y JetBrains. La
+primera vez que lo abrís te pide iniciar sesión. El paso a paso completo de
+la instalación (con Node, Git y las cuentas) está en el
+[capítulo 7](07-preparar-el-entorno.md).
+
+### Un laboratorio para practicar
+
+Las prácticas de estos capítulos usan el repositorio de este portfolio como
+laboratorio: cuando dicen "este repo", hablan de él. Clonalo en una carpeta
+aparte para poder probar sin miedo:
+
+```bash
+git clone https://github.com/patricioprp/portfolio.git portfolio-referencia
+cd portfolio-referencia
+npm install
+```
 
 ## 2.2 Abrir una sesión
 
@@ -25,7 +50,7 @@ Una **sesión** es una conversación con Claude dentro de una carpeta. Se abre
 desde la terminal, parado en la raíz del proyecto:
 
 ```bash
-cd C:\Users\ppolito\Desktop\mi-portfolio
+cd portfolio-referencia
 claude
 ```
 
@@ -33,6 +58,7 @@ Al arrancar pasan cosas que no ves pero que importan:
 
 ```mermaid
 sequenceDiagram
+    accTitle: Qué carga Claude Code al abrir una sesión
     actor Vos
     participant CC as Claude Code
     participant Repo as Repositorio
@@ -68,7 +94,7 @@ Leé siempre el comando antes de aceptar. En este repo, lo seguro y frecuente
 ## 2.4 Modos de trabajo
 
 Con **Shift+Tab** cambiás de modo. El modo actual se ve debajo del cuadro de
-texto. Los dos que más vas a usar:
+texto. Los que más vas a usar:
 
 | Modo                  | Qué hace                                                     | Cuándo usarlo                                              |
 | --------------------- | ------------------------------------------------------------ | ---------------------------------------------------------- |
@@ -107,6 +133,7 @@ pedido. Un buen pedido tiene cuatro partes:
 
 ```mermaid
 flowchart LR
+    accTitle: Las cuatro partes de un buen pedido: objetivo, contexto, restricciones y criterio de terminado
     A["Objetivo<br/>qué querés lograr"] --> B["Contexto<br/>dónde mirar, qué existe"]
     B --> C["Restricciones<br/>qué no tocar, qué respetar"]
     C --> D["Criterio de terminado<br/>cómo se comprueba"]
@@ -117,7 +144,7 @@ Ejemplo con este proyecto:
 | Pedido flojo                   | Pedido bueno                                                                                                                                                                                                    |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | "Arreglá el mapa que anda mal" | "En la demo del mapa (`src/islands/mapa/`), al hacer zoom con el teclado el foco se pierde. Reproducilo con un test e2e en `e2e/demo-mapa.spec.ts`, corregilo sin cambiar `src/lib/mapa` y corré `/verificar`." |
-| "Agregá mi trabajo nuevo"      | "`/nueva-experiencia` Entré a una consultora como Tech Lead en marzo de 2027."                                                                                                                                  |
+| "Agregá mi trabajo nuevo"      | "`/nueva-experiencia` Entré a una empresa como Tech Lead en marzo (ejemplo ficticio)."                                                                                                                          |
 | "Mejorá la home"               | "Usá el modo plan. Quiero que la sección de demos se entienda mejor en mobile. Leé `docs/PRODUCTO.md` y proponeme dos alternativas antes de tocar código."                                                      |
 
 Reglas prácticas:

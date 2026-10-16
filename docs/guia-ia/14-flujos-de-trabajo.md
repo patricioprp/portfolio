@@ -1,14 +1,15 @@
-# 7 · Flujos de trabajo paso a paso
+# 14 · Flujos de trabajo paso a paso
 
 Con todas las piezas presentadas, este capítulo las junta en los flujos que
 vas a usar de verdad: una funcionalidad nueva, una experiencia laboral, un
 caso de estudio, un arreglo chico y el camino de un cambio hasta que el sitio
 se publica. Cada flujo muestra qué escribís vos y qué hace Claude.
 
-## 7.1 Cuál flujo usar
+## 14.1 Cuál flujo usar
 
 ```mermaid
 flowchart TD
+    accTitle: Qué flujo usar según lo que quieras hacer
     Q["¿Qué querés hacer?"] --> A["Funcionalidad, página o<br/>sección nueva"]
     Q --> B["Demo nueva"]
     Q --> C["Sumar o actualizar<br/>experiencia laboral"]
@@ -26,10 +27,11 @@ flowchart TD
     E1 --> Z
 ```
 
-## 7.2 Funcionalidad nueva
+## 14.2 Funcionalidad nueva
 
 ```mermaid
 sequenceDiagram
+    accTitle: Flujo completo de una funcionalidad nueva, de la spec al commit
     actor P as Vos
     participant C as Claude
     participant R as Revisores
@@ -37,9 +39,9 @@ sequenceDiagram
     C->>C: Lee PRODUCTO, ARQUITECTURA y specs
     C-->>P: Todas las preguntas juntas
     P->>C: Respuestas
-    C-->>P: docs/specs/006-charlas.md (Borrador) + tarea en el ROADMAP
+    C-->>P: docs/specs/007-charlas.md (Borrador) + tarea en el ROADMAP
     P->>C: "Cambiá X" o "Aprobada"
-    P->>C: /implementar docs/specs/006-charlas.md
+    P->>C: /implementar docs/specs/007-charlas.md
     loop Por cada criterio de aceptación
         C->>C: Test que falla → código → test en verde
     end
@@ -54,12 +56,13 @@ sequenceDiagram
 Lo que te toca a vos: responder las preguntas, aprobar la spec y revisar el
 resultado. El resto lo guían los skills.
 
-## 7.3 Sumar experiencia laboral
+## 14.3 Sumar experiencia laboral
 
 Pensado para que solo tengas que contar lo que hiciste. Hay dos caminos:
 
 ```mermaid
 flowchart TD
+    accTitle: Dos caminos para sumar experiencia laboral y los archivos que se actualizan
     S{"¿Cómo preferís?"} --> E["Entrevista<br/>/nueva-experiencia"]
     S --> B["Borrador<br/>completás docs/contenido/_plantilla-experiencia.md<br/>y ejecutás /nueva-experiencia ruta"]
     E --> Q["Claude pregunta todo junto:<br/>rol, fechas, logros, stack,<br/>qué es confidencial, ¿caso?"]
@@ -82,7 +85,7 @@ Ejemplos de cómo arrancar:
 
 ```text
 /nueva-experiencia
-/nueva-experiencia Entré a una consultora como Tech Lead en marzo de 2027
+/nueva-experiencia Entré a una empresa como Tech Lead en marzo
 /nueva-experiencia docs/contenido/borrador-consultora.md
 ```
 
@@ -90,7 +93,7 @@ Para cada logro, Claude te va a pedir tres cosas: **qué problema había, qué
 hiciste vos (o el equipo, y cuál fue tu parte) y qué cambió**. Es el formato
 que convierte una lista de tareas en impacto, y lo que un recruiter busca.
 
-## 7.4 Caso de estudio
+## 14.4 Caso de estudio
 
 ```text
 /nuevo-caso <slug>
@@ -101,7 +104,7 @@ la estructura y te pide confirmar los datos marcados `TODO(contenido)`.
 Después genera las versiones ES y EN, los diagramas, corre `/verificar` y le
 pide una revisión a `revisor-contenido`.
 
-## 7.5 Arreglo chico
+## 14.5 Arreglo chico
 
 Para un texto mal escrito o un bug puntual no hace falta spec:
 
@@ -113,10 +116,11 @@ Corregilo y corré /verificar.
 Si el bug está en `src/lib/`, pedí primero un test que lo reproduzca: así
 queda cubierto para siempre.
 
-## 7.6 Del cambio a la publicación
+## 14.6 Del cambio a la publicación
 
 ```mermaid
 flowchart LR
+    accTitle: Camino de un cambio desde tu máquina hasta el sitio publicado
     L["Cambio en local"] --> V["/verificar<br/>formato, lint, tipos,<br/>tests, build, e2e"]
     V --> CO["/commit<br/>(Claude, si lo pedís)"]
     CO --> PU["git push<br/>(solo vos)"]
@@ -129,15 +133,15 @@ El CI (`.github/workflows/ci.yml`) repite los mismos pasos que `/verificar`.
 Si algo se escapó en local, aparece ahí en rojo en la pestaña _Actions_ del
 repositorio.
 
-## 7.7 Ejemplo de una conversación real (abreviada)
+## 14.7 Ejemplo de una conversación (ficticia y abreviada)
 
 ```text
-Vos:    /nueva-experiencia Entré a una consultora como Tech Lead en marzo de 2027
+Vos:    /nueva-experiencia Entré a una empresa como Tech Lead en marzo
 
 Claude: Para armarla necesito:
         1. ¿Nombre de la consultora y se puede publicar? ¿Cliente (anónimo)?
         2. Ubicación y modalidad (ej. "Córdoba · Remoto").
-        3. ¿Quadion termina en febrero de 2027?
+        3. ¿Tu trabajo actual termina en febrero? ¿En qué fecha exacta?
         4. Logros: para cada uno, problema → qué hiciste → qué cambió.
         5. Stack que usás de verdad.
         6. ¿Algo confidencial (sistemas, clientes)?
@@ -149,7 +153,7 @@ Claude: Borrador ES / EN: … ¿Lo confirmo?
 
 Vos:    Sí
 
-Claude: Actualicé experiencia.md, experiencia.json (cerré Quadion en 2027-02),
+Claude: Actualicé experiencia.md, experiencia.json (cerré el trabajo anterior),
         agregué 2 tecnologías al stack, cambié el rol del hero y el test e2e,
         regeneré el CV. /verificar: todo OK. revisor-contenido: sin hallazgos
         bloqueantes. ¿Hago el commit?
@@ -162,5 +166,5 @@ Claude: Actualicé experiencia.md, experiencia.json (cerré Quadion en 2027-02),
 - Caso: `/nuevo-caso`. Arreglo chico: directo + `/verificar`.
 - Claude puede commitear si se lo pedís; el push y la publicación son tuyos.
 
-Anterior: [6 · Specs, ADR y fuente de verdad](06-specs-adr-y-fuente-de-verdad.md) ·
-Siguiente: [8 · Armar un proyecto desde cero](08-proyecto-desde-cero.md)
+Anterior: [13 · Tutorial: publicar y mantener](13-publicar-y-mantener.md) ·
+Siguiente: [15 · Buenas prácticas](15-buenas-practicas.md)
