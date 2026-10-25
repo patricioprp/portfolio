@@ -203,7 +203,11 @@ sintaxis rota), sale con código 2 para que Claude lo corrija.
 ## 4.6 Cómo probar un hook
 
 Un hook es un script común: se prueba simulando la entrada que le mandaría
-Claude Code.
+Claude Code. Abrí la terminal **en la raíz del repo** (la carpeta donde está
+`package.json`): la ruta `.claude/hooks/…` es relativa, y desde otra carpeta
+Node no encuentra el script y sale con código 1.
+
+En **Git Bash** (o la terminal de macOS/Linux):
 
 ```bash
 # Debería bloquear (código 2)
@@ -215,11 +219,32 @@ echo '{"tool_input":{"file_path":"src/lib/periodo.ts","new_string":"x"}}' \
   | node .claude/hooks/proteger-archivos.mjs; echo "código: $?"
 ```
 
+Si Git Bash responde `stdin is not a tty` y `código: 1`, el hook ni llegó a
+correr: Git Bash en Windows suele traer el alias `node` → `winpty node.exe`, y
+`winpty` no acepta entrada por tubería (`|`). Escribí `node.exe` en lugar de
+`node`, o quitá el alias en esa terminal con `unalias node`. Claude Code no
+pasa por ese alias, así que los hooks reales no se ven afectados.
+
+En **PowerShell** la sintaxis cambia: no existe la `\` para cortar la línea,
+y el código de salida de un programa está en `$LASTEXITCODE` (`$?` solo dice
+`True` o `False`):
+
+```powershell
+# Debería bloquear (código 2)
+'{"tool_input":{"file_path":"dist/index.html"}}' | node .claude/hooks/proteger-archivos.mjs; "código: $LASTEXITCODE"
+
+# Debería pasar (código 0)
+'{"tool_input":{"file_path":"src/lib/periodo.ts","new_string":"x"}}' | node .claude/hooks/proteger-archivos.mjs; "código: $LASTEXITCODE"
+```
+
+En el primer caso, además del código, vas a ver el motivo del bloqueo: es el
+texto que el hook escribe en `stderr` y que Claude recibe.
+
 Dentro de Claude Code, `/hooks` muestra los hooks activos.
 
 ## 4.7 Práctica guiada
 
-1. Corré los dos comandos de 4.6 en Git Bash y mirá los códigos de salida.
+1. Corré los comandos de 4.6 (en Git Bash o en PowerShell) y mirá los códigos de salida.
 2. En una sesión, pedí: _"Agregá un comentario en `dist/index.html`"_. Vas a
    ver el bloqueo y cómo Claude te explica que hay que cambiar `src/`.
 3. Pedí una edición cualquiera en un `.ts` con comillas dobles y mirá cómo
