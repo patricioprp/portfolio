@@ -121,7 +121,7 @@ corregís antes de que haya tocado un solo archivo.
 | `/memory`               | Abrir y editar los archivos de memoria (`CLAUDE.md`)                           |
 | `/permissions`          | Ver y editar los permisos                                                      |
 | `/hooks`                | Ver los hooks configurados                                                     |
-| `/agents`               | Ver y crear subagentes                                                         |
+| `/list-agents`          | Ver los subagentes y sesiones que están corriendo (no los definidos)           |
 | `/model`                | Cambiar de modelo                                                              |
 | `/help`                 | Lista completa                                                                 |
 | `/verificar`, `/spec`…  | Skills de este proyecto (capítulo 5)                                           |
