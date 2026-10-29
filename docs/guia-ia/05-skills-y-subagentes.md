@@ -135,9 +135,16 @@ flowchart TD
 | `revisor-codigo`    | Que cumpla la spec, que haya tests, separación lógica/UI, tipos, a11y, i18n, CSP, simplicidad |
 | `revisor-contenido` | Privacidad, exactitud contra la fuente, atribución individual/equipo, tono, paridad ES/EN     |
 
-Se usan pidiéndolo ("pedile una revisión a `revisor-codigo`") o desde los
-skills que los incluyen (`/implementar`, `/nuevo-caso`, `/nueva-experiencia`).
-`/agents` muestra los disponibles.
+Se usan pidiéndolo ("pedile una revisión a `revisor-codigo`"), mencionándolo
+con `@` (`@agent-revisor-contenido revisá src/i18n/en.ts`) o desde los skills
+que los incluyen (`/implementar`, `/nuevo-caso`, `/nueva-experiencia`).
+
+Para ver cuáles hay, mirá la carpeta: `ls .claude/agents/` (los del proyecto)
+y `~/.claude/agents/` (los tuyos, para todos los proyectos). No hay un comando
+que los liste: el asistente `/agents` de versiones anteriores ya no existe, y
+`/list-agents` muestra solo los agentes y sesiones que están corriendo en ese
+momento, no los definidos. Para crear o cambiar uno, editá el archivo o
+pedíselo a Claude.
 
 ## 5.3 ¿Qué pieza uso para qué?
 
