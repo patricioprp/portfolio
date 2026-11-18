@@ -6,6 +6,8 @@ agente hace todo eso por su cuenta dentro de tu repositorio. Este capítulo
 explica qué cambia, cómo "piensa" un agente y por qué hace falta darle
 estructura.
 
+> **Aplicación:** En parte — el ciclo del agente se ve en cada sesión de este repo; el resto del capítulo es conceptual.
+
 ## 1.1 El chat: vos sos el intermediario
 
 Así trabaja casi todo el mundo con la IA al principio:
@@ -96,7 +98,7 @@ Las herramientas que vas a ver todo el tiempo:
 | `Edit`      | Reemplaza un fragmento de un archivo              | Editar y guardar            |
 | `Write`     | Crea o sobrescribe un archivo completo            | Archivo nuevo               |
 | `Bash`      | Ejecuta un comando en la terminal                 | `npm test`, `git diff`      |
-| `Agent`     | Delega una tarea a un subagente (capítulos 5 y 6) | Pedirle algo a un compañero |
+| `Agent`     | Delega una tarea a un subagente (capítulos 5 y 7) | Pedirle algo a un compañero |
 
 ## 1.4 El concepto más importante: el contexto
 
@@ -127,7 +129,7 @@ flowchart LR
 
 El contexto también tiene un **tamaño máximo**. En sesiones largas se llena
 de lecturas y salidas viejas, y Claude Code lo resume automáticamente. Por
-eso conviene una sesión por tarea (lo vemos en el capítulo 16).
+eso conviene una sesión por tarea (lo vemos en el capítulo 18).
 
 ## 1.5 Por qué un agente se equivoca
 

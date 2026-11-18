@@ -1,11 +1,13 @@
-# 13 · Tutorial: casos de estudio y demos
+# 14 · Tutorial: casos de estudio y demos
 
 Los casos de estudio y las demos son lo que separa a este portfolio de un CV
 en formato web: no dicen "sé hacer X", lo **muestran**. En este capítulo
 pasás tus borradores de `docs/casos/` al sitio y, si un caso lo merece,
 construís una demo que se pueda usar en el navegador.
 
-## 13.1 Qué hace bueno a un caso de estudio
+> **Aplicación:** En este repo — `docs/casos/`, `src/content/casos/` y las demos de `src/lib/`.
+
+## 14.1 Qué hace bueno a un caso de estudio
 
 ```mermaid
 flowchart LR
@@ -26,7 +28,7 @@ página de caso de la referencia empieza con un resumen "En 30 segundos"
 | "Usé muchas tecnologías"         | "Lo modelé como un problema de corte con programación lineal entera: menos acero, cumpliendo la demanda"            |
 | "Mejoré mucho el rendimiento"    | "La consulta pasó de X s a Y ms, medido en producción" (con tus números reales)                                     |
 
-## 13.2 Del borrador a la página
+## 14.2 Del borrador a la página
 
 Primero, una fase con su spec para la **colección de casos** (el esquema que
 valida cada caso y la plantilla de página). Pedila con `/spec` mirando cómo
@@ -59,10 +61,10 @@ sequenceDiagram
     C-->>Vos: Caso listo
 ```
 
-El esquema con zod (capítulo 7) hace que un caso mal cargado (resumen
+El esquema con zod (capítulo 8) hace que un caso mal cargado (resumen
 demasiado largo, métrica sin etiqueta) rompa el build en lugar de publicarse.
 
-## 13.3 Las demos: probar en lugar de contar
+## 14.3 Las demos: probar en lugar de contar
 
 Una demo vale la pena cuando un caso afirma algo que se puede **usar**:
 
@@ -95,10 +97,10 @@ demo se puede rehacer sin tocar las reglas.
 > isla de React aparte. Mirá cómo están armadas las demos de
 > `../portfolio-referencia` (`src/lib/` y `src/islands/`)."_
 
-Cuando tengas la primera, sumá el skill `/nueva-demo` adaptado (capítulo 11):
+Cuando tengas la primera, sumá el skill `/nueva-demo` adaptado (capítulo 12):
 la segunda va a salir mucho más rápido.
 
-## 13.4 Métricas ilustrativas
+## 14.4 Métricas ilustrativas
 
 Si la demo produce un número ("ahorro estimado de ~X %"), es una métrica
 **ilustrativa**: solo puede aparecer junto a la demo, con una aclaración, y
@@ -119,5 +121,5 @@ test e2e.
 - Una demo convierte una afirmación en algo que se puede usar.
 - Lógica en `src/lib/` con tests; la isla solo dibuja.
 
-Anterior: [12 · Tutorial: construir el sitio con specs](12-construir-el-sitio.md) ·
-Siguiente: [14 · Tutorial: publicar y mantener](14-publicar-y-mantener.md)
+Anterior: [13 · Tutorial: construir el sitio con specs](13-construir-el-sitio.md) ·
+Siguiente: [15 · Tutorial: publicar y mantener](15-publicar-y-mantener.md)

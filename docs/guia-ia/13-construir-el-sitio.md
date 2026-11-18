@@ -1,11 +1,13 @@
-# 12 · Tutorial: construir el sitio con specs
+# 13 · Tutorial: construir el sitio con specs
 
 Con la base lista, se construye el sitio por **fases**: cada fase es una
 spec que vos aprobás y Claude implementa. Este capítulo muestra cómo armar
 el roadmap, cómo escribir la spec de la home paso a paso y cómo revisar el
 resultado sin perder el control del diseño.
 
-## 12.1 El roadmap por fases
+> **Aplicación:** En este repo — las fases de `docs/ROADMAP.md` y las páginas de `src/pages/`.
+
+## 13.1 El roadmap por fases
 
 > _"Leé `docs/PRODUCTO.md` y proponé `docs/ROADMAP.md` con fases chicas y
 > casillas `- [ ]`, tomando como ejemplo `../portfolio-referencia/docs/ROADMAP.md`.
@@ -22,9 +24,9 @@ flowchart TD
     F4 --> F5["Fase 5 · Calidad y lanzamiento<br/>accesibilidad, inglés (opcional), imágenes OG"]
 ```
 
-## 12.2 Una fase, de punta a punta
+## 13.2 Una fase, de punta a punta
 
-Para cada fase el ciclo es siempre el mismo (capítulos 7 y 15):
+Para cada fase el ciclo es siempre el mismo (capítulos 8 y 17):
 
 ```mermaid
 sequenceDiagram
@@ -61,7 +63,7 @@ Lo que tenés que revisar en el borrador:
 - **Datos:** ¿todo sale de `docs/`? Lo que falte tiene que estar como
   `TODO(contenido)`, no inventado.
 
-## 12.3 El diseño sin perder el control
+## 13.3 El diseño sin perder el control
 
 La IA tiende a diseños genéricos si no le das dirección. Tres técnicas:
 
@@ -77,7 +79,7 @@ Y siempre: `npm run dev`, mirá el resultado en el navegador (también en el
 celular) y pedí ajustes concretos ("el título del hero ocupa tres líneas en
 mobile; que entre en dos").
 
-## 12.4 Reglas por carpeta, cuando aparezcan
+## 13.4 Reglas por carpeta, cuando aparezcan
 
 A medida que se crean carpetas con convenciones propias, sumá reglas
 (capítulo 3):
@@ -87,7 +89,7 @@ A medida que se crean carpetas con convenciones propias, sumá reglas
 
 Lo mismo para `src/islands/**` (islas de React), contenido e `e2e/**`.
 
-## 12.5 Idioma inglés (opcional)
+## 13.5 Idioma inglés (opcional)
 
 Si tu público es internacional, sumalo como fase aparte cuando el sitio en
 español esté terminado: rutas bajo `/en/`, diccionarios de textos con el
@@ -108,5 +110,5 @@ referencia lo resuelve en `src/i18n/`.
 - El diseño se dirige con alternativas, referencias y tokens.
 - Las reglas por carpeta aparecen cuando aparecen las carpetas.
 
-Anterior: [11 · Tutorial: Claude Code en tu repositorio](11-claude-code-en-tu-repo.md) ·
-Siguiente: [13 · Tutorial: casos de estudio y demos](13-casos-y-demos.md)
+Anterior: [12 · Tutorial: Claude Code en tu repositorio](12-claude-code-en-tu-repo.md) ·
+Siguiente: [14 · Tutorial: casos de estudio y demos](14-casos-y-demos.md)

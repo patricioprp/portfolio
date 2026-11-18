@@ -39,7 +39,7 @@ npm run e2e        # Playwright (la primera vez: npx playwright install chromium
 El proyecto está preparado para desarrollarse con
 [Claude Code](https://claude.com/claude-code) con un flujo guiado por specs.
 El detalle de cada pieza está en
-[`docs/guia-ia/`](docs/guia-ia/README.md), una guía en 17 capítulos con diagramas (fundamentos, paso a paso y referencia) que también se publica en el sitio.
+[`docs/guia-ia/`](docs/guia-ia/README.md), una guía en 19 capítulos con diagramas (fundamentos, paso a paso y referencia; cada capítulo indica si se aplica en este repo) que también se publica en el sitio.
 
 ```text
 /spec <idea>          → docs/specs/NNN-slug.md (borrador para aprobar)
@@ -53,4 +53,5 @@ El detalle de cada pieza está en
 
 - Subagentes: `revisor-codigo` (diff) y `revisor-contenido` (texto), de solo lectura, y `traductor` (ES → EN). La sesión principal los orquesta: explora en paralelo, delega lo independiente y consolida las revisiones ([ADR 0007](docs/adr/0007-orquestacion-de-agentes.md)).
 - Reglas por carpeta en `.claude/rules/`; hooks de formato y protección en `.claude/settings.json`.
-- CI en `.github/workflows/ci.yml` con las mismas verificaciones.
+- CI en `.github/workflows/ci.yml` con las mismas verificaciones, y Claude en GitHub a pedido (`@claude` o la etiqueta `revision-claude`) en `.github/workflows/claude.yml`.
+- Servidor MCP de Playwright en `.mcp.json` para revisar páginas en un navegador real ([ADR 0008](docs/adr/0008-mcp-y-claude-en-ci.md)).

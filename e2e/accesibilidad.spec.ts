@@ -21,7 +21,9 @@ const PAGINAS = [
   '/en/demos/formulario-dinamico/',
   '/guia/',
   '/guia/permisos-y-hooks/',
+  '/guia/mcp/',
   '/guia/orquestacion-de-agentes/',
+  '/guia/claude-code-en-ci/',
   '/guia/preparar-el-entorno/'
 ]
 

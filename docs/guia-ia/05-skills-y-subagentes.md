@@ -7,6 +7,8 @@ son asistentes especializados con su propio contexto y permisos limitados.
 Este capítulo explica los dos, cómo están escritos en este repo y cómo elegir
 entre todas las piezas vistas hasta ahora.
 
+> **Aplicación:** En este repo — `.claude/skills/` y `.claude/agents/`; `context: fork` se explica pero no se usa.
+
 ## 5.1 Skills: procedimientos con nombre
 
 Un skill es una carpeta dentro de `.claude/skills/` con un archivo
@@ -43,6 +45,38 @@ Entrada: `$ARGUMENTS` …
 | `argument-hint`             | Ayuda que aparece al escribir el comando                                                       |
 | `disable-model-invocation`  | Si es `true`, solo se ejecuta cuando vos lo escribís (ej. `/commit`)                           |
 | `$ARGUMENTS` (en el cuerpo) | Se reemplaza por lo que escribas después del comando                                           |
+| `allowed-tools`             | Herramientas que el skill usa **sin pedir permiso** mientras está activo                       |
+| `context: fork` + `agent:`  | El skill corre en un subagente aislado (por ejemplo, `agent: Explore`) y devuelve un resultado |
+
+### `allowed-tools`: un skill que no interrumpe
+
+`/verificar` corre siempre los mismos comandos. En lugar de depender de que
+cada uno esté autorizado en los settings, el skill los declara
+([documentación](https://code.claude.com/docs/en/skills)):
+
+```yaml
+---
+name: verificar
+allowed-tools: Bash(npm run format) Bash(npm run lint) Bash(npm run check) Bash(npm test) Bash(npm run build) …
+---
+```
+
+Dos cosas que conviene tener claras:
+
+- `allowed-tools` **pre-aprueba**, no restringe. Si el skill necesita otra
+  herramienta, la pide como siempre, y las reglas `deny` de los settings
+  siguen valiendo.
+- El skill queda autosuficiente: funciona igual en un repo con otros
+  permisos, algo que importa si lo compartís con otros proyectos.
+
+### `context: fork`: un skill que trabaja aparte
+
+Con `context: fork`, el contenido del skill pasa a ser la tarea de un
+subagente, que trabaja con contexto propio y devuelve solo el resultado
+([documentación](https://code.claude.com/docs/en/skills)). Sirve
+para skills de investigación o de revisión que leen mucho. Este repo no lo
+usa: sus skills necesitan la conversación con vos (preguntar, confirmar), y la
+delegación la decide el orquestador (capítulo 7).
 
 ### Qué pasa al invocarlo
 
@@ -138,7 +172,7 @@ flowchart TD
 
 Los dos revisores no tienen `Edit` ni `Write`: reportan, y la sesión principal decide. `traductor`
 es el único que escribe, y por eso tiene una sola tarea, archivos indicados en
-cada encargo y otro agente que controla su resultado (capítulo 6).
+cada encargo y otro agente que controla su resultado (capítulo 7).
 
 Se usan pidiéndolo ("pedile una revisión a `revisor-codigo`"), mencionándolo
 con `@` (`@agent-revisor-contenido revisá src/i18n/en.ts`) o desde los skills
@@ -197,8 +231,8 @@ flowchart TD
 - Subagente = asistente con contexto propio y herramientas limitadas; ideal
   para revisar o para una tarea acotada.
 - Cuando son varios trabajando para una misma tarea, hace falta orquestarlos:
-  es el tema del capítulo 6.
+  es el tema del capítulo 7.
 - Cada pieza tiene su lugar: usá el árbol de 5.3 para decidir.
 
 Anterior: [4 · Permisos y hooks](04-permisos-y-hooks.md) ·
-Siguiente: [6 · Orquestación de agentes](06-orquestacion-de-agentes.md)
+Siguiente: [6 · MCP: conectar herramientas](06-mcp.md)

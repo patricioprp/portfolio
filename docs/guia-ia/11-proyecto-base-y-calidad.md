@@ -1,4 +1,4 @@
-# 10 · Tutorial: proyecto base y calidad
+# 11 · Tutorial: proyecto base y calidad
 
 Con el contenido definido, toca crear el proyecto: Astro con React,
 TypeScript y Tailwind, y las herramientas que comprueban la calidad
@@ -6,7 +6,9 @@ TypeScript y Tailwind, y las herramientas que comprueban la calidad
 automatizada va antes de la primera funcionalidad**. Sin ella, ni Claude ni
 vos tienen forma de saber si algo se rompió.
 
-## 10.1 El stack y por qué
+> **Aplicación:** En este repo — `package.json`, Vitest, Playwright y `/verificar`.
+
+## 11.1 El stack y por qué
 
 | Pieza          | Elección                | Por qué (ver [ADR 0001](../adr/0001-astro-con-islas-react.md)) |
 | -------------- | ----------------------- | -------------------------------------------------------------- |
@@ -20,10 +22,10 @@ vos tienen forma de saber si algo se rompió.
 Si trabajás con otro stack (Next.js, Vue, Laravel), el **proceso** del
 tutorial es el mismo; cambian los comandos.
 
-## 10.2 Crear el proyecto
+## 11.2 Crear el proyecto
 
 El asistente de Astro pide una carpeta vacía, y la tuya ya tiene `docs/` y
-`.gitignore` (capítulo 9). Por eso se crea el proyecto en una carpeta
+`.gitignore` (capítulo 10). Por eso se crea el proyecto en una carpeta
 temporal y se copia al repositorio (en Git Bash, parado en `mi-portfolio`):
 
 ```bash
@@ -49,7 +51,7 @@ Y en `tsconfig.json` usá la configuración más estricta:
 
 Comprobá que arranca: `npm run dev` y abrí http://localhost:4321.
 
-## 10.3 Las herramientas de calidad
+## 11.3 Las herramientas de calidad
 
 Esto ya conviene pedírselo a Claude. Abrí una sesión
 (`claude --add-dir ../portfolio-referencia`) y pedí:
@@ -80,7 +82,7 @@ flowchart LR
 | Vitest        | Lógica que deja de cumplir sus reglas                                    |
 | Playwright    | Páginas rotas, flujos que fallan, violaciones de accesibilidad (con axe) |
 
-## 10.4 `CLAUDE.md`
+## 11.4 `CLAUDE.md`
 
 Ahora que hay código, generá el borrador con:
 
@@ -99,7 +101,7 @@ Y después completalo con lo que solo vos sabés:
 Revisalo línea por línea: es lo que Claude va a leer en **cada** sesión
 (capítulo 3).
 
-## 10.5 El skill `/verificar`
+## 11.5 El skill `/verificar`
 
 El primer skill que vale la pena tener: corre todas las verificaciones en
 orden y frena en el primer error.
@@ -110,7 +112,7 @@ orden y frena en el primer error.
 Probalo escribiendo `/verificar`. A partir de ahora, ninguna tarea está
 terminada si `/verificar` no pasa.
 
-## 10.6 Commit
+## 11.6 Commit
 
 ```text
 /verificar
@@ -138,5 +140,5 @@ git push
 - `/init` genera el `CLAUDE.md`; vos lo completás con tus reglas.
 - `/verificar` es la definición de "terminado".
 
-Anterior: [9 · Tutorial: producto y contenido](09-producto-y-contenido.md) ·
-Siguiente: [11 · Tutorial: Claude Code en tu repositorio](11-claude-code-en-tu-repo.md)
+Anterior: [10 · Tutorial: producto y contenido](10-producto-y-contenido.md) ·
+Siguiente: [12 · Tutorial: Claude Code en tu repositorio](12-claude-code-en-tu-repo.md)

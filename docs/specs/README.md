@@ -20,15 +20,16 @@ Code (que implementa).
 
 ## Índice
 
-| Spec                                                            | Estado       | Qué cubre                                                     |
-| --------------------------------------------------------------- | ------------ | ------------------------------------------------------------- |
-| [001 · Optimizador de viguetas](001-demo-optimizador.md)        | Implementada | Demo de corte de acero con programación lineal entera         |
-| [002 · Formulario dinámico](002-demo-formulario.md)             | Implementada | Planilla en JSON con visibilidad condicional y puntaje        |
-| [003 · Simulador de contingencias](003-demo-contingencias.md)   | Implementada | Portal ficticio con mantenimiento, trámites apagados y avisos |
-| [004 · Mapa de beneficios](004-demo-mapa.md)                    | Implementada | Mapa SVG con clusters, carrusel, listado y canje              |
-| [005 · Experiencia laboral](005-experiencia.md)                 | Implementada | Modelo de datos de la línea de tiempo y alta de experiencias  |
-| [006 · Guía de IA en el sitio](006-guia-ia-en-el-sitio.md)      | Implementada | La guía "Hacé tu portfolio con IA" en /guia/                  |
-| [007 · Orquestación de agentes](007-orquestacion-de-agentes.md) | Implementada | Orquestación en `.claude/` y capítulo 6 de la guía            |
+| Spec                                                            | Estado       | Qué cubre                                                           |
+| --------------------------------------------------------------- | ------------ | ------------------------------------------------------------------- |
+| [001 · Optimizador de viguetas](001-demo-optimizador.md)        | Implementada | Demo de corte de acero con programación lineal entera               |
+| [002 · Formulario dinámico](002-demo-formulario.md)             | Implementada | Planilla en JSON con visibilidad condicional y puntaje              |
+| [003 · Simulador de contingencias](003-demo-contingencias.md)   | Implementada | Portal ficticio con mantenimiento, trámites apagados y avisos       |
+| [004 · Mapa de beneficios](004-demo-mapa.md)                    | Implementada | Mapa SVG con clusters, carrusel, listado y canje                    |
+| [005 · Experiencia laboral](005-experiencia.md)                 | Implementada | Modelo de datos de la línea de tiempo y alta de experiencias        |
+| [006 · Guía de IA en el sitio](006-guia-ia-en-el-sitio.md)      | Implementada | La guía "Hacé tu portfolio con IA" en /guia/                        |
+| [007 · Orquestación de agentes](007-orquestacion-de-agentes.md) | Implementada | Orquestación en `.claude/` y capítulo de orquestación (hoy el 7)    |
+| [008 · Claude Code completo](008-claude-code-completo.md)       | Implementada | MCP, Claude en CI, funciones que faltaban y etiquetas de aplicación |
 
 Las specs 001 a 004 documentan demos que se planificaron en
 `docs/ARQUITECTURA.md` y `docs/ROADMAP.md`; acá quedan con el formato común

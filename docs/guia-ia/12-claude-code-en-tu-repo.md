@@ -1,12 +1,14 @@
-# 11 · Tutorial: Claude Code en tu repositorio
+# 12 · Tutorial: Claude Code en tu repositorio
 
 En este capítulo armás la "caja de herramientas" de Claude Code en tu
 proyecto: permisos, hooks, skills, subagentes (revisores y traductor), plantillas de spec y
 ADR, y el CI. Casi todo se copia del repositorio de referencia y se adapta:
-lo importante es que entiendas qué hace cada pieza (capítulos 3 a 7) para
+lo importante es que entiendas qué hace cada pieza (capítulos 3 a 8) para
 poder ajustarla a tu caso.
 
-## 11.1 Lo que vas a tener al final
+> **Aplicación:** En este repo — `.claude/`, `.mcp.json`, `docs/specs/`, `docs/adr/` y `.github/workflows/ci.yml`.
+
+## 12.1 Lo que vas a tener al final
 
 ```mermaid
 flowchart TD
@@ -14,6 +16,7 @@ flowchart TD
     R["mi-portfolio/"] --> CM["CLAUDE.md"]
     R --> CL[".claude/"]
     R --> GH[".github/workflows/ci.yml"]
+    R --> MC[".mcp.json<br/>servidor MCP de Playwright"]
     R --> DC["docs/specs/ y docs/adr/"]
     CL --> ST["settings.json<br/>permisos + hooks"]
     CL --> HK["hooks/<br/>4 scripts Node"]
@@ -22,7 +25,7 @@ flowchart TD
     CL --> RU["rules/<br/>se agregan a medida que crecen las carpetas"]
 ```
 
-## 11.2 Permisos
+## 12.2 Permisos
 
 > _"Copiá `../portfolio-referencia/.claude/settings.json` a `.claude/`, por
 > ahora solo la sección `permissions`. Ajustá la lista `allow` a los scripts
@@ -36,10 +39,10 @@ Revisá el resultado con este criterio (capítulo 4):
 | `ask`   | `git commit`, `npm install`                                    |
 | `deny`  | `git push`, `rm -rf`, leer `.env`                              |
 
-El `git push` prohibido no es desconfianza: en el capítulo 14 vas a conectar
+El `git push` prohibido no es desconfianza: en el capítulo 15 vas a conectar
 Netlify, y cada push publica el sitio. Publicar tiene que ser una decisión tuya.
 
-## 11.3 Hooks
+## 12.3 Hooks
 
 > _"Copiá los scripts de `../portfolio-referencia/.claude/hooks/` (tres hooks
 > y el módulo compartido `leer-entrada.mjs`) y
@@ -77,7 +80,7 @@ flowchart LR
 Si la lista de archivos protegidos no coincide con tu proyecto (por
 ejemplo, no tenés `legacy/`), pedile a Claude que la ajuste.
 
-## 11.4 Skills
+## 12.4 Skills
 
 Copiá y **adaptá** (los de la referencia mencionan a su autor y sus rutas):
 
@@ -89,17 +92,17 @@ Copiá y **adaptá** (los de la referencia mencionan a su autor y sus rutas):
 
 | Skill                | Lo vas a usar para                       | Capítulo |
 | -------------------- | ---------------------------------------- | -------- |
-| `/verificar`         | Saber si todo sigue funcionando          | 10       |
-| `/spec`              | Acordar qué construir antes de programar | 12       |
-| `/implementar`       | Construir una spec aprobada con TDD      | 12       |
-| `/nuevo-caso`        | Pasar un caso de `docs/casos/` al sitio  | 13       |
-| `/nueva-experiencia` | Sumar un trabajo nuevo sin tocar código  | 15       |
+| `/verificar`         | Saber si todo sigue funcionando          | 11       |
+| `/spec`              | Acordar qué construir antes de programar | 13       |
+| `/implementar`       | Construir una spec aprobada con TDD      | 13       |
+| `/nuevo-caso`        | Pasar un caso de `docs/casos/` al sitio  | 14       |
+| `/nueva-experiencia` | Sumar un trabajo nuevo sin tocar código  | 17       |
 | `/commit`            | Commits con formato Conventional Commits | —        |
 
-`/nueva-demo` conviene sumarlo cuando tengas tu primera demo (capítulo 13):
+`/nueva-demo` conviene sumarlo cuando tengas tu primera demo (capítulo 14):
 lista los archivos de una demo y depende de cómo armes la tuya.
 
-## 11.5 Subagentes y orquestación
+## 12.5 Subagentes y orquestación
 
 > _"Copiá `../portfolio-referencia/.claude/agents/revisor-codigo.md`,
 > `revisor-contenido.md` y `traductor.md` y adaptalos: mi nombre, mis fuentes
@@ -111,7 +114,7 @@ Revisá el encabezado `tools:` de cada uno (capítulo 5): los revisores sin
 solo idioma, no copies `traductor.md` y sacá el paso del inglés de
 `/nuevo-caso` y `/nueva-experiencia`.
 
-Los skills que copiaste en 11.4 ya traen la orquestación (capítulo 6):
+Los skills que copiaste en 12.4 ya traen la orquestación (capítulo 7):
 `/spec` e `/implementar` exploran en paralelo, y `/nuevo-caso` y
 `/nueva-experiencia` le pasan el inglés al traductor. Para comprobar que
 funciona, pedí:
@@ -124,11 +127,11 @@ Lanzá en paralelo dos agentes Explore: uno que resuma .claude/skills/ y otro
 Los dos tienen que arrancar a la vez, y en tu sesión solo tienen que entrar
 los dos resúmenes.
 
-## 11.6 Specs, ADR y CI
+## 12.6 Specs, ADR y CI
 
 > _"Copiá `docs/specs/_plantilla.md`, `docs/specs/README.md` (vaciá el
 > índice) y `docs/adr/README.md` de la referencia. Escribí el ADR 0001 con
-> el stack que elegimos en el capítulo 10 y sus alternativas. Después copiá
+> el stack que elegimos en el capítulo 11 y sus alternativas. Después copiá
 > `.github/workflows/ci.yml`."_
 
 El CI corre en GitHub las mismas verificaciones técnicas que `/verificar`
@@ -136,7 +139,20 @@ El CI corre en GitHub las mismas verificaciones técnicas que `/verificar`
 queda en tu máquina, porque la lista no está en git), en cada
 push a `main` y en cada pull request.
 
-## 11.7 Commit y prueba de fuego
+## 12.7 Servidor MCP del proyecto
+
+> _"Copiá `../portfolio-referencia/.mcp.json` a mi repo y agregá a
+> `.claude/settings.json` los mismos permisos `mcp__playwright__…` que tiene
+> la referencia: las de navegar y mirar en `allow`, las que ejecutan código
+> en `ask`."_
+
+Cerrá la sesión y volvé a abrir `claude`: te va a preguntar si aprobás el
+servidor `playwright` del proyecto. Aprobalo y comprobalo desde otra
+terminal con `claude mcp list`. Qué es y por qué se aprueba a mano está en
+el capítulo 6. Claude en GitHub Actions viene después, en el capítulo 16,
+cuando el sitio ya esté publicado.
+
+## 12.8 Commit y prueba de fuego
 
 ```text
 /verificar
@@ -153,6 +169,7 @@ Después de commitear, hacé el push vos (`git push`) y mirá la pestaña
 - [ ] Después de una edición de Claude, el archivo queda formateado solo.
 - [ ] `/spec`, `/implementar`, `/commit` y los subagentes aparecen y hablan de **tu** proyecto.
 - [ ] Dos agentes `Explore` pedidos en un mismo mensaje corren en paralelo.
+- [ ] `claude mcp list` muestra `playwright` conectado.
 - [ ] El CI está en verde en GitHub.
 
 ## Resumen
@@ -162,5 +179,5 @@ Después de commitear, hacé el push vos (`git push`) y mirá la pestaña
 - Skills y agentes: se copian y se adaptan a tu nombre, rutas y proyecto.
 - Plantillas de spec y ADR, y el CI como red final.
 
-Anterior: [10 · Tutorial: proyecto base y calidad](10-proyecto-base-y-calidad.md) ·
-Siguiente: [12 · Tutorial: construir el sitio con specs](12-construir-el-sitio.md)
+Anterior: [11 · Tutorial: proyecto base y calidad](11-proyecto-base-y-calidad.md) ·
+Siguiente: [13 · Tutorial: construir el sitio con specs](13-construir-el-sitio.md)

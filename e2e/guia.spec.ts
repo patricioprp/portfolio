@@ -72,13 +72,15 @@ test.describe('páginas de la guía', () => {
     const numeros = await page
       .locator('section[id] ol > li > span[aria-hidden="true"]')
       .allTextContents()
-    expect(numeros).toHaveLength(17)
+    expect(numeros).toHaveLength(19)
     expect(numeros.map(Number)).toEqual(numeros.map((_, i) => i + 1))
     const capitulos = page.locator('section[id] ol > li')
     await expect(capitulos.first()).toContainText(
       'De chatear a trabajar con un agente'
     )
-    await expect(capitulos.nth(5)).toContainText('Orquestación de agentes')
+    await expect(capitulos.nth(5)).toContainText('MCP: conectar herramientas')
+    await expect(capitulos.nth(6)).toContainText('Orquestación de agentes')
+    await expect(capitulos.nth(15)).toContainText('Claude Code en CI')
     await expect(capitulos.last()).toContainText('Glosario')
   })
 
@@ -99,10 +101,45 @@ test.describe('páginas de la guía', () => {
     await expect(page).toHaveURL(/\/guia\/specs-adr-y-fuente-de-verdad\/$/)
   })
 
+  test('cada capítulo dice si se aplica en este repo', async ({ page }) => {
+    await page.goto('/guia/')
+    const capitulos = page.locator('section[id] ol > li')
+    const total = await capitulos.count()
+    await expect(
+      capitulos.filter({
+        hasText: /Aplicación: (En este repo|En parte|Solo teórico)/
+      })
+    ).toHaveCount(total)
+
+    await page.goto('/guia/permisos-y-hooks/')
+    await expect(page.getByText('Aplicación: En este repo')).toBeVisible()
+
+    await page.goto('/guia/mcp/')
+    await expect(page.getByText('Aplicación: En parte')).toBeVisible()
+    // La etiqueta del Markdown no se repite dentro del contenido.
+    await expect(
+      page.locator('.guia-contenido').getByText('Aplicación:')
+    ).toHaveCount(0)
+  })
+
+  test('los capítulos nuevos de MCP y CI tienen diagramas con texto alternativo', async ({
+    page
+  }) => {
+    for (const ruta of ['/guia/mcp/', '/guia/claude-code-en-ci/']) {
+      await page.goto(ruta)
+      const imagenes = page.locator('figure.diagrama img:visible')
+      expect(await imagenes.count()).toBeGreaterThanOrEqual(1)
+      for (const imagen of await imagenes.all()) {
+        await expect(imagen).toHaveAttribute('alt', /\S/)
+      }
+    }
+  })
+
   test('los capítulos renumerados conservan su URL', async ({ page }) => {
     for (const [ruta, titulo] of [
       ['/guia/specs-adr-y-fuente-de-verdad/', /Specs, ADR/],
       ['/guia/preparar-el-entorno/', /preparar el entorno/],
+      ['/guia/orquestacion-de-agentes/', /Orquestación de agentes/],
       ['/guia/glosario/', /Glosario/]
     ] as const) {
       const respuesta = await page.goto(ruta)

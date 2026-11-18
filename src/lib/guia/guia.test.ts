@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
+  capitulosSinAplicacion,
   dimensionesDeSvg,
   enlacesACapitulos,
+  extraerAplicacion,
   esNavegacionDeCapitulo,
   extraerDiagramas,
   extraerResumen,
@@ -161,6 +163,92 @@ describe('transformarMarkdown', () => {
     const r = transformarMarkdown(md.replaceAll('\n', '\r\n'), () => '<f></f>')
     expect(r).toContain('<f></f>')
     expect(r).not.toContain('Siguiente: [3')
+  })
+
+  it('quita la etiqueta de aplicación (el sitio la muestra aparte), aunque ocupe varias líneas', () => {
+    const conEtiqueta = [
+      '# 6 · MCP',
+      '',
+      'Resumen.',
+      '',
+      '> **Aplicación:** En parte — el repo usa Playwright;',
+      '> el diseño de herramientas es teoría.',
+      '',
+      '> Una cita normal se queda.',
+      ''
+    ].join('\n')
+    const r = transformarMarkdown(conEtiqueta, () => '')
+    expect(r).not.toContain('Aplicación')
+    expect(r).not.toContain('es teoría')
+    expect(r).toContain('> Una cita normal se queda.')
+    expect(r).toContain('Resumen.')
+  })
+})
+
+describe('extraerAplicacion', () => {
+  const capitulo = (etiqueta: string) =>
+    `# 1 · T\n\nResumen.\n\n> **Aplicación:** ${etiqueta}\n\n## 1.1 Algo\n`
+
+  it('reconoce los tres tipos y separa el detalle', () => {
+    expect(
+      extraerAplicacion(capitulo('En este repo — `.mcp.json` en la raíz'))
+    ).toEqual({
+      tipo: 'repo',
+      etiqueta: 'En este repo',
+      detalle: '.mcp.json en la raíz'
+    })
+    expect(extraerAplicacion(capitulo('En parte'))).toEqual({
+      tipo: 'parcial',
+      etiqueta: 'En parte',
+      detalle: ''
+    })
+    expect(
+      extraerAplicacion(capitulo('Solo teórico — no está en el portfolio'))
+        ?.tipo
+    ).toBe('teorico')
+  })
+
+  it('une el detalle cuando la etiqueta ocupa varias líneas', () => {
+    const md =
+      '# 1 · T\n\nResumen.\n\n> **Aplicación:** En parte — uno,\n> dos.\n'
+    expect(extraerAplicacion(md)?.detalle).toBe('uno, dos.')
+  })
+
+  it('solo cuenta la etiqueta del encabezado, no un ejemplo dentro del capítulo', () => {
+    const ejemplo = [
+      '# 1 · T',
+      '',
+      'Resumen.',
+      '',
+      '## 1.1 Formato',
+      '',
+      `${FENCE}markdown`,
+      '> **Aplicación:** En este repo',
+      FENCE,
+      ''
+    ].join('\n')
+    expect(extraerAplicacion(ejemplo)).toBeNull()
+    expect(transformarMarkdown(ejemplo, () => '')).toContain(
+      '> **Aplicación:** En este repo'
+    )
+  })
+
+  it('devuelve null si no hay etiqueta o el tipo no es válido', () => {
+    expect(extraerAplicacion('# 1 · T\n\nResumen.\n')).toBeNull()
+    expect(extraerAplicacion(capitulo('A veces'))).toBeNull()
+  })
+})
+
+describe('capitulosSinAplicacion', () => {
+  it('lista los capítulos sin etiqueta válida e ignora los archivos que no son capítulos', () => {
+    const con = '# 1 · A\n\nR.\n\n> **Aplicación:** En este repo\n'
+    expect(
+      capitulosSinAplicacion([
+        { archivo: '01-a.md', markdown: con },
+        { archivo: '02-b.md', markdown: '# 2 · B\n\nR.\n' },
+        { archivo: 'README.md', markdown: '# Guía\n' }
+      ])
+    ).toEqual(['02-b.md'])
   })
 })
 

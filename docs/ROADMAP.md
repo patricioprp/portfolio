@@ -121,6 +121,24 @@ Spec: `docs/specs/007-orquestacion-de-agentes.md`.
 - [x] Capítulo "6 · Orquestación de agentes" y renumeración de la guía a 17 capítulos (fundamentos 1–7, paso a paso 8–14, referencia 15–17)
 - [x] Capítulos 1, 5, 11, 15, 16 y 17 ajustados; diagramas y OG regenerados
 
+## Fase 11 — Claude Code completo y etiquetas de aplicación ✅
+
+Spec: `docs/specs/008-claude-code-completo.md`.
+
+- [x] ADR 0008: MCP de Playwright y Claude en CI a pedido
+- [x] `.mcp.json` con Playwright, permisos y paso opcional en `/verificar`
+- [x] `.github/workflows/claude.yml` a pedido (`@claude` del dueño y etiqueta `revision-claude`, nunca en PR de forks)
+- [x] `allowed-tools` en skills
+- [x] Etiqueta de aplicación en cada capítulo (En este repo / En parte / Solo teórico), con control en el build
+- [x] Capítulos nuevos 6 (MCP) y 16 (Claude Code en CI) y renumeración a 19 capítulos (1–8, 9–16, 17–19)
+- [x] Secciones nuevas en los capítulos 2, 3, 4, 5, 12, 18 y 19
+
+- [ ] **Patricio:** aprobar el servidor `playwright` al abrir `claude` y comprobar `claude mcp list`
+- [ ] **Patricio:** instalar la app "Claude" de GitHub y cargar `ANTHROPIC_API_KEY` (`/install-github-app`); probar un `@claude` en una PR
+- [ ] **Patricio:** proteger `main` en GitHub (Settings → Branches)
+
+Próximas: spec 009 (plugin, capítulo 17) y spec 010 (parte "Construir agentes con la API" y mapa de la certificación).
+
 ## Ideas para después
 
 - Traducir la guía al inglés

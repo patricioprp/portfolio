@@ -8,15 +8,16 @@ a discutir lo mismo sin conocer el motivo.
 Los ADR no se editan para cambiar de opinión: se escribe uno nuevo que
 **reemplaza** al anterior y se marca el viejo como `Reemplazado por NNNN`.
 
-| ADR                                                | Decisión                                          | Estado   |
-| -------------------------------------------------- | ------------------------------------------------- | -------- |
-| [0001](0001-astro-con-islas-react.md)              | Astro estático con islas React                    | Aceptado |
-| [0002](0002-menu-y-tema-sin-react.md)              | Menú móvil y tema con scripts de Astro, sin React | Aceptado |
-| [0003](0003-highs-en-web-worker.md)                | HiGHS (WebAssembly) en un Web Worker              | Aceptado |
-| [0004](0004-mapa-en-svg.md)                        | Mapa de beneficios dibujado en SVG                | Aceptado |
-| [0005](0005-desarrollo-guiado-por-specs-con-ia.md) | Desarrollo guiado por specs con Claude Code       | Aceptado |
-| [0006](0006-diagramas-mermaid-pre-renderizados.md) | Diagramas Mermaid pre-renderizados a SVG          | Aceptado |
-| [0007](0007-orquestacion-de-agentes.md)            | Orquestador + subagentes para repartir el trabajo | Aceptado |
+| ADR                                                | Decisión                                           | Estado   |
+| -------------------------------------------------- | -------------------------------------------------- | -------- |
+| [0001](0001-astro-con-islas-react.md)              | Astro estático con islas React                     | Aceptado |
+| [0002](0002-menu-y-tema-sin-react.md)              | Menú móvil y tema con scripts de Astro, sin React  | Aceptado |
+| [0003](0003-highs-en-web-worker.md)                | HiGHS (WebAssembly) en un Web Worker               | Aceptado |
+| [0004](0004-mapa-en-svg.md)                        | Mapa de beneficios dibujado en SVG                 | Aceptado |
+| [0005](0005-desarrollo-guiado-por-specs-con-ia.md) | Desarrollo guiado por specs con Claude Code        | Aceptado |
+| [0006](0006-diagramas-mermaid-pre-renderizados.md) | Diagramas Mermaid pre-renderizados a SVG           | Aceptado |
+| [0007](0007-orquestacion-de-agentes.md)            | Orquestador + subagentes para repartir el trabajo  | Aceptado |
+| [0008](0008-mcp-y-claude-en-ci.md)                 | Servidor MCP de Playwright y Claude en CI a pedido | Aceptado |
 
 ## Plantilla
 

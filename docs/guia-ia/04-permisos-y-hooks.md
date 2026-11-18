@@ -6,6 +6,8 @@ ejecutan siempre, sin importar lo que el modelo decida: **permisos** (qué
 puede hacer) y **hooks** (código que corre antes o después de cada acción).
 Este capítulo explica los dos con los ejemplos reales del repo.
 
+> **Aplicación:** En este repo — `.claude/settings.json` y `.claude/hooks/`; el sandbox (4.7) no se usa porque el repo se desarrolla en Windows.
+
 ## 4.1 Instrucciones vs. controles
 
 ```mermaid
@@ -35,14 +37,24 @@ una vez?** Si la respuesta es "nada grave", alcanza con una instrucción. Si es
 ## 4.2 `.claude/settings.json`
 
 Es la configuración de Claude Code para el proyecto. Se versiona, así que
-aplica a cualquiera que trabaje en el repo. Hay tres niveles y el más
-específico gana:
+aplica a cualquiera que trabaje en el repo. Pero no es el único lugar: hay
+varios niveles, y cuando dos dicen cosas distintas gana el de más arriba
+([documentación](https://code.claude.com/docs/en/settings)):
 
 ```mermaid
-flowchart LR
-    accTitle: Niveles de configuración: usuario, proyecto y local
-    A["~/.claude/settings.json<br/>usuario"] --> B[".claude/settings.json<br/>proyecto · versionado"] --> C[".claude/settings.local.json<br/>local · no versionado"]
+flowchart TD
+    accTitle: Precedencia de la configuración, de mayor a menor: organización, línea de comandos, local, proyecto y usuario
+    M["Settings administrados<br/>los fija la organización · no se pueden pisar"] --> CLI["Opciones al abrir la sesión<br/>claude --model … --permission-mode …"]
+    CLI --> L[".claude/settings.local.json<br/>tuyo en este proyecto · no versionado"]
+    L --> P[".claude/settings.json<br/>del proyecto · versionado"]
+    P --> U["~/.claude/settings.json<br/>tuyo para todos los proyectos"]
 ```
+
+Las listas de permisos de los distintos niveles se suman; para los demás
+valores, gana el nivel más alto. En la práctica: lo del equipo va en
+`settings.json`, tus excepciones personales en `settings.local.json`, y una
+empresa puede imponer reglas con settings administrados que nadie puede
+desactivar.
 
 En este repo `settings.json` tiene dos secciones: `permissions` y `hooks`.
 
@@ -51,7 +63,7 @@ En este repo `settings.json` tiene dos secciones: `permissions` y `hooks`.
 ```json
 "permissions": {
   "allow": ["Bash(npm test)", "Bash(npm run build)", "Bash(git diff *)", "…"],
-  "ask":   ["Bash(git commit *)", "Bash(npm install *)", "Bash(npm uninstall *)"],
+  "ask":   ["Bash(git commit *)", "Bash(npm install *)", "Bash(npm uninstall *)", "…"],
   "deny":  ["Read(./.env)", "Bash(git push *)", "Bash(git reset --hard *)", "Bash(rm -rf *)"]
 }
 ```
@@ -80,13 +92,20 @@ hacer algo después.
 
 Eventos más usados:
 
-| Evento             | Cuándo ocurre                   | Para qué sirve                                |
-| ------------------ | ------------------------------- | --------------------------------------------- |
-| `SessionStart`     | Al abrir una sesión             | Darle contexto inicial                        |
-| `UserPromptSubmit` | Cuando enviás un mensaje        | Agregar contexto o validar el pedido          |
-| `PreToolUse`       | Antes de usar una herramienta   | **Bloquear** acciones                         |
-| `PostToolUse`      | Después de usar una herramienta | Formatear, correr chequeos, avisar de errores |
-| `Stop`             | Cuando Claude termina su turno  | Avisos o verificaciones finales               |
+| Evento               | Cuándo ocurre                    | Para qué sirve                                  |
+| -------------------- | -------------------------------- | ----------------------------------------------- |
+| `SessionStart`       | Al abrir una sesión              | Darle contexto inicial                          |
+| `UserPromptSubmit`   | Cuando enviás un mensaje         | Agregar contexto o validar el pedido            |
+| `PreToolUse`         | Antes de usar una herramienta    | **Bloquear** acciones                           |
+| `PostToolUse`        | Después de usar una herramienta  | Formatear, correr chequeos, avisar de errores   |
+| `Stop`               | Cuando Claude termina su turno   | Avisos o verificaciones finales                 |
+| `PostToolUseFailure` | Cuando una herramienta falla     | Registrar o explicar el error                   |
+| `PermissionRequest`  | Cuando Claude va a pedir permiso | Aprobar o rechazar con reglas propias           |
+| `Notification`       | Cuando Claude te necesita        | Avisarte (sonido, notificación del sistema)     |
+| `SessionEnd`         | Al cerrar la sesión              | Limpiar archivos temporales, guardar un resumen |
+
+Hay más eventos; la lista completa, con lo que recibe cada uno, está en la
+[referencia de hooks](https://code.claude.com/docs/en/hooks).
 
 ### Cómo se comunica un hook con Claude Code
 
@@ -242,7 +261,30 @@ texto que el hook escribe en `stderr` y que Claude recibe.
 
 Dentro de Claude Code, `/hooks` muestra los hooks activos.
 
-## 4.7 Práctica guiada
+## 4.7 Sandboxing: un límite del sistema operativo
+
+Los permisos deciden **qué comandos** puede correr Claude. El **sandbox**
+agrega otro límite, puesto por el sistema operativo: los comandos de `Bash`
+solo pueden escribir en la carpeta del proyecto (y en temporales) y salen a
+internet solo hacia los dominios que permitas
+([documentación](https://code.claude.com/docs/en/sandboxing)).
+
+- Se activa con `/sandbox` o con `"sandbox": { "enabled": true }` en los
+  settings.
+- Funciona en macOS y en Linux o WSL2. En Windows nativo no está disponible.
+- Cubre los comandos de `Bash`. Las herramientas de archivos (`Read`,
+  `Edit`, `Write`) siguen gobernadas por los permisos, y los servidores MCP
+  y los hooks corren fuera del sandbox.
+
+Este repo **no lo usa**: se desarrolló en Windows, y los permisos de 4.3 más
+el hook `proteger-archivos.mjs` cubren lo necesario. Si trabajás en macOS o
+Linux, vale la pena activarlo, sobre todo con el modo auto (capítulo 2).
+
+Ni los permisos ni el sandbox frenan el _prompt injection_ (instrucciones
+escondidas en una web, un PDF o lo que trae un servidor MCP): eso se cubre
+con hábitos, en 18.3.
+
+## 4.8 Práctica guiada
 
 1. Corré los comandos de 4.6 (en Git Bash o en PowerShell) y mirá los códigos de salida.
 2. En una sesión, pedí: _"Agregá un comentario en `dist/index.html`"_. Vas a

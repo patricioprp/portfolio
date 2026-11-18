@@ -12,6 +12,7 @@ import { fileURLToPath } from 'node:url'
 import type { Loader } from 'astro/loaders'
 import {
   CARPETA_GUIA,
+  capitulosSinAplicacion,
   dimensionesDeSvg,
   enlacesACapitulos,
   figuraDiagrama,
@@ -63,6 +64,12 @@ export function guiaLoader(): Loader {
         if (numeracion.length) {
           throw new Error(
             `Numeración de la guía (${CARPETA_GUIA}): ${numeracion.join('; ')}`
+          )
+        }
+        const sinEtiqueta = capitulosSinAplicacion(capitulos)
+        if (sinEtiqueta.length) {
+          throw new Error(
+            `Falta la etiqueta "> **Aplicación:** En este repo | En parte | Solo teórico" debajo del resumen: ${sinEtiqueta.join(', ')}`
           )
         }
         const entradas = []

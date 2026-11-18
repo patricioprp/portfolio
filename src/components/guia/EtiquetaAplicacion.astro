@@ -1,0 +1,46 @@
+---
+// Etiqueta "¿esto está en el repo?" de un capítulo de la guía (spec 008).
+// Se distingue por texto e ícono, no solo por color.
+import { Icon } from 'astro-icon/components'
+import type { Aplicacion } from '@/lib/guia/guia'
+
+interface Props {
+  aplicacion: Aplicacion
+  /** Muestra también el detalle (en la página del capítulo). */
+  conDetalle?: boolean
+}
+
+const { aplicacion, conDetalle = false } = Astro.props
+
+const estilos = {
+  repo: {
+    icono: 'lucide:folder-check',
+    clase: 'border-transparent bg-accent-soft text-accent'
+  },
+  parcial: {
+    icono: 'lucide:circle-dashed',
+    clase: 'border-line bg-surface text-strong'
+  },
+  teorico: {
+    icono: 'lucide:graduation-cap',
+    clase: 'border-line bg-surface-2 text-strong'
+  }
+} as const
+
+const { icono, clase } = estilos[aplicacion.tipo]
+---
+
+<p class="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm">
+  <span
+    class={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-semibold ${clase}`}
+  >
+    <Icon name={icono} class="size-3.5 shrink-0" aria-hidden="true" />
+    <span>
+      <span class="sr-only">Aplicación: </span>
+      {aplicacion.etiqueta}
+    </span>
+  </span>
+  {conDetalle && aplicacion.detalle && (
+    <span class="text-muted">{aplicacion.detalle}</span>
+  )}
+</p>

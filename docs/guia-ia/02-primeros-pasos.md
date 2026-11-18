@@ -5,6 +5,8 @@ el proyecto, qué significan los avisos de permisos, los atajos que se usan
 todo el tiempo y, sobre todo, cómo escribir un pedido para que el resultado
 salga bien a la primera.
 
+> **Aplicación:** En este repo — los comandos, modos y atajos son los que se usan para trabajar en él.
+
 ## 2.1 Instalación
 
 Necesitás una cuenta de Claude con acceso a Claude Code (o una API key). En
@@ -26,11 +28,12 @@ npm install -g @anthropic-ai/claude-code
 ```
 
 Los métodos de instalación cambian con el tiempo: antes de instalar, revisá
-la documentación oficial de Claude Code (https://docs.claude.com). También
+la documentación oficial de Claude Code
+(https://code.claude.com/docs/en/setup). También
 hay extensiones para VS Code y JetBrains. La
 primera vez que lo abrís te pide iniciar sesión. El paso a paso completo de
 la instalación (con Node, Git y las cuentas) está en el
-[capítulo 8](08-preparar-el-entorno.md).
+[capítulo 9](09-preparar-el-entorno.md).
 
 ### Un laboratorio para practicar
 
@@ -91,22 +94,75 @@ Leé siempre el comando antes de aceptar. En este repo, lo seguro y frecuente
 `.claude/settings.json`, y lo peligroso (`git push`, borrar carpetas, leer
 `.env`) está prohibido. Lo vemos en el capítulo 4.
 
-## 2.4 Modos de trabajo
+## 2.4 Modos de permiso
 
-Con **Shift+Tab** cambiás de modo. El modo actual se ve debajo del cuadro de
-texto. Los que más vas a usar:
+El **modo de permiso** decide cuánto pregunta Claude antes de actuar. Se ve
+debajo del cuadro de texto y se cambia con **Shift+Tab**
+([documentación](https://code.claude.com/docs/en/permission-modes)):
 
-| Modo                  | Qué hace                                                     | Cuándo usarlo                                              |
-| --------------------- | ------------------------------------------------------------ | ---------------------------------------------------------- |
-| **Normal**            | Pide permiso para editar y para comandos no autorizados      | Mientras aprendés y en tareas delicadas                    |
-| **Plan**              | Solo investiga y te presenta un plan; no edita nada          | Antes de un cambio grande o cuando no está claro el camino |
-| **Aceptar ediciones** | Edita sin preguntar (los comandos siguen sujetos a permisos) | Tareas mecánicas en las que ya confiás                     |
+| Modo                                    | Qué hace                                                                   | Cuándo usarlo                                                                   |
+| --------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| **Normal** (`default`)                  | Lee sin preguntar; pide permiso para editar y para comandos no autorizados | Mientras aprendés y en tareas delicadas                                         |
+| **Plan** (`plan`)                       | Investiga y te presenta un plan; no edita hasta que lo aprobás             | Antes de un cambio grande o cuando no está claro el camino                      |
+| **Aceptar ediciones** (`acceptEdits`)   | Edita archivos y corre comandos comunes de archivos sin preguntar          | Tareas mecánicas en las que ya confiás                                          |
+| **Auto** (`auto`)                       | Actúa sin preguntar, con un clasificador que revisa cada acción riesgosa   | Sesiones largas con un plan ya aprobado                                         |
+| **No preguntar** (`dontAsk`)            | Solo hace lo pre-aprobado; lo que tendría que preguntar, lo rechaza        | Ejecuciones sin supervisión con permisos bien definidos                         |
+| **Sin controles** (`bypassPermissions`) | Hace todo sin ningún control                                               | Solo dentro de un contenedor o una máquina virtual aislada; nunca en tu máquina |
+
+Shift+Tab recorre normal, aceptar ediciones, plan y auto (si está
+disponible). `dontAsk` y `bypassPermissions` no aparecen en ese ciclo: se
+eligen al abrir la sesión con `claude --permission-mode <modo>`. El modo
+inicial de todas tus sesiones se fija con `permissions.defaultMode` en los
+settings (capítulo 4).
 
 El **modo plan** es el mejor aliado al principio: le pedís algo, Claude lee
 el código y te muestra qué piensa hacer. Si el plan no te convence, lo
-corregís antes de que haya tocado un solo archivo.
+corregís antes de que haya tocado un solo archivo. En este repo, las specs se
+escriben y se implementan siempre después de un plan aprobado.
 
-## 2.5 Atajos y comandos útiles
+## 2.5 Sesiones y checkpoints
+
+Cada conversación es una **sesión** y queda guardada en tu máquina
+([documentación](https://code.claude.com/docs/en/sessions)):
+
+| Para                                    | Usá                                   |
+| --------------------------------------- | ------------------------------------- |
+| Seguir la última sesión de esta carpeta | `claude -c`                           |
+| Elegir una sesión anterior              | `claude --resume` o `/resume` adentro |
+| Retomar una sesión por nombre o ID      | `claude -r "<nombre>"`                |
+| Ponerle nombre antes de un `/clear`     | `/rename`                             |
+
+Además, Claude Code guarda un **checkpoint** antes de cada mensaje tuyo. Con
+`Esc` `Esc` o `/rewind` elegís un mensaje anterior y decidís si
+restaurar el código, la conversación o las dos cosas
+([documentación](https://code.claude.com/docs/en/checkpointing)).
+
+Ojo con lo que **no** vuelve atrás: los archivos que cambió solo un comando
+de `Bash` (por ejemplo, las imágenes que regenera `npm run og`) y, en
+general, lo que editó un subagente. Los checkpoints son un deshacer rápido; **git sigue
+siendo la red de seguridad**. Por eso en este repo se trabaja en ramas y se
+commitea al cerrar cada tarea.
+
+## 2.6 Modelos, esfuerzo y costo
+
+- **`/model`** cambia de modelo con un alias (`opus`, `sonnet`, `haiku`)
+  ([documentación](https://code.claude.com/docs/en/model-config)). Un modelo
+  más chico cuesta menos y alcanza para tareas mecánicas.
+- **`/effort`** regula cuánto razona el modelo antes de responder (`low`,
+  `medium`, `high`, `xhigh`, `max`, según el modelo). Más esfuerzo es mejor
+  para planes y problemas difíciles, y gasta más.
+- **Extended thinking:** los modelos actuales razonan antes de responder, y
+  ese razonamiento se cobra como texto generado. No hace falta activarlo; lo
+  regulás con `/effort`.
+- **`/usage`** muestra lo que consumió la sesión. Con una clave de API ves
+  tokens y costo estimado; con una suscripción, cuánto usaste del plan y qué
+  lo explica ([documentación](https://code.claude.com/docs/en/costs)).
+
+Lo que más baja el consumo: `/clear` entre tareas distintas, un
+`CLAUDE.md` corto (se lee en cada mensaje) y delegar en subagentes lo que
+produce mucha salida, como correr tests o leer logs (capítulo 7).
+
+## 2.7 Atajos y comandos útiles
 
 | Atajo / comando         | Para qué                                                                       |
 | ----------------------- | ------------------------------------------------------------------------------ |
@@ -122,11 +178,14 @@ corregís antes de que haya tocado un solo archivo.
 | `/permissions`          | Ver y editar los permisos                                                      |
 | `/hooks`                | Ver los hooks configurados                                                     |
 | `/list-agents`          | Ver los subagentes y sesiones que están corriendo (no los definidos)           |
-| `/model`                | Cambiar de modelo                                                              |
+| `/model`, `/effort`     | Cambiar de modelo y de nivel de esfuerzo (2.6)                                 |
+| `/usage`                | Ver el consumo de la sesión (2.6)                                              |
+| `/resume`               | Volver a una sesión anterior (2.5)                                             |
+| `/mcp`                  | Ver y aprobar los servidores MCP (capítulo 6)                                  |
 | `/help`                 | Lista completa                                                                 |
 | `/verificar`, `/spec`…  | Skills de este proyecto (capítulo 5)                                           |
 
-## 2.6 Cómo pedir las cosas
+## 2.8 Cómo pedir las cosas
 
 La diferencia entre un buen y un mal resultado casi siempre está en el
 pedido. Un buen pedido tiene cuatro partes:
@@ -154,7 +213,7 @@ Reglas prácticas:
 - **Una tarea por vez.** Si mezclás tres pedidos, el resultado mezcla tres cosas.
 - **Si algo es ambiguo, pedile que pregunte:** "si te falta un dato, preguntame antes".
 
-## 2.7 Revisar lo que hizo
+## 2.9 Revisar lo que hizo
 
 Claude te muestra cada edición como un _diff_ (líneas agregadas y quitadas).
 Al final de una tarea, revisá el conjunto:
@@ -167,7 +226,7 @@ git diff        # qué cambió en cada uno
 En este repo, además, el skill `/verificar` corre formato, lint, tipos,
 tests, build y e2e. Nada se commitea sin que vos lo pidas.
 
-## 2.8 Práctica guiada
+## 2.10 Práctica guiada
 
 Hacé esto en este repositorio para perderle el miedo:
 
@@ -185,6 +244,9 @@ Hacé esto en este repositorio para perderle el miedo:
 - `claude` en la raíz abre una sesión; al arrancar carga permisos, hooks,
   `CLAUDE.md`, skills y agentes.
 - Shift+Tab cambia de modo; el modo plan propone antes de editar.
+- `claude -c` retoma la última sesión; `Esc Esc` vuelve a un checkpoint, pero
+  git sigue siendo la red de seguridad.
+- `/model`, `/effort` y `/usage` controlan calidad y consumo.
 - Un buen pedido tiene objetivo, contexto, restricciones y criterio de terminado.
 - Siempre se revisa el diff; `/verificar` comprueba que todo siga funcionando.
 

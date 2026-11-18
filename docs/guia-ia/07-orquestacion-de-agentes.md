@@ -1,4 +1,4 @@
-# 6 · Orquestación de agentes
+# 7 · Orquestación de agentes
 
 Un subagente solo es una ayuda; varios bien coordinados son un equipo.
 **Orquestar** es repartir una tarea entre agentes (en paralelo o en cadena) y
@@ -6,7 +6,9 @@ después juntar, comprobar e integrar lo que devuelven. Este capítulo explica
 cuándo conviene, los cuatro patrones que usa este repo, cómo se escribe un
 encargo para un subagente y cuándo es mejor no orquestar.
 
-## 6.1 De un agente a un equipo
+> **Aplicación:** En este repo — `/spec`, `/implementar`, `/nuevo-caso` y `/nueva-experiencia`; agent teams y `claude -p` (7.7) no se usan.
+
+## 7.1 De un agente a un equipo
 
 En el capítulo 5 viste un subagente: un asistente con contexto propio al que
 la sesión le delega una tarea. Orquestar es usar varios a la vez con un
@@ -33,7 +35,7 @@ flowchart TD
     R -- "hallazgos" --> O
 ```
 
-## 6.2 Por qué orquestar
+## 7.2 Por qué orquestar
 
 1. **Contexto limpio.** Lo que lee un subagente queda en su contexto; a la
    sesión principal solo vuelve el resumen. Así la sesión que decide no se
@@ -48,9 +50,9 @@ flowchart TD
 
 El costo: cada subagente arranca **sin tu conversación**, así que gasta
 tokens en entender la tarea y depende de que el encargo sea bueno. Por eso
-no todo se delega (6.6).
+no todo se delega (7.6).
 
-## 6.3 Los cuatro patrones
+## 7.3 Los cuatro patrones
 
 ### Paralelo y unión
 
@@ -136,7 +138,7 @@ flowchart TD
     B -- "No" --> L["Listo: informe y /commit"]
 ```
 
-## 6.4 Cómo se escribe un encargo
+## 7.4 Cómo se escribe un encargo
 
 El subagente no vio tu conversación, no sabe qué decidiste ni por qué. Todo
 lo que necesita tiene que estar en el encargo. Un buen encargo responde cinco
@@ -163,7 +165,7 @@ Respuesta: archivos tocados + dudas con archivo:línea (sin repetir el código)
 Pedir un **resumen** y no el contenido es lo que hace que el contexto del
 orquestador quede limpio.
 
-## 6.5 La orquestación en este repo
+## 7.5 La orquestación en este repo
 
 | Skill                | Qué orquesta                                                                                         |
 | -------------------- | ---------------------------------------------------------------------------------------------------- |
@@ -210,7 +212,7 @@ El patrón y sus alternativas están en el
 [ADR 0007](../adr/0007-orquestacion-de-agentes.md); las instrucciones exactas,
 en [`.claude/skills/implementar/SKILL.md`](../../.claude/skills/implementar/SKILL.md).
 
-## 6.6 Cuándo no orquestar
+## 7.6 Cuándo no orquestar
 
 Orquestar no es gratis: cada subagente lee de nuevo lo que necesita, y un
 encargo ambiguo produce trabajo que hay que rehacer.
@@ -238,7 +240,7 @@ Nunca se delegan:
 - **La confianza en un informe:** lo que dice un subagente se comprueba en el
   código antes de actuar. Un informe es un dato, no una orden.
 
-## 6.7 Más allá: otras formas de repartir trabajo
+## 7.7 Más allá: otras formas de repartir trabajo
 
 Este repo usa subagentes dentro de una sesión. Claude Code tiene otras
 herramientas que conviene conocer; ninguna hace falta para el portfolio:
@@ -250,14 +252,15 @@ herramientas que conviene conocer; ninguna hace falta para el portfolio:
   `agent: Explore` (u otro) en el frontmatter, el skill entero se ejecuta en
   un contexto aislado ([documentación](https://code.claude.com/docs/en/skills)).
 - **Modo headless (`claude -p`):** Claude Code desde un script o el CI, sin
-  conversación. Sirve para tareas en lote
+  conversación. Sirve para tareas en lote, y es lo que usa por dentro la
+  acción de GitHub del capítulo 16
   ([documentación](https://code.claude.com/docs/en/headless)).
 - **Agent teams:** varias sesiones coordinadas que se mandan mensajes y
   comparten una lista de tareas. Son **experimentales**, vienen apagados y
   tienen limitaciones conocidas
   ([documentación](https://code.claude.com/docs/en/agent-teams)).
 
-## 6.8 Práctica guiada
+## 7.8 Práctica guiada
 
 1. Pedí, en un solo mensaje: _"Lanzá en paralelo tres agentes `Explore`:
    uno que resuma `src/lib/`, otro las páginas de `src/pages/` y otro los
@@ -268,7 +271,7 @@ herramientas que conviene conocer; ninguna hace falta para el portfolio:
    compará su `tools:` con el de los revisores
    ([campos del frontmatter](https://code.claude.com/docs/en/sub-agents)). ¿Por qué tiene `Edit` y no
    `Bash`?
-3. Ejercicio: escribí un encargo con la plantilla de 6.4 para que un
+3. Ejercicio: escribí un encargo con la plantilla de 7.4 para que un
    subagente agregue una pregunta frecuente a la página de contacto. ¿Qué
    archivos no puede tocar? ¿Cuándo está listo?
 
@@ -282,5 +285,5 @@ herramientas que conviene conocer; ninguna hace falta para el portfolio:
   "listo" y formato de respuesta.
 - No se delegan las decisiones, la integración ni la verificación.
 
-Anterior: [5 · Skills y subagentes](05-skills-y-subagentes.md) ·
-Siguiente: [7 · Specs, ADR y fuente de verdad](07-specs-adr-y-fuente-de-verdad.md)
+Anterior: [6 · MCP: conectar herramientas](06-mcp.md) ·
+Siguiente: [8 · Specs, ADR y fuente de verdad](08-specs-adr-y-fuente-de-verdad.md)

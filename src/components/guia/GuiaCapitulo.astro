@@ -2,6 +2,7 @@
 import { render } from 'astro:content'
 import { Icon } from 'astro-icon/components'
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import EtiquetaAplicacion from './EtiquetaAplicacion.astro'
 import { rutaOg } from '@/i18n/rutas'
 import { GUIA, RUTA_GUIA, rutaDeCapitulo, type Capitulo } from '@/data/guia'
 
@@ -47,6 +48,9 @@ const ruta = rutaDeCapitulo(c.slug)
       <p class="mt-6 font-mono text-sm font-semibold tracking-wider text-accent uppercase">
         Capítulo {c.numero} de {total}
       </p>
+      <div class="mt-3">
+        <EtiquetaAplicacion aplicacion={c.aplicacion} conDetalle />
+      </div>
 
       <div class="guia-contenido prose mt-2 max-w-none prose-headings:scroll-mt-24 prose-h1:text-4xl prose-h1:font-extrabold prose-h1:tracking-tight prose-pre:text-[13px]">
         <Content />
