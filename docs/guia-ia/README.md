@@ -20,12 +20,12 @@ https://portfolio-patricio-polito.netlify.app/guia/
 ```mermaid
 flowchart LR
     accTitle: Las tres partes de la guía: fundamentos, paso a paso y referencia
-    F["Parte 1 · Fundamentos<br/>capítulos 1 a 6<br/>el marco teórico"] --> T["Parte 2 · Paso a paso<br/>capítulos 7 a 13<br/>tu portfolio de cero a publicado"]
-    T --> R["Parte 3 · Referencia<br/>capítulos 14 a 16<br/>para el día a día"]
+    F["Parte 1 · Fundamentos<br/>capítulos 1 a 7<br/>el marco teórico"] --> T["Parte 2 · Paso a paso<br/>capítulos 8 a 14<br/>tu portfolio de cero a publicado"]
+    T --> R["Parte 3 · Referencia<br/>capítulos 15 a 17<br/>para el día a día"]
 ```
 
 Si nunca usaste un agente, leé la guía en orden. Si ya conocés Claude Code y
-querés ir directo a construir, empezá por el capítulo 7 y volvé a los
+querés ir directo a construir, empezá por el capítulo 8 y volvé a los
 fundamentos cuando un paso no te cierre: cada uno indica qué capítulo
 explica su porqué.
 
@@ -38,27 +38,28 @@ explica su porqué.
 | 3   | [Contexto persistente: CLAUDE.md y reglas](03-contexto-persistente.md) | ¿Cómo sabe Claude las reglas del proyecto en cada sesión? |
 | 4   | [Permisos y hooks](04-permisos-y-hooks.md)                             | ¿Cómo se garantiza lo que no puede fallar?                |
 | 5   | [Skills y subagentes](05-skills-y-subagentes.md)                       | ¿Cómo se empaquetan procesos y revisiones?                |
-| 6   | [Specs, ADR y fuente de verdad](06-specs-adr-y-fuente-de-verdad.md)    | ¿Cómo se acuerda qué construir, por qué y con qué datos?  |
+| 6   | [Orquestación de agentes](06-orquestacion-de-agentes.md)               | ¿Cómo se reparte una tarea entre varios agentes?          |
+| 7   | [Specs, ADR y fuente de verdad](07-specs-adr-y-fuente-de-verdad.md)    | ¿Cómo se acuerda qué construir, por qué y con qué datos?  |
 
 ### Parte 2 · Paso a paso
 
 | #   | Capítulo                                                      | Resultado                                              |
 | --- | ------------------------------------------------------------- | ------------------------------------------------------ |
-| 7   | [Preparar el entorno](07-preparar-el-entorno.md)              | Cuentas, herramientas y tu repositorio con Claude Code |
-| 8   | [Producto y contenido](08-producto-y-contenido.md)            | Tu objetivo, tu experiencia y tus casos, escritos      |
-| 9   | [Proyecto base y calidad](09-proyecto-base-y-calidad.md)      | Astro + React + TypeScript con tests y `/verificar`    |
-| 10  | [Claude Code en tu repositorio](10-claude-code-en-tu-repo.md) | Permisos, hooks, skills, revisores y CI                |
-| 11  | [Construir el sitio con specs](11-construir-el-sitio.md)      | La home y las páginas, fase por fase                   |
-| 12  | [Casos de estudio y demos](12-casos-y-demos.md)               | Tus casos publicados y, si querés, una demo            |
-| 13  | [Publicar y mantener](13-publicar-y-mantener.md)              | El sitio en internet y un circuito para mantenerlo     |
+| 8   | [Preparar el entorno](08-preparar-el-entorno.md)              | Cuentas, herramientas y tu repositorio con Claude Code |
+| 9   | [Producto y contenido](09-producto-y-contenido.md)            | Tu objetivo, tu experiencia y tus casos, escritos      |
+| 10  | [Proyecto base y calidad](10-proyecto-base-y-calidad.md)      | Astro + React + TypeScript con tests y `/verificar`    |
+| 11  | [Claude Code en tu repositorio](11-claude-code-en-tu-repo.md) | Permisos, hooks, skills, revisores y CI                |
+| 12  | [Construir el sitio con specs](12-construir-el-sitio.md)      | La home y las páginas, fase por fase                   |
+| 13  | [Casos de estudio y demos](13-casos-y-demos.md)               | Tus casos publicados y, si querés, una demo            |
+| 14  | [Publicar y mantener](14-publicar-y-mantener.md)              | El sitio en internet y un circuito para mantenerlo     |
 
 ### Parte 3 · Referencia
 
 | #   | Capítulo                                                       | Para qué                                                 |
 | --- | -------------------------------------------------------------- | -------------------------------------------------------- |
-| 14  | [Flujos de trabajo](14-flujos-de-trabajo.md)                   | Qué hacer para una feature, una experiencia o un arreglo |
-| 15  | [Buenas prácticas y problemas comunes](15-buenas-practicas.md) | Hábitos y qué hacer cuando algo sale mal                 |
-| 16  | [Glosario](16-glosario.md)                                     | Cada término, con dónde aparece en el repo               |
+| 15  | [Flujos de trabajo](15-flujos-de-trabajo.md)                   | Qué hacer para una feature, una experiencia o un arreglo |
+| 16  | [Buenas prácticas y problemas comunes](16-buenas-practicas.md) | Hábitos y qué hacer cuando algo sale mal                 |
+| 17  | [Glosario](17-glosario.md)                                     | Cada término, con dónde aparece en el repo               |
 
 ## Dónde está cada cosa en el repositorio
 
@@ -71,7 +72,7 @@ flowchart LR
         HK[".claude/hooks/<br/>scripts de control"]
         RU[".claude/rules/<br/>reglas por carpeta"]
         SK[".claude/skills/<br/>procedimientos /comando"]
-        AG[".claude/agents/<br/>revisores"]
+        AG[".claude/agents/<br/>revisores y traductor"]
     end
     subgraph DOC["Documentación (docs/)"]
         PR["PRODUCTO.md<br/>para qué"]

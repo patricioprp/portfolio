@@ -30,7 +30,7 @@ la documentación oficial de Claude Code (https://docs.claude.com). También
 hay extensiones para VS Code y JetBrains. La
 primera vez que lo abrís te pide iniciar sesión. El paso a paso completo de
 la instalación (con Node, Git y las cuentas) está en el
-[capítulo 7](07-preparar-el-entorno.md).
+[capítulo 8](08-preparar-el-entorno.md).
 
 ### Un laboratorio para practicar
 

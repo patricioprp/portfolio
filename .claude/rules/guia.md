@@ -18,7 +18,7 @@ La guía es pública: se lee en GitHub y en `/guia/`, que se genera desde
 - Cada diagrama en un bloque `mermaid` con `accTitle:` (texto alternativo).
   Después de crear o cambiar uno: `npm run diagramas` y versioná los SVG de
   `public/guia/diagramas/`. Si falta, el build falla.
-- Enlaces relativos: a capítulos (`07-preparar-el-entorno.md`) o a archivos del
+- Enlaces relativos: a capítulos (`08-preparar-el-entorno.md`) o a archivos del
   repo (`../../CLAUDE.md`); el sitio los convierte en rutas o en GitHub.
 - El párrafo final "Anterior: … · Siguiente: …" se mantiene para GitHub; el
   sitio lo oculta.

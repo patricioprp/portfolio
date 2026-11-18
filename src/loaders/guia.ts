@@ -16,6 +16,7 @@ import {
   enlacesACapitulos,
   figuraDiagrama,
   infoDeArchivo,
+  problemasDeNumeracion,
   transformarHtml,
   transformarMarkdown
 } from '@/lib/guia/guia'
@@ -54,10 +55,18 @@ export function guiaLoader(): Loader {
           (a) => a.endsWith('.md') && infoDeArchivo(a)
         )
         const existentes = new Set(archivos)
+        const capitulos = archivos.map((archivo) => ({
+          archivo,
+          markdown: readFileSync(path.join(carpeta, archivo), 'utf8')
+        }))
+        const numeracion = problemasDeNumeracion(capitulos)
+        if (numeracion.length) {
+          throw new Error(
+            `Numeración de la guía (${CARPETA_GUIA}): ${numeracion.join('; ')}`
+          )
+        }
         const entradas = []
-        for (const archivo of archivos) {
-          const cuerpo = readFileSync(path.join(carpeta, archivo), 'utf8')
-
+        for (const { archivo, markdown: cuerpo } of capitulos) {
           const rotos = enlacesACapitulos(cuerpo).filter(
             (destino) => !existentes.has(destino)
           )

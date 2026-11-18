@@ -9,6 +9,7 @@ import {
   figuraDiagrama,
   hashDiagrama,
   infoDeArchivo,
+  problemasDeNumeracion,
   reescribirEnlace,
   textoPlano,
   tituloAccesible,
@@ -25,8 +26,8 @@ describe('infoDeArchivo', () => {
       numero: 1,
       slug: 'de-chatear-a-un-agente'
     })
-    expect(infoDeArchivo('docs/guia-ia/12-casos-y-demos.md')).toEqual({
-      numero: 12,
+    expect(infoDeArchivo('docs/guia-ia/13-casos-y-demos.md')).toEqual({
+      numero: 13,
       slug: 'casos-y-demos'
     })
   })
@@ -264,5 +265,50 @@ describe('enlacesACapitulos', () => {
     expect(
       enlacesACapitulos('Ver [a](02-a.md) y [b](./03-b.md#x), no [c](../x.md).')
     ).toEqual(['02-a.md', '03-b.md'])
+  })
+})
+
+describe('problemasDeNumeracion', () => {
+  const cap = (archivo: string, titulo: string) => ({
+    archivo,
+    markdown: `# ${titulo}\n\nResumen.\n`
+  })
+
+  it('capítulos 1..n con el número del título igual al del archivo: sin problemas', () => {
+    expect(
+      problemasDeNumeracion([cap('02-b.md', '2 · B'), cap('01-a.md', '1 · A')])
+    ).toEqual([])
+  })
+
+  it('sin capítulos no hay problemas, y los archivos que no son capítulos se ignoran', () => {
+    expect(problemasDeNumeracion([])).toEqual([])
+    expect(
+      problemasDeNumeracion([cap('01-a.md', '1 · A'), cap('README.md', 'Guía')])
+    ).toEqual([])
+  })
+
+  it('avisa si el número del título no coincide con el del archivo', () => {
+    expect(
+      problemasDeNumeracion([cap('01-a.md', '1 · A'), cap('02-b.md', '3 · B')])
+    ).toEqual(['02-b.md: el título dice 3 y el archivo 2'])
+  })
+
+  it('avisa si el título no tiene número', () => {
+    expect(problemasDeNumeracion([cap('01-a.md', 'A')])).toEqual([
+      '01-a.md: el título no empieza con "1 · "'
+    ])
+  })
+
+  it('avisa si falta un número o se repite', () => {
+    expect(
+      problemasDeNumeracion([
+        cap('01-a.md', '1 · A'),
+        cap('03-c.md', '3 · C'),
+        cap('03-d.md', '3 · D')
+      ])
+    ).toEqual([
+      'Falta el capítulo 2',
+      'El número 3 se repite: 03-c.md, 03-d.md'
+    ])
   })
 })

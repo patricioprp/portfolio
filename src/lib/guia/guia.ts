@@ -102,6 +102,49 @@ export function enlacesACapitulos(markdown: string): string[] {
     .filter(Boolean)
 }
 
+export interface ArchivoDeCapitulo {
+  archivo: string
+  markdown: string
+}
+
+/**
+ * Controla la numeración de la guía: el título `# N · …` de cada capítulo
+ * coincide con el número del archivo, y los números van de 1 a n sin huecos
+ * ni repetidos. Devuelve un mensaje por problema (vacío si está todo bien).
+ */
+export function problemasDeNumeracion(
+  capitulos: readonly ArchivoDeCapitulo[]
+): string[] {
+  const problemas: string[] = []
+  const porNumero = new Map<number, string[]>()
+  const ordenados = [...capitulos].sort((a, b) =>
+    a.archivo.localeCompare(b.archivo)
+  )
+  for (const { archivo, markdown } of ordenados) {
+    const info = infoDeArchivo(archivo)
+    if (!info) continue
+    porNumero.set(info.numero, [...(porNumero.get(info.numero) ?? []), archivo])
+    const linea = markdown.split(/\r?\n/).find((l) => /^#\s/.test(l)) ?? ''
+    const numero = /^#\s+(\d+)\s*·\s/.exec(linea)?.[1]
+    if (!numero) {
+      problemas.push(`${archivo}: el título no empieza con "${info.numero} · "`)
+    } else if (Number(numero) !== info.numero) {
+      problemas.push(
+        `${archivo}: el título dice ${numero} y el archivo ${info.numero}`
+      )
+    }
+  }
+  const maximo = Math.max(0, ...porNumero.keys())
+  for (let n = 1; n <= maximo; n++) {
+    const archivos = porNumero.get(n)
+    if (!archivos) problemas.push(`Falta el capítulo ${n}`)
+    else if (archivos.length > 1) {
+      problemas.push(`El número ${n} se repite: ${archivos.join(', ')}`)
+    }
+  }
+  return problemas
+}
+
 /**
  * Párrafo de navegación del final de cada capítulo ("Anterior: … ·
  * Siguiente: …"). Sirve en GitHub; en el sitio lo reemplaza la navegación de

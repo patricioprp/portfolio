@@ -13,12 +13,16 @@ Patricio aprueba antes de implementar.
 
 ## 1. Entender
 
-- Leé `docs/PRODUCTO.md` (para quién es y qué objetivo cumple),
-  `docs/ARQUITECTURA.md` y las specs existentes en `docs/specs/` para no
-  contradecir decisiones tomadas. Revisá `docs/adr/` si el cambio toca stack o
-  arquitectura.
-- Buscá en el código lo que ya existe y se puede reutilizar (layouts,
-  helpers de `src/data/`, `DemoLayout`, `Figura`).
+- Leé `docs/PRODUCTO.md` (para quién es y qué objetivo cumple) y
+  `docs/ARQUITECTURA.md`.
+- Si el pedido toca más de un área, explorá **en paralelo**: lanzá en un
+  mismo mensaje hasta 3 agentes `Explore` (solo lectura) y pedile a cada uno
+  un resumen, no los archivos completos. Por ejemplo: (a) specs de
+  `docs/specs/` y ADR de `docs/adr/` relacionados, con las decisiones que no
+  hay que contradecir; (b) código que ya existe y se puede reutilizar
+  (layouts, helpers de `src/data/`, `DemoLayout`, `Figura`); (c) tests y
+  e2e que habría que tocar. Si el pedido es chico, leé vos los archivos. El
+  patrón está en `docs/adr/0007-orquestacion-de-agentes.md`.
 - Si falta información que solo Patricio sabe (datos, prioridades, alcance),
   hacé **todas las preguntas juntas** al principio, con una opción recomendada.
 

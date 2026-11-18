@@ -111,6 +111,16 @@ Spec: `docs/specs/006-guia-ia-en-el-sitio.md`.
 - [x] Regla `.claude/rules/guia.md`
 - [ ] **Patricio:** decidir la licencia del código del repositorio (la guía invita a reutilizar la estructura)
 
+## Fase 10 — Orquestación de agentes ✅
+
+Spec: `docs/specs/007-orquestacion-de-agentes.md`.
+
+- [x] ADR 0007: orquestador + subagentes frente a sesión única y agent teams
+- [x] `/spec` e `/implementar` con exploración en paralelo; `/implementar` con delegación, límites y consolidación de revisores
+- [x] Agente `traductor` (ES → EN) en `/nuevo-caso` y `/nueva-experiencia`; `CLAUDE.md` actualizado
+- [x] Capítulo "6 · Orquestación de agentes" y renumeración de la guía a 17 capítulos (fundamentos 1–7, paso a paso 8–14, referencia 15–17)
+- [x] Capítulos 1, 5, 11, 15, 16 y 17 ajustados; diagramas y OG regenerados
+
 ## Ideas para después
 
 - Traducir la guía al inglés
