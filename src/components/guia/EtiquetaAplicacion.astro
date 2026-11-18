@@ -5,7 +5,8 @@ import { Icon } from 'astro-icon/components'
 import type { Aplicacion } from '@/lib/guia/guia'
 
 interface Props {
-  aplicacion: Aplicacion
+  /** La leyenda del índice pasa solo el tipo y la etiqueta. */
+  aplicacion: Pick<Aplicacion, 'tipo' | 'etiqueta'> & Partial<Aplicacion>
   /** Muestra también el detalle (en la página del capítulo). */
   conDetalle?: boolean
 }

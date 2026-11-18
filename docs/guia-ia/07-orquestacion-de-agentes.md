@@ -242,8 +242,10 @@ Nunca se delegan:
 
 ## 7.7 Más allá: otras formas de repartir trabajo
 
-Este repo usa subagentes dentro de una sesión. Claude Code tiene otras
-herramientas que conviene conocer; ninguna hace falta para el portfolio:
+> **No se usa en este repo.** El repo usa subagentes dentro de una sesión;
+> ninguna de estas herramientas hace falta para el portfolio.
+
+Claude Code tiene otras herramientas que conviene conocer:
 
 - **Subagentes en segundo plano:** el orquestador sigue trabajando y el
   resultado le llega cuando el subagente termina

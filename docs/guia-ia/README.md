@@ -27,7 +27,9 @@ flowchart LR
 Cada capítulo dice, debajo del resumen, si lo que explica **se aplica en
 este repo**, **en parte** o es **solo teórico** (por ejemplo, temas de la
 certificación que un portfolio no necesita). Así sabés si podés buscarlo en el
-código.
+código. Dentro de un capítulo, una sección que no está en el repo empieza con
+**Para la certificación.** o **No se usa en este repo.**, y en el sitio se ve
+como un recuadro aparte. El índice de `/guia/` explica las etiquetas.
 
 Si nunca usaste un agente, leé la guía en orden. Si ya conocés Claude Code y
 querés ir directo a construir, empezá por el capítulo 9 y volvé a los
@@ -117,8 +119,11 @@ funcionando, al editarla:
   repo (`../../CLAUDE.md`, que en el sitio apuntan a GitHub);
 - debajo del resumen, la etiqueta
   `> **Aplicación:** En este repo | En parte | Solo teórico — …` (sin ella,
-  el build falla); una sección que es solo teoría empieza con
-  `> **Para la certificación.**` o aclara que el repo no la usa;
+  el build falla); una sección que no está en el repo empieza con
+  `> **Para la certificación.** …` (tema de la certificación) o
+  `> **No se usa en este repo.** …` (función que se explica pero no se
+  usa), y el sitio la muestra como un recuadro con el ícono de "Solo
+  teórico";
 - si se agrega un capítulo, va donde corresponde por tema y se ubica en su
   parte en `src/data/guia.ts`;
 - nada de datos privados ni de nombres de clientes.

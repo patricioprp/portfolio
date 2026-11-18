@@ -12,11 +12,13 @@ import { fileURLToPath } from 'node:url'
 import type { Loader } from 'astro/loaders'
 import {
   CARPETA_GUIA,
+  MARCAS_TEORICAS,
   capitulosSinAplicacion,
   dimensionesDeSvg,
   enlacesACapitulos,
   figuraDiagrama,
   infoDeArchivo,
+  marcasMalEscritas,
   problemasDeNumeracion,
   transformarHtml,
   transformarMarkdown
@@ -74,6 +76,12 @@ export function guiaLoader(): Loader {
         }
         const entradas = []
         for (const { archivo, markdown: cuerpo } of capitulos) {
+          const malEscritas = marcasMalEscritas(cuerpo)
+          if (malEscritas.length) {
+            throw new Error(
+              `${archivo}: marca de sección teórica mal escrita (va con el punto adentro de las negritas: ${MARCAS_TEORICAS.join(' o ')}): ${malEscritas.join(' | ')}`
+            )
+          }
           const rotos = enlacesACapitulos(cuerpo).filter(
             (destino) => !existentes.has(destino)
           )

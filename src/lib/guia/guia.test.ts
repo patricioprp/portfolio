@@ -11,8 +11,10 @@ import {
   figuraDiagrama,
   hashDiagrama,
   infoDeArchivo,
+  marcasMalEscritas,
   problemasDeNumeracion,
   reescribirEnlace,
+  seccionesTeoricas,
   textoPlano,
   tituloAccesible,
   transformarHtml,
@@ -278,6 +280,57 @@ describe('transformarHtml', () => {
   it('no reescribe texto que parece un enlace dentro de código', () => {
     const html = '<code>&#x3C;a href="x.md"></code>'
     expect(transformarHtml(html)).toBe(html)
+  })
+
+  it.each(['Para la certificación.', 'No se usa en este repo.'])(
+    'marca como sección teórica la cita que empieza con "%s"',
+    (marca) => {
+      const salida = transformarHtml(
+        `<blockquote>\n<p><strong>${marca}</strong> Texto.</p>\n</blockquote>`
+      )
+      expect(salida).toMatch(/^<blockquote class="recuadro-teorico">\n<p><svg /)
+      expect(salida).toContain('aria-hidden="true"')
+      expect(salida).toContain(`<strong>${marca}</strong> Texto.</p>`)
+    }
+  )
+
+  it('no marca las demás citas', () => {
+    const html =
+      '<blockquote>\n<p><strong>Nota.</strong> Texto.</p>\n</blockquote>'
+    expect(transformarHtml(html)).toBe(html)
+  })
+})
+
+describe('seccionesTeoricas', () => {
+  it('cuenta las citas que marcan una sección teórica', () => {
+    const md = [
+      '> **Para la certificación.** A',
+      '',
+      '> **No se usa en este repo.** B',
+      '',
+      '> **Nota.** C',
+      '',
+      'Texto con **Para la certificación.** en el medio.'
+    ].join('\n')
+    expect(seccionesTeoricas(md)).toEqual([
+      'Para la certificación.',
+      'No se usa en este repo.'
+    ])
+  })
+})
+
+describe('marcasMalEscritas', () => {
+  it('rechaza una marca con el punto afuera de las negritas o en minúscula', () => {
+    const md = [
+      '> **Para la certificación**. A',
+      '> **no se usa en este repo.** B',
+      '> **Para la certificación.** C',
+      '> **Nota.** D'
+    ].join('\n')
+    expect(marcasMalEscritas(md)).toEqual([
+      '> **Para la certificación**. A',
+      '> **no se usa en este repo.** B'
+    ])
   })
 })
 

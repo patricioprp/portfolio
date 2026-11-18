@@ -99,7 +99,11 @@ referencia, todavía sin el mapa).
 - **`.claude/rules/guia.md`:**
   - cada capítulo lleva su etiqueta de aplicación;
   - las secciones que son solo para la certificación se marcan con
-    `> **Para la certificación.** …`.
+    `> **Para la certificación.** …`, y las que explican una función que el
+    repo no usa, con `> **No se usa en este repo.** …`. El sitio muestra
+    las dos como un recuadro con el ícono de "Solo teórico", y el índice de
+    `/guia/` tiene una leyenda que explica las etiquetas y el recuadro
+    (agregado al implementar, a pedido de Patricio).
 
 ### Etiqueta de aplicación (todos los capítulos)
 

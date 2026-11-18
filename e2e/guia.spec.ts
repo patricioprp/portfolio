@@ -1,4 +1,11 @@
+import { readFileSync, readdirSync } from 'node:fs'
+import path from 'node:path'
 import { expect, test } from '@playwright/test'
+import {
+  CARPETA_GUIA,
+  infoDeArchivo,
+  seccionesTeoricas
+} from '../src/lib/guia/guia'
 
 // Guía "Hacé tu portfolio con IA — Claude Code" (spec 006).
 
@@ -120,6 +127,51 @@ test.describe('páginas de la guía', () => {
     await expect(
       page.locator('.guia-contenido').getByText('Aplicación:')
     ).toHaveCount(0)
+  })
+
+  test('el índice explica las etiquetas y el recuadro de las secciones teóricas', async ({
+    page
+  }) => {
+    await page.goto('/guia/')
+    const leyenda = page.getByRole('region', {
+      name: 'Qué vas a encontrar en el repo'
+    })
+    await expect(leyenda).toBeVisible()
+    for (const etiqueta of ['En este repo', 'En parte', 'Solo teórico']) {
+      await expect(
+        leyenda.getByText(`Aplicación: ${etiqueta}`, { exact: true })
+      ).toBeVisible()
+    }
+    await expect(leyenda).toContainText('Para la certificación.')
+    await expect(leyenda).toContainText('No se usa en este repo.')
+  })
+
+  test('las secciones que no están en el repo se ven como un recuadro', async ({
+    page
+  }) => {
+    // Las marcas salen de los capítulos: cada una tiene que verse como recuadro.
+    const capitulos = readdirSync(CARPETA_GUIA)
+      .map((archivo) => ({
+        slug: infoDeArchivo(archivo)?.slug,
+        marcas: seccionesTeoricas(
+          readFileSync(path.join(CARPETA_GUIA, archivo), 'utf8')
+        )
+      }))
+      .filter((c) => c.slug && c.marcas.length)
+    expect(capitulos.length).toBeGreaterThan(0)
+    for (const { slug, marcas } of capitulos) {
+      await page.goto(`/guia/${slug}/`)
+      const recuadros = page.locator(
+        '.guia-contenido blockquote.recuadro-teorico'
+      )
+      await expect(recuadros).toHaveCount(marcas.length)
+      for (const [i, marca] of marcas.entries()) {
+        await expect(recuadros.nth(i)).toBeVisible()
+        await expect(recuadros.nth(i).locator('strong').first()).toHaveText(
+          marca
+        )
+      }
+    }
   })
 
   test('los capítulos nuevos de MCP y CI tienen diagramas con texto alternativo', async ({

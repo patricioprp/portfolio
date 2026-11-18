@@ -69,8 +69,10 @@ flowchart TD
 
 ## 18.4 Más funciones, para cuando las necesites
 
-La guía cubre lo que usa este repo. Claude Code tiene más; estas son las que
-conviene conocer:
+> **No se usa en este repo.** Ninguna de estas funciones está configurada
+> en él; se nombran para que sepas que existen.
+
+Claude Code tiene más; estas son las que conviene conocer:
 
 | Función               | Qué hace                                                                          | Documentación                                                      |
 | --------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------ |

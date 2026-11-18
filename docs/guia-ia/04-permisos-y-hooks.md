@@ -263,6 +263,10 @@ Dentro de Claude Code, `/hooks` muestra los hooks activos.
 
 ## 4.7 Sandboxing: un límite del sistema operativo
 
+> **No se usa en este repo.** Se desarrolló en Windows, donde el sandbox no
+> está disponible; los permisos de 4.3 y el hook `proteger-archivos.mjs`
+> cubren lo necesario.
+
 Los permisos deciden **qué comandos** puede correr Claude. El **sandbox**
 agrega otro límite, puesto por el sistema operativo: los comandos de `Bash`
 solo pueden escribir en la carpeta del proyecto (y en temporales) y salen a
@@ -276,9 +280,8 @@ internet solo hacia los dominios que permitas
   `Edit`, `Write`) siguen gobernadas por los permisos, y los servidores MCP
   y los hooks corren fuera del sandbox.
 
-Este repo **no lo usa**: se desarrolló en Windows, y los permisos de 4.3 más
-el hook `proteger-archivos.mjs` cubren lo necesario. Si trabajás en macOS o
-Linux, vale la pena activarlo, sobre todo con el modo auto (capítulo 2).
+Si trabajás en macOS o Linux, vale la pena activarlo, sobre todo con el
+modo auto (capítulo 2).
 
 Ni los permisos ni el sandbox frenan el _prompt injection_ (instrucciones
 escondidas en una web, un PDF o lo que trae un servidor MCP): eso se cubre
