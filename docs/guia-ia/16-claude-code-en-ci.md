@@ -138,6 +138,9 @@ falta?`. En un minuto o dos, Claude responde en el mismo hilo.
 
 ## 16.5 Claude Code sin conversación: `claude -p`
 
+> **No se usa en este repo.** Ningún script propio lo llama; el repo solo
+> depende de la acción de 16.3.
+
 La acción de GitHub usa por dentro el modo **headless**: Claude Code recibe
 un pedido, trabaja y termina, sin conversación
 ([documentación](https://code.claude.com/docs/en/headless)). Lo podés usar en

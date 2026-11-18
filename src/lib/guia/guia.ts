@@ -252,13 +252,63 @@ export function transformarMarkdown(
 }
 
 /**
- * Ajusta el HTML ya renderizado: envuelve las tablas en una región
+ * Frases que, al principio de una cita, marcan una sección que no está en el
+ * repo: un tema de la certificación o una función que se explica pero no se
+ * usa (spec 008). El sitio muestra esas citas como un recuadro aparte.
+ */
+export const MARCAS_TEORICAS = [
+  'Para la certificación.',
+  'No se usa en este repo.'
+] as const
+
+const escaparRegex = (texto: string) =>
+  texto.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+const MARCA = MARCAS_TEORICAS.map(escaparRegex).join('|')
+
+/** Marcas de sección teórica de un capítulo, en orden. */
+export function seccionesTeoricas(markdown: string): string[] {
+  const regex = new RegExp(`^>\\s*\\*\\*(${MARCA})\\*\\*`, 'gm')
+  return [...markdown.matchAll(regex)].map((m) => m[1] ?? '')
+}
+
+/**
+ * Citas que parecen una marca teórica pero no la escriben exacta (por
+ * ejemplo, con el punto afuera de las negritas o en minúscula): el sitio no
+ * las mostraría como recuadro, así que el build las rechaza.
+ */
+export function marcasMalEscritas(markdown: string): string[] {
+  const exactas: readonly string[] = MARCAS_TEORICAS
+  const base = (texto: string) => texto.replace(/\.$/, '').toLowerCase()
+  const parecidas = new Set(MARCAS_TEORICAS.map(base))
+  return markdown.split(/\r?\n/).filter((linea) => {
+    const texto = /^>\s*\*\*([^*]+)\*\*/.exec(linea)?.[1]?.trim()
+    return !!texto && !exactas.includes(texto) && parecidas.has(base(texto))
+  })
+}
+
+/**
+ * Ícono "graduation-cap" de Lucide (@iconify-json/lucide 1.2.143), el mismo
+ * de la etiqueta "Solo teórico". Va en el HTML porque el Markdown no usa
+ * componentes de Astro.
+ */
+const ICONO_TEORICO =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" class="teorico-icono"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0zM22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></g></svg>'
+
+/**
+ * Ajusta el HTML ya renderizado: marca las citas de sección teórica
+ * (`MARCAS_TEORICAS`), envuelve las tablas en una región
  * desplazable con teclado (no rompen el ancho en el celular), les da nombre
  * a las casillas de las listas y reescribe los enlaces con `reescribirEnlace`.
  */
 export function transformarHtml(html: string): string {
   return (
     html
+      .replace(
+        new RegExp(`<blockquote>(\\s*)<p><strong>(${MARCA})</strong>`, 'g'),
+        (_, espacio: string, marca: string) =>
+          `<blockquote class="recuadro-teorico">${espacio}<p>${ICONO_TEORICO}<strong>${marca}</strong>`
+      )
       .replace(
         /<table(?=[\s>])/g,
         '<div class="tabla" tabindex="0" role="region" aria-label="Tabla desplazable"><table'

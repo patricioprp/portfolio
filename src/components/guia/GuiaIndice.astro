@@ -67,6 +67,36 @@ const primeroDelTutorial = await primerCapituloDelTutorial()
       <p class="mt-6 text-sm text-muted">{GUIA.aviso}</p>
     </div>
   </header>
+  <section aria-labelledby="leyenda-titulo" class="px-4 pb-14 sm:px-6">
+    <div class="mx-auto max-w-4xl rounded-2xl border border-line bg-surface p-5">
+      <h2 id="leyenda-titulo" class="font-semibold text-strong">
+        {GUIA.leyenda.titulo}
+      </h2>
+      <p class="mt-1 text-sm text-muted">{GUIA.leyenda.bajada}</p>
+      <dl class="mt-4 grid gap-3">
+        {GUIA.leyenda.etiquetas.map((e) => (
+          <div class="grid gap-1 sm:grid-cols-[10rem_1fr] sm:items-baseline">
+            <dt>
+              <EtiquetaAplicacion aplicacion={e} />
+            </dt>
+            <dd class="text-sm">{e.texto}</dd>
+          </div>
+        ))}
+      </dl>
+      <div class="recuadro-teorico mt-4 text-sm">
+        <p>
+          <Icon
+            name="lucide:graduation-cap"
+            class="teorico-icono"
+            width="18"
+            height="18"
+            aria-hidden="true"
+          />
+          {GUIA.leyenda.recuadro}
+        </p>
+      </div>
+    </div>
+  </section>
 
   {PARTES.map((parte) => {
     const lista = capitulos.filter((c) => c.parte.id === parte.id)

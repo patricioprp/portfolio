@@ -18,9 +18,16 @@ La guía es pública: se lee en GitHub y en `/guia/`, que se genera desde
 - Debajo del resumen va la etiqueta de aplicación (spec 008):
   `> **Aplicación:** En este repo | En parte | Solo teórico — <aclaración>`. Dice si lo que explica el capítulo
   existe en el repo; si falta, el build falla. Si un capítulo aplicado tiene
-  una sección que es solo teoría (por ejemplo, para la certificación), esa
-  sección empieza con `> **Para la certificación.** …` o aclara que el repo no
-  la usa.
+  una sección que no está en el repo, esa sección empieza con una de estas
+  citas (`MARCAS_TEORICAS` en `src/lib/guia/guia.ts`), que el sitio muestra
+  como un recuadro:
+  - `> **Para la certificación.** …` para un tema de la certificación;
+  - `> **No se usa en este repo.** …` para una función que se explica pero
+    no se usa.
+
+  El build rechaza una marca mal escrita (por ejemplo, con el punto afuera de
+  las negritas), y el e2e comprueba que cada una se vea como recuadro.
+
 - Orden por tema: un capítulo nuevo va donde se aprende de forma natural, no al
   final. Renumerar no rompe URL (el slug no lleva el número); revisá también
   los números sueltos en diagramas y frases como "(9 y 10)".

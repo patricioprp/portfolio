@@ -24,7 +24,33 @@ export const GUIA = {
     'Llevarte el método: specs, controles automáticos y revisiones.'
   ],
   aviso:
-    'La guía usa este portfolio como ejemplo. Podés reutilizar la estructura y la configuración; el contenido (experiencia, casos, CV) tiene que ser el tuyo.'
+    'La guía usa este portfolio como ejemplo. Podés reutilizar la estructura y la configuración; el contenido (experiencia, casos, CV) tiene que ser el tuyo.',
+  leyenda: {
+    titulo: 'Qué vas a encontrar en el repo',
+    bajada:
+      'La guía explica lo que usa este portfolio y también temas que pide la certificación Claude Certified Architect: Foundations, aunque el portfolio no los necesite. Cada capítulo lo indica con una etiqueta:',
+    etiquetas: [
+      {
+        tipo: 'repo',
+        etiqueta: 'En este repo',
+        texto: 'Lo que explica está en el código: lo podés buscar y copiar.'
+      },
+      {
+        tipo: 'parcial',
+        etiqueta: 'En parte',
+        texto:
+          'Una parte está en el repo y otra es solo teoría; el capítulo dice cuál.'
+      },
+      {
+        tipo: 'teorico',
+        etiqueta: 'Solo teórico',
+        texto:
+          'Se explica para entenderlo o para la certificación, pero no está en el repo.'
+      }
+    ],
+    recuadro:
+      'Dentro de un capítulo, una sección que no está en el repo empieza con un recuadro como este, que dice "Para la certificación." o "No se usa en este repo."'
+  }
 } as const
 
 export interface Parte {

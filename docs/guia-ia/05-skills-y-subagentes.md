@@ -71,12 +71,14 @@ Dos cosas que conviene tener claras:
 
 ### `context: fork`: un skill que trabaja aparte
 
+> **No se usa en este repo.** Los skills del repo necesitan la conversación con vos
+> (preguntar, confirmar), y la delegación la decide el orquestador
+> (capítulo 7).
+
 Con `context: fork`, el contenido del skill pasa a ser la tarea de un
 subagente, que trabaja con contexto propio y devuelve solo el resultado
 ([documentación](https://code.claude.com/docs/en/skills)). Sirve
-para skills de investigación o de revisión que leen mucho. Este repo no lo
-usa: sus skills necesitan la conversación con vos (preguntar, confirmar), y la
-delegación la decide el orquestador (capítulo 7).
+para skills de investigación o de revisión que leen mucho.
 
 ### Qué pasa al invocarlo
 

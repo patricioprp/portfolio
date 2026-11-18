@@ -147,6 +147,37 @@ html {
   overflow-x: auto;
 }
 
+/* Sección que no está en el repo ("Para la certificación." o "No se usa en
+   este repo."): recuadro con el ícono de la etiqueta "Solo teórico". Se
+   distingue por el ícono y la frase, no solo por el color. Lo usan los
+   capítulos (transformarHtml) y la leyenda del índice. */
+.recuadro-teorico {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 0.75rem;
+  background: var(--surface-2);
+  color: var(--fg);
+  font-weight: 400;
+  font-style: normal;
+  quotes: none;
+}
+
+.recuadro-teorico strong {
+  color: var(--strong);
+}
+
+.recuadro-teorico p {
+  margin: 0;
+}
+
+.recuadro-teorico .teorico-icono {
+  display: inline-block;
+  margin-right: 0.4rem;
+  vertical-align: -0.2em;
+  color: var(--accent);
+}
+
 /* Código en línea sin los acentos graves que agrega la tipografía. */
 .guia-contenido :not(pre) > code {
   padding: 0.1em 0.35em;
