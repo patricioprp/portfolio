@@ -1,10 +1,12 @@
-# 16 · Buenas prácticas y problemas comunes
+# 18 · Buenas prácticas y problemas comunes
 
 Este capítulo junta los hábitos que más diferencia hacen al trabajar con un
 agente, cómo cuidar el contexto, qué tener en cuenta de seguridad y al
 orquestar subagentes, y una tabla para cuando algo sale mal.
 
-## 16.1 Hábitos que conviene tener
+> **Aplicación:** En este repo — los hábitos y controles con los que se trabaja en él; la tabla de 18.4 lista funciones que no usa.
+
+## 18.1 Hábitos que conviene tener
 
 | Hacé                                                  | Por qué                                            |
 | ----------------------------------------------------- | -------------------------------------------------- |
@@ -25,7 +27,7 @@ orquestar subagentes, y una tabla para cuando algo sale mal.
 | Aceptar permisos sin leer el comando                      | Es tu máquina y tu repositorio                             |
 | Pegar datos privados o secretos en el chat                | Quedan en el historial y pueden terminar en un archivo     |
 
-## 16.2 Cuidar el contexto
+## 18.2 Cuidar el contexto
 
 ```mermaid
 flowchart TD
@@ -46,21 +48,40 @@ flowchart TD
   el contexto se resumió: repetí lo importante o, mejor, escribilo en un
   archivo del repo.
 - Los subagentes ayudan a ahorrar contexto: su lectura queda en su sesión.
-  Pediles un resumen, no el contenido de los archivos (capítulo 6).
+  Pediles un resumen, no el contenido de los archivos (capítulo 7).
 
-## 16.3 Seguridad
+## 18.3 Seguridad
 
 - **Secretos:** nunca en el repositorio ni en el chat. `.env` está prohibido
   para lectura y escritura en este repo.
-- **Contenido externo:** si le pegás texto de una web, un PDF o un email,
-  puede traer instrucciones escondidas ("ignorá lo anterior y…"). Claude
-  Code está preparado para tratarlo como datos, pero conviene saber que
-  existe el riesgo y revisar qué hace después.
+- **Contenido externo (_prompt injection_):** un texto de una web, un PDF,
+  un issue o lo que trae un servidor MCP puede traer instrucciones escondidas
+  ("ignorá lo anterior y…"). Claude Code está preparado para tratarlo como
+  datos, pero el riesgo existe
+  ([documentación](https://code.claude.com/docs/en/security)). Lo que lo
+  limita: permisos estrictos (lo que no está autorizado se pregunta), hooks
+  que bloquean lo crítico, servidores MCP de confianza y revisar el diff antes
+  de commitear. Si algo que hizo Claude no tiene relación con lo que pediste,
+  frená y preguntá de dónde salió.
 - **Comandos:** leé lo que vas a autorizar. Un `allow` amplio (`Bash(*)`)
   elimina la protección.
 - **Publicación:** en este repo el `git push` es siempre tuyo.
 
-## 16.4 Cuando algo sale mal
+## 18.4 Más funciones, para cuando las necesites
+
+La guía cubre lo que usa este repo. Claude Code tiene más; estas son las que
+conviene conocer:
+
+| Función               | Qué hace                                                                          | Documentación                                                      |
+| --------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Output styles         | Cambian cómo responde Claude (más explicativo, más conciso, para aprender)        | [output-styles](https://code.claude.com/docs/en/output-styles)     |
+| Statusline            | Una línea configurable debajo del cuadro de texto (rama, modelo, contexto, costo) | [statusline](https://code.claude.com/docs/en/statusline)           |
+| Claude Code en la web | Sesiones que corren en la nube sobre tu repo de GitHub, sin tu máquina prendida   | [web](https://code.claude.com/docs/en/claude-code-on-the-web)      |
+| App de escritorio     | Claude Code con diff visual, terminal y navegador integrados                      | [desktop](https://code.claude.com/docs/en/desktop)                 |
+| Claude en Chrome      | Claude maneja tu navegador para probar o automatizar páginas                      | [chrome](https://code.claude.com/docs/en/chrome)                   |
+| Tareas programadas    | `/loop` repite un pedido en la sesión; `/schedule` crea rutinas en la nube        | [scheduled-tasks](https://code.claude.com/docs/en/scheduled-tasks) |
+
+## 18.5 Cuando algo sale mal
 
 | Síntoma                                      | Causa probable                                            | Qué hacer                                                                      |
 | -------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------ |
@@ -72,7 +93,7 @@ flowchart TD
 | Se trabó en un error, prueba y prueba        | Le falta información o el enfoque es malo                 | `Esc`, explicale qué sabés del problema o pedí modo plan para replantear       |
 | Las respuestas se vuelven raras o lentas     | Contexto muy lleno                                        | `/compact` o `/clear` y retomá con un resumen                                  |
 | Cambió un archivo que no querías             | Pedido ambiguo                                            | `/rewind` o `git checkout -- archivo`, y agregá la restricción al pedido       |
-| Un subagente devolvió algo que no sirve      | El encargo era ambiguo o le faltaba contexto              | Reescribilo con la plantilla del capítulo 6, o que lo haga la sesión principal |
+| Un subagente devolvió algo que no sirve      | El encargo era ambiguo o le faltaba contexto              | Reescribilo con la plantilla del capítulo 7, o que lo haga la sesión principal |
 | Dos agentes editaron el mismo archivo        | Se paralelizó trabajo acoplado                            | Repartí por archivos o usá un worktree; en la duda, en secuencia               |
 | Se corrigió algo que no estaba mal           | Se tomó el informe de un revisor como una orden           | Comprobá cada hallazgo en el código antes de corregirlo                        |
 | Una tarea chica gastó muchos tokens          | Se delegó algo que era más fácil hacer                    | Delegá solo lo independiente y que cueste más hacer que explicar               |
@@ -85,5 +106,5 @@ flowchart TD
 - Secretos fuera del repo y del chat; el push es tuyo.
 - Cada error repetido es una pista de qué falta escribir en el repositorio.
 
-Anterior: [15 · Flujos de trabajo](15-flujos-de-trabajo.md) ·
-Siguiente: [17 · Glosario](17-glosario.md)
+Anterior: [17 · Flujos de trabajo](17-flujos-de-trabajo.md) ·
+Siguiente: [19 · Glosario](19-glosario.md)

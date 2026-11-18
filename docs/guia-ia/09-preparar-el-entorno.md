@@ -1,12 +1,14 @@
-# 8 · Tutorial: preparar el entorno
+# 9 · Tutorial: preparar el entorno
 
 Empieza el paso a paso. En este capítulo creás las cuentas, instalás las
 herramientas y dejás listo un repositorio vacío con Claude Code funcionando.
 Al final vas a tener tu máquina conectada a GitHub y una primera sesión
-abierta. No hace falta experiencia previa con agentes: los capítulos 1 a 7
+abierta. No hace falta experiencia previa con agentes: los capítulos 1 a 8
 explican el porqué de cada cosa que vas a hacer acá.
 
-## 8.1 Qué vas a construir
+> **Aplicación:** En este repo — es el camino con el que se armó este portfolio.
+
+## 9.1 Qué vas a construir
 
 Al terminar el tutorial vas a tener un portfolio publicado en internet, con
 la misma arquitectura que este, y un repositorio preparado para seguir
@@ -23,22 +25,23 @@ flowchart LR
     N --> V["Recruiters y tech leads"]
 ```
 
-## 8.2 El recorrido del tutorial
+## 9.2 El recorrido del tutorial
 
 ```mermaid
 flowchart TD
-    accTitle: Los siete pasos del tutorial, del entorno a la publicación
-    T1["8 · Preparar el entorno"] --> T2["9 · Producto y contenido"]
-    T2 --> T3["10 · Proyecto base y calidad"]
-    T3 --> T4["11 · Claude Code en tu repositorio"]
-    T4 --> T5["12 · Construir el sitio con specs"]
-    T5 --> T6["13 · Casos de estudio y demos"]
-    T6 --> T7["14 · Publicar y mantener"]
+    accTitle: Los ocho pasos del tutorial, del entorno a Claude en CI
+    T1["9 · Preparar el entorno"] --> T2["10 · Producto y contenido"]
+    T2 --> T3["11 · Proyecto base y calidad"]
+    T3 --> T4["12 · Claude Code en tu repositorio"]
+    T4 --> T5["13 · Construir el sitio con specs"]
+    T5 --> T6["14 · Casos de estudio y demos"]
+    T6 --> T7["15 · Publicar y mantener"]
+    T7 --> T8["16 · Claude Code en CI"]
 ```
 
-El orden importa: primero se define **qué** querés mostrar (capítulo 9),
-después la base técnica y los controles (10 y 11), y recién entonces se
-construye el sitio (12 y 13). Es el orden que recomendamos: este
+El orden importa: primero se define **qué** querés mostrar (capítulo 10),
+después la base técnica y los controles (11 y 12), y recién entonces se
+construye el sitio (13 y 14). Es el orden que recomendamos: este
 portfolio sumó la configuración de Claude Code más tarde, y por eso la guía
 la adelanta (así se aprovecha desde el primer día).
 
@@ -47,7 +50,7 @@ la adelanta (así se aprovecha desde el primer día).
 > casos, experiencia, CV) es personal: el tuyo tiene que salir de tu
 > trayectoria. Un portfolio con logros ajenos se cae en la primera entrevista.
 
-## 8.3 Cuentas
+## 9.3 Cuentas
 
 | Cuenta                             | Para qué              | Costo                                                            |
 | ---------------------------------- | --------------------- | ---------------------------------------------------------------- |
@@ -58,7 +61,7 @@ la adelanta (así se aprovecha desde el primer día).
 Conviene crear la de Netlify **con tu cuenta de GitHub**: así después solo
 elegís el repositorio y listo.
 
-## 8.4 Herramientas
+## 9.4 Herramientas
 
 Instalá, en este orden:
 
@@ -89,7 +92,7 @@ git config --global user.name "Tu Nombre"
 git config --global user.email "tu@email.com"
 ```
 
-## 8.5 El repositorio
+## 9.5 El repositorio
 
 1. En GitHub: **New repository** → nombre (por ejemplo, `portfolio`) →
    **Public** → sin README (lo crea el proyecto después) → **Create**.
@@ -111,7 +114,7 @@ flowchart LR
 > No pongas tu proyecto **dentro** de otra carpeta que tenga su propio
 > `CLAUDE.md`: Claude Code cargaría las dos instrucciones (capítulo 3).
 
-## 8.6 Primera sesión
+## 9.6 Primera sesión
 
 ```bash
 cd mi-portfolio
@@ -140,5 +143,5 @@ Probá con un pedido inocuo, en modo plan (Shift+Tab):
 - Tu repositorio y el de referencia como carpetas hermanas.
 - `claude --add-dir ../portfolio-referencia` para que Claude pueda leer la referencia.
 
-Anterior: [7 · Specs, ADR y fuente de verdad](07-specs-adr-y-fuente-de-verdad.md) ·
-Siguiente: [9 · Tutorial: producto y contenido](09-producto-y-contenido.md)
+Anterior: [8 · Specs, ADR y fuente de verdad](08-specs-adr-y-fuente-de-verdad.md) ·
+Siguiente: [10 · Tutorial: producto y contenido](10-producto-y-contenido.md)

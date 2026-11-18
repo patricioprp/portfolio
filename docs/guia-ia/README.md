@@ -20,12 +20,17 @@ https://portfolio-patricio-polito.netlify.app/guia/
 ```mermaid
 flowchart LR
     accTitle: Las tres partes de la guía: fundamentos, paso a paso y referencia
-    F["Parte 1 · Fundamentos<br/>capítulos 1 a 7<br/>el marco teórico"] --> T["Parte 2 · Paso a paso<br/>capítulos 8 a 14<br/>tu portfolio de cero a publicado"]
-    T --> R["Parte 3 · Referencia<br/>capítulos 15 a 17<br/>para el día a día"]
+    F["Parte 1 · Fundamentos<br/>capítulos 1 a 8<br/>el marco teórico"] --> T["Parte 2 · Paso a paso<br/>capítulos 9 a 16<br/>tu portfolio de cero a publicado"]
+    T --> R["Parte 3 · Referencia<br/>capítulos 17 a 19<br/>para el día a día"]
 ```
 
+Cada capítulo dice, debajo del resumen, si lo que explica **se aplica en
+este repo**, **en parte** o es **solo teórico** (por ejemplo, temas de la
+certificación que un portfolio no necesita). Así sabés si podés buscarlo en el
+código.
+
 Si nunca usaste un agente, leé la guía en orden. Si ya conocés Claude Code y
-querés ir directo a construir, empezá por el capítulo 8 y volvé a los
+querés ir directo a construir, empezá por el capítulo 9 y volvé a los
 fundamentos cuando un paso no te cierre: cada uno indica qué capítulo
 explica su porqué.
 
@@ -38,28 +43,30 @@ explica su porqué.
 | 3   | [Contexto persistente: CLAUDE.md y reglas](03-contexto-persistente.md) | ¿Cómo sabe Claude las reglas del proyecto en cada sesión? |
 | 4   | [Permisos y hooks](04-permisos-y-hooks.md)                             | ¿Cómo se garantiza lo que no puede fallar?                |
 | 5   | [Skills y subagentes](05-skills-y-subagentes.md)                       | ¿Cómo se empaquetan procesos y revisiones?                |
-| 6   | [Orquestación de agentes](06-orquestacion-de-agentes.md)               | ¿Cómo se reparte una tarea entre varios agentes?          |
-| 7   | [Specs, ADR y fuente de verdad](07-specs-adr-y-fuente-de-verdad.md)    | ¿Cómo se acuerda qué construir, por qué y con qué datos?  |
+| 6   | [MCP: conectar herramientas](06-mcp.md)                                | ¿Cómo se suman herramientas externas al agente?           |
+| 7   | [Orquestación de agentes](07-orquestacion-de-agentes.md)               | ¿Cómo se reparte una tarea entre varios agentes?          |
+| 8   | [Specs, ADR y fuente de verdad](08-specs-adr-y-fuente-de-verdad.md)    | ¿Cómo se acuerda qué construir, por qué y con qué datos?  |
 
 ### Parte 2 · Paso a paso
 
 | #   | Capítulo                                                      | Resultado                                              |
 | --- | ------------------------------------------------------------- | ------------------------------------------------------ |
-| 8   | [Preparar el entorno](08-preparar-el-entorno.md)              | Cuentas, herramientas y tu repositorio con Claude Code |
-| 9   | [Producto y contenido](09-producto-y-contenido.md)            | Tu objetivo, tu experiencia y tus casos, escritos      |
-| 10  | [Proyecto base y calidad](10-proyecto-base-y-calidad.md)      | Astro + React + TypeScript con tests y `/verificar`    |
-| 11  | [Claude Code en tu repositorio](11-claude-code-en-tu-repo.md) | Permisos, hooks, skills, revisores y CI                |
-| 12  | [Construir el sitio con specs](12-construir-el-sitio.md)      | La home y las páginas, fase por fase                   |
-| 13  | [Casos de estudio y demos](13-casos-y-demos.md)               | Tus casos publicados y, si querés, una demo            |
-| 14  | [Publicar y mantener](14-publicar-y-mantener.md)              | El sitio en internet y un circuito para mantenerlo     |
+| 9   | [Preparar el entorno](09-preparar-el-entorno.md)              | Cuentas, herramientas y tu repositorio con Claude Code |
+| 10  | [Producto y contenido](10-producto-y-contenido.md)            | Tu objetivo, tu experiencia y tus casos, escritos      |
+| 11  | [Proyecto base y calidad](11-proyecto-base-y-calidad.md)      | Astro + React + TypeScript con tests y `/verificar`    |
+| 12  | [Claude Code en tu repositorio](12-claude-code-en-tu-repo.md) | Permisos, hooks, skills, revisores y CI                |
+| 13  | [Construir el sitio con specs](13-construir-el-sitio.md)      | La home y las páginas, fase por fase                   |
+| 14  | [Casos de estudio y demos](14-casos-y-demos.md)               | Tus casos publicados y, si querés, una demo            |
+| 15  | [Publicar y mantener](15-publicar-y-mantener.md)              | El sitio en internet y un circuito para mantenerlo     |
+| 16  | [Claude Code en CI](16-claude-code-en-ci.md)                  | Claude revisa tus PR cuando se lo pedís                |
 
 ### Parte 3 · Referencia
 
 | #   | Capítulo                                                       | Para qué                                                 |
 | --- | -------------------------------------------------------------- | -------------------------------------------------------- |
-| 15  | [Flujos de trabajo](15-flujos-de-trabajo.md)                   | Qué hacer para una feature, una experiencia o un arreglo |
-| 16  | [Buenas prácticas y problemas comunes](16-buenas-practicas.md) | Hábitos y qué hacer cuando algo sale mal                 |
-| 17  | [Glosario](17-glosario.md)                                     | Cada término, con dónde aparece en el repo               |
+| 17  | [Flujos de trabajo](17-flujos-de-trabajo.md)                   | Qué hacer para una feature, una experiencia o un arreglo |
+| 18  | [Buenas prácticas y problemas comunes](18-buenas-practicas.md) | Hábitos y qué hacer cuando algo sale mal                 |
+| 19  | [Glosario](19-glosario.md)                                     | Cada término, con dónde aparece en el repo               |
 
 ## Dónde está cada cosa en el repositorio
 
@@ -85,7 +92,8 @@ flowchart LR
     subgraph APP["Aplicación"]
         SRC["src/"]
         E2E["e2e/"]
-        CI[".github/workflows/ci.yml"]
+        CI[".github/workflows/<br/>ci.yml y claude.yml"]
+        MCP[".mcp.json<br/>servidor MCP"]
     end
     IA --> APP
     DOC --> APP
@@ -107,5 +115,10 @@ funcionando, al editarla:
   ([ADR 0006](../adr/0006-diagramas-mermaid-pre-renderizados.md));
 - enlaces relativos: a otro capítulo (`02-primeros-pasos.md`) o a archivos del
   repo (`../../CLAUDE.md`, que en el sitio apuntan a GitHub);
-- si se agrega un capítulo, se ubica en su parte en `src/data/guia.ts`;
+- debajo del resumen, la etiqueta
+  `> **Aplicación:** En este repo | En parte | Solo teórico — …` (sin ella,
+  el build falla); una sección que es solo teoría empieza con
+  `> **Para la certificación.**` o aclara que el repo no la usa;
+- si se agrega un capítulo, va donde corresponde por tema y se ubica en su
+  parte en `src/data/guia.ts`;
 - nada de datos privados ni de nombres de clientes.

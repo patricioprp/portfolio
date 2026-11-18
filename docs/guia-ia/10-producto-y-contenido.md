@@ -1,4 +1,4 @@
-# 9 · Tutorial: producto y contenido
+# 10 · Tutorial: producto y contenido
 
 Antes de escribir una línea de código vas a dejar escrito **para qué** es tu
 portfolio y **qué** vas a contar. Esto se hace primero porque es lo único
@@ -6,7 +6,9 @@ que la IA no puede saber por su cuenta: si falta, la completa con lo
 probable (capítulo 1). En este capítulo Claude te entrevista y vos le dictás
 tu trayectoria.
 
-## 9.1 Por qué empezar por acá
+> **Aplicación:** En este repo — `docs/PRODUCTO.md` y `docs/contenido/`.
+
+## 10.1 Por qué empezar por acá
 
 ```mermaid
 flowchart LR
@@ -18,11 +20,11 @@ flowchart LR
     X["Sin docs/"] -. "Claude inventa<br/>lo que falta" .-> S
 ```
 
-Lo que escribas en `docs/` va a ser la **fuente de verdad** (capítulo 7):
+Lo que escribas en `docs/` va a ser la **fuente de verdad** (capítulo 8):
 el sitio se genera a partir de ahí, y una regla en `CLAUDE.md` le prohíbe a
 Claude inventar lo que no esté.
 
-## 9.2 El documento de producto
+## 10.2 El documento de producto
 
 `docs/PRODUCTO.md` responde: ¿qué querés lograr?, ¿quién lo va a leer?, ¿qué
 tiene que ver en los primeros 30 segundos? Abrí una sesión en `mi-portfolio`
@@ -45,7 +47,7 @@ Decisiones que te va a preguntar y conviene pensar:
 | ¿En qué idiomas?                              | Español e inglés                                                  |
 | ¿Qué presupuesto de rendimiento?              | Home con 50 KB o menos de JavaScript (comprimido)                 |
 
-## 9.3 Tu perfil y tu experiencia
+## 10.3 Tu perfil y tu experiencia
 
 Creá la fuente de verdad del contenido en `docs/contenido/`:
 
@@ -65,7 +67,7 @@ Tres reglas que valen oro en una entrevista:
 3. **Métricas honestas.** Etiquetalas `real` (medida) o `ilustrativa`
    (estimada o de una demo). Las ilustrativas nunca como logro profesional.
 
-## 9.4 Los casos de estudio (borrador)
+## 10.4 Los casos de estudio (borrador)
 
 Elegí **2 o 3 problemas** en los que hayas tenido impacto. Para cada uno, un
 archivo en `docs/casos/<slug>.md`:
@@ -79,7 +81,7 @@ Si el trabajo fue para un cliente, **anonimizalo** ("empresa de salud de alcance
 nacional", "empresa de logística regional") y no publiques nombres de
 sistemas internos.
 
-## 9.5 Lo que nunca se publica
+## 10.5 Lo que nunca se publica
 
 El repositorio va a ser público. Antes del primer commit:
 
@@ -88,7 +90,7 @@ El repositorio va a ser público. Antes del primer commit:
 2. Creá `docs/privado/terminos-sensibles.txt` con, una por línea, las
    palabras que **nunca** pueden aparecer en el repositorio (nombres de
    clientes, de sistemas internos, tu fecha de nacimiento…). Un hook la va a
-   usar para bloquear cualquier filtración (capítulo 11).
+   usar para bloquear cualquier filtración (capítulo 12).
 3. Creá `.gitignore` con, al menos:
 
 ```text
@@ -101,7 +103,7 @@ docs/privado/
 CLAUDE.local.md
 ```
 
-## 9.6 Primer commit
+## 10.6 Primer commit
 
 ```bash
 git add docs .gitignore
@@ -125,5 +127,5 @@ Comprobá en GitHub que `docs/privado/` **no** aparece.
 - Logros con problema, acción y resultado; métricas reales o ilustrativas; clientes anónimos.
 - Lo privado, fuera de git desde el primer commit.
 
-Anterior: [8 · Tutorial: preparar el entorno](08-preparar-el-entorno.md) ·
-Siguiente: [10 · Tutorial: proyecto base y calidad](10-proyecto-base-y-calidad.md)
+Anterior: [9 · Tutorial: preparar el entorno](09-preparar-el-entorno.md) ·
+Siguiente: [11 · Tutorial: proyecto base y calidad](11-proyecto-base-y-calidad.md)

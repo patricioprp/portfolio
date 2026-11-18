@@ -1,11 +1,13 @@
-# 7 · Specs, ADR y fuente de verdad
+# 8 · Specs, ADR y fuente de verdad
 
 Las piezas anteriores le dicen al agente **cómo** trabajar. Este capítulo
 trata de **qué** construir y **con qué datos**: las _specs_ (acordar el
 alcance antes de programar), los _ADR_ (registrar por qué se decidió algo) y
 la _fuente de verdad_ (el único lugar donde un dato es correcto).
 
-## 7.1 Por qué escribir una spec antes de programar
+> **Aplicación:** En este repo — `docs/specs/`, `docs/adr/`, `docs/contenido/` y `docs/casos/`.
+
+## 8.1 Por qué escribir una spec antes de programar
 
 Con un agente, escribir código es barato y rápido. Lo caro es **construir lo
 que no era**. Sin una spec pasa esto:
@@ -34,7 +36,7 @@ flowchart LR
 Si trabajaste con Jira o similar, una spec es un **ticket bien escrito**: una
 historia de usuario con criterios de aceptación y lo que queda fuera.
 
-## 7.2 Ciclo de vida de una spec
+## 8.2 Ciclo de vida de una spec
 
 ```mermaid
 stateDiagram-v2
@@ -49,7 +51,7 @@ stateDiagram-v2
 El skill `/implementar` **se niega** a empezar si la spec no está
 `Aprobada`. Es intencional: la aprobación es tu punto de control.
 
-## 7.3 Anatomía de una spec
+## 8.3 Anatomía de una spec
 
 Plantilla: [`docs/specs/_plantilla.md`](../specs/_plantilla.md). Ejemplo
 real: [`003-demo-contingencias.md`](../specs/003-demo-contingencias.md).
@@ -73,7 +75,7 @@ Un criterio de aceptación de la spec 003:
 "Gana sobre todo lo demás" se puede comprobar con un test. "Que el
 mantenimiento funcione bien" no.
 
-## 7.4 De criterio a test: TDD
+## 8.4 De criterio a test: TDD
 
 `/implementar` trabaja criterio por criterio con **TDD** (_test-driven
 development_):
@@ -90,7 +92,7 @@ flowchart LR
 que el test realmente prueba algo. Y porque, al final, "terminado" no es la
 opinión del agente: es una lista de tests en verde.
 
-## 7.5 ADR: el porqué de las decisiones
+## 8.5 ADR: el porqué de las decisiones
 
 Un ADR (_Architecture Decision Record_) es un documento corto que registra
 **una** decisión técnica: contexto, qué se eligió, **qué alternativas se
@@ -117,7 +119,7 @@ Cuándo escribir uno: cuando hubo **alternativas reales** y elegir una tiene
 consecuencias. Un ADR no se edita para cambiar de opinión: se escribe uno
 nuevo que lo reemplaza, y así queda la historia.
 
-## 7.6 Fuente de verdad: de dónde salen los datos
+## 8.6 Fuente de verdad: de dónde salen los datos
 
 El agente completa huecos con lo probable (capítulo 1). En un portfolio eso es
 grave: una fecha o una métrica inventada es un problema en una entrevista. Por
@@ -171,7 +173,7 @@ producción.
 El contrato completo de la experiencia está en
 [`docs/specs/005-experiencia.md`](../specs/005-experiencia.md).
 
-## 7.7 Práctica guiada
+## 8.7 Práctica guiada
 
 1. Leé la spec [`003-demo-contingencias.md`](../specs/003-demo-contingencias.md)
    y abrí `src/lib/contingencias/evaluar.test.ts`: buscá el test de cada criterio.
@@ -188,5 +190,5 @@ El contrato completo de la experiencia está en
 - ADR = una decisión con sus alternativas descartadas.
 - Cada dato tiene una fuente de verdad; zod impide que un dato mal formado llegue al sitio.
 
-Anterior: [6 · Orquestación de agentes](06-orquestacion-de-agentes.md) ·
-Siguiente: [8 · Tutorial: preparar el entorno](08-preparar-el-entorno.md)
+Anterior: [7 · Orquestación de agentes](07-orquestacion-de-agentes.md) ·
+Siguiente: [9 · Tutorial: preparar el entorno](09-preparar-el-entorno.md)

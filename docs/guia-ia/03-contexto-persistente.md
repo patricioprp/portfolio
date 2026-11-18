@@ -6,6 +6,8 @@ siempre) y `.claude/rules/` (lo que aplica a una parte del código). Este
 capítulo explica cómo se cargan, qué contienen en este repo y cómo escribir
 instrucciones que el modelo realmente siga.
 
+> **Aplicación:** En este repo — `CLAUDE.md` y `.claude/rules/`; la memoria automática vive fuera del repo.
+
 ## 3.1 Qué es `CLAUDE.md`
 
 Es un archivo Markdown que Claude Code carga **automáticamente al comienzo
@@ -31,12 +33,13 @@ flowchart TD
     SUB["CLAUDE.md dentro de una subcarpeta"] -.-> W
 ```
 
-| Archivo               | Alcance                            | ¿Va a git?        | Uso en este repo                          |
-| --------------------- | ---------------------------------- | ----------------- | ----------------------------------------- |
-| `~/.claude/CLAUDE.md` | Todos tus proyectos                | No                | No se usa                                 |
-| `CLAUDE.md`           | Este proyecto, siempre             | Sí                | Reglas globales del portfolio             |
-| `CLAUDE.local.md`     | Este proyecto, solo tu máquina     | No (`.gitignore`) | Disponible para notas personales          |
-| `.claude/rules/*.md`  | Archivos que coinciden con `paths` | Sí                | Lógica pura, islas, contenido, e2e y guía |
+| Archivo                      | Alcance                                              | ¿Va a git?        | Uso en este repo                          |
+| ---------------------------- | ---------------------------------------------------- | ----------------- | ----------------------------------------- |
+| CLAUDE.md de la organización | Todos los usuarios de una empresa (lo administra IT) | No                | No se usa                                 |
+| `~/.claude/CLAUDE.md`        | Todos tus proyectos                                  | No                | No se usa                                 |
+| `CLAUDE.md`                  | Este proyecto, siempre                               | Sí                | Reglas globales del portfolio             |
+| `CLAUDE.local.md`            | Este proyecto, solo tu máquina                       | No (`.gitignore`) | Disponible para notas personales          |
+| `.claude/rules/*.md`         | Archivos que coinciden con `paths`                   | Sí                | Lógica pura, islas, contenido, e2e y guía |
 
 Un detalle que conviene saber: Claude Code también carga los `CLAUDE.md` de
 las **carpetas superiores**. Si tu proyecto vive dentro de una carpeta que
@@ -44,6 +47,27 @@ tiene su propio `CLAUDE.md` (por ejemplo, el de otro proyecto de trabajo), se
 van a mezclar instrucciones. Al portfolio le pasó en la máquina donde se
 desarrolló; por eso su `CLAUDE.md` empieza aclarando que el otro archivo no
 aplica. Lo más simple es no anidar proyectos.
+
+Los `CLAUDE.md` de las **subcarpetas**, en cambio, no se cargan al abrir la
+sesión: entran recién cuando Claude lee o edita un archivo de esa carpeta.
+Con `/context all` ves qué archivos de instrucciones están cargados
+([documentación](https://code.claude.com/docs/en/memory)).
+
+### Imports: `@ruta` dentro de un `CLAUDE.md`
+
+Un `CLAUDE.md` puede traer otro archivo escribiendo su ruta con `@`:
+
+```markdown
+- Estrategia y público: @docs/PRODUCTO.md
+- Mis atajos personales: @~/.claude/mis-preferencias.md
+```
+
+El archivo importado se carga como si estuviera escrito ahí. La ruta es
+relativa al archivo que importa, y un import puede importar otro, hasta cuatro
+niveles. Sirve para no duplicar texto. Cuidado: lo importado también ocupa
+contexto en **cada** sesión. Por eso este repo **no** importa
+`docs/PRODUCTO.md` ni `docs/ARQUITECTURA.md`: los nombra en `CLAUDE.md` y
+Claude los lee cuando la tarea lo necesita.
 
 ## 3.3 Recorrido por el `CLAUDE.md` de este repo
 
@@ -53,7 +77,7 @@ aplica. Lo más simple es no anidar proyectos.
 | Qué es este proyecto        | Objetivo: empleo estable; diferencial: casos y demos            | Que cada decisión apunte al objetivo (nada de "servicios freelance") |
 | Estado actual y Stack       | Fases terminadas, versiones y por qué TypeScript queda en 6     | Que no "actualice" algo que se fijó a propósito                      |
 | Comandos                    | `npm run …` del proyecto                                        | Que use los comandos reales y no invente otros                       |
-| Cómo trabajar               | Qué skill usar según el pedido                                  | Que siga el flujo (capítulo 15) sin que se lo recuerdes              |
+| Cómo trabajar               | Qué skill usar según el pedido                                  | Que siga el flujo (capítulo 17) sin que se lo recuerdes              |
 | Fuente de verdad            | Todo texto sale de `docs/contenido/` y `docs/casos/`            | La regla que más errores evita: no inventar                          |
 | Datos que nunca se publican | Referencias, credenciales, fecha de nacimiento, `docs/privado/` | El repo es público                                                   |
 | Convenciones                | Idioma, Prettier, sin `any`, a11y, commits                      | Consistencia sin tener que repetirlo                                 |
@@ -117,13 +141,32 @@ Otros consejos:
 - **Mantenelo vivo.** Si corregís a Claude dos veces por lo mismo, falta una
   línea en `CLAUDE.md` o en una regla.
 
-## 3.6 ¿Y la "memoria" de Claude?
+## 3.6 La memoria automática
 
-Además de estos archivos, Claude Code puede guardar notas propias entre
-sesiones (memoria automática, fuera del repositorio). Es útil para
-preferencias personales, pero **la fuente de verdad del proyecto es el
-repositorio**: lo que importa para trabajar en él tiene que estar en
-`CLAUDE.md`, en las reglas o en `docs/`, donde lo ve cualquiera y queda en git.
+Además de los archivos que escribís vos, Claude Code puede guardar **sus
+propias notas** entre sesiones: preferencias que le dijiste, correcciones,
+datos del proyecto que no están en el código
+([documentación](https://code.claude.com/docs/en/memory)).
+
+- Viven fuera del repo, en `~/.claude/projects/<proyecto>/memory/`: una nota
+  por archivo y un índice `MEMORY.md`. Del índice se cargan las primeras 200
+  líneas (o 25 KB) en cada sesión.
+- Si le decís "acordate de que…", lo guarda ahí. Si querés que vaya al
+  `CLAUDE.md`, pedíselo explícitamente.
+- `/memory` lista todos los archivos de instrucciones y de memoria, los abre
+  para editarlos y activa o desactiva la memoria automática.
+
+|                  | `CLAUDE.md` y reglas         | Memoria automática                     |
+| ---------------- | ---------------------------- | -------------------------------------- |
+| Quién lo escribe | Vos                          | Claude                                 |
+| Dónde vive       | En el repo (versionado)      | En tu máquina                          |
+| Quién lo ve      | Cualquiera que clone el repo | Solo vos                               |
+| Para qué         | Reglas del proyecto          | Preferencias y aprendizajes personales |
+
+La regla de este repo: **la fuente de verdad del proyecto es el repositorio**.
+Lo que importa para trabajar en él tiene que estar en `CLAUDE.md`, en las
+reglas o en `docs/`, donde lo ve cualquiera y queda en git. La memoria
+automática es un complemento personal, no un lugar para reglas.
 
 ## 3.7 Práctica guiada
 

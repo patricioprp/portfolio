@@ -4,9 +4,11 @@ import {
   RAMA_PUBLICADA,
   REPO_URL,
   RUTA_GUIA,
+  extraerAplicacion,
   extraerResumen,
   extraerTitulo,
-  infoDeArchivo
+  infoDeArchivo,
+  type Aplicacion
 } from '@/lib/guia/guia'
 
 /** Textos de la guía en el sitio. La guía existe solo en español. */
@@ -43,7 +45,7 @@ export const PARTES: readonly Parte[] = [
     descripcion:
       'El marco teórico: qué es un agente, qué es el contexto y para qué sirve cada pieza de la configuración.',
     desde: 1,
-    hasta: 7
+    hasta: 8
   },
   {
     id: 'paso-a-paso',
@@ -51,8 +53,8 @@ export const PARTES: readonly Parte[] = [
     titulo: 'Paso a paso',
     descripcion:
       'El tutorial: de instalar las herramientas a tener tu portfolio publicado y listo para mantener.',
-    desde: 8,
-    hasta: 14
+    desde: 9,
+    hasta: 16
   },
   {
     id: 'referencia',
@@ -60,8 +62,8 @@ export const PARTES: readonly Parte[] = [
     titulo: 'Referencia',
     descripcion:
       'Para el día a día: flujos de trabajo, buenas prácticas y glosario.',
-    desde: 15,
-    hasta: 17
+    desde: 17,
+    hasta: 19
   }
 ]
 
@@ -72,6 +74,8 @@ export interface Capitulo {
   titulo: string
   resumen: string
   parte: Parte
+  /** Si lo que explica se aplica en este repo (etiqueta del Markdown). */
+  aplicacion: Aplicacion
   /** El capítulo en GitHub (fuente de la página). */
   github: string
 }
@@ -115,6 +119,12 @@ export async function obtenerCapitulos(): Promise<Capitulo[]> {
       const info = infoDeArchivo(entrada.id)
       if (!info) throw new Error(`Nombre de capítulo inválido: ${entrada.id}`)
       const cuerpo = entrada.body ?? ''
+      const aplicacion = extraerAplicacion(cuerpo)
+      if (!aplicacion) {
+        throw new Error(
+          `${CARPETA_GUIA}/${entrada.id}.md: falta la etiqueta "> **Aplicación:**".`
+        )
+      }
       return {
         entrada,
         numero: info.numero,
@@ -122,6 +132,7 @@ export async function obtenerCapitulos(): Promise<Capitulo[]> {
         titulo: extraerTitulo(cuerpo),
         resumen: extraerResumen(cuerpo),
         parte: parteDeCapitulo(info.numero),
+        aplicacion,
         github: `${REPO_URL}/blob/${RAMA_PUBLICADA}/${CARPETA_GUIA}/${entrada.id}.md`
       }
     })

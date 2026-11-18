@@ -102,6 +102,69 @@ export function enlacesACapitulos(markdown: string): string[] {
     .filter(Boolean)
 }
 
+/** Si lo que explica un capítulo está aplicado en este repo (spec 008). */
+export interface Aplicacion {
+  tipo: 'repo' | 'parcial' | 'teorico'
+  etiqueta: string
+  detalle: string
+}
+
+const TIPOS_DE_APLICACION: Record<string, Aplicacion['tipo']> = {
+  'En este repo': 'repo',
+  'En parte': 'parcial',
+  'Solo teórico': 'teorico'
+}
+
+const INICIO_APLICACION = /^>\s*\*\*Aplicación:\*\*\s*/
+
+/** Líneas (índices) del blockquote `> **Aplicación:** …`, o null. */
+function lineasDeAplicacion(
+  lineas: readonly string[]
+): [number, number] | null {
+  // Solo en el encabezado (antes de la primera sección "##"), para que un
+  // ejemplo del formato dentro del capítulo no cuente como etiqueta.
+  const primeraSeccion = lineas.findIndex((l) => /^##\s/.test(l))
+  const encabezado =
+    primeraSeccion === -1 ? lineas : lineas.slice(0, primeraSeccion)
+  const inicio = encabezado.findIndex((l) => INICIO_APLICACION.test(l))
+  if (inicio === -1) return null
+  let fin = inicio
+  while (lineas[fin + 1]?.startsWith('>')) fin++
+  return [inicio, fin]
+}
+
+/**
+ * Lee la etiqueta `> **Aplicación:** En este repo | En parte | Solo teórico
+ * — detalle` que va debajo del resumen de cada capítulo.
+ */
+export function extraerAplicacion(markdown: string): Aplicacion | null {
+  const lineas = markdown.split(/\r?\n/)
+  const rango = lineasDeAplicacion(lineas)
+  if (!rango) return null
+  const texto = lineas
+    .slice(rango[0], rango[1] + 1)
+    .map((l) => l.replace(/^>\s?/, '').trim())
+    .join(' ')
+    .replace(/^\*\*Aplicación:\*\*\s*/, '')
+  const [etiqueta = '', ...resto] = texto.split(/\s+—\s+/)
+  const tipo = TIPOS_DE_APLICACION[etiqueta.trim()]
+  if (!tipo) return null
+  return {
+    tipo,
+    etiqueta: etiqueta.trim(),
+    detalle: textoPlano(resto.join(' — '))
+  }
+}
+
+/** Capítulos sin una etiqueta de aplicación válida (el build los rechaza). */
+export function capitulosSinAplicacion(
+  capitulos: readonly ArchivoDeCapitulo[]
+): string[] {
+  return capitulos
+    .filter((c) => infoDeArchivo(c.archivo) && !extraerAplicacion(c.markdown))
+    .map((c) => c.archivo)
+}
+
 export interface ArchivoDeCapitulo {
   archivo: string
   markdown: string
@@ -179,6 +242,11 @@ export function transformarMarkdown(
   let inicio = lineas.length
   while (inicio > 0 && lineas[inicio - 1]?.trim() !== '') inicio--
   if (esNavegacionDeCapitulo(lineas[inicio] ?? '')) lineas.splice(inicio)
+
+  // La etiqueta de aplicación la muestra la página junto al título.
+  const aplicacion = lineasDeAplicacion(lineas)
+  if (aplicacion)
+    lineas.splice(aplicacion[0], aplicacion[1] - aplicacion[0] + 1)
 
   return lineas.join('\n') + '\n'
 }

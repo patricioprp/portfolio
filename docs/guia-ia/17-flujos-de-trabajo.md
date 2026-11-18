@@ -1,11 +1,13 @@
-# 15 · Flujos de trabajo paso a paso
+# 17 · Flujos de trabajo paso a paso
 
 Con todas las piezas presentadas, este capítulo las junta en los flujos que
 vas a usar de verdad: una funcionalidad nueva, una experiencia laboral, un
 caso de estudio, un arreglo chico y el camino de un cambio hasta que el sitio
 se publica. Cada flujo muestra qué escribís vos y qué hace Claude.
 
-## 15.1 Cuál flujo usar
+> **Aplicación:** En este repo — los skills y subagentes de `.claude/`.
+
+## 17.1 Cuál flujo usar
 
 ```mermaid
 flowchart TD
@@ -27,7 +29,7 @@ flowchart TD
     E1 --> Z
 ```
 
-## 15.2 Funcionalidad nueva
+## 17.2 Funcionalidad nueva
 
 ```mermaid
 sequenceDiagram
@@ -61,10 +63,10 @@ sequenceDiagram
 
 Lo que te toca a vos: responder las preguntas, aprobar la spec y revisar el
 resultado. El resto lo guían los skills, y Claude orquesta a los subagentes
-(capítulo 6): si una tarea es independiente, la puede delegar con un encargo
+(capítulo 7): si una tarea es independiente, la puede delegar con un encargo
 y después la integra él.
 
-## 15.3 Sumar experiencia laboral
+## 17.3 Sumar experiencia laboral
 
 Pensado para que solo tengas que contar lo que hiciste. Hay dos caminos:
 
@@ -101,7 +103,7 @@ Para cada logro, Claude te va a pedir tres cosas: **qué problema había, qué
 hiciste vos (o el equipo, y cuál fue tu parte) y qué cambió**. Es el formato
 que convierte una lista de tareas en impacto, y lo que un recruiter busca.
 
-## 15.4 Caso de estudio
+## 17.4 Caso de estudio
 
 ```text
 /nuevo-caso <slug>
@@ -113,9 +115,9 @@ Después escribe la versión en español y los diagramas, y te muestra el resume
 las métricas y lo que atribuye a vos y al equipo. Cuando lo confirmás, el
 agente `traductor` escribe la versión en inglés. Claude corre `/verificar` y
 `revisor-contenido` controla las dos versiones: es la cadena productor →
-verificador del capítulo 6.
+verificador del capítulo 7.
 
-## 15.5 Arreglo chico
+## 17.5 Arreglo chico
 
 Para un texto mal escrito o un bug puntual no hace falta spec:
 
@@ -127,7 +129,7 @@ Corregilo y corré /verificar.
 Si el bug está en `src/lib/`, pedí primero un test que lo reproduzca: así
 queda cubierto para siempre.
 
-## 15.6 Del cambio a la publicación
+## 17.6 Del cambio a la publicación
 
 ```mermaid
 flowchart LR
@@ -144,7 +146,7 @@ El CI (`.github/workflows/ci.yml`) repite los mismos pasos que `/verificar`.
 Si algo se escapó en local, aparece ahí en rojo en la pestaña _Actions_ del
 repositorio.
 
-## 15.7 Ejemplo de una conversación (ficticia y abreviada)
+## 17.7 Ejemplo de una conversación (ficticia y abreviada)
 
 ```text
 Vos:    /nueva-experiencia Entré a una empresa como Tech Lead en marzo
@@ -178,5 +180,5 @@ Claude: Actualicé experiencia.md, experiencia.json (cerré el trabajo anterior)
 - Caso: `/nuevo-caso`. Arreglo chico: directo + `/verificar`.
 - Claude puede commitear si se lo pedís; el push y la publicación son tuyos.
 
-Anterior: [14 · Tutorial: publicar y mantener](14-publicar-y-mantener.md) ·
-Siguiente: [16 · Buenas prácticas](16-buenas-practicas.md)
+Anterior: [16 · Tutorial: Claude Code en CI](16-claude-code-en-ci.md) ·
+Siguiente: [18 · Buenas prácticas](18-buenas-practicas.md)

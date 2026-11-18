@@ -1,11 +1,13 @@
-# 14 · Tutorial: publicar y mantener
+# 15 · Tutorial: publicar y mantener
 
 Último paso: poner el sitio en internet, hacer que lo encuentren y
 mantenerlo vivo. Publicar con Netlify lleva unos minutos; lo que importa es
 dejar armado un circuito en el que cada cambio pase por las verificaciones
 antes de llegar a los visitantes.
 
-## 14.1 Netlify
+> **Aplicación:** En este repo — Netlify y `.github/workflows/ci.yml`.
+
+## 15.1 Netlify
 
 1. Copiá `netlify.toml` de la referencia a la raíz de tu proyecto (define el
    comando de build, la carpeta publicada, la versión de Node y los headers
@@ -20,7 +22,7 @@ Si usás el formulario de contacto con Netlify Forms, activá la detección de
 formularios en la configuración del sitio (sección **Forms**) y configurá a
 qué email llegan.
 
-## 14.2 El circuito de publicación
+## 15.2 El circuito de publicación
 
 ```mermaid
 flowchart LR
@@ -41,7 +43,7 @@ el CI corre las verificaciones y Netlify suele generar una vista previa con
 su propia URL. Revisás tranquilo y, si te convence, hacés el merge. Esta
 misma guía se agregó así al portfolio.
 
-## 14.3 Que te encuentren
+## 15.3 Que te encuentren
 
 - **Google Search Console:** agregá tu sitio, verificá la propiedad (con la
   opción de etiqueta HTML: la agregás al `<head>` de tu layout y publicás) y enviá el sitemap
@@ -52,7 +54,7 @@ misma guía se agregó así al portfolio.
   que el enlace se vea bien en LinkedIn o WhatsApp. La referencia las genera
   con un script (`npm run og`); pedile a Claude una spec para replicarlo.
 
-## 14.4 Mantenerlo vivo
+## 15.4 Mantenerlo vivo
 
 ```mermaid
 flowchart TD
@@ -65,13 +67,13 @@ flowchart TD
 ```
 
 - **Experiencia:** cuando cambiás de trabajo, `/nueva-experiencia` te
-  entrevista y actualiza el sitio (capítulo 15).
+  entrevista y actualiza el sitio (capítulo 17).
 - **El repositorio aprende:** cada vez que corregís a Claude dos veces por lo
-  mismo, agregá la regla donde corresponda (capítulo 16).
+  mismo, agregá la regla donde corresponda (capítulo 18).
 - **Actualizaciones:** subí dependencias en una rama; el CI te dice si algo
   se rompió antes de que llegue al sitio.
 
-## 14.5 Checklist final
+## 15.5 Checklist final
 
 - [ ] El sitio está publicado en Netlify y se actualiza con cada push a `main`.
 - [ ] El formulario de contacto llega a tu email (si lo usás).
@@ -90,5 +92,5 @@ flowchart TD
 
 ¡Listo! Los capítulos que siguen son de referencia para el día a día.
 
-Anterior: [13 · Tutorial: casos de estudio y demos](13-casos-y-demos.md) ·
-Siguiente: [15 · Flujos de trabajo](15-flujos-de-trabajo.md)
+Anterior: [14 · Tutorial: casos de estudio y demos](14-casos-y-demos.md) ·
+Siguiente: [16 · Tutorial: Claude Code en CI](16-claude-code-en-ci.md)

@@ -2,6 +2,7 @@
 name: commit
 description: Propone (y, si el usuario lo confirma, crea) un commit con formato Conventional Commits a partir del diff actual. Usar cuando se pida commitear, preparar un commit o redactar el mensaje.
 disable-model-invocation: true
+allowed-tools: Bash(git status*) Bash(git diff *) Bash(git log *) Bash(git add *)
 ---
 
 # Commit
