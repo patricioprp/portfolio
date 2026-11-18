@@ -23,7 +23,7 @@ impacto medible** y las **demos ejecutables** en el navegador.
 
 ## Estado actual
 
-Fases 1 a 9 terminadas: sitio completo en español e inglés (home, cinco casos, cuatro demos), flujo de trabajo con IA documentado y la guía "Hacé tu portfolio con IA — Claude Code" publicada en `/guia/` (solo en español). Pendientes manuales del lanzamiento en la Fase 6 de `docs/ROADMAP.md`.
+Fases 1 a 10 terminadas: sitio completo en español e inglés (home, cinco casos, cuatro demos), flujo de trabajo con IA documentado (con orquestación de subagentes) y la guía "Hacé tu portfolio con IA — Claude Code" publicada en `/guia/` (solo en español). Pendientes manuales del lanzamiento en la Fase 6 de `docs/ROADMAP.md`.
 `legacy/index.html` es la versión anterior (HTML + Tailwind por CDN); sirve
 solo de referencia de contenido y estética (paleta oscura slate + sky). El
 progreso está en `docs/ROADMAP.md`.
@@ -72,8 +72,13 @@ Antes de dar una tarea por terminada, ejecutá la skill `/verificar`.
 | Arreglo chico o ajuste de texto         | directo, con test si toca `src/lib/`, y `/verificar` |
 | Commit                                  | `/commit`, solo cuando Patricio lo pida              |
 
-- Revisores (subagentes de solo lectura): `revisor-codigo` para el diff y
-  `revisor-contenido` para el texto visible. Usalos antes de cerrar una tarea.
+- Subagentes: `revisor-codigo` (diff) y `revisor-contenido` (texto visible)
+  son de solo lectura; usalos antes de cerrar una tarea. `traductor` escribe
+  la versión en inglés de un texto ya confirmado en español.
+- Orquestación (ADR 0007): la sesión principal decide, integra y verifica.
+  Explorá en paralelo con `Explore`, delegá solo tareas independientes con un
+  encargo autocontenido y revisá en paralelo. `/verificar` y las decisiones
+  no se delegan.
 - Reglas por carpeta en `.claude/rules/` (se cargan solas al tocar
   `src/lib/`, `src/islands/`, contenido o `e2e/`).
 - Hooks en `.claude/settings.json`: Prettier corre solo después de cada

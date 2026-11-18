@@ -41,8 +41,9 @@ preguntas **en una sola tanda** (no de a una), con ejemplos de respuesta:
    (fuera de git), nunca en un archivo versionado.
 8. **¿Merece un caso de estudio?** Si hay un problema con impacto medible, sí.
 
-Cuando respondan, mostrá un **borrador** (ES y EN) de la entrada para la
-línea de tiempo y pedí confirmación antes de tocar archivos.
+Cuando respondan, mostrá un **borrador en español** de la entrada para la
+línea de tiempo y pedí confirmación antes de tocar archivos. La versión en
+inglés se escribe después, sobre el texto confirmado (paso 3).
 
 ## 2. Fuente de verdad
 
@@ -63,8 +64,17 @@ sale de acá.
 | Caso de estudio                         | `/nuevo-caso <slug>` y luego `caso: "<slug>"` en la entrada de experiencia                                                                                        |
 
 Reglas de redacción: primera persona, verbos de acción, una oración por
-logro, sin adjetivos vacíos. La versión en inglés es una traducción natural,
-no literal. El `id` de la entrada es el nombre de la empresa en kebab-case.
+logro, sin adjetivos vacíos. El `id` de la entrada es el nombre de la empresa
+en kebab-case.
+
+**Inglés: cadena productor → verificador.** Vos escribís los campos en
+español (y los `es` de `src/i18n/`). Después delegá en el agente
+`traductor` los campos en inglés, con un encargo autocontenido: archivos y
+claves exactas que tiene que completar (`src/content/experiencia.json`,
+`src/i18n/en.ts`), qué no tocar (el español, los `id`, las fechas) y que
+responda con los archivos tocados y sus dudas. Las dudas del traductor se las
+consultás a Patricio; no las resuelvas inventando. La paridad la controla
+`revisor-contenido` en el paso 4.
 
 ## 4. Derivados y verificación
 

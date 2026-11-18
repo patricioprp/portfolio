@@ -72,13 +72,43 @@ test.describe('páginas de la guía', () => {
     const numeros = await page
       .locator('section[id] ol > li > span[aria-hidden="true"]')
       .allTextContents()
-    expect(numeros.length).toBeGreaterThan(10)
+    expect(numeros).toHaveLength(17)
     expect(numeros.map(Number)).toEqual(numeros.map((_, i) => i + 1))
     const capitulos = page.locator('section[id] ol > li')
     await expect(capitulos.first()).toContainText(
       'De chatear a trabajar con un agente'
     )
+    await expect(capitulos.nth(5)).toContainText('Orquestación de agentes')
     await expect(capitulos.last()).toContainText('Glosario')
+  })
+
+  test('el capítulo de orquestación tiene diagramas y sigue con las specs', async ({
+    page
+  }) => {
+    await page.goto('/guia/orquestacion-de-agentes/')
+    await expect(page).toHaveTitle(/Orquestación de agentes/)
+    const imagenes = page.locator('figure.diagrama img:visible')
+    expect(await imagenes.count()).toBeGreaterThanOrEqual(4)
+    for (const imagen of await imagenes.all()) {
+      await expect(imagen).toHaveAttribute('alt', /\S/)
+    }
+    await page
+      .getByRole('navigation', { name: 'Capítulos' })
+      .getByRole('link', { name: /Siguiente/ })
+      .click()
+    await expect(page).toHaveURL(/\/guia\/specs-adr-y-fuente-de-verdad\/$/)
+  })
+
+  test('los capítulos renumerados conservan su URL', async ({ page }) => {
+    for (const [ruta, titulo] of [
+      ['/guia/specs-adr-y-fuente-de-verdad/', /Specs, ADR/],
+      ['/guia/preparar-el-entorno/', /preparar el entorno/],
+      ['/guia/glosario/', /Glosario/]
+    ] as const) {
+      const respuesta = await page.goto(ruta)
+      expect(respuesta?.status()).toBe(200)
+      await expect(page).toHaveTitle(titulo)
+    }
   })
 
   test('un capítulo muestra sus diagramas con texto alternativo y navega al siguiente', async ({

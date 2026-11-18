@@ -43,7 +43,7 @@ export const PARTES: readonly Parte[] = [
     descripcion:
       'El marco teórico: qué es un agente, qué es el contexto y para qué sirve cada pieza de la configuración.',
     desde: 1,
-    hasta: 6
+    hasta: 7
   },
   {
     id: 'paso-a-paso',
@@ -51,8 +51,8 @@ export const PARTES: readonly Parte[] = [
     titulo: 'Paso a paso',
     descripcion:
       'El tutorial: de instalar las herramientas a tener tu portfolio publicado y listo para mantener.',
-    desde: 7,
-    hasta: 13
+    desde: 8,
+    hasta: 14
   },
   {
     id: 'referencia',
@@ -60,8 +60,8 @@ export const PARTES: readonly Parte[] = [
     titulo: 'Referencia',
     descripcion:
       'Para el día a día: flujos de trabajo, buenas prácticas y glosario.',
-    desde: 14,
-    hasta: 16
+    desde: 15,
+    hasta: 17
   }
 ]
 

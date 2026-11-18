@@ -16,6 +16,7 @@ Los ADR no se editan para cambiar de opinión: se escribe uno nuevo que
 | [0004](0004-mapa-en-svg.md)                        | Mapa de beneficios dibujado en SVG                | Aceptado |
 | [0005](0005-desarrollo-guiado-por-specs-con-ia.md) | Desarrollo guiado por specs con Claude Code       | Aceptado |
 | [0006](0006-diagramas-mermaid-pre-renderizados.md) | Diagramas Mermaid pre-renderizados a SVG          | Aceptado |
+| [0007](0007-orquestacion-de-agentes.md)            | Orquestador + subagentes para repartir el trabajo | Aceptado |
 
 ## Plantilla
 

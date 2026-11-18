@@ -130,10 +130,15 @@ flowchart TD
 
 ### Los subagentes de este repo
 
-| Agente              | Revisa                                                                                        |
-| ------------------- | --------------------------------------------------------------------------------------------- |
-| `revisor-codigo`    | Que cumpla la spec, que haya tests, separación lógica/UI, tipos, a11y, i18n, CSP, simplicidad |
-| `revisor-contenido` | Privacidad, exactitud contra la fuente, atribución individual/equipo, tono, paridad ES/EN     |
+| Agente              | Herramientas                  | Hace                                                                                                 |
+| ------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `revisor-codigo`    | Read, Grep, Glob, Bash        | Revisa que cumpla la spec, que haya tests, separación lógica/UI, tipos, a11y, i18n, CSP, simplicidad |
+| `revisor-contenido` | Read, Grep, Glob              | Revisa privacidad, exactitud contra la fuente, atribución individual/equipo, tono, paridad ES/EN     |
+| `traductor`         | Read, Grep, Glob, Edit, Write | Escribe la versión en inglés de un texto ya confirmado en español; no ejecuta comandos               |
+
+Los dos revisores no tienen `Edit` ni `Write`: reportan, y la sesión principal decide. `traductor`
+es el único que escribe, y por eso tiene una sola tarea, archivos indicados en
+cada encargo y otro agente que controla su resultado (capítulo 6).
 
 Se usan pidiéndolo ("pedile una revisión a `revisor-codigo`"), mencionándolo
 con `@` (`@agent-revisor-contenido revisá src/i18n/en.ts`) o desde los skills
@@ -190,8 +195,10 @@ flowchart TD
 - Skill = procedimiento reutilizable en `.claude/skills/<nombre>/SKILL.md`; la
   `description` decide cuándo se usa.
 - Subagente = asistente con contexto propio y herramientas limitadas; ideal
-  para revisar.
+  para revisar o para una tarea acotada.
+- Cuando son varios trabajando para una misma tarea, hace falta orquestarlos:
+  es el tema del capítulo 6.
 - Cada pieza tiene su lugar: usá el árbol de 5.3 para decidir.
 
 Anterior: [4 · Permisos y hooks](04-permisos-y-hooks.md) ·
-Siguiente: [6 · Specs, ADR y fuente de verdad](06-specs-adr-y-fuente-de-verdad.md)
+Siguiente: [6 · Orquestación de agentes](06-orquestacion-de-agentes.md)

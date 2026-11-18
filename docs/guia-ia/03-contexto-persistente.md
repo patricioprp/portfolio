@@ -53,7 +53,7 @@ aplica. Lo más simple es no anidar proyectos.
 | Qué es este proyecto        | Objetivo: empleo estable; diferencial: casos y demos            | Que cada decisión apunte al objetivo (nada de "servicios freelance") |
 | Estado actual y Stack       | Fases terminadas, versiones y por qué TypeScript queda en 6     | Que no "actualice" algo que se fijó a propósito                      |
 | Comandos                    | `npm run …` del proyecto                                        | Que use los comandos reales y no invente otros                       |
-| Cómo trabajar               | Qué skill usar según el pedido                                  | Que siga el flujo (capítulo 14) sin que se lo recuerdes              |
+| Cómo trabajar               | Qué skill usar según el pedido                                  | Que siga el flujo (capítulo 15) sin que se lo recuerdes              |
 | Fuente de verdad            | Todo texto sale de `docs/contenido/` y `docs/casos/`            | La regla que más errores evita: no inventar                          |
 | Datos que nunca se publican | Referencias, credenciales, fecha de nacimiento, `docs/privado/` | El repo es público                                                   |
 | Convenciones                | Idioma, Prettier, sin `any`, a11y, commits                      | Consistencia sin tener que repetirlo                                 |

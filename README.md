@@ -39,18 +39,18 @@ npm run e2e        # Playwright (la primera vez: npx playwright install chromium
 El proyecto está preparado para desarrollarse con
 [Claude Code](https://claude.com/claude-code) con un flujo guiado por specs.
 El detalle de cada pieza está en
-[`docs/guia-ia/`](docs/guia-ia/README.md), una guía en 16 capítulos con diagramas (fundamentos, paso a paso y referencia) que también se publica en el sitio.
+[`docs/guia-ia/`](docs/guia-ia/README.md), una guía en 17 capítulos con diagramas (fundamentos, paso a paso y referencia) que también se publica en el sitio.
 
 ```text
 /spec <idea>          → docs/specs/NNN-slug.md (borrador para aprobar)
-/implementar <spec>   → TDD, /verificar, revisores y checkboxes del roadmap
+/implementar <spec>   → exploración en paralelo, TDD, /verificar, revisores y roadmap
 /nueva-demo <slug>    → esqueleto de una demo nueva
-/nuevo-caso <slug>    → caso de estudio ES/EN
+/nuevo-caso <slug>    → caso de estudio ES (y EN con el traductor)
 /nueva-experiencia    → entrevista y alta de una experiencia laboral
 /verificar            → formato, lint, tipos, tests, build y e2e
 /commit               → mensaje Conventional Commits a partir del diff
 ```
 
-- Subagentes de solo lectura: `revisor-codigo` (diff) y `revisor-contenido` (texto).
+- Subagentes: `revisor-codigo` (diff) y `revisor-contenido` (texto), de solo lectura, y `traductor` (ES → EN). La sesión principal los orquesta: explora en paralelo, delega lo independiente y consolida las revisiones ([ADR 0007](docs/adr/0007-orquestacion-de-agentes.md)).
 - Reglas por carpeta en `.claude/rules/`; hooks de formato y protección en `.claude/settings.json`.
 - CI en `.github/workflows/ci.yml` con las mismas verificaciones.

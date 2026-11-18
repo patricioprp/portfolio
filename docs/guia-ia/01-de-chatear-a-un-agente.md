@@ -88,15 +88,15 @@ el modelo puede invocar.
 
 Las herramientas que vas a ver todo el tiempo:
 
-| Herramienta | Qué hace                                     | Equivalente manual          |
-| ----------- | -------------------------------------------- | --------------------------- |
-| `Read`      | Lee un archivo                               | Abrirlo en el editor        |
-| `Grep`      | Busca texto en el proyecto                   | Ctrl+Shift+F                |
-| `Glob`      | Lista archivos por patrón (`src/**/*.ts`)    | Explorador de archivos      |
-| `Edit`      | Reemplaza un fragmento de un archivo         | Editar y guardar            |
-| `Write`     | Crea o sobrescribe un archivo completo       | Archivo nuevo               |
-| `Bash`      | Ejecuta un comando en la terminal            | `npm test`, `git diff`      |
-| `Agent`     | Delega una tarea a un subagente (capítulo 5) | Pedirle algo a un compañero |
+| Herramienta | Qué hace                                          | Equivalente manual          |
+| ----------- | ------------------------------------------------- | --------------------------- |
+| `Read`      | Lee un archivo                                    | Abrirlo en el editor        |
+| `Grep`      | Busca texto en el proyecto                        | Ctrl+Shift+F                |
+| `Glob`      | Lista archivos por patrón (`src/**/*.ts`)         | Explorador de archivos      |
+| `Edit`      | Reemplaza un fragmento de un archivo              | Editar y guardar            |
+| `Write`     | Crea o sobrescribe un archivo completo            | Archivo nuevo               |
+| `Bash`      | Ejecuta un comando en la terminal                 | `npm test`, `git diff`      |
+| `Agent`     | Delega una tarea a un subagente (capítulos 5 y 6) | Pedirle algo a un compañero |
 
 ## 1.4 El concepto más importante: el contexto
 
@@ -127,7 +127,7 @@ flowchart LR
 
 El contexto también tiene un **tamaño máximo**. En sesiones largas se llena
 de lecturas y salidas viejas, y Claude Code lo resume automáticamente. Por
-eso conviene una sesión por tarea (lo vemos en el capítulo 15).
+eso conviene una sesión por tarea (lo vemos en el capítulo 16).
 
 ## 1.5 Por qué un agente se equivoca
 
@@ -160,6 +160,7 @@ flowchart LR
     Q2["Le doy notas específicas<br/>según la parte del código"] --> R2[".claude/rules/"]
     Q3["Le escribo los procedimientos<br/>que se repiten"] --> R3["Skills"]
     Q4["Le pido que otro revise su trabajo"] --> R4["Subagentes revisores"]
+    Q9["Reparto una tarea grande<br/>entre varios y coordino"] --> R9["Orquestación"]
     Q5["Le saco acceso a lo peligroso"] --> R5["Permisos"]
     Q6["Pongo controles automáticos<br/>que no dependen de él"] --> R6["Hooks, tests y CI"]
     Q7["Le doy tickets claros<br/>con criterios de aceptación"] --> R7["Specs"]
